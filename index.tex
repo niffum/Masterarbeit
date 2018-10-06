@@ -1,0 +1,120 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=25mm,bmargin=25mm,lmargin=25mm,rmargin=25mm}
+\usepackage[utf8]{inputenc}
+\usepackage[singlespacing]{setspace}
+\usepackage{textcomp}
+\usepackage{blindtext}
+\usepackage{titlesec}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage[ngerman]{babel}
+\usepackage{listings}
+\usepackage{parskip}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{chngcntr}
+\usepackage{csquotes}
+\usepackage[backend=bibtex,citestyle=verbose-ibid]{biblatex}
+\usepackage{footnote}
+\usepackage[section]{placeins}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage{threeparttable}
+\usepackage{pgfplots}
+\usepackage{longtable}
+\usepackage[automake,acronym,xindy,toc]{glossaries}
+\usepackage{hyperref}
+\usepackage[ngerman]{cleveref}
+\usepackage{makeidx}   % load package
+
+
+
+\newcommand*{\bildquelle}[1]{\par\raggedleft\footnotesize Quelle:~#1}
+
+
+
+%\newglossaryentry{Beamline}
+
+
+%\newglossaryentry{RayTracing}
+
+
+%\newglossaryentry{Canvas}
+%{
+%name=Canvas,
+%description={oder Leinwand. Bezeichnet eine Fläche eines Fensters in der Computergrafik, %%in die virtuell gezeichnet werden kann}
+%}
+
+
+
+
+
+\newacronym{hzb}{HZB}{Helmholtz-Zentrum Berlin}
+
+
+\makeglossaries
+\usepackage[xindy]{imakeidx}
+\makeindex
+
+
+
+
+%\addbibresource{bibtex.bib}
+
+\counterwithout{figure}{chapter}
+\counterwithout{footnote}{chapter}
+
+\titleformat{\chapter}[display]
+   {\normalfont\large\bfseries}
+   {\chaptertitlename\ \thechapter}{1em}{\large}
+\titleformat{\section}
+   {\normalfont\large\bfseries}
+   {\thesection}{1em}{}
+   
+\titleformat{\subsection}
+   {\normalfont\small\bfseries}
+   {\thesubsection}{1em}{}
+
+
+\title{Abschlussarbeit Master Medieninformatik}
+\author{Viola Jertschat}
+
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	\includegraphics[width=\textwidth]{images/beuthlogo.eps}\par\vspace{1cm}
+	{\scshape\LARGE Beuth Hochschule für Technik \par}
+	\vspace{1cm}
+	{\scshape\Large Abschlussarbeit Master Medieninformatik\par}
+	\vspace{1.5cm}
+	{\huge\bfseries mARt: Interaktive Darstellung von MRT Daten in AR\par}
+	\vspace{2cm}
+	{\Large\itshape Viola Jertschat\par}
+	\vfill
+	betreut von\par
+	Prof. Dr.-Ing. Kristian \textsc{Hildebrand}
+
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\tableofcontents
+
+\listoffigures
+
+\printglossaries
+
+%\include{chapter}
+
+
+\pagebreak
+
+\printbibliography
+
+\end{document}
