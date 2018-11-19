@@ -1,5 +1,12 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: index.aux
 The style file: biblatex.bst
+A level-1 auxiliary file: chapters/chapter.aux
+A level-1 auxiliary file: chapters/related.aux
+A level-1 auxiliary file: chapters/anforderung.aux
+A level-1 auxiliary file: chapters/konzept.aux
+A level-1 auxiliary file: chapters/implementierung.aux
+A level-1 auxiliary file: chapters/evaluation.aux
+A level-1 auxiliary file: chapters/fazit.aux
 Database file #1: index-blx.bib
 Database file #2: references/references.bib
 Biblatex version: 3.8

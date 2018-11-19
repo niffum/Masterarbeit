@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.10.6)  21 OCT 2018 12:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.10.6)  19 NOV 2018 19:30
 entering extended mode
 **./index.tex
 (index.tex
@@ -1663,7 +1663,9 @@ Package biblatex Info: ... file 'german.lbx' found.
 ("C:\Users\Viola\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\germa
 n.lbx"
 File: german.lbx 2018/03/04 v3.11 biblatex localization (PK/MW)
-)) (index.aux)
+)) (index.aux (chapters/chapter.aux) (chapters/related.aux)
+(chapters/anforderung.aux) (chapters/konzept.aux) (chapters/implementierung.aux
+) (chapters/evaluation.aux) (chapters/fazit.aux))
 \openout1 = `index.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
@@ -1808,7 +1810,7 @@ Package epstopdf Info: Output file is already uptodate.
 
 pdfTeX warning: pdflatex (file ./images/beuthlogo-eps-converted-to.pdf): PDF in
 clusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/beuthlogo-eps-converted-to.pdf, id=6, 537.00626pt x 86.3225pt>
+<images/beuthlogo-eps-converted-to.pdf, id=54, 537.00626pt x 86.3225pt>
 File: images/beuthlogo-eps-converted-to.pdf Graphic file (type pdf)
 <use images/beuthlogo-eps-converted-to.pdf>
 Package pdftex.def Info: images/beuthlogo-eps-converted-to.pdf  used on input l
@@ -1829,7 +1831,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.103 \listoffigures
+l.102 \listoffigures
                      [1
 
 ] (index.lof
@@ -1843,47 +1845,103 @@ No file index.gls.
 No file index.acr.
 [2
 
-] [3
+]
+\openout2 = `chapters/chapter.aux'.
 
-runsystem(xindy -I xindy -L ngerman -M index -C utf8 -t index.glg -o index.gls 
-index.glo)...disabled (restricted).
 
-runsystem(xindy -I xindy -L ngerman -M index -C utf8 -t index.alg -o index.acr 
-index.acn)...disabled (restricted).
+No file chapters/chapter.tex.
+\openout2 = `chapters/related.aux'.
+
+(chapters/related.tex
+Kapitel 1.
+) [3
+
+
+
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
- (index.aux
+\openout2 = `chapters/anforderung.aux'.
+
+ (chapters/anforderung.tex
+Kapitel 2.
+) [4
+
+
+
+]
+\openout2 = `chapters/konzept.aux'.
+
+ (chapters/konzept.tex
+Kapitel 3.
+) [5
+
+
+
+]
+\openout2 = `chapters/implementierung.aux'.
+
+ (chapters/implementierung.tex
+Kapitel 4.
+) [6
+
+
+
+]
+\openout2 = `chapters/evaluation.aux'.
+
+ (chapters/evaluation.tex
+Kapitel 5.
+) [7
+
+
+
+]
+\openout2 = `chapters/fazit.aux'.
+
+ (chapters/fazit.tex
+Kapitel 6.
+) [8
+
+
+
+]
+
+LaTeX Warning: Empty bibliography on input line 117.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 119.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 119.
+(index.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 34.
-)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
+ (chapters/chapter.aux) (chapters/related.aux)
+(chapters/anforderung.aux) (chapters/konzept.aux) (chapters/implementierung.aux
+) (chapters/evaluation.aux) (chapters/fazit.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 119.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 119.
 Package rerunfilecheck Info: File `index.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 6DB7EBE91CE90DB75A157BE796DAD27A;653.
 Package logreq Info: Writing requests to 'index.run.xml'.
 \openout1 = `index.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44338 strings out of 492970
- 983627 string characters out of 3126594
- 1558520 words of memory out of 3000000
- 47469 multiletter control sequences out of 15000+200000
- 7045 words of font info for 25 fonts, out of 3000000 for 9000
+ 44249 strings out of 492970
+ 982146 string characters out of 3126594
+ 1559520 words of memory out of 3000000
+ 47310 multiletter control sequences out of 15000+200000
+ 10120 words of font info for 36 fonts, out of 3000000 for 9000
  1143 hyphenation exceptions out of 8191
  62i,5n,96p,1994b,2269s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmcsc10.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Viola/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Viola/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Vio
+/cm/cmbx10.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Viola/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Viola/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Vio
 la/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
 
-Output written on index.pdf (4 pages, 94711 bytes).
+Output written on index.pdf (9 pages, 113933 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 143 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 
