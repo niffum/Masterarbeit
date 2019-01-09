@@ -1,6 +1,83 @@
 % Konzept
 
 \chapter{Konzept}
+\label{konzept}
+
+Im folgenden werden Konzepte diskutiert, um die in Kapitel \ref{anforderung} herausgearbeiteten Anforderungen zu erfüllen.
+
+\section{3D Darstellung}
+
+- Da das innere der 3D Darstellung erkennbar sein soll, muss eine semi-transparente Darstellung erzeugt werden, die sowohl die Form des Gehirns abbildet, als auch die innere Struktur
+- Relevant sind nur die Pixel, die das Gehirn darstellen. Der Bereich darum (Schädel und Hintergrund) muss gefiltert werden. Das gewünschte Ergebniss wäre, wenn das Gehirn frei im Raum "schwebt" (Bei Ray Casting noch mal erwähnen?)
+
+- Daten liegen dreidimensional in Schichten vor
+- verschiedene Möglichkeiten zur 3D Visualisierung
+- - Voxel
+- - Volume Rendering (Ray Casting)
+- - Marching Cubes
+- - ...?
+
+- Ist es notwendig bzw. nützlich ein  Mesh zu generieren?
+	- Gut für Darstellung der Gehirnform. Relevant ist aber vor allem das "Innere" des Gehirns, da sich dort der markierte Bereich befindet. 
+	- Marching Cubes eignen nich nicht, um innere Struktur Darzustellen. Eine Transparente Ansicht würde das Modell als innen "gleich" darstellen
+	- Das Mesh müsste kontinuierlich angepasst werden, um jeweils andere Schichten beim scrollen anzuzeigen.
+	
+	- Voxel könnten auch das Innere des Gehirns darstellen. Um ein deutliches und hochaufgelöstes Modell zu erhalten währen allerdings viele Voxel notwendig. Performance?
+	- Referenzen
+	
+	- Im Fokus der Darstellung, soll das Innere des Gehirns stehen. Ein Mesh, dass die äußere Form beschreibt ist also nicht sinnvoll, zumal keine der Anforderungen Funktionen beschreibt, für die ein Mesh nötig wäre (z.B. Kollsion (Unity))
+	
+Wie in dem Kapitel \ref{related} beschrieben, gibt es bereits viele Lösungsansätze zur 3D Darstellung von MRT-Bildern. Obwohl verschiedene Methodne zum Einsatz kommen, ist der am weitesten verbreitete Ansatz der des Volume Rendering.
+Dies hat die folgenden Gründe:
+- 
+- ...
+	
+Diese Vorgehensweise ist somit am besten für die Implementierung der Anwendung geeignet.
+Diese wird im Kapitel \ref{implementierung} genauer beschrieben.
+
+Anforderungen an Shader??
+
+
+\section{Darstellung des gekennzeichneten Bereichs}
+
+
+U02 U03  
+
+\section{Unterstützung von Dateiformaten} 
+
+Die User Story U13 verlangt nach einer Unterstützung des nifti-Dateiformats.
+
+nifti-Dateien, sind Bilddateien, die oft in der Medizin verwendet werden. Sie speichern Bildsequenzen und eigenen sich somit für MRT-Bilder. 
+% Referenz nifti
+Ein weiteres für diesen Zweck weitverbreitetes Dateiformat ist DICOM. ...
+% Referenz DICOM
+
+Es ist weiterhin sinnvoll gängigere Dateiformate, wie JPEG oder PNG zu unterstützen. 
+
+Wie in \ref{anforderung} beschrieben, soll es sich bei mARt in erster Linie um einen Prototyp handeln. 
+Der Datensatz, der dargestellt werden soll ist gering. Um die Komplexität und den Umfang der Anwendung möglichst gering zu halten kann darauf verzichtet werden, dem Nutzer die Möglichkeit zu geben, aus verschiedenen Dateitypen oder Datensätzen zu wählen. Es ist ausreichend, wenn der entsprechende Datensatz vor dem Build gewählt wird.
+
+Da die Darstellung und interaktion eines Datensatzes also im Vordergrund stehhen soll, ist es sinnvoll, die Dateien in ein Format umzuwandeln, das einfacher zu verarbeiten ist (JPEG, PNG). Hierzu kann ein externes Tool verwendet werden (ImageJ Bezug in Implementierung).
+
+
+\section{Interaktion} 
+
+
+U06  Als Nutzer möchte ich durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden.
+
+U07  Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position im Raum anzupassen.
+
+U08 Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen.
+
+U09  Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. 
+
+U10  Als Nutzer will ich, dass die Darstellung nicht von anderen Elementen verdeckt wird, damit ich sie uneingeschränkt sehen kann. 
+
+U11  Als Nutzer möchte ich mit einem Scrollrad durch die Darstellung scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden.
+
+U12  Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann.  
+
+U14  Als Nutzer möchte ich aus aus verschiedenen Darstellungen wählen können, die nebeneinander angezeigt werden, um direkte Vergleiche zwischen diesen ziehen zu können.
 
 \section{Endgerät}
 

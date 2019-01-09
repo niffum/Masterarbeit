@@ -1,5 +1,113 @@
 % Implementierung
 
 \chapter{Implementierung}
+\label{implementierung}
 
-\section{Ein Abschnitt}
+\section{mARt in Unity}
+
+\subsection{2D Szenario}
+- Prototyp für hololens Demo
+- Deckt Hologram Interaktionen ab
+
+- Aufbau Szene
+- Funktionsweise der GameObjekte/ Skripte
+
+\subsection{3D Szenario}
+\label{3dscene}
+
+- Grundlage: GitHub Projekt
+- Aufbau Szene
+- Funktionsweise der GameObjekte/ Skripte
+
+\subsection{Interaktion}
+
+\section{Volume Rendering}
+
+Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns mit Hilfe von Volume Rendering umgesetzt. 
+
+Im Kapitel \ref{grundlagen} wurde der theoretische Vorgang dieser Technik beschrieben. Dieses Kapitel fokussiert sich auf die Implementierung der einzelnen Schritte.
+
+Die volumetrische Darstellung der Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter geupdated, die für das Rendering relevant sind, wie z.B.die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
+Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg/HLSL Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
+% WARUM??
+
+Im Fragmentshader wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt "geschossen" wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Würfeln zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
+
+%-----------Intersect-----------
+%Dies geschieht indem zuerst die Inverse der Strahlrichtung ermittelt wird. Die Inverse eines Vektors $v$ ist $v^-1$ und da $v^-x=\frac1}{v^x}$, ergibt sich die Inverse des Richtungsvektors des Strahls indem $1$ durch die dividiert wird.
+% AABB, axis aligend etc? intersection formula REFERENZ
+Um die Schnittpunkte des Strahls zu ermitteln nimmt man an, dass die sechs Seiten des Würfels auf jeweils sechs Ebenen liegen, wobei davon zwei immer parallel sind. Zuerst werden jetzt alle Schnittpunkte des Strahls mit diesen Ebenen berechnet und dann geprüft, ob die Schnittpunkte innerhalb des Würfels liegen.
+Der Würfel wird durch zwei Eckpunkte beschrieben. Da der Würfel Koordinaten von -0,5 bis 0,5 hat können wir hierfür die jeweils kleinsten und größten Koordinaten nutzen. 
+Die Schnittpunkte des Strahls, mit den x-, y- und z-Ebenen ergeben sich durch das Umstellen der Formel, die einen Strahl beschreibt:
+
+$p=r_{Ursprung}+t*r_{Richtung}$
+
+$r_{Ursprung}$ ist dabei der Ursprung des Strahls und $r_{Richtung}$ seine Richtung. $p$ ist ein Punkt auf dem Strahl und $t$ ein Parameter, der bestimmt wie weit der Punkt vom Ursprung entfernt ist.
+
+Um die Schnittpunkte mit den Ebenen zu erhalten wird die Formel nach $t$ umgestellt:
+
+$t=(p-r_{Ursprung})/r_{Richtung}$
+
+Für $p$ werden jeweils die beiden Eckpunkte des Würfels eingesetzt, die den Würfel beschreiben. Dadurch sind in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ insgesamt 6 Schnittpunkte mit den Ebenen bekannt. Zwei auf jeder Ebene. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt (und damit welche Ebene) weiter vorne liegt. 
+% Was wenn Strahl parallel zur Ebene ist??
+Jetzt muss bestimmt werden, ob diese Schnittpunkte sich innerhalb des Würfels befinden.
+Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für den näher gelegenen t-Vektor wird der maximale bestimmt, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren ts größer als der des entfernten, liegt der Schnittpunkt nicht in dem Würfel. Andersherum tut er es.
+
+%----------------------------------------
+Die beiden t-Werte werden als $t_{nah}$ und $t_{fern}$ gespeichert.
+Mit dem Ursprung des Strahls und $t_{fern}$ werden Anfang, Ende und die Länge des Strahls berechnet. Mit Hilfe der Länge kann ermittelt werden um wie weit pro Iteration am Strahl entlang gegangen werden soll. Dadurch wird der Strahl nur bis zu seinem Austritt aus dem Würfel abgetastet. 
+
+In einer for-Schleife wird jeder Strahl nun abgetastet. In jeder Iteration wird jeweils ein Punkt betrachtet. Der Punkt verschiebt sich entlang des Strahls um die zuvor berechnete Distanz.
+Für jeden Punkt werden zuerst die uv-Koordinaten berechnet, da sonst nur ein viertel des MRT-Bildes dargestellt würde.
+% WARUM???
+Für die Koordinaten werden dann die jeweiliges Isowerte aus der 3D-Textur gelesen, die zuvor mit den MRT-Bildern befüllt wurde.
+
+%---------------SAMPLE VOLUME-------------
+Hierbei werden lediglich die uv-Koordinaten als Indices für die Textur verwendet. 
+Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um eine Farbe sondern nur einen Grauwert handelt, können die anderen Farbkanäle der Textur mit der ?Magnitude? des jeweiligen Pixels befüllt werden. Darauf wird in der Sektion Transferfunktion genauer eingegangen.
+% VERWEIS Transferfunktion
+Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutzer beeinflussen kann.
+An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist, oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
+Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
+% UBERPRÜFEN Warum?
+Der Punkt wird dann mit den minimalen und maximalen x-, y-, und z-Werten der verschiebbaren Schicht verglichen. Das Ergebnis des Vergleichs wird dabei in einer Variable gespeichert. Ist der Punkt kleiner als das Minimum oder größer als das Maximum wird 0 gespeichert, ansonsten 1. 
+Die beiden Werte werden anschließend mit dem Isowert multipliziert.Ist einer der Werte null, ist auch der ermittelte Isowert null, was im Alphakanal totale Transparenz bedeutet. 
+
+
+%-----------------------------------------
+Dies tritt ein, da der Isowert zunächst für alle Farbkanäle verwendet wird, um eine neue Farbe zu deklarieren.
+
+An dieser Stelle wird über die Transferfunktion der entsprechende Farbwert aus der zugehörigen Textur gelesen. Dazu wird der Isowert als Index verwendet. Die Funktionsweise und Implementierung der Transferfunktion wird in der Sektion \ref{transfer} beschrieben.
+% Bezug Transferfunktion!
+Die Transferfunktion wird nur abgerufen, wenn der Isowert nicht 0 ist, da sonst die Transparenz überschrieben würde.
+% Tranferfunktion bei index 0 auf 0000 setzen??
+
+Der Alphawert der so erhaltenen Farbe wird noch einmal halbiert, um die Darstellung semi-transparent erscheinen zu lassen.
+% WARUM
+
+Schließlich wird der erhaltene Farbwert mit den vorhergehenden verrechnet. Die Komposition erfolgt dabei von vorne nach hinten, da der Strahl in dieser Richtung abgetastet wird, wie folgt:
+% Referenz GPU Gems
+
+$\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
+$\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}$
+
+Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
+Wenn diese Farbe einen vorher definierten Schwellenwert überschreitet wird die Schleife abgebrochen. Der Schwellenwert kann vom Nutzer manipuliert werden und bestimmt die ?Helligkeit? der Darstellung.
+
+Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt und mit der Farbe der Maske verrechnet.
+
+% MASKE
+% PHONG
+% ILLUMINATION 
+
+
+- Transferfunktion: Erstellen einer Textur
+
+- Illumination: Gradient vector = normal
+- Gradient: 
+
+\subsection{Ray Casting}
+
+\subsection{Transferfunktion}
+
+\subsection{Illumination}

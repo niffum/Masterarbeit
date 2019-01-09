@@ -1,12 +1,96 @@
 % Anforderungsanalyse
 
 \chapter{Anforderungsanalyse}
+\label{anforderung}
 
 \section{Interviews}
 
 Zur Bestimmung der Anforderungen, die von der Anwendung erfüllt werden sollen wurden iterativ mehrere Interviews mit dem betreuenden Radiologen der Charité geführt.
 
-Aus dem ersten Interview ließen sich folgende Anforderungen ableiten:
 
-- Darstellung eines Schlaganfallgebiets innerhalb der Gerhins in 3D
-- ...
+Im Rahmen des ersten Interviews wurde zunächst der Nutzen der Anwendung beschreiben.
+Diese soll Neurologen im Bereich der Schlaganfallprävention unterstützen. Wie im Kapitel Grundlagen beschrieben untersucht der Neurologe dabei die Abbildungen des Gehirns eines Patienten, die durch den MRT-Scan erzeugt wurden. Auffällige Bereiche, die auf einen Schlaganfall hindeuten könnten werden dabei markiert. 
+% Bezug zu Kapitel Grundlagen
+Diese Darstellung soll nun inklusive des markierten Bereichs dreidimensional dargestellt werden. Durch die zusätzliche Dimension soll sowohl für Ärzte als auch Patienten die Ausmaße des betroffenen Bereich verdeutlichen, was die Einschätzung eines Schlaganfallpatienten verbessern könnte.
+Weiterhin könnte man anhand des Modells auch Voraussagen von Therapieerfolgen anschaulich demonstrieren.
+% Bezug zu Kapitel Motivation
+
+Die Anwendung soll dabei als Prototyp dienen, die die Möglichkeiten, sowie das Potential für die Verwendung in der Praxis testet. Im Vordergrund steht hierbei die Darstellung in 3D, inklusive des markierten Bereichs.
+
+Aus dem ersten Interview ließen sich außerdem folgende Anforderungen ableiten:
+Die aus dem Interview ermittelten Anforderungen wurden in der folgenden Tabelle aufgelistet. Zur besseren Referenzierung wurden sie jeweils mit Bezeichner versehen. Weiterhin wurde die Priorität jeder Anforderungen auf niedrig, mittel, oder hoch geschätzt.
+
+\begin{table}
+\begin{tabular}{|c|p{10cm}|c|}
+\hline
+Anforderungsbezeichnung & Anforderung & Priorität \\
+\hline
+A01 & 3D Darstellung der MRT Daten & hoch\\
+\hline
+A02 & Einblenden des gekennzeichneten Bereichs  & hoch\\
+\hline
+A03  & 3D-Darstellung des Gehirns, die auch Schlaganfallsbereich in 3D Erkennbar werden lässt  & hoch\\
+\hline
+A04 & Scrollen durch Schichten der 3D-Darstellung auf mindestens einer Achse& mittel\\
+\hline
+A05 & Erkennbarkeit der Struktur inneren Struktur des Gehirns (entsprechend der MRT-Bilder) & hoch\\
+\hline
+A06 & Scrollbare 2D Darstellung der MRT-Bilder auch mindestens einer Achse & mittel\\
+\hline
+A07 & Manipulation der Darstellung ähnlich wie bei einem Hologramm. & niedrig\\
+\hline
+A10 & Interaktionselemente sollten die Darstellung nicht verdecken & niedrig\\
+\hline
+A11 & Scrollen durch Verwendung eines Scrollrads & niedrig\\
+\hline
+A12 & Auswahl verschiedener MRT-Sequenzen (falls vorhanden) & niedrig\\
+\hline
+A13 & Unterstützung von nifti-Daten & mittel\\
+\hline
+A14 & Verschiedene Ansichten können nebeneinander dargestellt werden. (z.B. vor und nach Therapie) & mittel\\
+\hline
+
+\end{tabular}
+\caption{\label{tab:table-name} Durch Interview bestimmte Anforderungen.}
+\end{table}
+
+Anhand dieser Anforderungen wurden User Stories formuliert. 
+%Referenz User Stories
+
+\begin{table}
+\begin{tabular}{|c|p{10cm}|c|}
+\hline
+Story-Bezeichnung & User Story & Anforderungsreferenz \\
+\hline
+U01 & Als Nutzer möchte ich ein 3D-Modell des gescannten Gehirns sehen, um ... & A01\\
+\hline
+U02 & Als Nutzer möchte ich den gekennzeichneten Bereich innerhalb des Gehirn sehen können, um einzuschätzen wie groß der Bereich tatsächlich ist.  & A02\\
+\hline
+U03  & Als Nutzer möchte ich den gekennzeichneten Bereich ein- und ausblenden können, um mich auf diesen, oder die Darstellung an sich konzentrieren zu können.  & A02\\
+\hline
+U04 & Als Nutzer möchte ich auch dann noch die Strukturen des Gehirns erkennen, wenn der gekennzeichnete Bereich eingeblendet ist. & A03\\
+\hline
+U05 & Als Nutzer möchte ich eine möglichst genaue und gut erkennbare Abbildung der MRT-Bilder, damit ich eine Vorstellung habe, wie das Gehirn des Patienten aussieht. & A05\\
+\hline
+U06 & Als Nutzer möchte ich durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden. & A04\\
+\hline
+U07 & Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position im Raum anzupassen. & A07\\
+\hline
+U08 & Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen. & A08\\
+\hline
+U09 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & A09\\
+\hline
+U10 & Als Nutzer will ich, dass die Darstellung nicht von anderen Elementen verdeckt wird, damit ich sie uneingeschränkt sehen kann. & A10\\
+\hline
+U11 & Als Nutzer möchte ich mit einem Scrollrad durch die Darstellung scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden. & A11\\
+\hline
+U12 & Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann. & A12\\
+\hline
+U13 & Als Nutzer möchte ich Dateien im nifti-Format in der Anwendung verwenden können, damit ich sie nicht vorher umwandeln muss. & A13\\
+\hline
+U14 & Als Nutzer möchte ich aus aus verschiedenen Darstellungen wählen können, die nebeneinander angezeigt werden, um direkte Vergleiche zwischen diesen ziehen zu können. & A14\\
+\hline
+
+\end{tabular}
+\caption{\label{tab:table-name}Aus Anforderungen abgeleitete User Stories.}
+\end{table}
