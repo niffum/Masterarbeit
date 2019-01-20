@@ -43,25 +43,27 @@ Anforderungen an Shader??
 
 U02 U03  
 
-\section{Unterstützung von Dateiformaten} 
 
-Die User Story U13 verlangt nach einer Unterstützung des nifti-Dateiformats.
+\section{Endgerät}
 
-nifti-Dateien, sind Bilddateien, die oft in der Medizin verwendet werden. Sie speichern Bildsequenzen und eigenen sich somit für MRT-Bilder. 
-% Referenz nifti
-Ein weiteres für diesen Zweck weitverbreitetes Dateiformat ist DICOM. ...
-% Referenz DICOM
+- Hololens oder HTC Vive?
+- Leistung
+- Interaktionsmöglichkeiten
+- Tragekompfort
+- ...
+% Bezug Hololens2?
 
-Es ist weiterhin sinnvoll gängigere Dateiformate, wie JPEG oder PNG zu unterstützen. 
+\section{Interaktion/ UI} 
 
-Wie in \ref{anforderung} beschrieben, soll es sich bei mARt in erster Linie um einen Prototyp handeln. 
-Der Datensatz, der dargestellt werden soll ist gering. Um die Komplexität und den Umfang der Anwendung möglichst gering zu halten kann darauf verzichtet werden, dem Nutzer die Möglichkeit zu geben, aus verschiedenen Dateitypen oder Datensätzen zu wählen. Es ist ausreichend, wenn der entsprechende Datensatz vor dem Build gewählt wird.
+% 2D 
+% UX steht im Vordergrung -> begründen warum besser als vorher!
 
-Da die Darstellung und interaktion eines Datensatzes also im Vordergrund stehhen soll, ist es sinnvoll, die Dateien in ein Format umzuwandeln, das einfacher zu verarbeiten ist (JPEG, PNG). Hierzu kann ein externes Tool verwendet werden (ImageJ Bezug in Implementierung).
+% auf probleme bei der visualisierung auf Hololens hinweisen, VR App 
 
+\subsection{Interaktion AR}
 
-\section{Interaktion} 
-
+\subsection{Interaktion VR}
+% Leap motion
 
 U06  Als Nutzer möchte ich durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden.
 
@@ -79,10 +81,19 @@ U12  Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ih
 
 U14  Als Nutzer möchte ich aus aus verschiedenen Darstellungen wählen können, die nebeneinander angezeigt werden, um direkte Vergleiche zwischen diesen ziehen zu können.
 
-\section{Endgerät}
 
-- Hololens oder HTC Vive?
-- Leistung
-- Interaktionsmöglichkeiten
-- Tragekompfort
-- ...
+\section{Unterstützung von Dateiformaten} 
+
+Die User Story U13 verlangt nach einer Unterstützung des nifti-Dateiformats.
+
+nifti-Dateien, sind Bilddateien, die oft in der Medizin verwendet werden. Sie speichern Bildsequenzen und eigenen sich somit für MRT-Bilder. 
+% Referenz nifti
+Ein weiteres für diesen Zweck weitverbreitetes Dateiformat ist DICOM. ...
+% Referenz DICOM
+
+Es ist weiterhin sinnvoll gängigere Dateiformate, wie JPEG oder PNG zu unterstützen. 
+
+Wie in \ref{anforderung} beschrieben, soll es sich bei mARt in erster Linie um einen Prototyp handeln. 
+Der Datensatz, der dargestellt werden soll ist gering. Um die Komplexität und den Umfang der Anwendung möglichst gering zu halten kann darauf verzichtet werden, dem Nutzer die Möglichkeit zu geben, aus verschiedenen Dateitypen oder Datensätzen zu wählen. Es ist ausreichend, wenn der entsprechende Datensatz vor dem Build gewählt wird.
+
+Da die Darstellung und interaktion eines Datensatzes also im Vordergrund stehhen soll, ist es sinnvoll, die Dateien in ein Format umzuwandeln, das einfacher zu verarbeiten ist (JPEG, PNG). Hierzu kann ein externes Tool verwendet werden (ImageJ Bezug in Implementierung).

@@ -18,5 +18,7 @@ I'm skipping whatever remains of this entry
  :        howpublished = https://www.uni-koblenz.de/~cg/Studienarbeiten/SA_Sawitzki.pdf
  :                                                                                     ",
 I'm skipping whatever remains of this entry
-Biblatex version: 3.8
+Biblatex version: 3.11
+Warning--bbl version mismatch: biblatex.bst has 3.0, but biblatex.sty has 2.9
+         The bbl version need not be the same as the biblatex version.
 (There were 2 error messages)
