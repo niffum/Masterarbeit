@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.20)  20 JAN 2019 15:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.20)  21 JAN 2019 11:06
 entering extended mode
 **./index.tex
 (index.tex
@@ -1668,7 +1668,7 @@ Package biblatex Info: ... file 'german.lbx' found.
 ("C:\Users\Viola\AppData\Local\Programs\MiKTeX 2.9\tex/latex/biblatex/lbx\germa
 n.lbx"
 File: german.lbx 2018/11/02 v3.12 biblatex localization (PK/MW)
-)) (index.aux (chapters/chapter.aux) (chapters/related.aux)
+)) (index.aux (chapters/motivation.aux) (chapters/related.aux)
 (chapters/grundlagen.aux) (chapters/anforderung.aux
 
 LaTeX Warning: Label `tab:table-name' multiply defined.
@@ -1822,7 +1822,7 @@ Package epstopdf Info: Output file is already uptodate.
 
 pdfTeX warning: pdflatex (file ./images/beuthlogo-eps-converted-to.pdf): PDF in
 clusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/beuthlogo-eps-converted-to.pdf, id=138, 537.00626pt x 86.3225pt>
+<images/beuthlogo-eps-converted-to.pdf, id=214, 537.00626pt x 86.3225pt>
 File: images/beuthlogo-eps-converted-to.pdf Graphic file (type pdf)
 <use images/beuthlogo-eps-converted-to.pdf>
 Package pdftex.def Info: images/beuthlogo-eps-converted-to.pdf  used on input l
@@ -1833,20 +1833,25 @@ ine 81.
 \openout5 = `index.xdy'.
 
 {C:/Users/Viola/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./images/be
-uthlogo-eps-converted-to.pdf>] (index.toc
+uthlogo-eps-converted-to.pdf>]pdfTeX warning (ext4): destination with the same 
+identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.101 \end{abstract}
+                     [1] (index.toc
 Package cleveref Info: loaded `ngerman' language definitions on input line 2.
-)
-\tf@toc=\write10
-\openout10 = `index.toc'.
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.102 \listoffigures
-                     [1
+l.80 ...{\numberline {7}Evaluation}{17}{chapter.7}
+                                                  % [1
 
-] (index.lof
+])
+\tf@toc=\write10
+\openout10 = `index.toc'.
+
+ [2] (index.lof
 Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 )
 \tf@lof=\write11
@@ -1855,22 +1860,26 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 
 No file index.gls.
 No file index.acr.
-[2
+[3
 
 ]
 \openout2 = `chapters/motivation.aux'.
 
  (chapters/motivation.tex
 Kapitel 1.
-) [3
+
+LaTeX Warning: Reference `images/mrtSoftware' on page 4 undefined on input line
+ 17.
+
+[4
 
 
-]
+]) [5]
 \openout2 = `chapters/related.aux'.
 
  (chapters/related.tex
 Kapitel 2.
-) [4
+) [6
 
 
 
@@ -1879,7 +1888,7 @@ Kapitel 2.
 
  (chapters/grundlagen.tex
 Kapitel 3.
-) [5
+) [7
 
 
 
@@ -1893,7 +1902,7 @@ Overfull \hbox (31.16403pt too wide) in paragraph at lines 27--57
 [][] 
  []
 
-[6
+[8
 
 
 
@@ -1912,37 +1921,37 @@ Overfull \hbox (57.96115pt too wide) in paragraph at lines 66--100
 [][] 
  []
 
-[7] [8]) [9]
+[9] [10]) [11]
 \openout2 = `chapters/konzept.aux'.
 
  (chapters/konzept.tex
 Kapitel 5.
-[10
+[12
 
 
 
-]) [11]
+]) [13]
 \openout2 = `chapters/implementierung.aux'.
 
  (chapters/implementierung.tex
 Kapitel 6.
 
-LaTeX Warning: Reference `grundlagen' on page 12 undefined on input line 32.
+LaTeX Warning: Reference `grundlagen' on page 14 undefined on input line 32.
 
-[12
+[14
 
 
 
 ]
 
-LaTeX Warning: Reference `transfer' on page 13 undefined on input line 84.
+LaTeX Warning: Reference `transfer' on page 15 undefined on input line 84.
 
-[13]) [14]
+[15]) [16]
 \openout2 = `chapters/evaluation.aux'.
 
  (chapters/evaluation.tex
 Kapitel 7.
-) [15
+) [17
 
 
 
@@ -1951,32 +1960,26 @@ Kapitel 7.
 
  (chapters/fazit.tex
 Kapitel 8.
-) [16
+) [18
 
 
 
 ]
 
-LaTeX Warning: Empty bibliography on input line 118.
+LaTeX Warning: Empty bibliography on input line 121.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 120.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 120.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 123.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 123.
 (index.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 34.
  (chapters/motivation.aux) (chapters/related.aux)
 (chapters/grundlagen.aux) (chapters/anforderung.aux) (chapters/konzept.aux)
 (chapters/implementierung.aux) (chapters/evaluation.aux) (chapters/fazit.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 120.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 120.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 123.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 123.
+Package rerunfilecheck Info: File `index.out' has not changed.
+(rerunfilecheck)             Checksum: B65ADAC2361F8CDF553D00D9551DDB17;2951.
 
-
-Package rerunfilecheck Warning: File `index.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `index.out':
-(rerunfilecheck)             Before: 489B2A61A8B2BEF85AB3747ED0F9DBC9;1640
-(rerunfilecheck)             After:  C5A734293D668D132C0D69019D7C5CD0;2779.
 
 LaTeX Warning: There were undefined references.
 
@@ -1988,53 +1991,29 @@ Package logreq Info: Writing requests to 'index.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44645 strings out of 492946
- 993038 string characters out of 3126266
+ 44663 strings out of 492946
+ 993276 string characters out of 3126266
  1583680 words of memory out of 3000000
- 47664 multiletter control sequences out of 15000+200000
+ 47685 multiletter control sequences out of 15000+200000
  10428 words of font info for 37 fonts, out of 3000000 for 9000
  1143 hyphenation exceptions out of 8191
- 62i,11n,96p,1994b,2280s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsection.5.2.3} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.2.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.2.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.1.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.1.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.1.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4.5} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4.4} has been referenced but does not exist
-, replaced by a fixed one
-
+ 62i,11n,96p,1994b,2316s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Viola/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Viola/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Vi
+ola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 <C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmbx10.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmbx12.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Viola/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Viola/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Viol
-a/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
-:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmr12.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr8.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Viola/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on index.pdf (17 pages, 213585 bytes).
+m/cmr12.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb><C:/Users/Viola/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Viola/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Viola/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on index.pdf (20 pages, 227808 bytes).
 PDF statistics:
- 336 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 330 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 419 PDF objects out of 1000 (max. 8388607)
+ 69 named destinations out of 1000 (max. 500000)
+ 482 words of extra memory for PDF output out of 10000 (max. 10000000)
 
