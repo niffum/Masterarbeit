@@ -35,6 +35,8 @@ Die volumetrische Darstellung der Gehirns wird im Grunde genommen mit nur 3 Skri
 Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg/HLSL Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
 % WARUM??
 
+\subsection{Ray Casting}
+
 Im Fragmentshader wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt "geschossen" wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Würfeln zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
 
 %-----------Intersect-----------
@@ -79,12 +81,13 @@ Die beiden Werte werden anschließend mit dem Isowert multipliziert.Ist einer de
 
 
 %-----------------------------------------
-Dies tritt ein, da der Isowert zunächst für alle Farbkanäle verwendet wird, um eine neue Farbe zu deklarieren.
+Dies tritt ein, da der Isowert zunächst für alle Farbkanäle verwendet wird, um eine neue Farbe zu deklarieren. ?
 
 An dieser Stelle wird über die Transferfunktion der entsprechende Farbwert aus der zugehörigen Textur gelesen. Dazu wird der Isowert als Index verwendet. Die Funktionsweise und Implementierung der Transferfunktion wird in der Sektion \ref{transfer} beschrieben.
 % Bezug Transferfunktion!
 Die Transferfunktion wird nur abgerufen, wenn der Isowert nicht 0 ist, da sonst die Transparenz überschrieben würde.
 % Tranferfunktion bei index 0 auf 0000 setzen??
+Ist die Farbe bekannt, wir der betrachtete Voxel illuminiert. Dies ist in der Sektion \ref{ilumination} beschrieben. 
 
 Der Alphawert der so erhaltenen Farbe wird noch einmal halbiert, um die Darstellung semi-transparent erscheinen zu lassen.
 % WARUM
@@ -111,8 +114,33 @@ Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt u
 - Illumination: Gradient vector = normal
 - Gradient: 
 
-\subsection{Ray Casting}
+
 
 \subsection{Transferfunktion}
+\label{transfer}
+
+- lookup
+
+- erzeugen von transferfunktion
 
 \subsection{Illumination}
+\label{illumination}
+
+Das Volumen wird mit einem einfachen Beleuchtungsmodell illuminiert, wodurch es mehr Plastizität erhält. Gängiger Weise wird dafür das Phong Beleuchtungsmodell verwendet. 
+% Referenz? warum nicht blinn?
+Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. In Abbildung \ref{phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie zusammengesetzt das Phong Beleuchtungsmodell ergeben.
+Dieses wird durch folgende Formel beschreiben:
+
+$I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
+
+$I$ ist dabei die Farbe des beleuchteten Punktes. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
+Die oben beschriebenen Komponenten werden aufaddiert und sind somit durch jeweils ein $+$-Zeichen voneinander getrennt, wodurch sie gut voneinander zu trennen sind. 
+
+Die Koeffizienten werden im Shader durch Farben repräsentiert. Der diffuse Koeffizient ist dabei der vorher aus der Transferfunktion gelesene Farbwert. Um diesen nicht durch die ambiente Beleuchtung zu verfälschen, wird er mit einem konstanten Faktor multipliziert, um eine abgedunkelte Farbe zu erhalten, die als ambienter Wert verwendet wird. Die Reflextion wird weiß dargestellt.
+Als Reflexionsexponent hat sich der Wert ?10? als am besten erwiesen.
+
+Um die Reflexion berechnen zu können müssen außerdem der Lichtvektor und die normale bekannt sein.
+Unterscheidung direktionales und Punktlicht?
+
+\subsection{Gradientenberechnung}
+\label{gradienten}

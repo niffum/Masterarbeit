@@ -18,25 +18,37 @@ Um MRT-Scans zu studieren benutzen Ärzte in der Regel speziell dafür entwickel
 Ein Beispiel für die Oberfläche solch einer eben beschriebenen Software ist in Abbildung \ref{images/mrtSoftware} zu sehen. 
 % Grundlagen?
 
-Obwohl Anwendungen dieser Art wohl am meist verbreitetsten sind, um MRT-Scans zu analysieren 
+Anwendungen dieser Art sind weit verbreitet. Dennoch gibt es Verbesserungspotenzial.
 %Refrerenz?
-weisen sie einige Unzulänglichkeiten auf.
 Zum Einen entsteht durch die Reduzierung um eine Dimension ein verzerrtes Bild des Gehirns. Die Darstellung der verschiedenen Achsen auf den Scans soll den Arzt bei der Orientierung unterstützen. Trotzdem muss dieser immer seinen Fokus zwischen zwei oder mehr Bildern wechseln und über ein gewisses räumliches Vorstellungsvermögen besitzen, um das Gesamtbild des Gehirns in seinem Geist zu rekonstruieren. Dies ist ein kognitiver Aufwand, der Ärzte zusätzlich belastet, während sie sich darauf konzentrieren Anomalien in den Scans eines Patienten zu erkennen und einzuschätzen. 
 Wird auf einem Scan ein Schlaganfall entdeckt, ist es durch die Abstraktion des Organs außerdem schwierig eine korrekte Vorstellung von der Größe und Lage des betroffenen Bereichs zu bekommen, da jeweils nur eine Schicht des Gehirns sichtbar ist. 
 Hier würde eine dreidimensionale Ansicht des gescannten Gehirns, in der der betroffene Bereich gekennzeichnet ist einen sehr viel deutlicheren Einblick in den Zustand des Patienten liefern. Dies ist nicht nur für den behandelnden Arzt hilfreich. Durch die klare und eindeutigere Darstellung fällt es auch leichter den anderen die Situation zu erläutern. Dies trifft auf Patienten zu oder auch auf andere Ärzte, die der behandelnde Arzt eventuell in den Fall mit einbeziehen möchte. Schließlich würde eine 3D-Darstellung auch das Verständnis in Lernzwecken begünstigen.
 Da der betroffene Bereich in einer 3D-Darstellung auf einen Blick erfasst werden kann, eignet sie sich außerdem, um den direkten Vergleich zwischen zwei zuständen zu ziehen. So fiele es leichter beispielsweise die Größe des Bereichs vor und nach einer Therapie gegenüberzustellen, um deren Erfolgt zu demonstrieren oder zu beurteilen.
 
-Zum Anderen, 
+% UX 
+Zum Anderen, ist das Design der Benutzeroberfläche solcher Programme meist unübersichtlich und wirkt veraltet. 
+% Software zum Vergleichen finden
+Die eben beschriebenen Vorteile einer 3D-Darstellung würden theoretisch auch in einer Bildschirmanwendung gelten. Allerdings würde das Potenzial der Räumlichkeit damit nicht vollkommen ausgeschöpft werden. 
+??
+AR-Anwendungen entwickeln sich stetig weiter und werden in der Zukunft einen immer größeren Teil des Alltags einnehmen. Diese Entwicklung wirkt sich auch auf den medizinischen Bereich aus. 
+% Referenz?
+Ärzte sind sich der neuen Möglichkeiten bewusst und sind daran interessiert, 
+in welchen Einsatzgebieten man einen Nutzen aus diesen ziehen kann. (Studie)
+Eine Anwendung wie mARt eignet sich gut, um den praktischen Einsatz von AR prototypisch zu testen.
+
+Durch die Umsetzung der Darstellung in AR wird die Interaktion mit den Daten direkter und intuitiver, da der Nutzer seine Hände als Eingabemedium benutzen kann. Dies macht die Verwendung der Software leichter zugänglich, was unter anderem für Lernzwecke dienlich sein kann. 
+Zudem wird die Nutzung der Anwendung dadurch interessanter und unterhaltsamer.
+Gleichzeitig ist durch die kabellosen, tragbaren AR-Headsets eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen.
+
+- mobilität (im op)
+- intuitivere Bedienung -> leichter zugänglich
+- interessant / macht spaß
+- AR findet einzug in leben -> Prototyp 
+- ärzte fänden hilfreich
+UX?
+- intuitiver
 
 Es bietet sich die Möglichkeit moderne Technologie einzusetzen, um die Arbeit von Neurologen zu erleichtern und ihre Ergebnisse und somit die Gesundheit ihrer Patienten zu verbessern.
-
-
-- kein intuitiver umgang, kein "Spaß" Faktor
-
-- AR leichter zugänglich als komplizierte Software
-
-Anwendung:
-- Macht betrachten der Daten interessanter- 
 
 - UX -> intuitiver, besseres Verständnis
 
@@ -44,12 +56,14 @@ Anwendung:
 - Ärzte fänden AR unterstütztes Arbeiten hilfreich (Referenz)
 
 
-
 \section{Zielsetzung}
 
-In \ref{motivation} wurden Möglichkeiten beschrieben, die Arbeit von Neurologen, die MRT-Scans auf Schlaganfälle untersuchen zu erleichtern und zugänglicher zu machen. Ziel dieser Arbeit ist es eine Anwendung zu konzipieren und zu implementieren, die diese Verbesserungsmöglichkeiten umsetzt. Dabei handelt es sich um eine AR-Anwendung, die es ermöglichen soll, MRT-Scans, sowie Bereiche derer, die auf einen Schlaganfall schließen lassen in einer dreidimensionalen Darstellung zu betrachten und mit dieser zu interagieren. 
-Um eine nützliche Anwendung zu entwickeln, die den Anforderungen eines Einsatzes in dem Arbeitsfeld eines Neurologen entspricht, werden Interviews mit einem Neurologen geführt werden. Aus diesen wird dann die nötige Funktionalität der Anwendung abgeleitet. 
-Die Anwendung ist nicht als einsetzbares Produkt zu verstehen sondern eher als Prototyp, der die Nützlichkeit und das Potenzial des Programms beweisen soll.
+Ziel dieser Arbeit ist es, die Möglichkeiten der Darstellung von und Interaktion mit MRT-Daten in AR untersuchen. Der Fokus liegt dabei auf der Darstellung von Gehirnscans, die in der Schlaganfallprävention und -diagnose verwendet werden.
+Hierzu soll eine prototypische Anwendung konzipiert und implementiert werden, die die eben genannten Möglichkeiten demonstriert: mARt.
+Die MRT-Bilder werden innerhalb einer AR-Anwendung dreidimensional dargestellt. Außerdem soll eine möglichst intuitive Interaktion mit der Darstellung ermöglicht werden. 
+Um eine nützliche Anwendung zu entwickeln, die den Anforderungen eines Einsatzes im Arbeitsfeld eines Neurologen entspricht, werden Interviews mit einem Neurologen geführt werden. Aus diesen wird dann die nötige Funktionalität der Anwendung abgeleitet. 
+Die Anwendung ist nicht als einsetzbares Produkt zu verstehen sondern eher als Prototyp, der die Nützlichkeit und das Potenzial des Programms beweisen soll. Der Nutzen der Anwendung wird am Ende der Arbeit evaluiert.
+
 
 \section{Struktur dieser Arbeit}
 
