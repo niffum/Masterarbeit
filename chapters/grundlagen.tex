@@ -1,17 +1,46 @@
-% Grundlagen
+% Grundlagen & verwnadte Arbeiten
 
-\chapter{Grundlagen}
+\chapter{Aktueller Stand der Technik}
 
-\section{MRT}
+%-------------------------------------------------------------
+\section{MRT}												 %
+%-------------------------------------------------------------
 
-Die Abkürzung MRT steht für Magnetresonanztomographie. Das Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen der inneren Organe zu erzeugen. Dazu werden Magnetfelder erzeugt, 
+Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
+ 	
+\subsection{Verfahren}
 
-\section{MRT und Schlaganfälle}
+Um die inneren Organe eines Patienten zu visualisieren, werden kleinste Teilchen seines Körpers in Bewegung versetzt, die gemessen werden kann. Im Falle einer MRT handelt es sich dabei um Wasserstoffprotonen. Diese haben eine Eigendrehung um sich selbst, den sogenannten Kernspin. Durch ihre positive Ladung, die durch den Kernspin in Bewegung ist, besitzen die Protonen weiterhin ein eigenes Magnetfeld, welches messbar ist. 
+Während einer MRT wird mit einer Spule, die in dem MRT-System verbaut ist um den Körper des Patienten ein Magnetfeld erzeugt. Die Kernspin-Achsen der Wasserstoffprotonen richten sich an diesem aus. Anschließend wird in das Magnetfeld ein Hochfrequenzimpuls, die Larmorfrequenz eingestrahlt. Durch diesen Impuls findet eine Synchronisation der Protonen statt, wobei einige um 180° gedreht werden. Kurz danach laufen die Protonen wieder auseinander und richten sich wieder am Magnetfeld aus. 
+Dadurch, dass alle Protonen in dieselbe Richtung zeigen (phasengleich sind), verstärken sie gegenseitig das Signal, dass sie abgeben. Das Signal wird schwächer, sobald sie wieder auseinander laufen (Dephasierung).
+Die Zeit, die die Protonen brauchen, um sich wieder am Magnetfeld auszurichten wird als Relaxtionzeit bezeichnet. Dabei wird zwischen T1- und T2-Relaxtion unterschieden.
+Die Relaxionszeit ist dabei abhängig von der Zusammensetzung des umgebenden Gewebes. Das gemessene MR-Signal, das durch diese beeinflusst wird, ist also für verschiedene Gewebearten verschieden stark.
 
-\section{AR und VR}
+\subsection{Datenverarbeitung}
 
-\section{Volume Rendering}
+Da die MRT ein dreidimensionales Objekt abbilden soll, werden mit dem eben beschriebenen Verfahren die Werte auch der XY-Ebene erfasst. Das Gehirn wird in Z-Richtung in einzelne Schichten unterteilt. Eine Schicht ist dabei gewissermaßen ein Bild mit X- und Y-Koordinaten, von dem viele hintereinander gehängt werden. Diese Unterteilung in Schichten wird erreicht, indem Z-Gradientenspulen verwendet werden, die das Magnetfeld inhomogen machen und entsprechend dem Z-Gradienten zu einer Seite hin abfallen lassen. So kann jeder Z-Schicht eine bestimmt Stärke im Magnetfeld zugewiesen werden. 
+Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 
+Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem Bild Koordinaten, die der Anordnung der jeweils betrachteten Punkte in der Welt entsprechen. Stattdessen bildet der X-Wert die Frequenz und der Y-Wert die Phase ab. Wie für den Z-Wert werden auch hier Gradienten gebildet und auf das Magnetfeld gelegt. Der X-Gradient verläuft von links nach rechts und sorgt dafür, dass die Larmorfrequenz in dieser Richtung zunimmt, sodass die jeder Punkt seine eigene Frequenz hat.Der Y-Gradient, der senkrecht verläuft, beeinflusst auf dieselbe Weise die Phasen einer Schicht. Er wird dabei nur kurz nach dem Einstrahlen des Hochfrequenz-Impulses eingeschaltet, wenn sich die Protonen bereits ausgerichtet haben.
+
+Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichern, die K-Raum genannt wird. Die Matrix entspricht allerdings noch nicht der bildlichen Darstellung, die angestrebt wird, da die Werte eine andere Bedeutung haben. ? Deshalb werden sie mit Hilfe der Fouriertransformation in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
+
+\subsection{Abgrenzung CT}
+Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, ist die Computer-Tomographie. Die Verfahren unterscheiden sich jedoch. Denn bei einer CT wird der Patient schichtenweise geröntgt. Dh. sein Körper wird mit Röntgenstrahlung beschossen, die je nach Gewebe, auf das sie treffen unterschiedlich stark abgeschwächt werden, was dann gemessen wird. Die so entstandenen "Querschnitte" des Körpers werden anschließend mit Hilfe eines Computers zu einem dreidimensionalen Bild zusammengesetzt. 
+
+Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen verwendet. Allerdings wird der Patient dabei auch der Belastung von radioaktiver Strahlung ausgesetzt ist, die stärker ist als beim normalen Röntgen. Außerdem ist können Weichteile mit einer MRT besser darstellt werden. Sie eignet sich also mehr zur Untersuchung des Gehirns.
+
+
+\subsection{Datenformate}
+
+MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören nifti oder DICOM, welches z.B. neben den Bildern auch Patientendaten speichert.
+Allerdings 
+16 bit int images, pvm ? Standart?
+%-------------------------------------------------------------
+\section{Dreidimensionale Darstellung von MRT-Daten}		 %
+%-------------------------------------------------------------
+\subsection{Volume Rendering}
+% Bezug zu Motivation
 ! Nur Grundlagen, nicht Implementierung
 
 3D Texturen
@@ -19,6 +48,41 @@ Die Abkürzung MRT steht für Magnetresonanztomographie. Das Verfahren, das auch
 Raymarching
 
 Transferfunktionen
+\subsection{Shearwarp}
+\subsection{Marching Cubes}
+
+\subsection{Voxel}
+
+\subsection{Andere}
+%-------------------------------------------------------------
+\section{AR und VR}											 %
+%-------------------------------------------------------------
+
+%-------------------------------------------------------------
+\section{Verarbeitung von MRT-Daten}						 %
+%-------------------------------------------------------------
+Obwohl die Darstellung von MRT-Bildern in direktem Zusammenhang mit ihrem Zweck steht, bleibt die Verarbeitung der Daten auch bei verschiedenen Darstellungsformen gleich. 
+
+\subsection{Arbeit eines Radiologen}
+Wie bereits in Kapitel \ref{motivation} oberflächlich erläutert wurde, besteht der Nutzen eines MRTs darin, dass der behandelnde Arzt einen Einblick in die betreffenden Organe (hier das Gehirn) erhält. Dazu studiert er die einzelnen Schichten des Gehirns und hält Ausschau nach Anomalien.
+Im Fall von Schlaganfällen sind diese ...
+
+Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf jeder einzelnen Schicht. 
+\subsubsection{Schlaganfälle auf einem MRT}
+
+\subsection{Software in der Radiologie}
+%Use Cases
+%Bsp
+Die Untersuchung der MRT-Daten werden digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Software, die diesen darstellen kann und weiterhin relevante Funktionen bietet. Beispiele für solche Software sind die Programme
+
+
+%-------------------------------------------------------------
+\section{Interaktion in AR/VR}								 %
+%-------------------------------------------------------------
+\subsection{Integrierte Nutzereingaben}
+\subsection{Leap Motion}
+\subsection{Andere}
+
 
 
 

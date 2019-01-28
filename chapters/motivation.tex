@@ -2,14 +2,10 @@
 
 \chapter{Einleitung}
 
-Der Einsatz von MRTs ermöglicht es Ärzten einen Einblick in das innere des menschlichen Körpers zu erlangen, ohne diesen dabei zu verletzten. Sie erhalten Bilder innerer Organe, anhand deren sich dessen Aufbau und Funktionalität beobachten lassen. Aber auch mögliche Fehlfunktionen oder Anomalien können so erfasst werden. So können auf MRTs-Scans gebrochene Knochen, innere Verletzungen oder Schlaganfälle erkannt und beurteilt werden. Im Fall von Schlaganfällen ist hierbei nicht nur eine Diagnose möglich sondern sogar eine Prävention. 
+Der Einsatz von MRTs ermöglicht es Ärzten einen Einblick in das innere des menschlichen Körpers zu erlangen, ohne diesen dabei zu verletzten. Sie erhalten Bilder innerer Organe, anhand derer sich dessen Aufbau und Funktionalität beobachten lassen. Aber auch mögliche Fehlfunktionen oder Anomalien können so erfasst werden. So können auf MRTs-Scans gebrochene Knochen, innere Verletzungen oder Schlaganfälle erkannt und beurteilt werden. Im Fall von Schlaganfällen ist hierbei nicht nur eine Diagnose möglich sondern sogar eine Prävention. 
 % Wie genau?
-Um auf dem MRT-Scan des Gehirns eines Patienten einen Bereich zu entdecken, der auf einen Schlaganfall hindeuten könnte studiert ein Neurologe die einzelnen Bilder genau. Hierbei ist für den Behandlungserfolg neben der Qualität der Bilder vor allem die Methode der Anschauung wichtig. Diese sollte für den Arzt so intuitiv und wie möglich und auf seine Bedürfnisse zugeschnitten sein. 
-Diese Arbeit untersucht den Einsatz von AR-Headsets in der Verarbeitung von MRT-Scans zur Schlagabfallprävention.
-
-- Neurologen sehen sich MRT Scans Bild für Bild an
-- Schlaganfälle sind auf Scans sichtbar
-- Fokus Gehirn und Schlaganfall betonen
+In beiden Fällen ist es unabdingbar, dass der Arzt eine möglichst umfassende Vorstellung von der Struktur des Gehirns des Patienten und vor allem von den vom Schlaganfall betroffenen Bereichen hat. Nur wenn dies der Fall ist, kann eine sinnvolle Therapie angewandt werden.
+Diese Arbeit stellt die Möglichkeit vor den Umgang mit MRT-Daten anschaulicher und intuitiver zu gestalten, um somit die Arbeit von Neurologen im Bereich der Schlaganfallprävention zu erleichtern und die Gesundheit ihrer Patienten zu verbessern.
 
 \section{Motivation}
 \label{motivation}
@@ -18,45 +14,32 @@ Um MRT-Scans zu studieren benutzen Ärzte in der Regel speziell dafür entwickel
 Ein Beispiel für die Oberfläche solch einer eben beschriebenen Software ist in Abbildung \ref{images/mrtSoftware} zu sehen. 
 % Grundlagen?
 
-Anwendungen dieser Art sind weit verbreitet. Dennoch gibt es Verbesserungspotenzial.
+Anwendungen dieser Art sind weit verbreitet. Die zweidimensionale Ansicht, in der die Bilder vorliegen können allerdings eine falsche Vorstellung von der vorliegenden Situation schaffen. 
 %Refrerenz?
-Zum Einen entsteht durch die Reduzierung um eine Dimension ein verzerrtes Bild des Gehirns. Die Darstellung der verschiedenen Achsen auf den Scans soll den Arzt bei der Orientierung unterstützen. Trotzdem muss dieser immer seinen Fokus zwischen zwei oder mehr Bildern wechseln und über ein gewisses räumliches Vorstellungsvermögen besitzen, um das Gesamtbild des Gehirns in seinem Geist zu rekonstruieren. Dies ist ein kognitiver Aufwand, der Ärzte zusätzlich belastet, während sie sich darauf konzentrieren Anomalien in den Scans eines Patienten zu erkennen und einzuschätzen. 
-Wird auf einem Scan ein Schlaganfall entdeckt, ist es durch die Abstraktion des Organs außerdem schwierig eine korrekte Vorstellung von der Größe und Lage des betroffenen Bereichs zu bekommen, da jeweils nur eine Schicht des Gehirns sichtbar ist. 
-Hier würde eine dreidimensionale Ansicht des gescannten Gehirns, in der der betroffene Bereich gekennzeichnet ist einen sehr viel deutlicheren Einblick in den Zustand des Patienten liefern. Dies ist nicht nur für den behandelnden Arzt hilfreich. Durch die klare und eindeutigere Darstellung fällt es auch leichter den anderen die Situation zu erläutern. Dies trifft auf Patienten zu oder auch auf andere Ärzte, die der behandelnde Arzt eventuell in den Fall mit einbeziehen möchte. Schließlich würde eine 3D-Darstellung auch das Verständnis in Lernzwecken begünstigen.
+Durch die Reduzierung um eine Dimension entsteht ein verzerrtes Bild des Gehirns. Die Darstellung der verschiedenen Achsen auf den Scans soll den Arzt bei der Orientierung unterstützen. Trotzdem muss dieser immer seinen Fokus zwischen zwei oder mehr Bildern wechseln und über ein gewisses räumliches Vorstellungsvermögen besitzen, um das Gesamtbild des Gehirns in seinem Geist zu rekonstruieren. Dies ist ein kognitiver Aufwand, der Ärzte zusätzlich belastet, während sie sich darauf konzentrieren Anomalien in den Scans eines Patienten zu erkennen und einzuschätzen. 
+Wird auf einem Scan ein Schlaganfall entdeckt, ist es durch die Abstraktion des Organs schwierig eine korrekte Vorstellung von der Größe und Lage des betroffenen Bereichs zu bekommen, da jeweils nur eine Schicht des Gehirns sichtbar ist. 
+Eine dreidimensionale Ansicht des gescannten Gehirns würde einen sehr viel deutlicheren Einblick in den Zustand des Patienten liefern. Vor allem der vom Arzt gekennzeichnete betroffene Bereich wäre in 3D um einiges anschaulicher.    Dies ist nicht nur für den behandelnden Arzt hilfreich. Durch die klare und eindeutigere Darstellung fällt es auch leichter den anderen die Situation zu erläutern. Dies trifft auf Patienten zu oder auch auf andere Ärzte, die der behandelnde Arzt eventuell in den Fall mit einbeziehen möchte.
+Schließlich würde eine 3D-Darstellung auch das Verständnis in Lernzwecken begünstigen.
 Da der betroffene Bereich in einer 3D-Darstellung auf einen Blick erfasst werden kann, eignet sie sich außerdem, um den direkten Vergleich zwischen zwei zuständen zu ziehen. So fiele es leichter beispielsweise die Größe des Bereichs vor und nach einer Therapie gegenüberzustellen, um deren Erfolgt zu demonstrieren oder zu beurteilen.
 
-% UX 
-Zum Anderen, ist das Design der Benutzeroberfläche solcher Programme meist unübersichtlich und wirkt veraltet. 
+% UX  
 % Software zum Vergleichen finden
 Die eben beschriebenen Vorteile einer 3D-Darstellung würden theoretisch auch in einer Bildschirmanwendung gelten. Allerdings würde das Potenzial der Räumlichkeit damit nicht vollkommen ausgeschöpft werden. 
-??
+Weiterhin ist es das Ziel die Interaktion mit den Daten möglichst intuitiv zu gestalten, damit der Fokus des Nutzers auf den Bildern selbst liegen kann.
+Durch die Platzierung im Raum wäre die Darstellung anschaulicher und der Nutzer könnte direkt mit ihr interagieren. 
+Um dies zu erreichen bieten sich die virtuelle oder augementierte Realität an. 
+Eine AR-Anwendung scheint für diesen Fall allerdings besser geeignet zu sein. Durch die Umsetzung der Darstellung in AR wird die Interaktion mit den Daten direkter und intuitiver, da der Nutzer seine Hände als Eingabemedium benutzen kann. Dies macht die Verwendung der Software leichter zugänglich, was unter anderem für Lernzwecke dienlich sein kann.
+Zudem wird die Nutzung der Anwendung dadurch interessanter und unterhaltsamer.
+Gleichzeitig ist durch die kabellosen, tragbaren AR-Headsets eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen. 
+
 AR-Anwendungen entwickeln sich stetig weiter und werden in der Zukunft einen immer größeren Teil des Alltags einnehmen. Diese Entwicklung wirkt sich auch auf den medizinischen Bereich aus. 
 % Referenz?
 Ärzte sind sich der neuen Möglichkeiten bewusst und sind daran interessiert, 
 in welchen Einsatzgebieten man einen Nutzen aus diesen ziehen kann. (Studie)
 Eine Anwendung wie mARt eignet sich gut, um den praktischen Einsatz von AR prototypisch zu testen.
 
-Durch die Umsetzung der Darstellung in AR wird die Interaktion mit den Daten direkter und intuitiver, da der Nutzer seine Hände als Eingabemedium benutzen kann. Dies macht die Verwendung der Software leichter zugänglich, was unter anderem für Lernzwecke dienlich sein kann. 
-Zudem wird die Nutzung der Anwendung dadurch interessanter und unterhaltsamer.
-Gleichzeitig ist durch die kabellosen, tragbaren AR-Headsets eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen.
-
-- mobilität (im op)
-- intuitivere Bedienung -> leichter zugänglich
-- interessant / macht spaß
-- AR findet einzug in leben -> Prototyp 
-- ärzte fänden hilfreich
-UX?
-- intuitiver
-
-Es bietet sich die Möglichkeit moderne Technologie einzusetzen, um die Arbeit von Neurologen zu erleichtern und ihre Ergebnisse und somit die Gesundheit ihrer Patienten zu verbessern.
-
-- UX -> intuitiver, besseres Verständnis
-
-- Ar kommt schon in Medizin zum Einsatz (Referenz)
-- Ärzte fänden AR unterstütztes Arbeiten hilfreich (Referenz)
-
-
 \section{Zielsetzung}
+% hier techniken kokretisieren
 
 Ziel dieser Arbeit ist es, die Möglichkeiten der Darstellung von und Interaktion mit MRT-Daten in AR untersuchen. Der Fokus liegt dabei auf der Darstellung von Gehirnscans, die in der Schlaganfallprävention und -diagnose verwendet werden.
 Hierzu soll eine prototypische Anwendung konzipiert und implementiert werden, die die eben genannten Möglichkeiten demonstriert: mARt.
