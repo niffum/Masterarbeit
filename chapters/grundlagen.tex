@@ -36,8 +36,57 @@ Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen ve
 MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören nifti oder DICOM, welches z.B. neben den Bildern auch Patientendaten speichert.
 Allerdings 
 16 bit int images, pvm ? Standart?
+%------------------------------------------------------
+\section{Volume Rendering}							  %
+%------------------------------------------------------
+
+% Bezug zu Motivation
+
+Skalarfeld 
+Isosurface
+Optical Model
+Classification
+Lightning
+Voxel
+
+3D Texturen
+
+Transferfunktionen
+
+
+\subsection{Volumetrisches Ray-Casting}
+
+\textbf{Ray-Casting} ist eine bekannte Rendering-Methode, die auch beim Rendern von 3D-Szenen zur Anwendung kommt die keine Volumendaten enthalten.
+In diesem Fall werden von der Position der Kamera für jeden Pixel Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser die Oberfläche eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Pixel in der Farbe des Objektes eingefärbt, wobei der verwendete Shader diese beeinflusst. Es wird außerdem berücksichtigt, welche Länge der Strahl zu dem Schnittpunkt hat, da nur der Eintrittspunkt relevant ist.
+Weiterhin existieren die Techniken Ray-Tracing und Ray-Marching, die ebenfalls auf der Kollision zwischen Strahlen und Objekten beruhen.
+Beim \textbf{Ray-Tracing} werden dabei neben dem ursprünglichen Strahl, der das Objelt trifft noch weitere berechnet, die durch die gesamte Szene laufen können um z.B. die Reflexion von Objekten aufeinander zu ermitteln. 
+\textbf{Ray-Marching} ist eine schnellere Version des Ray-Castings. Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau kalkuliert. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung etwas weniger genau ist, ist wie bereits gesagt schneller als Ray-Casting.
+
+%Ray-Casting bzw. Ray-Marching wird auch zum Rendering von Volumen benutzt.
+Bei beiden Verfahren muss allerdings die Oberfläche bzw. die Form des Objektes bekannt sein, um bestimmen zu können, wann der Strahl in sie eintritt. Dies ist bei Volumendaten in der Regel nicht gegeben, da nicht zur das Objekt selbst, sondern auch dessen Umgebung darin gespeichert sind. Weiterhin werden durch die eben beschriebenen Prozesse nur die Oberflächen der Objekte gerendert, nicht aber ihr Inneres.
+
+Hier liegt der Unterschied zum Rendering von Volumen. In diesem Fall werden beide Verfahren quasi vereint. \textbf{Volumetrisches Ray-Casting} und volumetrisches Ray-Marching bezeichnen deshalb ein und dasselbe. Auch hier werden dabei Strahlen von der Kamera in die Szene geschossen. Um das Volumen zu rendern sind davon nur die Strahlen relevant, die das Volumen treffen. Und auch von diesen wird nur der Teil des Strahls berücksichtigt, der innerhalb der umgebenden Geometrie liegt. Für jeden Strahl Ein- und Austrittspunkt errechnet. Innerhalb der Geometrie werden jetzt entlang des Strahls in bestimmten Abständen Voxel betrachtet. Für jeden Voxel wird ein Farb- und Alphawert bestimmt und die Werte werden abhängig von der Komposition von hinten nach vorne oder von vorne nach hinten aufeinander addiert. Die Summen der Werte ergeben so eine dreidimensionale Darstellung des Volumens aus der Sicht der Kamera.
+
+\subsection{Texture Based Volume Rendering}
+
+Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann mit Alpha Blending übereinander geblendet werden. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den dann mit Hilfe von Texture Mapping die Textur gerendert wird.
+Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt auf welche Art die Volumendaten vorliegen. In Abbildung \ref{images/2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dies ist in Abbildung \ref{images/textureBased} dargestellt.
+
+Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sichtachse. Dazu werden sogenannte Proxy Geometrien erzeugt, Polygone, die einen Querschnitt beschreiben. Auf diesen Proxy Geometrien wird dann die Textur erstellt, indem die entsprechenden Volumendaten abgefragt werden. Dadurch, dass die Querschnitte an der Sichtachse ausgerichtet sind, ist nur ein Texturstapel notwendig. 
+
+
+https://dl.acm.org/citation.cfm?id=329138
+
+\subsection{Shear-Warp}
+
+Shear-Warp verfolgt den selben Ansatz wie das Ray-Casting. Anstatt die Strahlen allerdings von der tatsächlichen Kameraposition aus zu verschießen, werden die Strahlen orthogonal zu den Volumenschichten in das Volumen gefeuert. Auf diese Weise wird die Berechnung der Strahlen und die Komposition der Darstellung deutlich beschleunigt. 
+Damit auch bei einem nicht orthogonalen Blickwinkel das Volumen korrekt dargestellt wird, wird vor dem Ray Casting eine vom Blickwinkel abhängige Scherung auf die Volumendaten angewandt. In Abbildung \ref{shearwarp} ist Dargestellt, wie die Scherung die einzelnen Schichten entsprechend des Blickwinkels verschiebt, um einen orthogonalen Einfallswinkel zu simulieren. 
+Das durch das Ray Casting entstandene Bild wird zunächst in einen Buffer gerendered. Durch die Scherung ist das Bild zu diesem Zeitpunkt noch verzerrt. Deshalb wird es anschließend noch einmal transformiert, sodass eine korrekte Abbildung des Volumens auf die Bildschirmebene projiziert wird. In Abbildung \ref{shearwarpResult} ist zu sehen, wie das gerenderte Bild vor und nach der Transformation aussieht. 
+
+Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um einiges schneller.
+
 %-------------------------------------------------------------
-\section{Dreidimensionale Darstellung von MRT-Daten}		 %
+\section{Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten}		 %
 %-------------------------------------------------------------
 % Bsp
 Wie in Kapitel \ref{motivation} beschrieben wurde, bietet eine 3D-Darstellung von MRT-Bildern einige Vorteile gegenüber einer Betrachtung der Daten in 2D. 
@@ -47,39 +96,6 @@ Im Folgenden werden diese erläutert.
 
 % Vor- und Nachteile Tabelle?
 
-\subsection{Volume Rendering}
-% Bezug zu Motivation
-
-Skalarfeld 
-Isosurface
-Optical Model
-Classification
-Lightning
-
-
-\subsubsection{Ray Casting}
-
-Volume Rendering basiert auf dem Verfahren des Ray Castings. 
-Dabei werden von der Position der Kamera für jeden Bildpunkt Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Bildpunkt in der Farbe des Objektes eingefärbt. 
-Bei dieser Vorgehensweise müssen allerdings alle Objekte in der Szene bekannt sein und es muss außerdem eine Formel existieren, die beschreibt, ob ein Schnittpunkt mit dem Strahl existiert oder nicht. 
-
-\subsubsection{Texture Based Volume Rendering}
-
-Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann mit Alpha Blending übereinander geblendet werden. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den dann mit Hilfe von Texture Mapping die Textur gerendert wird.
-Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt auf welche Art die Volumendaten vorliegen. In Abbildung \ref{images/2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dies ist in Abbildung \ref{images/textureBased} dargestellt.
-
-Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sichtachse. Dazu werden sogenannte Proxy Geometrien erzeugt, Polygone, die einen Querschnitt beschreiben. Auf diesen Proxy Geometrien wird dann die Textur erstellt, indem die entsprechenden Volumendaten abgefragt werden. Dadurch, dass die Querschnitte an der Sichtachse ausgerichtet sind, ist nur ein Texturstapel notwendig. 
-
-Voxel
-
-3D Texturen
-
-Raymarching
-
-Transferfunktionen
-
-https://dl.acm.org/citation.cfm?id=329138
-\subsubsection{Shearwarp}
 
 \subsection{Marching Cubes}
 
@@ -87,6 +103,12 @@ https://dl.acm.org/citation.cfm?id=329138
 
 \subsection{Andere}
 https://dl.acm.org/citation.cfm?id=3264776
+
+
+%-------------------------------------------------------------
+\section{Vergleich der Methoden im Überblick}											 %
+%-------------------------------------------------------------
+
 %-------------------------------------------------------------
 \section{AR und VR}											 %
 %-------------------------------------------------------------
