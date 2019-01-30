@@ -39,21 +39,54 @@ Allerdings
 %-------------------------------------------------------------
 \section{Dreidimensionale Darstellung von MRT-Daten}		 %
 %-------------------------------------------------------------
+% Bsp
+Wie in Kapitel \ref{motivation} beschrieben wurde, bietet eine 3D-Darstellung von MRT-Bildern einige Vorteile gegenüber einer Betrachtung der Daten in 2D. 
+% Kann man das belegen?
+Auf Grund dieser Tatsache gab es im Laufe der Zeit verschiedene Ansätze zur Umsetzung einer dreidimensionalen Darstellungsweise. 
+Im Folgenden werden diese erläutert. 
+
+% Vor- und Nachteile Tabelle?
+
 \subsection{Volume Rendering}
 % Bezug zu Motivation
-! Nur Grundlagen, nicht Implementierung
+
+Skalarfeld 
+Isosurface
+Optical Model
+Classification
+Lightning
+
+
+\subsubsection{Ray Casting}
+
+Volume Rendering basiert auf dem Verfahren des Ray Castings. 
+Dabei werden von der Position der Kamera für jeden Bildpunkt Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Bildpunkt in der Farbe des Objektes eingefärbt. 
+Bei dieser Vorgehensweise müssen allerdings alle Objekte in der Szene bekannt sein und es muss außerdem eine Formel existieren, die beschreibt, ob ein Schnittpunkt mit dem Strahl existiert oder nicht. 
+
+\subsubsection{Texture Based Volume Rendering}
+
+Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann mit Alpha Blending übereinander geblendet werden. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den dann mit Hilfe von Texture Mapping die Textur gerendert wird.
+Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt auf welche Art die Volumendaten vorliegen. In Abbildung \ref{images/2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dies ist in Abbildung \ref{images/textureBased} dargestellt.
+
+Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sichtachse. Dazu werden sogenannte Proxy Geometrien erzeugt, Polygone, die einen Querschnitt beschreiben. Auf diesen Proxy Geometrien wird dann die Textur erstellt, indem die entsprechenden Volumendaten abgefragt werden. Dadurch, dass die Querschnitte an der Sichtachse ausgerichtet sind, ist nur ein Texturstapel notwendig. 
+
+Voxel
 
 3D Texturen
 
 Raymarching
 
 Transferfunktionen
-\subsection{Shearwarp}
+
+https://dl.acm.org/citation.cfm?id=329138
+\subsubsection{Shearwarp}
+
 \subsection{Marching Cubes}
 
 \subsection{Voxel}
 
 \subsection{Andere}
+https://dl.acm.org/citation.cfm?id=3264776
 %-------------------------------------------------------------
 \section{AR und VR}											 %
 %-------------------------------------------------------------
