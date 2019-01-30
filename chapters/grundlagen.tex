@@ -36,25 +36,63 @@ Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen ve
 MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören nifti oder DICOM, welches z.B. neben den Bildern auch Patientendaten speichert.
 Allerdings 
 16 bit int images, pvm ? Standart?
+
 %------------------------------------------------------
-\section{Volume Rendering}							  %
+\section{Volumendaten}							  %
 %------------------------------------------------------
 
-% Bezug zu Motivation
+Das Volumen setzt sich aus mehreren dreidimensionalen Bildpunkten zusammen. Diese werden Voxel genannt, vergleichbar mit Pixeln in zweidimensionalen Bildern.
 
-Skalarfeld 
-Isosurface
-Optical Model
-Classification
-Lightning
 Voxel
 
 3D Texturen
 
-Transferfunktionen
+Isosurface
 
+%------------------------------------------------------
+\section{Volume Rendering}							  %
+%------------------------------------------------------
+https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch39.html
+% Bezug zu Motivation
+Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Radiologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
+Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
+Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
+
+Eine Transferfunktion besteht meistens aus einer Textur, aus der für jeden Isowert eine Farbe und Opazität gelesen werden kann. Auf diese Weise können Voxel, die einem bestimmten Bereich oder z.B. Gewebe angehören hervorgehoben oder ausgeblendet werden. Eine gut Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden und von dem jeweiligen Datensatz abhängen. 
+
+Das Shading bestimmt unter anderem die Beleuchtung eines Voxels und kann dessen Eigenschaften somit zusätzlich zur Transferfunktion verändern. Hierbei können verschiedene Beleuchtungsmodelle verwendet werden.
+Bei einer lokalen Beleuchtung der einzelnen Voxel kommt hierzu meist das Phong-Beleuchtungsmodell zum Einsatz. 
+
+%-------
+Phong
+Normalen
+Gradienten
+etc...
+?
+%-----1
+
+Wie bereist erwähnt, werden die einzelnen Werte entlang eines Strahls mit einander verrechnet. Dabei werden sie in der Regel auf einander addiert. Dieser Vorgang wird Komposition genannt. Dabei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
+
+$\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
+
+$\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}$
+
+Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
+Sollen die Werte von hinten nach vorne addiert werden, wird dies durch die folgende Formel beschrieben.
+
+$\hat{C}_{i}=C_{i}+(1-\hat{A}_{i})\hat{C}_{i+1}$
+
+$\hat{A}_{i}=A_{i}+(1-\hat{A}_{i})\hat{A}_{i+1}$
+ 
+Skalarfeld 
+Optical Model
+Classification?
+Lightning
+
+Es gibt verschiedne Techniken, von denen die wichtigsten im Folgenden erläutert werden.
 
 \subsection{Volumetrisches Ray-Casting}
+\label{rayCasting}
 
 \textbf{Ray-Casting} ist eine bekannte Rendering-Methode, die auch beim Rendern von 3D-Szenen zur Anwendung kommt die keine Volumendaten enthalten.
 In diesem Fall werden von der Position der Kamera für jeden Pixel Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser die Oberfläche eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Pixel in der Farbe des Objektes eingefärbt, wobei der verwendete Shader diese beeinflusst. Es wird außerdem berücksichtigt, welche Länge der Strahl zu dem Schnittpunkt hat, da nur der Eintrittspunkt relevant ist.
