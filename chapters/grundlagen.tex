@@ -52,7 +52,7 @@ Isosurface
 %------------------------------------------------------
 \section{Volume Rendering}							  %
 %------------------------------------------------------
-https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch39.html
+%https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch39.html
 % Bezug zu Motivation
 Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Radiologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
 Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
