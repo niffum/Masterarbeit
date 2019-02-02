@@ -6,7 +6,7 @@
 \section{MRT}												 %
 %-------------------------------------------------------------
 
-Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
+Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der ,togie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
  	
 \subsection{Verfahren}
 
@@ -47,14 +47,14 @@ Voxel
 
 3D Texturen
 
-Isosurface
+Isofläche
 
 %------------------------------------------------------
 \section{Volume Rendering}							  %
 %------------------------------------------------------
 %https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch39.html
 % Bezug zu Motivation
-Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Radiologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
+Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
 Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
 
@@ -136,6 +136,22 @@ Im Folgenden werden diese erläutert.
 
 
 \subsection{Marching Cubes}
+%https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch01.html
+
+Das Marching Cubes Verfahren wird eingesetzt, um eine Polygonenoberfläche zu erzeugen, die ein volumetrisches Objekt visualisiert. 
+Der Visualisierung liegen Volumendaten, die in Form eines Skalarfeldes vorliegen zu Grunde.
+Die Idee hinter dem Algorithmus ist, dass es zwischen den Voxeln, die innerhalb und außerhalb eines Objektes liegen eine Grenze gibt, die die Oberfläche des Objektes bildet. Diese Grenze gilt es zu finden. Dazu wird der zu visualisierende Datensatz in würfelförmige Voxel aufgeteilt. Jeweils vier benachbarte Werte bilden jeweils einen Würfel. Für jeden der Werte wird dann geprüft, ob er unter einem gewissen Schwellenwert liegt, der bestimmt ob es sich um das Innere oder Äußere des Objektes handelt. Die Werte werden dabei als Dichtewerte angesehen. Je nachdem, ob dies der Fall ist, wird der Eckpunkt, den der entsprechende Wert repräsentiert mit 1 oder 0 versehen. Die so erhaltenen Werte aller Eckpunkte des betreffenden Würfels werden aneinander gefügt, sodass eine Binärzahl erzeugt wird. Diese Zahl dient als Index. 
+Dieser Index gilt für eine Look-up-Tabelle, in der alle Möglichkeiten vermerkt sind, wie ein Würfel von einer aus dreieckigen Polygonen bestehenden Oberfläche geteilt werden kann. Dafür  Die Anzahl dieser Möglichkeiten ist dabei immer gleich, denn für jeden der acht Eckpunkte des Würfels gilt eine der zwei Möglichkeiten, dass er sich unter der Oberfläche und damit im Objekt befindet oder nicht. Für alle Punkte zusammen ergibt dies also $2^8=256$ mögliche Fälle. Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden. Diese sind in Abbildung \ref{marchingCubes} dargestellt. Trotzdem werden in der Tabelle alle Fälle abgebildet. 
+Da sich mit Hilfe dieser Tabelle feststellen lässt, wie die Polygone in dem Würfel liegen, ist auch bekannt, auf welchen Würfelkanten sich deren Eckpunkte befinden. Für die Erzeugung einer Oberfläche muss aber weiterhin die genaue Position auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Eckpunkte, zwischen denen die betreffende Kante verläuft.
+Auf die selbe Weise wird für jeden Vertex der Polygone dessen Normale berechnet, indem die Normalen der Eckpunkte interpoliert werden.
+
+Nach und nach werden so für jeden Voxel-Würfel Polygone berechnet, die in einer Liste gespeichert und schließlich gezeichnet werden.
+
+
+Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terrain eingesetzt. In diesem Fall ist es entscheidend, wie die Dichtewerte des Volumens generiert werden. Bei der Visualisierung von medizinischen Daten, wie MRT-Bildern werden die Bilddaten als Eingabewerte genommen.
+
+Beschleunigung durch Unterstützung der Grafikkarte??
+
 
 \subsection{Voxel}
 
@@ -156,7 +172,7 @@ https://dl.acm.org/citation.cfm?id=3264776
 %-------------------------------------------------------------
 Obwohl die Darstellung von MRT-Bildern in direktem Zusammenhang mit ihrem Zweck steht, bleibt die Verarbeitung der Daten auch bei verschiedenen Darstellungsformen gleich. 
 
-\subsection{Arbeit eines Radiologen}
+\subsection{Arbeit eines Neurologen}
 Wie bereits in Kapitel \ref{motivation} oberflächlich erläutert wurde, besteht der Nutzen eines MRTs darin, dass der behandelnde Arzt einen Einblick in die betreffenden Organe (hier das Gehirn) erhält. Dazu studiert er die einzelnen Schichten des Gehirns und hält Ausschau nach Anomalien.
 Im Fall von Schlaganfällen sind diese ...
 
