@@ -49,6 +49,7 @@ Voxel
 
 Isofläche
 
+Klassifikation
 %------------------------------------------------------
 \section{Volume Rendering}							  %
 %------------------------------------------------------
@@ -69,6 +70,7 @@ Normalen
 Gradienten
 etc...
 ?
+Segmentierung
 %-----1
 
 Wie bereist erwähnt, werden die einzelnen Werte entlang eines Strahls mit einander verrechnet. Dabei werden sie in der Regel auf einander addiert. Dieser Vorgang wird Komposition genannt. Dabei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
@@ -124,7 +126,7 @@ Das durch das Ray Casting entstandene Bild wird zunächst in einen Buffer gerend
 Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um einiges schneller.
 
 %-------------------------------------------------------------
-\section{Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten}		 %
+\section{Oberflächen Generierung (Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten)}		 %
 %-------------------------------------------------------------
 % Bsp
 Wie in Kapitel \ref{motivation} beschrieben wurde, bietet eine 3D-Darstellung von MRT-Bildern einige Vorteile gegenüber einer Betrachtung der Daten in 2D. 
@@ -140,9 +142,15 @@ Im Folgenden werden diese erläutert.
 
 Das Marching Cubes Verfahren wird eingesetzt, um eine Polygonenoberfläche zu erzeugen, die ein volumetrisches Objekt visualisiert. 
 Der Visualisierung liegen Volumendaten, die in Form eines Skalarfeldes vorliegen zu Grunde.
-Die Idee hinter dem Algorithmus ist, dass es zwischen den Voxeln, die innerhalb und außerhalb eines Objektes liegen eine Grenze gibt, die die Oberfläche des Objektes bildet. Diese Grenze gilt es zu finden. Dazu wird der zu visualisierende Datensatz in würfelförmige Voxel aufgeteilt. Jeweils vier benachbarte Werte bilden jeweils einen Würfel. Für jeden der Werte wird dann geprüft, ob er unter einem gewissen Schwellenwert liegt, der bestimmt ob es sich um das Innere oder Äußere des Objektes handelt. Die Werte werden dabei als Dichtewerte angesehen. Je nachdem, ob dies der Fall ist, wird der Eckpunkt, den der entsprechende Wert repräsentiert mit 1 oder 0 versehen. Die so erhaltenen Werte aller Eckpunkte des betreffenden Würfels werden aneinander gefügt, sodass eine Binärzahl erzeugt wird. Diese Zahl dient als Index. 
+Die Idee hinter dem Algorithmus ist, dass es zwischen den Voxeln, die innerhalb und außerhalb eines Objektes liegen eine Grenze gibt, die die Oberfläche des Objektes bildet. Diese Grenze gilt es zu finden. 
+
+Dazu wird der zu visualisierende Datensatz in würfelförmige Voxel aufgeteilt. Jeweils vier benachbarte Werte bilden jeweils einen Würfel. 
+
+Für jeden der Werte wird dann geprüft, ob er unter einem gewissen Schwellenwert liegt, der bestimmt ob es sich um das Innere oder Äußere des Objektes handelt. Die Werte werden dabei als Dichtewerte angesehen. Je nachdem, ob dies der Fall ist, wird der Eckpunkt, den der entsprechende Wert repräsentiert mit 1 oder 0 versehen. Die so erhaltenen Werte aller Eckpunkte des betreffenden Würfels werden aneinander gefügt, sodass eine Binärzahl erzeugt wird. Diese Zahl dient als Index.
+ 
 Dieser Index gilt für eine Look-up-Tabelle, in der alle Möglichkeiten vermerkt sind, wie ein Würfel von einer aus dreieckigen Polygonen bestehenden Oberfläche geteilt werden kann. Dafür  Die Anzahl dieser Möglichkeiten ist dabei immer gleich, denn für jeden der acht Eckpunkte des Würfels gilt eine der zwei Möglichkeiten, dass er sich unter der Oberfläche und damit im Objekt befindet oder nicht. Für alle Punkte zusammen ergibt dies also $2^8=256$ mögliche Fälle. Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden. Diese sind in Abbildung \ref{marchingCubes} dargestellt. Trotzdem werden in der Tabelle alle Fälle abgebildet. 
-Da sich mit Hilfe dieser Tabelle feststellen lässt, wie die Polygone in dem Würfel liegen, ist auch bekannt, auf welchen Würfelkanten sich deren Eckpunkte befinden. Für die Erzeugung einer Oberfläche muss aber weiterhin die genaue Position auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Eckpunkte, zwischen denen die betreffende Kante verläuft.
+
+Da sich mit Hilfe dieser Tabelle feststellen lässt, wie die Polygone in dem Würfel liegen, ist auch bekannt, auf welchen Würfelkanten sich deren Eckpunkte befinden. Für die Erzeugung einer Oberfläche muss aber weiterhin die genaue Position auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Eckpunkte, zwischen denen die betreffende Kante verläuft. ??
 Auf die selbe Weise wird für jeden Vertex der Polygone dessen Normale berechnet, indem die Normalen der Eckpunkte interpoliert werden.
 
 Nach und nach werden so für jeden Voxel-Würfel Polygone berechnet, die in einer Liste gespeichert und schließlich gezeichnet werden.
@@ -152,21 +160,26 @@ Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terra
 
 Beschleunigung durch Unterstützung der Grafikkarte??
 
-
+Erweiterungen/ Abwandlungen
 \subsection{Voxel}
 
 \subsection{Andere}
-https://dl.acm.org/citation.cfm?id=3264776
+%https://dl.acm.org/citation.cfm?id=3264776
 
+%https://www.researchgate.net/publication/279205507_A_BRIEF_REVIEW_OF_SURFACE_MESHING_IN_MEDICAL_IMAGES_FOR_BIOMEDICAL_COMPUTING_AND_VISUALIZATION
 
 %-------------------------------------------------------------
 \section{Vergleich der Methoden im Überblick}											 %
 %-------------------------------------------------------------
 
 %-------------------------------------------------------------
-\section{AR und VR}											 %
+\section{AR und VR (MR?)}		
+Occluded Display 
+					 %
 %-------------------------------------------------------------
-
+\subsection{Augmented Rreality}
+Hololens, Magic Leap, HMD
+Smartphones
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
@@ -183,6 +196,24 @@ Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf je
 %Use Cases
 %Bsp
 Die Untersuchung der MRT-Daten werden digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Software, die diesen darstellen kann und weiterhin relevante Funktionen bietet. Beispiele für solche Software sind die Programme
+
+Drei Achsen (namen?)
+verschiedene Sequnzen?
+Interaktionen
+
+Seit es die Technologie erlaubt (?) erfolgt die Verarbeitung von MRT-Daten digital. Dazu gehört auch, dass der Arzt die Bilder genau studiert, um eine Diagnose stellen zu können. 
+Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM oder nifti Datenformat vor. Um die Dateien öffnen zu können, bedarf es bestimmter Software. Diese kann sich von Arzt zu Arzt unterscheiden. In Krankenhäusern werden die Bilder allerdings in der Regel in einem Picture Archiving and Communication System (PACS) gespeichert. (Fußnote?) Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral Speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit herkömmlichen Computern über den Browser auch die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. ??
+
+Diese PACS-Viewer unterscheiden sich oft nicht stark von anderen DICOM Viewern, von denen eine Vielzahl gibt. Teilweise lassen sich kostenlose Viewer im Internet finden.
+
+Vom Aufbau her sind diese wie gesagt alle recht ähnlich. 
+Wie im Kapitel \ref{motivation} bereits oberflächlich beschrieben, stellen sie das betreffende Organ, z.B. ein Gehirn, aus drei verschiedenen Blickwinkeln dar, die an den X-, Y- und Z-Achsen ausgerichtet sind. Orthogonal zum Blickachse steht jeweils eine Ebene, die gleichzeitig den Querschnitt durch das Gehirn darstellt. Diese Ebenen können entlang der Achsen verschoben werden. Auf diese Weise scrollt der Neurologe durch die verschiedenen Schichten des Gehirns. 
+Bei den drei Ebenen handelt es sich um die Frontal- oder Coronalebene, die das Gehirn in vorne und hinten teilt, die Sagittalebene, die zwischen links und rechts verläuft und die Transversalebene, die eine Teilung zwischen oben und unten bewirkt. 
+Die drei Ebenen sind dabei in jeder Ansicht farbkodiert eingezeichnet, sodass der Arzt ein besseres Bild davon bekommt, welchen Teil des Gehirns er gerade betrachtet. 
+Manchmal wird noch eine vierte Ansicht ergänzt, auf der entweder die Sagittalebene von der anderen Seite abgebildet ist oder sogar durch das Ineinanderschieben der gerade angezeigten Schichten eine annähernd dreidimensionale Darstellung simuliert wird. 
+In Abbildung \ref{mrtSoftware} ist die Oberfläche der XY-Viewers zu sehen, die beispielhaft die Ansichten zeigt.
+
+Interaktionen und Werkzeuge
 
 
 %-------------------------------------------------------------
