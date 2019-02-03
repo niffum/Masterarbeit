@@ -2,6 +2,7 @@
 
 \chapter{Aktueller Stand der Technik}
 
+
 %-------------------------------------------------------------
 \section{MRT}												 %
 %-------------------------------------------------------------
@@ -143,18 +144,29 @@ Im Folgenden werden diese erläutert.
 Das Marching Cubes Verfahren wird eingesetzt, um eine Polygonenoberfläche zu erzeugen, die ein volumetrisches Objekt visualisiert. 
 Der Visualisierung liegen Volumendaten, die in Form eines Skalarfeldes vorliegen zu Grunde.
 Die Idee hinter dem Algorithmus ist, dass es zwischen den Voxeln, die innerhalb und außerhalb eines Objektes liegen eine Grenze gibt, die die Oberfläche des Objektes bildet. Diese Grenze gilt es zu finden. 
+Die Werte der Voxel, werden dabei als Dichtewerte angesehen. Voxel innerhalb der Grenze haben eine Dichte, die außerhalb eine andere. Demnach kann ein Schwellenwert definiert werden, der die beiden Wertebereiche voneinander trennt.
+Um die Grenze zwischen den Voxeln zu ermitteln, werden diese zunächst in Würfel aufgeteilt, woher auch der Name des Verfahrens stammt. Immer vier benachbarte Voxel bilden dabei einen Würfel.  
 
-Dazu wird der zu visualisierende Datensatz in würfelförmige Voxel aufgeteilt. Jeweils vier benachbarte Werte bilden jeweils einen Würfel. 
+Die Vorstellung einer Grneze zwischen den Voxeln lässt sich auf die Würfel übertragen. Dabei liegt dann ein bestimmter Teil der Würfel des Volumens mit allen Eckpunkten innerhalb und ein bestimmter Teil außerhalb des Objektes. Diese Würfel liegen nicht auf der Grenze und alle ihre Eckpunkte haben jeweils ähnliche Werte. Andererseits gibt es Würfel, durch die die Grenze verläuft. Die Eckpunkte dieser Würfel können sich in ihren Werten stark unterscheiden, da jeweils ein Punkt zum Inneren und ein anderer zum Äußeren des Objektes gehören kann. 
 
-Für jeden der Werte wird dann geprüft, ob er unter einem gewissen Schwellenwert liegt, der bestimmt ob es sich um das Innere oder Äußere des Objektes handelt. Die Werte werden dabei als Dichtewerte angesehen. Je nachdem, ob dies der Fall ist, wird der Eckpunkt, den der entsprechende Wert repräsentiert mit 1 oder 0 versehen. Die so erhaltenen Werte aller Eckpunkte des betreffenden Würfels werden aneinander gefügt, sodass eine Binärzahl erzeugt wird. Diese Zahl dient als Index.
- 
-Dieser Index gilt für eine Look-up-Tabelle, in der alle Möglichkeiten vermerkt sind, wie ein Würfel von einer aus dreieckigen Polygonen bestehenden Oberfläche geteilt werden kann. Dafür  Die Anzahl dieser Möglichkeiten ist dabei immer gleich, denn für jeden der acht Eckpunkte des Würfels gilt eine der zwei Möglichkeiten, dass er sich unter der Oberfläche und damit im Objekt befindet oder nicht. Für alle Punkte zusammen ergibt dies also $2^8=256$ mögliche Fälle. Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden. Diese sind in Abbildung \ref{marchingCubes} dargestellt. Trotzdem werden in der Tabelle alle Fälle abgebildet. 
+Um also die Oberfläche zu erzeugen, die das gesamte Volumen aufteilt, wird jeder Würfel zuerst einzeln betrachtet und es wird ermittelt, ob und wie die Polygonfläche diesen einzelnen Würfel aufteilt.  Da diese Teilung auch einzelne Eckpunkte betreffen kann, setzt sich diese Oberfläche aus dreieckigen Polygonen zusammen. ?
 
-Da sich mit Hilfe dieser Tabelle feststellen lässt, wie die Polygone in dem Würfel liegen, ist auch bekannt, auf welchen Würfelkanten sich deren Eckpunkte befinden. Für die Erzeugung einer Oberfläche muss aber weiterhin die genaue Position auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Eckpunkte, zwischen denen die betreffende Kante verläuft. ??
+Die Anzahl an Möglichkeiten einen Würfel aufzuteilen lässt sich errechnen. Für jeden der acht Eckpunkte des Würfels gilt eine von zwei Möglichkeiten: Entweder befindet er sich unter der Oberfläche und damit im Objekt oder eben nicht. Demnach ergeben sich für alle Punkte zusammen $2^8=256$ mögliche Fälle der Aufteilung. Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden, die in Abbildung \ref{img:marchingCubes} dargestellt sind. Der Fall, dass die Eckpunkte gar nicht getrennt werden ist dabei berücksichtigt. 
+
+\begin{figure}
+	\centering
+	\includegraphics{images/marchingCubes_gpugems.jpg}
+	\caption{Die 15 verschiedenen Möglichkeiten, wie eine Polygonfläche einen Würfel in zwei Bereiche teilen kann.}
+	\label{img:marchingCubes}
+\end{figure}
+
+Bei der Implementierung des Algorithmus werden nun alle 256 Teilungsmöglichkeiten eines Würfels in einer Look-up-Tabelle gespeichert. Um auszulesen, welcher Fall auf den momentan betrachteten Würfel zutrifft, bedarf es eines Indexes. 
+Der Index ist eine achtstellige Binärzahl. Sie wird ermittelt, indem für jeden der acht Eckpunkte des Würfels geprüft wird, ob er unter dem Schwellenwert liegt, der die Unterscheidung zwischen Innen und Außen definiert oder nicht. Die Ergebnisse der Prüfung, die durch 1 oder 0 repräsentiert werden, werden aneinander gefügt. Nach der Prüfung aller Eckpunkte ist so ein achtstelliger Index entstanden. 
+
+Durch die Verwendung dieses Index und der Tabelle lässt sich so auslesen, wie die Polygone in dem Würfel liegen. Damit ist auch bekannt, auf welchen Würfelkanten sich deren Vertices befinden. Für die Erzeugung einer Oberfläche muss weiterhin die genaue Position des Vertex auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Würfel-Eckpunkte, zwischen denen die betreffende Kante verläuft. ??
 Auf die selbe Weise wird für jeden Vertex der Polygone dessen Normale berechnet, indem die Normalen der Eckpunkte interpoliert werden.
 
 Nach und nach werden so für jeden Voxel-Würfel Polygone berechnet, die in einer Liste gespeichert und schließlich gezeichnet werden.
-
 
 Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terrain eingesetzt. In diesem Fall ist es entscheidend, wie die Dichtewerte des Volumens generiert werden. Bei der Visualisierung von medizinischen Daten, wie MRT-Bildern werden die Bilddaten als Eingabewerte genommen.
 
@@ -173,13 +185,15 @@ Erweiterungen/ Abwandlungen
 %-------------------------------------------------------------
 
 %-------------------------------------------------------------
-\section{AR und VR (MR?)}		
-Occluded Display 
-					 %
+\section{AR und VR (MR?)}									 %
 %-------------------------------------------------------------
+Occluded Display 
+
 \subsection{Augmented Rreality}
 Hololens, Magic Leap, HMD
 Smartphones
+Der Begriff der \textit{Augemented Reality} (AR) 
+\cite{azuma97}
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
@@ -213,12 +227,25 @@ Die drei Ebenen sind dabei in jeder Ansicht farbkodiert eingezeichnet, sodass de
 Manchmal wird noch eine vierte Ansicht ergänzt, auf der entweder die Sagittalebene von der anderen Seite abgebildet ist oder sogar durch das Ineinanderschieben der gerade angezeigten Schichten eine annähernd dreidimensionale Darstellung simuliert wird. 
 In Abbildung \ref{mrtSoftware} ist die Oberfläche der XY-Viewers zu sehen, die beispielhaft die Ansichten zeigt.
 
-Interaktionen und Werkzeuge
+Die Benutzeroberfläche bietet auch einige Interaktionen. Die wichtigsten sind dabei die, die es dem Arzt ermöglichen ein möglichst eindeutiges Verständnis vom Inneren des Gehirns zu erhalten.  Dazu zählen:
 
+\begin{description}
+\item [Scrollen durch die einzelnen Bildschichten]\hfill \\
+Dies geschieht in der Regel durch die Auswahl einer der Ansichten und die Betätigung des Mausrads. 
+\item [Einstellen von Kontrast und Helligkeit D]\hfill \\
+adurch können schlecht sichtbare Strukturen erkennbarer gemacht werden. Das Werkzeug dazu muss in der Taskleiste ausgewählt werden. In einem separaten Fenster können die Werte dann angepasst werden. ??
+\item [Heranzoomen]\hfill \\
+Bestimmte Bereiche eines Bildes können vergrößert werden, um sie besser beurteilen zu können.
+\item [Verschieben des Bildausschnitts]\hfill \\
+Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken und in eine Richtung ziehen. Dies ermöglicht es andere Bildteile zu untersuchen, ohne zuerst herauszoomen zu müssen.
+\end{description}
+
+Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt.
 
 %-------------------------------------------------------------
 \section{Interaktion in AR/VR}								 %
 %-------------------------------------------------------------
+
 \subsection{Integrierte Nutzereingaben}
 \subsection{Leap Motion}
 \subsection{Andere}

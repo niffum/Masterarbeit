@@ -5,20 +5,18 @@
 
 \section{Interviews}
 
-Zur Bestimmung der Anforderungen, die von der Anwendung erfüllt werden sollen wurden iterativ mehrere Interviews mit dem betreuenden Radiologen der Charité geführt.
+Zur Bestimmung der Anforderungen, die von der Anwendung erfüllt werden sollen wurden iterativ mehrere Interviews mit dem betreuenden Neurologen der Charité geführt.
 
+Wie bereits beschrieben, ist es das Ziel dieser Arbeit Neurologen eine dreidimensionale Darstellung von Gehirn-MRT-Scans in einer interaktiven AR- bzw. VR-Anwendung zur Verfügung zu stellen, um zu untersuchen, inwiefern diese die Ärzte in ihrer Arbeit besser unterstützt, als bisher verwendete Darstellungssoftware. Die hypothetischen Vorteile eines solchen Programmes wurden im Kapitel \ref{motivation} erläutert.
+Für den Vergleich mit bisheriger Software ist eine Anwendung prototypischen Charakters ausreichend. Diese soll auf die grundlegenden Interaktionen beschränkt sein, die ein Neurologe für die Verarbeitung der Daten benötigt.
 
-Im Rahmen des ersten Interviews wurde zunächst der Nutzen der Anwendung beschreiben.
-Diese soll Neurologen im Bereich der Schlaganfallprävention unterstützen. Wie im Kapitel Grundlagen beschrieben untersucht der Neurologe dabei die Abbildungen des Gehirns eines Patienten, die durch den MRT-Scan erzeugt wurden. Auffällige Bereiche, die auf einen Schlaganfall hindeuten könnten werden dabei markiert. 
-% Bezug zu Kapitel Grundlagen
-Diese Darstellung soll nun inklusive des markierten Bereichs dreidimensional dargestellt werden. Durch die zusätzliche Dimension soll sowohl für Ärzte als auch Patienten die Ausmaße des betroffenen Bereich verdeutlichen, was die Einschätzung eines Schlaganfallpatienten verbessern könnte.
+Der Fokus der Untersuchung liegt auf dem Bereich der akuten Schlaganfall Behandlung. Wie im Kapitel \ref{grundlagen} beschrieben untersucht der Neurologe hierfür die Abbildungen des Gehirns eines Patienten, die durch den MRT-Scan erzeugt wurden. Dabei hält er nach Bereichen Ausschau, die von einem Schlaganfall betroffen sein könnten, um die Art des Schlaganfalls zu bestimmen, ? sowie den entstandenen Schaden einschätzen zu können. Betroffene Bereiche werden anschließend markiert. Die Markierung kann danach ein- und ausgeblendet werden.
+
+% ZU MOTIVATION
 Weiterhin könnte man anhand des Modells auch Voraussagen von Therapieerfolgen anschaulich demonstrieren.
-% Bezug zu Kapitel Motivation
+%%
 
-Die Anwendung soll dabei als Prototyp dienen, die die Möglichkeiten, sowie das Potential für die Verwendung in der Praxis testet. Im Vordergrund steht hierbei die Darstellung in 3D, inklusive des markierten Bereichs.
-
-
-Aus dem ersten Interview ließen sich außerdem folgende Anforderungen ableiten:
+Folgende Anforderungen haben sich aus den Interviews des Neurolgen ergeben, die erfüllt sein sollten, um den erfolgreichen Einsatz von mARt zu ermöglichen.
 
 \subsection{Anforderungen aus Interviews}
 Die aus dem Interview ermittelten Anforderungen wurden in der folgenden Tabelle aufgelistet. Zur besseren Referenzierung wurden sie jeweils mit Bezeichner versehen. Weiterhin wurde die Priorität jeder Anforderungen auf niedrig, mittel, oder hoch geschätzt.
@@ -30,27 +28,29 @@ Anforderungsbezeichnung & Anforderung & Priorität \\
 \hline
 A01 & 3D Darstellung der MRT Daten & hoch\\
 \hline
-A02 & Einblenden des gekennzeichneten Bereichs  & hoch\\
+A02 & Einblenden des gekennzeichneten Bereichs in 3D & hoch\\
 \hline
-A03  & 3D-Darstellung des Gehirns, die auch Schlaganfallsbereich in 3D Erkennbar werden lässt  & hoch\\
+A03 & Scrollen durch Schichten der 3D-Darstellung auf mindestens einer Achse& mittel\\
 \hline
-A04 & Scrollen durch Schichten der 3D-Darstellung auf mindestens einer Achse& mittel\\
+A04 & Erkennbarkeit der inneren Struktur des Gehirns (entsprechend der MRT-Bilder) & hoch\\
 \hline
-A05 & Erkennbarkeit der Struktur inneren Struktur des Gehirns (entsprechend der MRT-Bilder) & hoch\\
+A05 & Scrollbare 2D Darstellung der MRT-Bilder auf mindestens einer Achse & mittel\\
 \hline
-A06 & Scrollbare 2D Darstellung der MRT-Bilder auch mindestens einer Achse & mittel\\
+A06 & Kontrast und Helligkeit sollten einstellbar sein & hoch\\
 \hline
-A07 & Manipulation der Darstellung ähnlich wie bei einem Hologramm. & niedrig\\
+A07 & Man sollte die Darstellung vergrößern können & hoch\\
 \hline
-A10 & Interaktionselemente sollten die Darstellung nicht verdecken & niedrig\\
+A08 & Die Darstellung sollte verschiebbar sein & hoch\\
 \hline
-A11 & Scrollen durch Verwendung eines Scrollrads & niedrig\\
+A09 & Interaktionselemente sollten die Darstellung nicht verdecken & niedrig\\
 \hline
-A12 & Auswahl verschiedener MRT-Sequenzen (falls vorhanden) & niedrig\\
+A10 & Scrollen durch Verwendung eines Scrollrads & niedrig\\
 \hline
-A13 & Unterstützung von nifti-Daten & mittel\\
+A11 & Auswahl verschiedener MRT-Sequenzen (falls vorhanden) & niedrig\\
 \hline
-A14 & Verschiedene Ansichten können nebeneinander dargestellt werden. (z.B. vor und nach Therapie) & mittel\\
+A12 & Unterstützung von nifti-Daten & mittel\\
+\hline
+A13 & Verschiedene Ansichten können nebeneinander dargestellt werden. (z.B. vor und nach Therapie) & mittel\\
 \hline
 
 \end{tabular}

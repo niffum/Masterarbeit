@@ -31,9 +31,11 @@ Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns m
 
 Im Kapitel \ref{grundlagen} wurde der theoretische Vorgang dieser Technik beschrieben. Dieses Kapitel fokussiert sich auf die Implementierung der einzelnen Schritte.
 
-Die volumetrische Darstellung der Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter geupdated, die für das Rendering relevant sind, wie z.B.die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
+Die volumetrische Darstellung der Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
 Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg/HLSL Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
 % WARUM??
+
+\subsection{Shader in Unity}
 
 \subsection{Ray Casting}
 
