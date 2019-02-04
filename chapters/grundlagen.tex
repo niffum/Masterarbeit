@@ -147,7 +147,7 @@ Die Idee hinter dem Algorithmus ist, dass es zwischen den Voxeln, die innerhalb 
 Die Werte der Voxel, werden dabei als Dichtewerte angesehen. Voxel innerhalb der Grenze haben eine Dichte, die außerhalb eine andere. Demnach kann ein Schwellenwert definiert werden, der die beiden Wertebereiche voneinander trennt.
 Um die Grenze zwischen den Voxeln zu ermitteln, werden diese zunächst in Würfel aufgeteilt, woher auch der Name des Verfahrens stammt. Immer vier benachbarte Voxel bilden dabei einen Würfel.  
 
-Die Vorstellung einer Grneze zwischen den Voxeln lässt sich auf die Würfel übertragen. Dabei liegt dann ein bestimmter Teil der Würfel des Volumens mit allen Eckpunkten innerhalb und ein bestimmter Teil außerhalb des Objektes. Diese Würfel liegen nicht auf der Grenze und alle ihre Eckpunkte haben jeweils ähnliche Werte. Andererseits gibt es Würfel, durch die die Grenze verläuft. Die Eckpunkte dieser Würfel können sich in ihren Werten stark unterscheiden, da jeweils ein Punkt zum Inneren und ein anderer zum Äußeren des Objektes gehören kann. 
+Die Vorstellung einer Grenze zwischen den Voxeln lässt sich auf die Würfel übertragen. Dabei liegt dann ein bestimmter Teil der Würfel des Volumens mit allen Eckpunkten innerhalb und ein bestimmter Teil außerhalb des Objektes. Diese Würfel liegen nicht auf der Grenze und alle ihre Eckpunkte haben jeweils ähnliche Werte. Andererseits gibt es Würfel, durch die die Grenze verläuft. Die Eckpunkte dieser Würfel können sich in ihren Werten stark unterscheiden, da jeweils ein Punkt zum Inneren und ein anderer zum Äußeren des Objektes gehören kann. 
 
 Um also die Oberfläche zu erzeugen, die das gesamte Volumen aufteilt, wird jeder Würfel zuerst einzeln betrachtet und es wird ermittelt, ob und wie die Polygonfläche diesen einzelnen Würfel aufteilt.  Da diese Teilung auch einzelne Eckpunkte betreffen kann, setzt sich diese Oberfläche aus dreieckigen Polygonen zusammen. ?
 
@@ -189,11 +189,56 @@ Erweiterungen/ Abwandlungen
 %-------------------------------------------------------------
 Occluded Display 
 
-\subsection{Augmented Rreality}
+\subsection{Augmented Reality}
 Hololens, Magic Leap, HMD
 Smartphones
-Der Begriff der \textit{Augemented Reality} (AR) 
-\cite{azuma97}
+Der Begriff der \textit{Augemented Reality} (AR), also \textit{Erweiterte Realität} beschreibt die Idee, das die physisch vorhandene Umwelt, die einen Nutzer umgibt angereichert wird mit zusätzlichen Inhalten. Dies geschieht z.B. indem wahrgenommene Gegenstände von virtuell erzeugten Objekten überlagert werden. 
+Laut \cite{azuma97} sollte eine AR-Anwendung folgende Eigenschaften besitzen:
+\begin{itemize}
+
+\end{itemize}
+
+\subsection{Virtual Reality}
+
+Wenn die Realität durch AR also erweitert wird, so wird sie durch Virtual Reality völlig ersetzt. D.h. der Nutzer wird von seiner realen Umgebung abgeschnitten und in eine simulierte versetzt, mit der er in Echtzeit 
+interagieren kann. Dabei wird in der Regel eine möglichst hohe Immersion angestrebt. 
+Im Kontext von VR bezeichnet Immersion den Effekt, dass ein Nutzer dermaßen in die simulierte Welt, die umgibt eintaucht, dass sich diese für ihn real anfühlt und Interaktionen mit ihr natürlich werden. Wie immersiv eine Anwendung ist hängt dabei von der Anwendung selbst ab, sowie auch von dem verwendeten VR-System. 
+
+Im Laufe der Zeit wurden verschiedene Systeme entwickelt, die eine möglichst immersive Realität erschaffen sollten. 
+Bereits in den 50er Jahren wurde versucht den Nutzer in das Geschehen eines Films zu versetzten, indem er von seiner realen Umgebung isoliert wurde, und seine Wahrnehmung so auf bestimmte Reize gebündelt wurde. % Referenz Sensorama
+In den 1960ern wurden dann erste Versionen eines Head Mounted Displays (HMD) entwickelt. %Referenz Sword of Dmaocles -> Eigentlich AR
+Dabei handelt es sich um eine Art Brille, mit zwei Bildschirmen vor den Augen, auf die simulierte Inhalte projiziert werden.
+Um den Eindruck von Dreidimensionalität zu erzeugen, wird dabei das Prinzip der Stereoskopie verwendet. Hierzu werden jeweils dem linken und rechten Auge des Nutzers zwei Bilder des selben Objektes aus leicht unterschiedlichen Blickwinkeln  gezeigt. Da die Augen beim normalen Sehen ein Objekt tatsächlich aus zwei verschiedenen Winkeln wahrnehmen, werden die Bilder im Gehirn zusammengefügt, sodass der Eindruck von Tiefe entsteht.
+
+Der Blickwinkel auf ein Objekt hängt dabei von der Kopfposition des Nutzers ab. Um diesem die Möglichkeit zu geben, den Kopf zu bewegen und damit den Eindruck eines 3D Objektes zu verstärken wird die Position des Kopfes getracked. Auf diese Weise können die stereoskopischen Bilder dem Blickwinkel des Nutzers angpasst werden. Dieser erhält somit das Gefühl, er könne um das dargestellte Objekt herumgehen. 
+
+Die Bewegungsfreiheit der Nutzers war allerdings durch die damalige Technik eingeschränkt, denn das System, mit dem das HMD verbunden war, war zu schwer, um es zu tragen und deshalb fest installiert. 
+In den 90er Jahren gab es deshalb Entwicklungen in eine andere Richtung. Anstatt die virtuelle Realität nur direkt vor den Augen des Nutzers darzustellen, sollte diese um ihn herum erzeugt werden. Dazu wird der Nutzer in einem abgeschlossenen Raum platziert, an dessen Wände und Boden die Umgebung des jeweiligen Szenarios projiziert wurde. Die Immersion des Erlebnisses kann gesteigert werden, indem z.B. 3D-Brillen eingesetzt werden. Sogenannte CAVE-Systeme (Cave Automatic Virtual Environment) kommen auch heute noch zum Einsatz. Da sie allerdings sehr unhandlich und in ihrer Umsetzung kostspielig sind, eignen sie sich nicht als Massenprodukt oder für private Nutzung.
+
+Obwohl die Simulation einer virtuellen Realität oft auf die Täuschung visueller Wahrnehmung fokussiert ist, werden in vielen Systemen auch andere Sinne angesprochen, um das Erlebnis immersiver zu gestalten. Dies gilt vor allem für das Gehör. Dem Nutzer werden dabei über Lautsprecher oder Kopfhörer zur Erfahrung passende Geräusche vorgespielt.
+Eine größere Herausforderung stellt die Imitation von haptischen Reizen dar. Hierzu gibt es verschiedene Ansätze. Einer der einfacheren ist es dem Nutzer bei virtuellen Berührungen Vibrationen auszusetzen, z.B. über Eingabe Medien in seinen Händen. Es gibt allerdings mehrere Konzepte, die Haptische Impulse realistischer simulieren sollen, beispielsweise durch Handschuhe aus speziellem Material. %Referenz 
+Durch die Verwendung eines Laufbands, das auf die Laufbewegung des Nutzers reagiert soll die Bewegungsfreiheit innerhalb der Simulation erweitert werden. Omnidirektionale Laufbänder können sowohl zusammen mit HMD als auch CAVEs eingesetzt werden.
+Über den Verlauf der Entwicklung von VR-Systemen wurde außerdem des Öfteren versucht Gerüche zu simulieren. % Referenz??
+
+Auf die Möglichkeiten der Nutzerinteraktion in VR-Systemen wird im Abschnitt \ref{VRInteraktion} genauer eingegangen.
+
+Heutzutage bestehen die meistgenutzten VR-Systeme meist aus einem HMD, welches über eine Kamera verfügt, Eingabemedien (z.B. Controllern), einem Trackingsystem, das die Position der ersten beiden Komponenten verfolgt und einem Computer, der die Komponenten miteinander verknüpft und auf dem die VR-Anwendung läuft. 
+  
+Im Folgenden sind Hersteller von VR-Systemen aufgelistet, sowie die Modelle, die derzeit auf dem Markt zum freien Verkauf stehen.
+
+% REDO?
+\begin{itemize}
+\item Facebook (Oculus Rift und Oculus Go)
+\item Google (Google Cardboard, Google Daydream)
+\item HTC \& Valve (HTC Vive)
+\item Microsoft (Microsoft HoloLens, Windows Mixed Reality)
+\item Razer (OSVR Hacker Dev Kit)
+\item Samsung (Samsung Gear VR)
+\item Sony Computer Entertainment (PS VR)
+\item Starbreeze Studios (StarVR)
+\item Lenovo (Lenovo Explorer für Windows Mixed Reality und Lenovo Mirage Solo für Google Daydream)
+\end{itemize}
+
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
@@ -243,12 +288,15 @@ Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken
 Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt.
 
 %-------------------------------------------------------------
-\section{Interaktion in AR/VR}								 %
+\section{Interaktion in AR/VR}	
+\label{VRInteraktion}							 %
 %-------------------------------------------------------------
-
+\subsection{Eingabe Moduläritäten}
 \subsection{Integrierte Nutzereingaben}
 \subsection{Leap Motion}
 \subsection{Andere}
+
+\subsection{Interaktionsdesign}
 
 
 
