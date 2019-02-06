@@ -7,7 +7,19 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Die 15 verschiedenen M\IeC {\"o}glichkeiten, wie eine Polygonfl\IeC {\"a}che einen W\IeC {\"u}rfel in zwei Bereiche teilen kann.}}{14}{figure.3.1}% 
+\contentsline {figure}{\numberline {1}{\ignorespaces Links: Texturen beim werden entlang des Volumens ausgerichtet. Recht: Texturen werden entlang des Blickwinkels ausgerichtet.}}{12}{figure.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2}{\ignorespaces Texturen werden als Stapel in der XY-, YZ- und XZ-Ebene angeordnet.}}{13}{figure.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3}{\ignorespaces Shear-Warp Verfahren. Rechts: Ohne Verschiebung w\IeC {\"u}rden die Strahlen der Bildebene schr\IeC {\"a}g auf das Volumen treffen. Mitte: Die Schichten des Volumen werden verschoben, sodass die Strahlen orthogonal darauf treffen. Das resultierende Bild ist verzerrt. Rechts: Das verzerrte Bild wird transformiert, um das Volumen korrekt darzustellen.}}{13}{figure.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4}{\ignorespaces Die 15 verschiedenen M\IeC {\"o}glichkeiten, wie eine Polygonfl\IeC {\"a}che einen W\IeC {\"u}rfel in zwei Bereiche teilen kann.}}{14}{figure.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5}{\ignorespaces Handgesten, die die Hololens erkennt.}}{20}{figure.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6}{\ignorespaces Handgesten, die die Magic Leap erkennt.}}{20}{figure.3.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {7}{\ignorespaces Handgesten, die die Leap Motion erkennt. \textit {Circle} (a), \textit {Swipe} (b), \textit {Tap} (c) und \textit {Screen Tap} (d).}}{21}{figure.3.7}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
