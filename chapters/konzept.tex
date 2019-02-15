@@ -53,10 +53,38 @@ U02 U03
 - ...
 % Bezug Hololens2?
 
-\section{Interaktion/ UI} 
+\section{Interaktion/ UI } 
 
 % 2D 
 % UX steht im Vordergrung -> begründen warum besser als vorher!
+
+Scrollen durch 2d Bilder:
+kein Mausrad-> slide vor und zurück abhängig von armlänge
+slide hochrunter recht links, schwierig, ungenau
+
+Rad wäre gut, kleines Rad (Lautstärkeregler) ideal
+aber handgelenkbewegung schwer zu tracken
+deshalb: Ring, den man anfasen und drehen kann, Geräusche untermalen auswahl (Feeback)
+
+scrollwn wird oft als swipr bewegung implementiert: ungenau zu stoppen
+
+http://blog.leapmotion.com/designing-cat-explorer/
+
+Manipulation: Helligkeit kontrast, Größe, Verschieben, schichten scrollen, Maske?, ...
+
+Der Use Case (REFERENZ Vergleich) erfordert es weiterhin, dass man Bilder im direkten Vergleich nebeneinander betrachten kann. Dies gilt sowohl für die zwei- als auch dreidimensionale Darstellung der Daten. Die UseCases (REFERENZ Liste) und (REFERENZ synchon) erfordern außerdem eine Möglichkeit für den Nutzen aus den vorhandenen Daten einzelne auszuwählen , die angezeigt werden sollen, sowie die Daten jeweils gleichzeitig oder einzeln zu manipulieren. 
+Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden sollen oder nicht, sind beide nicht teil der direkten Manipulation des Bildes. Sie müssen deshalb nicht in dessen unmittelbaren Umfeld stehen und der Nutzer kann sich auf sie konzentrieren. 
+Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzten sein. 
+Diese beiden optionen werden deshalb in einem Menü vereint. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Die Interaktionselemente nutzen außerdem die Möglichkeiten der VR aus, da sie i auf einem Bildschirm nicht umsetzbar wären. 
+Damit das Menü nicht wären der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Motion Leap bietet bereits Beispiel Code, der dies umsetzt. ?
+Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst klein zu halten. Das Erfassungsfeld der Motion Leap Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionfläche, die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
+Um den Umfang des Menüs in benutzbaren Dimensionen zu halten wurde es auf drei Knäpfe reduziert. 
+Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht werden. Deshalb kann sie bei Bedarf über einen der Knöpfe aus geklappt werden. 
+Indem der Nutzer einen Datensatz auswählt, wird dieser auf der Bildfläche angezeigt. Die Auswahl ist auf zwei Datensätze beschränkt. Zu viele gleichzeitig dargestellte Bilder würden unübersichtlich wirken und im die Motivation hinter dem Use Case ist der direkte Vergleich zweier Bilder. Außerdem stellen mehr Bilder auch mehr Möglichkeiten dar diese in verschiedenen Kombinationen zu manipulieren. Dies hätte die Anwendung unnötig verkompliziert. 
+Stattdessen wird die Synchronisierung der Manipulation über einen weiteren Knopf im Handmenü gesteuert. Dieser ist nur aktiv, wenn tatsächlich zwei Bilder angezeigt werden. Dann funktioniert er als Schalter. Indem der Nutzer in betätigt wird jeweils nur eine Benutzeroberfläche neben beiden Bildern angezeigt oder sie wird dupliziert und für jede Darstellung eingeblendet. 
+
+
+
 
 % auf probleme bei der visualisierung auf Hololens hinweisen, VR App 
 
