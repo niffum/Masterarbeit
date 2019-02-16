@@ -5,8 +5,25 @@
 
 \section{Aufbau Struktur des Projektes}
 
+Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der grafischen Leistungsfähigkeit der Hololens, wird die Anwendung sowohl für die Hololens als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Die VR-Anwednung ermöglich dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
+Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen GameEngines verwendet, da sie als Oberfläche diesen, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
+zur Implementierung von mARt wurde \textit{Unity 3D} (Ref) verwendet. Die Engine gehört zu den meist genutzten und bekanntesten (Ref?) auf dem Markt und ermöglicht die Entwicklung von Software für die meisten Plattformen. Unity bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
+
+Microsoft empfiehlt weiterhin Unity zur Entwicklung für Hololens-Software zu Nutzen und bietet mit HoloToolkit ein Framework, das Hololens Funktionen innerhalb von Unity zur Verfügung stellt. 
+%https://docs.microsoft.com/en-us/windows/mixed-reality/install-the-tools
+Unity verwendet C# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
+%Wieso?
+
+Die Anwendung wird in Unity entwickelt und dann für die Hololens und als VR-Anwendung gebaut.
+
+
 \subsection{Kombination von Leap Motion mit Vive/Hololens}
 \subsection{Unity Projekt}
+
+Unity Projekte basieren auf 3D-Szenen. Innerhalb einer Szene können Gameobjects platziert werden. Dabei kann es sich z.B. um 3D-Modelle handeln. Ein GameObject besitzt verschiedene Components, die dessen Eigenschaften und Verhalten bestimmen. Viele Funktionen und Eigenschaften werden von bereits in der Engine vorhandenen Components realisiert. Sogenannte Rigidbodys verleihen einem Objekt beispielsweise physikalische Eigenschaften, die von der Engine berechnet werden. Components können auch Skripte sein, die der Entwickler selbst verfasst hat. Über diese Skripte wird die Spiellogik und die Funktionalität der Anwendung definiert. 
+
+Da mARt sich hauptsächlich in die beiden Szenarien einer zwei- und dreidimensionalen Darstellung unterteilen lässt existiert für jedes Szenario eine Szene.
+Viele der Funktionen sind allerdings ähnlich oder gleich, weshalb manche Skripte in beiden Szenen verwendet werden. 
 
 \section{Interaktion Hololens}
 - Prototyp für hololens Demo
@@ -24,6 +41,36 @@
 
 \subsection{Leap Motion}
 
+Damit die Motion Leap Kamera in einer Anwendung verwendet werden kann, muss das von \textit{Motion Leap} zur Verfügung gestellte SDK eingebunden werden. Das \textit{Core SDK} ist dabei zur Erkennung und Verwendung des Gerätes notwendig, während das das erweiternde Paket für Interaktionen die Funktionen und Beispiele bietet, wie verschiedene Bedienelemente in eine Anwendung integriert werden können, die auf die Controller, also die Hände des Nutzers reagieren.
+Meistens funktioniert dies indem einzelne Skripte, die das gewünschte Verhalten implementieren als Komponenten an Spieleobjekte angehangen werden. Die Skripte lösen dann bestimmte Events oder Methoden aus, die mit den Funktionalitäten der Anwendung verknüpft werden. 
+
+\section{Shader in Unity}
+
+Das Volume Rendering der MRT-Daten wird innerhalb eines Shaders berechnet. An dieser Stelle soll ein Überblick über die Funktionsweise und den Aufbau von Unity-Shadern gegeben werden. 
+
+Wie ein Objekt in einer Szene gerendert wird hängt in Unity davon ab, welches Material diesem zugewiesen ist. Das Material fungiert dabei als eine Art Behälter für sämtliche Parameter, die das Aussehen des Objektes beeinflussen, wie z.B. die Textur oder Farbe. Welche Parameter das Material besitzt und wie diese miteinander verrechnet werden bestimmt der Shader des Materials. Innerhalb des Shaders wird in Abhängigkeit zu den diesem übergebenen Werten die Farbe für jeden Pixel errechnet. 
+% https://docs.unity3d.com/Manual/Shaders.html
+
+Shader in Unity sind in der Unity eigenen Shader-Sprache \textit{Shader Lab} geschrieben. Im Shader ist definiert, welche Eigenschaften dieser besitzt und welche Sub- und Fallback-Shader er verwendet.
+Die Eigenschaften sind die eben genannten Parameter, dessen Werte dann über das Material gesetzt werden. Hier werden deren Namen, Typen, ihr Wertebereich, sowie ihre Standartwerte definiert. 
+
+Schließlich werden im Shader auch sogenannte Subshader definiert, die den eigentlichen Shader-Code enthalten.
+Ein Shader kann mehrere Subshader enthalten für den Fall, dass einer der Shader von einem Gerät nicht unterstützt wird. Wird keiner unterstützt wird der Fallback-Shader verwendet. 
+Neben dem Shader-Code besitzt ein Subshader Tags, die bestimmen, wann und wie ein Shader von der Rendering Engine gerendert werden soll. Dies kann sich beispielsweise auf die Reihenfolge beziehen, in der Objekte gerendert werden oder ob ein Objekt Schatten werfen soll. 
+Nach den Tags folgt die Definition eines \textit{Pass}. Als Render Pass wird der gesamte Prozess bezeichnet, der durchlaufen wird, um einen Pixel zu rendern. Angefangen bei der Berechnung einzelner Vertices eines Meshes über den Vertex-Shader bis zum Fragment-Shader. D.h. im Pass werden in verschiedenen Methoden die tatsächlichen Berechnungen beschrieben, die zum Aussehen jedes Pixels führen. 
+Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie oft ein Pass durchlaufen werden soll. 
+% Render setup ????
+Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics) geschrieben, einer Shading-Sprache syntaktisch stark HLSL (High-Level Shading Language). 
+Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss (?). Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
+
+Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader auf die genaue Implementierung wird im Folgenden eingegangen. 
+
+% https://docs.unity3d.com/Manual/SL-Shader.html
+-Was is cg hlsl?
+- Was sind compute, surface, unlit shader?
+- Graphic pipeline?
+
+
 \section{Volume Rendering}
 - Grundlage: GitHub Projekt
 
@@ -31,11 +78,9 @@ Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns m
 
 Im Kapitel \ref{grundlagen} wurde der theoretische Vorgang dieser Technik beschrieben. Dieses Kapitel fokussiert sich auf die Implementierung der einzelnen Schritte.
 
-Die volumetrische Darstellung der Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
+Die volumetrische Darstellung des Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
 Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg/HLSL Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
 % WARUM??
-
-\subsection{Shader in Unity}
 
 \subsection{Ray Casting}
 
@@ -128,16 +173,9 @@ Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt u
 \subsection{Illumination}
 \label{illumination}
 
-Das Volumen wird mit einem einfachen Beleuchtungsmodell illuminiert, wodurch es mehr Plastizität erhält. Gängiger Weise wird dafür das Phong Beleuchtungsmodell verwendet. 
+Das Volumen wird mit mit dem Phong Beleuchtungsmodell illuminiert, wodurch es mehr Plastizität erhält. Das Modell wurde bereits in Kapitel \ref{grundlagen} detailliert beschrieben. Deshalb wird an dieser Stelle nur auch die Umsetzung im Shader eingegangen.
 % Referenz? warum nicht blinn?
-Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. In Abbildung \ref{phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie zusammengesetzt das Phong Beleuchtungsmodell ergeben.
-Dieses wird durch folgende Formel beschreiben:
-
-$I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
-
-$I$ ist dabei die Farbe des beleuchteten Punktes. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
-Die oben beschriebenen Komponenten werden aufaddiert und sind somit durch jeweils ein $+$-Zeichen voneinander getrennt, wodurch sie gut voneinander zu trennen sind. 
-
+Wie beschrieben setzt sich das Modell aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Die Komponenten werden zusammen addiert, was in die endgültige Farbe resultiert. 
 Die Koeffizienten werden im Shader durch Farben repräsentiert. Der diffuse Koeffizient ist dabei der vorher aus der Transferfunktion gelesene Farbwert. Um diesen nicht durch die ambiente Beleuchtung zu verfälschen, wird er mit einem konstanten Faktor multipliziert, um eine abgedunkelte Farbe zu erhalten, die als ambienter Wert verwendet wird. Die Reflextion wird weiß dargestellt.
 Als Reflexionsexponent hat sich der Wert ?10? als am besten erwiesen.
 

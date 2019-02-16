@@ -1,7 +1,7 @@
 % Grundlagen & verwnadte Arbeiten
 
 \chapter{Aktueller Stand der Technik}
-
+\label{grundlagen}
 
 %-------------------------------------------------------------
 \section{MRT}												 %
@@ -24,7 +24,7 @@ Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 
 Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem Bild Koordinaten, die der Anordnung der jeweils betrachteten Punkte in der Welt entsprechen. Stattdessen bildet der X-Wert die Frequenz und der Y-Wert die Phase ab. Wie für den Z-Wert werden auch hier Gradienten gebildet und auf das Magnetfeld gelegt. Der X-Gradient verläuft von links nach rechts und sorgt dafür, dass die Larmorfrequenz in dieser Richtung zunimmt, sodass die jeder Punkt seine eigene Frequenz hat.Der Y-Gradient, der senkrecht verläuft, beeinflusst auf dieselbe Weise die Phasen einer Schicht. Er wird dabei nur kurz nach dem Einstrahlen des Hochfrequenz-Impulses eingeschaltet, wenn sich die Protonen bereits ausgerichtet haben.
 
-Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichern, die K-Raum genannt wird. Die Matrix entspricht allerdings noch nicht der bildlichen Darstellung, die angestrebt wird, da die Werte eine andere Bedeutung haben. ? Deshalb werden sie mit Hilfe der Fouriertransformation in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
+Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichert, die K-Raum genannt wird. Die Matrix entspricht allerdings noch nicht der bildlichen Darstellung, die angestrebt wird, da die Werte eine andere Bedeutung haben. ? Deshalb werden sie mit Hilfe der Fouriertransformation in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
 
 \subsection{Abgrenzung CT}
 Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, ist die Computer-Tomographie. Die Verfahren unterscheiden sich jedoch. Denn bei einer CT wird der Patient schichtenweise geröntgt. Dh. sein Körper wird mit Röntgenstrahlung beschossen, die je nach Gewebe, auf das sie treffen unterschiedlich stark abgeschwächt werden, was dann gemessen wird. Die so entstandenen "Querschnitte" des Körpers werden anschließend mit Hilfe eines Computers zu einem dreidimensionalen Bild zusammengesetzt. 
@@ -39,18 +39,17 @@ Allerdings
 16 bit int images, pvm ? Standart?
 
 %------------------------------------------------------
-\section{Volumendaten}							  %
+\section{Volumendaten}							  	  %
 %------------------------------------------------------
 
-Das Volumen setzt sich aus mehreren dreidimensionalen Bildpunkten zusammen. Diese werden Voxel genannt, vergleichbar mit Pixeln in zweidimensionalen Bildern.
+Ein wichtiger Aspekt dieser Arbeit ist die dreidimensionale Visualisierung von MRT-Daten. Deshalb soll an dieser Stelle auf einige grundlegende Aspekte und Begriffe im Zusammenhang mit Volumendaten eingegangen werden. Da das Gehirn durch einen MRT-Scan dreidimensional erfasst wird, liegen die MRT-Daten als Volumendaten vor. Die Daten werden durch ein Skalarfeld repräsentiert. Ein Skalarfeld ist ein Sammlung von Skalarwerten, die in einem Raum verteilt sind. Durch eine Funktion kann jedem Punkt im Raum ein Skalarwert zugewiesen werden. Im Fall von Volumendaten handelt es sich um ein dreidimensionales Skalarfeld. D.h. die Skalarwerte sind innerhalb eines Würfels angeordnet für jeden Skalarwert existieren X-, Y- und Z-Koordinaten, die dessen Position beschreiben. 
+Diese Punkte aus denen sich der Volumen-Würfel zusammensetzt werden auch Voxel genannt. Ähnlich wie Pixel in zweidimensionalen Bildern stellen sie die kleinsten Teilchen in einem Volumen dar. 
+Die Skalarwerte werden auch als Isowerte des Volumens bezeichnet bei MRT-Daten bildet jeder Wert eine Graustufe ab und liegt damit in dem Bereich von 0-255. 
+Über das Volumen verteilt haben benachbarte Werte oft ähnliche Isowerte. Eine Gruppe dieser Werte wird als Isofläche bezeichnet. Isoflächen innerhalb eines Volumens entsprechen oft tatsächlichen Oberflächen des darzustellenden Objektes. Durch das Vergleichen benachbarter Werte ist es also möglich Oberflächen von Objekten zu ermittlen (siehe \ref{marchingCubes}). 
+Der Prozess, durch den Voxel aufgrund ihrer Werte als Teil eines Objektes bzw. dessen Oberfläche eingeordnet werden wird als Klassifikation bezeichnet. ...
 
-Voxel
+Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben der Vorstellung eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen und 
 
-3D Texturen
-
-Isofläche
-
-Klassifikation
 %------------------------------------------------------
 \section{Volume Rendering}							  %
 %------------------------------------------------------
@@ -64,6 +63,15 @@ Eine Transferfunktion besteht meistens aus einer Textur, aus der für jeden Isow
 
 Das Shading bestimmt unter anderem die Beleuchtung eines Voxels und kann dessen Eigenschaften somit zusätzlich zur Transferfunktion verändern. Hierbei können verschiedene Beleuchtungsmodelle verwendet werden.
 Bei einer lokalen Beleuchtung der einzelnen Voxel kommt hierzu meist das Phong-Beleuchtungsmodell zum Einsatz. 
+
+% PHONG
+Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. In Abbildung \ref{phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie zusammengesetzt das Phong Beleuchtungsmodell ergeben.
+Dieses wird durch folgende Formel beschreiben:
+
+$I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
+
+$I$ ist dabei die Farbe des beleuchteten Punktes. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
+Die oben beschriebenen Komponenten werden aufaddiert und sind somit durch jeweils ein $+$-Zeichen voneinander getrennt, wodurch sie gut voneinander zu trennen sind.
 
 %-------
 Phong
@@ -164,6 +172,7 @@ Im Folgenden werden diese erläutert.
 
 
 \subsection{Marching Cubes}
+\label{marchingCubes}
 %https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch01.html
 
 Das Marching Cubes Verfahren wird eingesetzt, um eine Polygonenoberfläche zu erzeugen, die ein volumetrisches Objekt visualisiert. 

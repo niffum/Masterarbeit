@@ -9,148 +9,142 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}Struktur dieser Arbeit}{5}{section.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Verwandte Arbeiten und Technologien}{8}{chapter.2}
+\contentsline {chapter}{\numberline {2}Aktueller Stand der Technik}{7}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}AR in der Medizin}{8}{section.2.1}
+\contentsline {section}{\numberline {2.1}MRT}{7}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Visualiserung von MRT-Daten in AR/VR}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.1.1}Verfahren}{7}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}MRT Volume Rendering}{8}{section.2.3}
+\contentsline {subsection}{\numberline {2.1.2}Datenverarbeitung}{7}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Interaktion in AR}{8}{section.2.4}
+\contentsline {subsection}{\numberline {2.1.3}Abgrenzung CT}{8}{subsection.2.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Aktueller Stand der Technik}{9}{chapter.3}
+\contentsline {subsection}{\numberline {2.1.4}Datenformate}{8}{subsection.2.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}MRT}{9}{section.3.1}
+\contentsline {section}{\numberline {2.2}Volumendaten}{8}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}Verfahren}{9}{subsection.3.1.1}
+\contentsline {section}{\numberline {2.3}Volume Rendering}{9}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Datenverarbeitung}{9}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {2.3.1}Volumetrisches Ray-Casting}{9}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.3}Abgrenzung CT}{10}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {2.3.2}Texture Based Volume Rendering}{10}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.4}Datenformate}{10}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {2.3.3}Shear-Warp}{11}{subsection.2.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Volumendaten}{10}{section.3.2}
+\contentsline {section}{\numberline {2.4}Oberfl\IeC {\"a}chen Generierung (Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten)}{12}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Volume Rendering}{10}{section.3.3}
+\contentsline {subsection}{\numberline {2.4.1}Marching Cubes}{12}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Volumetrisches Ray-Casting}{11}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {2.4.2}Voxel}{13}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Texture Based Volume Rendering}{12}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {2.4.3}Andere}{13}{subsection.2.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.3}Shear-Warp}{13}{subsection.3.3.3}
+\contentsline {section}{\numberline {2.5}Vergleich der Methoden im \IeC {\"U}berblick}{13}{section.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Oberfl\IeC {\"a}chen Generierung (Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten)}{13}{section.3.4}
+\contentsline {section}{\numberline {2.6}AR und VR (MR?)}{13}{section.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.1}Marching Cubes}{14}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {2.6.1}Augmented Reality}{14}{subsection.2.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.2}Voxel}{15}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {2.6.2}Virtual Reality}{15}{subsection.2.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.3}Andere}{15}{subsection.3.4.3}
+\contentsline {section}{\numberline {2.7}Verarbeitung von MRT-Daten}{16}{section.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Vergleich der Methoden im \IeC {\"U}berblick}{15}{section.3.5}
+\contentsline {subsection}{\numberline {2.7.1}Arbeit eines Neurologen}{16}{subsection.2.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}AR und VR (MR?)}{15}{section.3.6}
+\contentsline {subsubsection}{Schlaganf\IeC {\"a}lle auf einem MRT}{17}{subsubsection*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.1}Augmented Reality}{15}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {2.7.2}Software in der Radiologie}{17}{subsection.2.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.2}Virtual Reality}{16}{subsection.3.6.2}
+\contentsline {section}{\numberline {2.8}Interaktion in AR/VR}{18}{section.2.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Verarbeitung von MRT-Daten}{18}{section.3.7}
+\contentsline {subsection}{\numberline {2.8.1}Systeminterne Nutzereingaben}{18}{subsection.2.8.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Arbeit eines Neurologen}{18}{subsection.3.7.1}
+\contentsline {paragraph}{Controller}{18}{paragraph*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Schlaganf\IeC {\"a}lle auf einem MRT}{18}{subsubsection*.3}
+\contentsline {paragraph}{Gesten}{18}{paragraph*.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.2}Software in der Radiologie}{18}{subsection.3.7.2}
+\contentsline {paragraph}{Kopfposition und Blickrichtung}{18}{paragraph*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Interaktion in AR/VR}{19}{section.3.8}
+\contentsline {paragraph}{Sprachsteuerung}{18}{paragraph*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.8.1}Systeminterne Nutzereingaben}{19}{subsection.3.8.1}
+\contentsline {paragraph}{HMD-Kn\IeC {\"o}pfe}{20}{paragraph*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Controller}{19}{paragraph*.4}
+\contentsline {subsection}{\numberline {2.8.2}Leap Motion}{20}{subsection.2.8.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Gesten}{20}{paragraph*.5}
+\contentsline {subsection}{\numberline {2.8.3}Andere}{20}{subsection.2.8.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Kopfposition und Blickrichtung}{20}{paragraph*.6}
+\contentsline {subsection}{\numberline {2.8.4}Interaktionsdesign}{20}{subsection.2.8.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Sprachsteuerung}{21}{paragraph*.7}
+\contentsline {chapter}{\numberline {3}Anforderungsanalyse}{21}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{HMD-Kn\IeC {\"o}pfe}{21}{paragraph*.8}
+\contentsline {section}{\numberline {3.1}Interviews}{21}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.8.2}Leap Motion}{21}{subsection.3.8.2}
+\contentsline {subsection}{\numberline {3.1.1}Anforderungen aus Interviews}{21}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.8.3}Andere}{21}{subsection.3.8.3}
+\contentsline {section}{\numberline {3.2}User Stories}{22}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.8.4}Interaktionsdesign}{21}{subsection.3.8.4}
+\contentsline {section}{\numberline {3.3}Technische Anforderungen}{24}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Anforderungsanalyse}{22}{chapter.4}
+\contentsline {chapter}{\numberline {4}Konzept}{25}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Interviews}{22}{section.4.1}
+\contentsline {section}{\numberline {4.1}3D Darstellung}{25}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Anforderungen aus Interviews}{22}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Darstellung des gekennzeichneten Bereichs}{25}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}User Stories}{23}{section.4.2}
+\contentsline {section}{\numberline {4.3}Endger\IeC {\"a}t}{25}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Technische Anforderungen}{25}{section.4.3}
+\contentsline {section}{\numberline {4.4}Interaktion/ UI }{26}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Konzept}{26}{chapter.5}
+\contentsline {subsection}{\numberline {4.4.1}Nutzereingabe}{26}{subsection.4.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}3D Darstellung}{26}{section.5.1}
+\contentsline {subsection}{\numberline {4.4.2}Konzeption der Interaktionselemente}{26}{subsection.4.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Darstellung des gekennzeichneten Bereichs}{26}{section.5.2}
+\contentsline {subsection}{\numberline {4.4.3}Interaktion AR}{29}{subsection.4.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Endger\IeC {\"a}t}{26}{section.5.3}
+\contentsline {subsection}{\numberline {4.4.4}Interaktion VR}{29}{subsection.4.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Interaktion/ UI}{27}{section.5.4}
+\contentsline {section}{\numberline {4.5}Unterst\IeC {\"u}tzung von Dateiformaten}{29}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Interaktion AR}{27}{subsection.5.4.1}
+\contentsline {chapter}{\numberline {5}Implementierung}{30}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Interaktion VR}{27}{subsection.5.4.2}
+\contentsline {section}{\numberline {5.1}Aufbau Struktur des Projektes}{30}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Unterst\IeC {\"u}tzung von Dateiformaten}{27}{section.5.5}
+\contentsline {subsection}{\numberline {5.1.1}Kombination von Leap Motion mit Vive/Hololens}{30}{subsection.5.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Implementierung}{28}{chapter.6}
+\contentsline {subsection}{\numberline {5.1.2}Unity Projekt}{30}{subsection.5.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Aufbau Struktur des Projektes}{28}{section.6.1}
+\contentsline {section}{\numberline {5.2}Interaktion Hololens}{31}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Kombination von Leap Motion mit Vive/Hololens}{28}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {5.2.1}HoloToolkit}{31}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Unity Projekt}{28}{subsection.6.1.2}
+\contentsline {section}{\numberline {5.3}Interaktion Vive}{31}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Interaktion Hololens}{28}{section.6.2}
+\contentsline {subsection}{\numberline {5.3.1}Leap Motion}{31}{subsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}HoloToolkit}{28}{subsection.6.2.1}
+\contentsline {section}{\numberline {5.4}Shader in Unity}{31}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Interaktion Vive}{28}{section.6.3}
+\contentsline {section}{\numberline {5.5}Volume Rendering}{32}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}Leap Motion}{28}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {5.5.1}Ray Casting}{32}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Volume Rendering}{28}{section.6.4}
+\contentsline {subsection}{\numberline {5.5.2}Transferfunktion}{34}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.1}Shader in Unity}{28}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {5.5.3}Illumination}{34}{subsection.5.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.2}Ray Casting}{28}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {5.5.4}Gradientenberechnung}{34}{subsection.5.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.3}Transferfunktion}{30}{subsection.6.4.3}
+\contentsline {chapter}{\numberline {6}Evaluation}{35}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.4}Illumination}{30}{subsection.6.4.4}
+\contentsline {section}{\numberline {6.1}Vergleich mit Anforderungen}{35}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.5}Gradientenberechnung}{31}{subsection.6.4.5}
+\contentsline {section}{\numberline {6.2}Nutzertest}{35}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Evaluation}{32}{chapter.7}
+\contentsline {section}{\numberline {6.3}Ergebnisse}{35}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Vergleich mit Anforderungen}{32}{section.7.1}
+\contentsline {chapter}{\numberline {7}Zusammenfassung und Fazit}{36}{chapter.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Nutzertest}{32}{section.7.2}
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{36}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.3}Ergebnisse}{32}{section.7.3}
+\contentsline {section}{\numberline {7.2}Ausblick}{36}{section.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Zusammenfassung und Fazit}{33}{chapter.8}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.1}Zusammenfassung}{33}{section.8.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.2}Ausblick}{33}{section.8.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.3}Fazit}{33}{section.8.3}
+\contentsline {section}{\numberline {7.3}Fazit}{36}{section.7.3}

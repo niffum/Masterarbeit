@@ -63,38 +63,49 @@ Anhand dieser Anforderungen wurden User Stories formuliert.
 %Referenz User Stories
 
 \begin{table}
-\begin{tabular}{|c|p{10cm}|c|}
+\begin{tabular}{|c|p{10cm}|c|c|c|}
 \hline
-Story-Bezeichnung & User Story & Anforderungsreferenz \\
+Story-Bezeichnung & User Story & 2D & 3D & Anforderungsreferenz \\
 \hline
-U01 & Als Nutzer möchte ich ein 3D-Modell des gescannten Gehirns sehen, um ... & A01\\
+U01 & Als Nutzer möchte ich Aus verschiedenen Datensätzen auswählen können, welcher angezeigt wird. & X & X A01\\
 \hline
-U02 & Als Nutzer möchte ich den gekennzeichneten Bereich innerhalb des Gehirn sehen können, um einzuschätzen wie groß der Bereich tatsächlich ist.  & A02\\
+U02 & Als Nutzer möchte ich zwischen einer zwei- und dreidimensionalen Ansicht wechseln können. & X & X & A02\\
 \hline
-U03  & Als Nutzer möchte ich den gekennzeichneten Bereich ein- und ausblenden können, um mich auf diesen, oder die Darstellung an sich konzentrieren zu können.  & A02\\
+U02 & Als Nutzer möchte ich die Daten als dreidimensionales Volumen betrachten können, um ein besseres Verständnis für den Zustand des Gehirns zu erhalten. & & X & A02\\
 \hline
-U04 & Als Nutzer möchte ich auch dann noch die Strukturen des Gehirns erkennen, wenn der gekennzeichnete Bereich eingeblendet ist. & A03\\
+U02 & Als Nutzer möchte ich die Daten als zweidimensionale Schichten betrachten können, um diese wie gewohnt untersuchen zu können.  & X & & A02\\
 \hline
-U05 & Als Nutzer möchte ich eine möglichst genaue und gut erkennbare Abbildung der MRT-Bilder, damit ich eine Vorstellung habe, wie das Gehirn des Patienten aussieht. & A05\\
+U03  & Als Nutzer möchte ich den gekennzeichneten vom Schlaganfall betroffenen Bereich ein- und ausblenden können, um mich auf diesen, oder die Darstellung an sich konzentrieren zu können. & X & X & A02\\
 \hline
-U06 & Als Nutzer möchte ich durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden. & A04\\
+U04 & Als Nutzer möchte ich auch dann noch die Strukturen des Gehirns erkennen, wenn der gekennzeichnete Bereich eingeblendet ist. & X & X & A03\\
 \hline
-U07 & Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position im Raum anzupassen. & A07\\
+U05 & Als Nutzer möchte ich eine möglichst genaue und gut erkennbare Abbildung der MRT-Bilder, damit ich eine Vorstellung habe, wie das Gehirn des Patienten aussieht. & X & X & A05\\
 \hline
-U08 & Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen. & A08\\
+U06 & Als Nutzer möchte ich auf mindestens einer Achse durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden. & & X & A04\\
 \hline
-U09 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & A09\\
+U07 & Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position im Raum anzupassen. & X & X & A07\\
 \hline
-U10 & Als Nutzer will ich, dass die Darstellung nicht von anderen Elementen verdeckt wird, damit ich sie uneingeschränkt sehen kann. & A10\\
+U08 & Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen. & X & X & A08\\
 \hline
-U11 & Als Nutzer möchte ich mit einem Scrollrad durch die Darstellung scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden. & A11\\
+U09 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & & X & A09\\
 \hline
-U12 & Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann. & A12\\
+U09 & Als Nutzer möchte ich die die Helligkeit und den Kontrast der Darstellung verändern können, um Strukturen besser deutlich zu machen. & & X & A09\\
 \hline
-U13 & Als Nutzer möchte ich Dateien im nifti-Format in der Anwendung verwenden können, damit ich sie nicht vorher umwandeln muss. & A13\\
+U09 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & & X & A09\\
 \hline
-U14 & Als Nutzer möchte ich aus aus verschiedenen Darstellungen wählen können, die nebeneinander angezeigt werden, um direkte Vergleiche zwischen diesen ziehen zu können. & A14\\
+U14 & Als Nutzer möchte ich mindestens zwei Datensätze nebeneinander angezeigen lassen, um direkte Vergleiche zwischen diesen ziehen zu können. & X & X & A14\\
 \hline
+U14 & Als Nutzer möchte ich entscheiden können, ob ich mehrere Angezeigte Datensätze gleichzeitig oder einzeln manipuliere (z.B. Kontrast). & X & X & A14\\
+\hline
+U10 & Als Nutzer will ich, dass die Darstellung nicht von anderen Elementen verdeckt wird, damit ich sie uneingeschränkt sehen kann. & X & X & A10\\
+\hline
+U11 & Als Nutzer möchte ich mit einem Scrollrad durch die Darstellung scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden. & X & X & A11\\
+\hline
+U12 & Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann. & X & X & A12\\
+\hline
+U13 & Als Nutzer möchte ich Dateien im nifti-Format in der Anwendung verwenden können, damit ich sie nicht vorher umwandeln muss. & X & X & A13\\
+\hline
+
 
 \end{tabular}
 \caption{\label{tab:table-name}Aus Anforderungen abgeleitete User Stories.}

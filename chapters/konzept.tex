@@ -41,9 +41,6 @@ Anforderungen an Shader??
 \section{Darstellung des gekennzeichneten Bereichs}
 
 
-U02 U03  
-
-
 \section{Endgerät}
 
 - Hololens oder HTC Vive?
@@ -53,38 +50,82 @@ U02 U03
 - ...
 % Bezug Hololens2?
 
+%Benchmarks!
+
 \section{Interaktion/ UI } 
 
+\subsection{Nutzereingabe}
+Diskussion Controller, Motion Leap etc
+
+- beide haben nutzereingabe
+- interaktion kosistent über geräte hinweg
+- intuitiv
+- Controller schlecht, da einzelteile, immobil
+
+
+\subsection{Konzeption der Interaktionselemente}
 % 2D 
 % UX steht im Vordergrung -> begründen warum besser als vorher!
 
-Scrollen durch 2d Bilder:
-kein Mausrad-> slide vor und zurück abhängig von armlänge
-slide hochrunter recht links, schwierig, ungenau
+Im Kapitel \ref{anforderung} ist definiert, welche Interaktionen bzw. Funktionalitäten dem Nutzer zur Verfügung stehen sollten, damit er die Anwendung sinnvoll Nutzen kann. 
+Wie vorhergehend beschrieben, wird die Motion Leap eingesetzt, um dem Nutzer eine möglichst intuitive Interaktion mit der Anwendung zu ermöglichen. Das zur Eingabe stehen dem Nutzer hauptsächlich seine Hände zur Verfügung, die er frei im virtuellen/ augmentierten Raum bewegen und somit mit digitalen Eingabeelementen interagieren kann. 
+Dazu stehen ihm einerseits physische Bedienelemente, wie Knöpfe, Schieberegler oder Räder zur Verfügung, die virtuell simuliert werden. Andererseits die Bewegung der Hände selbst, z.B. durch das Formen von Gesten.
 
-Rad wäre gut, kleines Rad (Lautstärkeregler) ideal
-aber handgelenkbewegung schwer zu tracken
-deshalb: Ring, den man anfasen und drehen kann, Geräusche untermalen auswahl (Feeback)
+Physische Bedienelemente haben den Vorteil, dass sie dem Nutzer bereits aus anderen Kontexten bekannt sind. Durch Icons oder Beschriftungen kann dieser ihre Funktion schnell begreifen. Dies Ermöglicht eine Verwendung ohne hohen Lernaufwand oder das Merken von Gesten. 
+Die Elemente laden außerdem dazu ein sie auszuprobieren, sodass der Nutzer ermutigt wird mit der Anwendung zu interagieren und sich so mit dieser vertraut zu machen. 
+Allerdings ist es schwierig ein physisches Feedback zu simulieren, das der Nutzer erwartet, da die Elemente der physischen Realität nachempfunden sind. Der Tastsinn des Nutzers kann durch die Anwendung nicht simuliert werden. Es können lediglich audiovisuelle Reize erzeugt werden. Da der Sehsinn allerdings im Allgemeinen der am stärksten ausgebildete Sinn ist (REFERNZ?), kann durch die Verwendung dieser Reize eine immersive Interaktion erreicht werden. 
+Schließlich ist zu beachten, dass Interaktionselemente dieser Art Raum innerhalb der virtuellen Realität einnehmen. Dementsprechend ist es wichtig diese so anzuordnen und zu gestalten, dass der virtuelle Raum für den Nutzer übersichtlich bleibt. Hier muss auch ein Gleichgewicht zwischen der Reduzierung der Elemente in Größe und Komplexität, sowie der Bedienbarkeit gefunden werden. Ist ein Knopf beispielsweise zu klein, fällt es schwer diesen zu betätigen. 
+
+Für die Verwendung physischer Bedienelemente spricht außerdem, dass die Komplexität der Interaktionen zu hoch ist, um nur durch Gesten abgedeckt werden zu können. Der intuitive Einsatz der Hände für simple Interaktionen, wie z.B. das Drehen eines Objektes durch anfassen ist dabei trotzdem einer abstrakteren Abbildung auf Bedienelemente vorzuziehen. Der Einsatz von einzelnen, eindeutigen Gesten ist weiterhin hilfreich, um der eben genannte visuellen Reizüberflutung entgegen zu wirken. 
+Bei der Konzeption der Interaktion mit der Anwendung wird also zuerst angestrebt eine intuitive direkte Bedienmöglichkeit per Hand oder Geste zu verwenden und bei komplexeren Interaktionen möglichst einfach gestaltete physische Bedienelemente einzusetzen.
+Im Folgenden wird erläutert, wie die in \ref{anforderung} beschriebenen Interaktionen innerhalb der Anwendung gestaltet wurden.
+
+% Scrollen
+Die zentrale Interaktion ist dabei das \textbf{Scrollen durch die Bildschichten}, die es dem Nutzer ermöglicht einen Einblick in das Innere des Gehirns zu erlangen. In Bildschirmanwendungen wird die Bewegung durch die Schichten meistens durch Betätigung des Scrollrads der Maus erreicht, wie in Kapitel \ref{grundlagen} erläutert.
+Dies erfordert geringen Aufwand, ermöglicht es dem Nutzer schnell die Richtung der Bewegung zu ändern und liefert außerdem oft haptisches Feedback. 
+In VR/AR sollte der der Wechsel zwischen den Schichten möglichst genauso direkt und intuitiv sein. 
+Hierzu bieten sich für die 2D- und 3D-Darstellungen verschiedene Möglichkeiten, weswegen die Bedienung sich für diesen Fall in den Szenarien unterscheidet. 
+
+In beiden Darstellungen wird die aktuell angezeigte Schicht durch das Volumen bewegt. Bei einem Volumen lässt sich diese sehr verständlich als Ebene darstellen. Um dieses zu verschieben ist die direkteste Aktion diese mit der Hand zu greifen und in eine Richtung zu ziehen. 
+Dies lässt sich bei der Visualisierung der Daten als Würfel genauso umsetzten. Durch die räumliche Perspektive und die Möglichkeit das Volumen zu rotieren lässt sich die Ebene bequem manipulieren. 
+
+Um diese Bedienung darzustellen, wird die Ebene als Quadratischer Rahmen angezeigt. Damit die Daten ungestört untersucht werden können, wird dieser nur eingeblendet, wenn sich die Hand des Nutzer dieser nähert. 
+Die Position der Berührung von Hand und Rahmen kann schwer zu erfassen sein, vor allem wenn die Ebenen der verschiedenen Achsen dicht beieinander liegen. Dazu kommt außerdem, dass noch andere Funktionen durch des Greifen des Volumens umgesetzt werden. Dazu gehört z.B. dir Rotation, wie später noch beschrieben wird. Deshalb ist es sinnvoll dem Nutzer bestimmte Punkte zur Verfügung zu stellen, die er anfassen und somit die Ebenen steuern kann. Diese Punkte werden jeweils an den Eckpunkten der Ebenen angebracht und stehen in einiger Entfernung zum Volumen. Sie reagieren auf die Nähe von und den Kontakt mit Händen. Dies macht es für den Nutzer eindeutig nachvollziehbar, welche Auswirkungen seine Handbewegungen haben werden. 
+
+Dieses Bedienkonzept lässt sich allerdings nicht einfach in den zweidimensionalen Raum übertragen. Da jeweils nur die ausgewählte Schicht zu sehen ist und nicht das gesamte Volumen, hat der Nutzer keine Vorstellung davon, wo in dessen Innern er sich befindet. Um ihm diese zu liefern, wird die Gesamtanzahl an schichten angezeigt, sowie die wievielte gerade ausgewählt ist. 
+Die Bewegung durch die Schichten erfolgt außerdem entlang der Z-Achse, die durch den zweidimensionalen Kontext allerdings wegfällt. D.h. der Wechsel zwischen den Schichten durch Anfassen und Ziehen eines Kontaktpunktes entlang dieser, wie eben beschrieben, würde nicht in das Konzept passen. 
+Weiterhin sollte es dem Nutzer möglich sein die Ebene ununterbrochen zu verschieben. Bei einer Bewegung entlang der Z-Achse müsste er sehr weit vorne anfangen und ist in der Tiefe durch die Länge seines Armes beschränkt, die  variieren kann. Es wäre möglich das Interaktionselement als Schieberegler in die XY-Achse zu legen, die Bedienung ist dabei allerdings oft ungenau und könnte dazu führen, dass der Nutzer den Fokus auf den Regler legt, anstatt auf das Bild, das er auswählen will. Eine bessere Variante stellt ein Rad dar, durch dessen Rotation man zwischen den Bildern wechseln kann. Dies entspricht eher der Bedienung einer Bildschirmanwendung mittles eines Mausrads und ist dem Nutzer somit bereits bekannt. Außerdem lässt dich so eine kontinuierliche Bewegung in beide Richtungen ermöglichen. Der Nutzer muss zur Steuerung lediglich die Hand und nicht den Arm bewegen, was eine genauere Manipulation erlaubt. 
+Das Rad ist dabei ähnlich einer Wählscheibe konzipiert, die der Nutzer mit einer Kreisbewegung rotiert. Verglichen mit einem Drehknopf, wie z.B. einem Lautstärkeregler, unterstützt der größere Radius mehr Kontrolle. Zudem lässt sich eine endlose Bewegung ohne Umgreifen realisieren und die Bewegung ist vom System leichter erkennbar. 
+Um dem Nutzer den Eindruck von haptischen Feedback zu vermitteln und den Zustand des Elements zu verdeutlichen, wird die Berührung und Bewegung des Rades durch den Einsatz von Farbe und Ton untermalt.
 
 scrollwn wird oft als swipr bewegung implementiert: ungenau zu stoppen
 
 http://blog.leapmotion.com/designing-cat-explorer/
 
-Manipulation: Helligkeit kontrast, Größe, Verschieben, schichten scrollen, Maske?, ...
+% Zoom
+Zu den geforderten Interaktionen gehört auch die die Vergrößerung von Bildern, um dem Nutzer eine genaue Untersuchung zu erlauben. Bei der Vergrößerung handelt es sich im Grunde genommen um eine Skalierung bzw. ein "Heranzoomen" des Bildes. Auch dies lässt sich gut mit einer direkten Handbewegung in Berührung mit der Darstellung umsetzten. Aus anderen Anwendungen sind Nutzern zwei Bedienmöglichkeiten dieser Funktionalität bekannt. Bei Bildschirmanwendungen wird oft das Mausrad zum Zoomen verwendet. Allerdings werden Räder bereits für andere Aktionen verwendet und ein mehrdeutiger Einsatz könnte zu Verwirrung führen. Von der Bedienung von Touchdisplays sind Nutzer weiterhin daran gewöhnt zu zoomen, indem sie den Bildschirm mit Daumen und Zeigefinger berühren und die Finder dann aufeinander zu oder voneinander weg zu bewegen. Diese Bewegung lässt sich gut in die Anwendung übertragen. Um ein eindeutigeres Ergebnis zu erhalten und dem Nutzer mehr Kontrolle zu geben werden statt zwei Fingern allerdings die beiden Hände verwendet. Wird das Bild von beiden Händen mit Daumen und Zeigefinder gegriffen kann es durch die Bewegung der Hände zueinander manipuliert werden.
 
-Der Use Case (REFERENZ Vergleich) erfordert es weiterhin, dass man Bilder im direkten Vergleich nebeneinander betrachten kann. Dies gilt sowohl für die zwei- als auch dreidimensionale Darstellung der Daten. Die UseCases (REFERENZ Liste) und (REFERENZ synchon) erfordern außerdem eine Möglichkeit für den Nutzen aus den vorhandenen Daten einzelne auszuwählen , die angezeigt werden sollen, sowie die Daten jeweils gleichzeitig oder einzeln zu manipulieren. 
-Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden sollen oder nicht, sind beide nicht teil der direkten Manipulation des Bildes. Sie müssen deshalb nicht in dessen unmittelbaren Umfeld stehen und der Nutzer kann sich auf sie konzentrieren. 
-Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzten sein. 
-Diese beiden optionen werden deshalb in einem Menü vereint. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Die Interaktionselemente nutzen außerdem die Möglichkeiten der VR aus, da sie i auf einem Bildschirm nicht umsetzbar wären. 
+% Verschieben
+Wenn eine Darstellung vergrößert wird, wird der im Bildausschnitt angezeigt Bereich automatisch kleiner. Um dem Nutzer die Möglichkeit zu geben einen anderen Bereich zu betrachten, ohne vorher wieder herauszoomen zu müssen, ist es sinnvoll, dass den Bildausschnitt verschieben zu können. 
+% Helligkeit/ Kontrast
+
+% Ein und Ausblenden von Maske
+
+Das Ein- und Ausblenden des markierten Schlaganfallbereichs lässt sich 
+% Daten vergleichen
+% synchron/asynchron+
+
+Der Use Case (REFERENZ Vergleich) erfordert es weiterhin, dass man Bilder im direkten Vergleich nebeneinander betrachten kann. Dies gilt sowohl für die zwei- als auch dreidimensionale Darstellung der Daten. Die UseCases (REFERENZ Liste) und (REFERENZ synchon) erfordern außerdem eine Möglichkeit für den Nutzen aus den vorhandenen Daten einzelne auszuwählen, die angezeigt werden sollen, sowie die Daten jeweils gleichzeitig oder einzeln zu manipulieren. 
+Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden sollen oder nicht, sind beide nicht Teil der direkten Manipulation des Bildes. Sie müssen deshalb nicht in dessen unmittelbaren Umfeld stehen und der Nutzer kann während dessen Bedienung auch auf diese den Fokus setzen. 
+Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzen sein. Da die Option der Synchronizität abhängig ist von der Tatsache, ob ein oder mehrere Datensätze angezeigt werden, stehen die beiden Aktionen in Verbindung zu einander und werden deshalb in einem Menü vereint, das für beide Darstellungen verwendet wird. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Gleichzeitig fördert es die Immersion der Anwendung, da der Nutzer quasi Teil von ihr wird. Ein Effekt, der in einer Bildschirmanwendung nicht umsetzbar wäre. 
 Damit das Menü nicht wären der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Motion Leap bietet bereits Beispiel Code, der dies umsetzt. ?
-Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst klein zu halten. Das Erfassungsfeld der Motion Leap Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionfläche, die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
-Um den Umfang des Menüs in benutzbaren Dimensionen zu halten wurde es auf drei Knäpfe reduziert. 
-Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht werden. Deshalb kann sie bei Bedarf über einen der Knöpfe aus geklappt werden. 
-Indem der Nutzer einen Datensatz auswählt, wird dieser auf der Bildfläche angezeigt. Die Auswahl ist auf zwei Datensätze beschränkt. Zu viele gleichzeitig dargestellte Bilder würden unübersichtlich wirken und im die Motivation hinter dem Use Case ist der direkte Vergleich zweier Bilder. Außerdem stellen mehr Bilder auch mehr Möglichkeiten dar diese in verschiedenen Kombinationen zu manipulieren. Dies hätte die Anwendung unnötig verkompliziert. 
+Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst einfach und platzsparend zu halten. Das Erfassungsfeld der Motion Leap Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionsfläche die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
+Um den Umfang des Menüs in benutzbaren Dimensionen zu halten wurde es auf drei Knöpfe reduziert. 
+Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht werden. Deshalb kann sie bei Bedarf über einen der Knöpfe ausgeklappt werden. 
+Indem der Nutzer einen Datensatz auswählt, wird dieser auf der Bildfläche angezeigt. Die Auswahl ist auf zwei Datensätze beschränkt. Zu viele gleichzeitig dargestellte Bilder würden unübersichtlich wirken und die Motivation hinter dem Use Case ist der direkte Vergleich zweier Bilder. Außerdem stellen mehr Bilder auch mehr Möglichkeiten dar diese in verschiedenen Kombinationen zu manipulieren. Dies hätte die Anwendung unnötig verkompliziert. 
 Stattdessen wird die Synchronisierung der Manipulation über einen weiteren Knopf im Handmenü gesteuert. Dieser ist nur aktiv, wenn tatsächlich zwei Bilder angezeigt werden. Dann funktioniert er als Schalter. Indem der Nutzer in betätigt wird jeweils nur eine Benutzeroberfläche neben beiden Bildern angezeigt oder sie wird dupliziert und für jede Darstellung eingeblendet. 
 
-
-
+% Wechsel zwischen 2D/3D
 
 % auf probleme bei der visualisierung auf Hololens hinweisen, VR App 
 
