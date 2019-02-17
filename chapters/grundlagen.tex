@@ -2,12 +2,53 @@
 
 \chapter{Aktueller Stand der Technik}
 \label{grundlagen}
+%-------------------------------------------------------------
+\section{AR in der Medizin}												 %
+%-------------------------------------------------------------
+...
+Ein großer Anwendungsbereich sind dabei Operationen und deren Vorbereitung dar. 
+
+\cite{Voinea16} stellt eine AR-Anwendung vor die den Lernprozess im Bereich der Biomechanik unterstützt.
+
+
+\subsection{AR und MRT}
+
+Da die Visualisierung von inneren Organen durch MRT-Scans eines der wichtigsten bildgebenden Mittel in der Medizin und für Diagnosen im Körperinneren unabdingbar ist, 
+
+% Hololens
+
+% Andere Hardware
+AR-Systeme werden genutzt um MRT-Daten während eines Eingriffs zugänglich zu machen. Während ein Patient sich in einem MR-Scanner befindet, können die MRT-Bilder direkt an den Arzt weitergeleitet werden. Dieser kann diese zur besseren Orientierung bei z.B. Injektionen nutzen. Offene MRT-Systeme (s. \ref{mrt}) ermöglichen dabei eine Abbildung der betroffenen Organe während des Eingriffs. Die Bildqualität ist allerdings deutlich schlechter als bei geschlossenen Systemen. Bei einem geschlossenen System hat der Arzt dagegen während des Scans keinen Zugang zum Patienten. Um einen MRT-gestützen Eingriff durchführen zu können werden die vorher erstellten MRT-Bilder auf den Patienten projiziert. zur Umsetzung eines Systems gibt es verschiedene Ansätze.
+In \cite{Fritz2012} wird ein System vorgestellt, bei dem eines transparenten Spiegels MRT-Bilder über einen Patienten bzw. ein Modell projiziert werden. Die Visualisierung soll Ärzte bei der Nadelführung für Injektionen der Wirbelsäule unterstützen. 
+\cite{khamene03} verwendet für einen ähnlichen Anwendungsdall ein HMD und projiziert die Bilder abhängig vom Blickwinkel des Arztes auf den Patienten. Das HMD wurde in \cite{khamene01} weiterentwickelt, sodass der Arzt es während einer Gehirnoperation tragen kann. Dabei wird das Körperinnere durch eine dreidimensionale Visualisierung sichtbar gemacht, die aus MRT-Bildern gewonnen wurde. 
+
+Bildgestüzte Operationen 
+\cite{fuchs98} verwendet ebenfalls ein HMD. Über dieses werden Bilder aus einer Laparoscopy auf den Patienten projiziert. (Relevanz?)
+Image guided surgery :\cite{grimson99} und  \cite{KerstenOertel2013TheSO}
+\cite{MISCHKOWSKI2006478}
+\cite{MISCHKOWSKI2006478} untersucht eine Bildschirm basierte AR-Anwendung, die bei Kieferoperationen zum Einsatz kommt. Mit Hilfe der Anwendung kann der Eingriff geplant werden und während der Operation hilft sie dabei, die Position des Kiefers zu überprüfen. 
+\cite{Soler04} beschreibt Methoden zur Automatisierung einer dreidimensionalen Visualisierung von MRT-Bildern der Verdauungsorgane. Sowie den Einsatz von AR bei Operationen in diesem Bereich. 
+\cite{GasquesRodrigues17} untersucht die Einsatzmöglichkeiten von AR und VR im operativen medizinischen Bereich. Dazu gehört unter anderem die Entwicklung einer AR-Anwendung für die Hololens, die die Ausbildung von Ärzten in Anatomie und Operationen unterstützen soll. 
+\cite{Wendt03} entwickelt eine HMD basierte AR-Anwendung, die MRT-Bilder bei Eingriffen auf den Patienten Projiziert. Die Anwendung wurde mit Bildern des Gehirns an einem Kopfphantom getestet.
+\cite{Watts17} stellt ebenfalls eine AR-Anwendung vor, die Bilder auf den Körper des Patienten projiziert. Allerdings ein Projektoraufbau verwendet, sodass mehrere Betrachter gleichzeitig die Augmentierung sehen können. Wie in den meisten genannten Arbeiten werden Marker auf dem Patienten angebracht, um das Bild anzupassen.
+
+
+visualisierung
+% Lesen, Referenzen?
+\cite{Mangina17} beschäftigt sich mit der Erzeugung von zum 3D-Druck geeigneten Modellen des Herzens, sowie der Integration dessen in eine AR- bzw. VR-Anwendung, die zur Planung von Herzoperationen genutzt werden kann.
+\cite{Mangina17_2} untersucht die Möglichkeiten zur Erzeugung eines 3D Models aus MRT-Daten genauer.
+
+Vr 
+\cite{SORENSEN2001193} beschreibt ebenfalls, wie aus MRT-Bildern des Herzens ein 3D-Modell generiert wird. Das Modell wird anschließend in einem eigenen VR-System platziert, durch dessen Verwendung der Arzt vor einer Operation einen besseren Überblick über das Organ erhält.
+
 
 %-------------------------------------------------------------
-\section{MRT}												 %
+\section{MRT}
+\label{mrt}												 %
 %-------------------------------------------------------------
 
 Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
+Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. in einem geschlossenen ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
  	
 \subsection{Verfahren}
 
@@ -16,6 +57,7 @@ Während einer MRT wird mit einer Spule, die in dem MRT-System verbaut ist um de
 Dadurch, dass alle Protonen in dieselbe Richtung zeigen (phasengleich sind), verstärken sie gegenseitig das Signal, dass sie abgeben. Das Signal wird schwächer, sobald sie wieder auseinander laufen (Dephasierung).
 Die Zeit, die die Protonen brauchen, um sich wieder am Magnetfeld auszurichten wird als Relaxtionzeit bezeichnet. Dabei wird zwischen T1- und T2-Relaxtion unterschieden.
 Die Relaxionszeit ist dabei abhängig von der Zusammensetzung des umgebenden Gewebes. Das gemessene MR-Signal, das durch diese beeinflusst wird, ist also für verschiedene Gewebearten verschieden stark.
+\cite{weishaupt09}
 
 \subsection{Datenverarbeitung}
 
@@ -25,6 +67,7 @@ Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem Bild Koordinaten, die der Anordnung der jeweils betrachteten Punkte in der Welt entsprechen. Stattdessen bildet der X-Wert die Frequenz und der Y-Wert die Phase ab. Wie für den Z-Wert werden auch hier Gradienten gebildet und auf das Magnetfeld gelegt. Der X-Gradient verläuft von links nach rechts und sorgt dafür, dass die Larmorfrequenz in dieser Richtung zunimmt, sodass die jeder Punkt seine eigene Frequenz hat.Der Y-Gradient, der senkrecht verläuft, beeinflusst auf dieselbe Weise die Phasen einer Schicht. Er wird dabei nur kurz nach dem Einstrahlen des Hochfrequenz-Impulses eingeschaltet, wenn sich die Protonen bereits ausgerichtet haben.
 
 Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichert, die K-Raum genannt wird. Die Matrix entspricht allerdings noch nicht der bildlichen Darstellung, die angestrebt wird, da die Werte eine andere Bedeutung haben. ? Deshalb werden sie mit Hilfe der Fouriertransformation in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
+\cite{weishaupt09}
 
 \subsection{Abgrenzung CT}
 Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, ist die Computer-Tomographie. Die Verfahren unterscheiden sich jedoch. Denn bei einer CT wird der Patient schichtenweise geröntgt. Dh. sein Körper wird mit Röntgenstrahlung beschossen, die je nach Gewebe, auf das sie treffen unterschiedlich stark abgeschwächt werden, was dann gemessen wird. Die so entstandenen "Querschnitte" des Körpers werden anschließend mit Hilfe eines Computers zu einem dreidimensionalen Bild zusammengesetzt. 
@@ -34,9 +77,24 @@ Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen ve
 
 \subsection{Datenformate}
 
-MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören nifti oder DICOM, welches z.B. neben den Bildern auch Patientendaten speichert.
-Allerdings 
-16 bit int images, pvm ? Standart?
+MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches z.B. neben den Bildern auch Patientendaten speichert.
+
+Das NIfTI-Format wurde 2003 von der Data Format Working Group (DFWG) als Alternative zum vorherigen Analyze 7.5-Format entwickelt, das Probleme mit der Orientierung der Daten aufwies. Beide Formate werden im Bereich des Neuroimaging verwendet.
+Bilderinformationen werden bei ersterem in einer einzigen Daten mit der Endung .nii gespeichert. Um mit dem Analyze-Format kompatibel zu bleiben besitzen auch NIfTI-Dateien einen 348 Byte Header. Im Header ist unter anderem festgelegt, wie die Koordinaten der Voxel auf Weltkoordinaten abgebildet sind.
+Dem Header folgen die Volumedaten des Scans. Es ist möglich bis zu sieben Dimensionen in der Datei abzulegen. Die ersten drei sind dabei für die X-,Y- und Z-Dimensionen des Volumens reserviert.
+% https://brainder.org/2012/09/23/the-nifti-file-format/
+
+DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeichert werden, sondern auch legt auch ein Kommunikationsprotokoll zum Austausch von medizinischen Daten fest. Der DICOM-Standart wird in den meisten medizinischen Einrichtungen verwendet. 
+Wie bereits erwähnt speichert eine DICOM-Datei neben den Bilddaten weitere Informationen. Dazu können eine ID oder der Patientenname zählen, die als Attribute des DICOM-Objektes hinterlegt werden. 
+..
+
+MRT-Bilder werden außerhalb des medizinischen Umfelds allerdings auch in anderen Formaten gespeichert. 
+Ein Beispiel dafür ist das PVM-Format, das zum Speichern von volumetrischen Daten genutzt wird. Das Format geht davon aus, dass das Volumen aus quadratischen Voxeln besteht und enthält die Voxelwerte und Größeninformationen über das Volumen.
+% http://paulbourke.net/dataformats/pvm/
+
+Die Daten können weiterhin in herkömmlichen Bildformaten, wie JPEG oder PNG gespeichert werden. Dabei entspricht dann eine Bilddatei einer Schicht des Scans. 
+ 
+%16 bit int images, pvm ? Standart?
 
 %------------------------------------------------------
 \section{Volumendaten}							  	  %
@@ -58,31 +116,11 @@ Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dies
 Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
 Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
+IMfolgenden werden grundlegende Techniken des Volume Rendering erläutert.
 
-Eine Transferfunktion besteht meistens aus einer Textur, aus der für jeden Isowert eine Farbe und Opazität gelesen werden kann. Auf diese Weise können Voxel, die einem bestimmten Bereich oder z.B. Gewebe angehören hervorgehoben oder ausgeblendet werden. Eine gut Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden und von dem jeweiligen Datensatz abhängen. 
+\subsection{Komposition}
 
-Das Shading bestimmt unter anderem die Beleuchtung eines Voxels und kann dessen Eigenschaften somit zusätzlich zur Transferfunktion verändern. Hierbei können verschiedene Beleuchtungsmodelle verwendet werden.
-Bei einer lokalen Beleuchtung der einzelnen Voxel kommt hierzu meist das Phong-Beleuchtungsmodell zum Einsatz. 
-
-% PHONG
-Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. In Abbildung \ref{phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie zusammengesetzt das Phong Beleuchtungsmodell ergeben.
-Dieses wird durch folgende Formel beschreiben:
-
-$I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
-
-$I$ ist dabei die Farbe des beleuchteten Punktes. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
-Die oben beschriebenen Komponenten werden aufaddiert und sind somit durch jeweils ein $+$-Zeichen voneinander getrennt, wodurch sie gut voneinander zu trennen sind.
-
-%-------
-Phong
-Normalen
-Gradienten
-etc...
-?
-Segmentierung
-%-----1
-
-Wie bereist erwähnt, werden die einzelnen Werte entlang eines Strahls mit einander verrechnet. Dabei werden sie in der Regel auf einander addiert. Dieser Vorgang wird Komposition genannt. Dabei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
+Wie eben erwähnt, werden die einzelnen Werte entlang eines Strahls mit einander verrechnet. Dabei werden sie in der Regel auf einander addiert. Dieser Vorgang wird Komposition genannt. Hierbei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
 
 $\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
 
@@ -94,13 +132,57 @@ Sollen die Werte von hinten nach vorne addiert werden, wird dies durch die folge
 $\hat{C}_{i}=C_{i}+(1-\hat{A}_{i})\hat{C}_{i+1}$
 
 $\hat{A}_{i}=A_{i}+(1-\hat{A}_{i})\hat{A}_{i+1}$
- 
-Skalarfeld 
-Optical Model
-Classification?
-Lightning
 
-Es gibt verschiedne Techniken, von denen die wichtigsten im Folgenden erläutert werden.
+Die Komposition erfolgt für jeden Strahl am Ende des Renderingprozesses. Die Eigenschaften des Voxels können in dessen Verlauf verändert werden. Beispielsweise durch die Verwendung einer Transferfunktion oder eines Shaders.
+
+\subsection{Transferfunktion}
+
+Transferfunktionen werden verwendet, um verschiedenen Bereichen bzw. Beschaffenheiten eines Objektes verschiedene Farben und Opazitäten zu geben. Unterschiedliche Geweben können auf diese Weise eingefärbt oder ausgeblendet werden. In der Umsetzung besteht eine Transferfunktion meistens aus einer Textur, aus der für jeden Isowert eine Farbe und Opazität gelesen werden kann. Die Textur kann dabei eindimensional sein, wenn als Index lediglich der Isowert des Voxels verwendet wird. Für eine bessere Unterscheidung der Gewebe eines Objektes können allerdings auch multidimensionale Transferfunktionen eingesetzt werden. Hierbei werden neben dem Isowert z.B. auch der Betrag des Gradienten des jeweiligen Voxels als Koordinaten für die Transfer-Textur verwendet. Eine gut Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden können und von dem jeweiligen Datensatz abhängen. Teilweise werden Widgets eingesetzt, die es den Nutzer erlauben eine Transferfunktion zu erstellen, die direkt auf ein gerendertes Volumen angewandt wird.
+
+Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da über die Transferfunktion definiert ist, welche Isowerte welchem Gewebe entsprechen.
+
+\subsection{Beleuchtung}
+\label{beleuchtung}
+
+Um dem gerenderten Objekt einen möglichst plastischen Eindruck zu verleihen ist es sinnvoll dieses zu beleuchten. Die Beleiuchtung wird in in der Regel durch einen Shader implementiert. Jeder Voxel wird dabei einzeln nach der Anwendung der Transfertextur geshadet, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
+
+Die lokale Beleuchtung betrachtet ausschließlich den Voxel und wie sich das Licht zu diesem verhält. 
+Globale Beleuchtung bezieht unter anderem den Schatten des gesamten Volumens mit ein..
+// TODO:
+globale Beleuchtung
+
+Bei einer lokalen Beleuchtung der einzelnen Voxel kommt meist das Phong-Beleuchtungsmodell zum Einsatz. 
+
+% PHONG
+Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Diese werden aufeinander addiert und ergeben so das Phong-Beleuchtungsmodell.  In Abbildung \ref{phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie in Kombination die vollständige Beleuchtung ergeben.
+Die folgende Formel beschreibt, wie die Beleuchtung berechnet wird. Die Terme zwischen den $+$-Zeichen stehen für die Berechnungen der genannten Komponenten.
+
+$I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
+
+$I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Transferfunktion durch diese bestimmt wird. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
+
+\subsection{Gradientenberechnung}
+
+Um die in \ref{beleuchtung} erläuterte Beleuchtung umzusetzen, müssen wie beschrieben die Normalen der einzelnen Voxel bekannt sein. Da es die Voxel allerdings keine Oberfläche bilden, besitzen sie auch keine Normalen. Als Ersatz können stattdessen die Gradienten der Voxel verwendet werden. Diese beschreiben die Wertveränderung in der Umgebung eines Voxels und zeigen dabei auf die Größte Veränderung. Benachbarte Voxel mit ähnlichen Isowerten bilden eine Isofläche, die durch die Gradienten beschrieben wird. 
+% ??
+
+Zur Berechnung der Gradienten können verschiedene Verfahren eingesetzt werden. Der Unterschied in der Berechnung liegt vor allem in dem Zeitpunkt zu dem diese ausgeführt werden. Gradienten können entweder vor dem Start des Programmes berechnet werden oder zur Laufzeit. 
+
+Ist ersteres der Fall werden die Gradienten in den meisten Fällen per Pixel mit Hilfe der Finite-Differenzen-Methode berechnet. 
+Dabei wird jeweils die Differenz zwischen dem Isowert eines Voxels und den Voxeln in seiner festgelegten Umgebung gebildet. Dies lässt sich als folgende Formel ausdrücken: 
+
+$
+\Delta f(x,y,z)\approx \frac{1}{2h}
+\left ( \begin{matrix}
+f(x + h, y, z) - f(x - h, y, z)\\ 
+f(x, y + h, z) - f(x, y - h, z)\\ 
+f(x, y, z + h) - f(x, y, z - h)
+\end{matrix} \right )
+$
+
+Convolution?
+On´The fly gradientenberechnung
+Segmentierung
 
 \subsection{Volumetrisches Ray-Casting}
 \label{rayCasting}
@@ -159,6 +241,7 @@ Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um e
 \end{figure}
 
 
+
 %-------------------------------------------------------------
 \section{Oberflächen Generierung (Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten)}		 %
 %-------------------------------------------------------------
@@ -208,9 +291,6 @@ Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terra
 Beschleunigung durch Unterstützung der Grafikkarte??
 
 Erweiterungen/ Abwandlungen
-\subsection{Voxel}
-
-\subsection{Andere}
 %https://dl.acm.org/citation.cfm?id=3264776
 
 %https://www.researchgate.net/publication/279205507_A_BRIEF_REVIEW_OF_SURFACE_MESHING_IN_MEDICAL_IMAGES_FOR_BIOMEDICAL_COMPUTING_AND_VISUALIZATION
@@ -312,6 +392,7 @@ Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf je
 \subsubsection{Schlaganfälle auf einem MRT}
 
 \subsection{Software in der Radiologie}
+% https://www.dicomlibrary.com/meddream/md5/index.html?study=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170
 %Use Cases
 %Bsp
 Die Untersuchung der MRT-Daten werden digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Software, die diesen darstellen kann und weiterhin relevante Funktionen bietet. Beispiele für solche Software sind die Programme

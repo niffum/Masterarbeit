@@ -11,7 +11,7 @@ zur Implementierung von mARt wurde \textit{Unity 3D} (Ref) verwendet. Die Engine
 
 Microsoft empfiehlt weiterhin Unity zur Entwicklung für Hololens-Software zu Nutzen und bietet mit HoloToolkit ein Framework, das Hololens Funktionen innerhalb von Unity zur Verfügung stellt. 
 %https://docs.microsoft.com/en-us/windows/mixed-reality/install-the-tools
-Unity verwendet C# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
+Unity verwendet C\# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
 %Wieso?
 
 Die Anwendung wird in Unity entwickelt und dann für die Hololens und als VR-Anwendung gebaut.
@@ -26,11 +26,14 @@ Da mARt sich hauptsächlich in die beiden Szenarien einer zwei- und dreidimensio
 Viele der Funktionen sind allerdings ähnlich oder gleich, weshalb manche Skripte in beiden Szenen verwendet werden. 
 
 \section{Interaktion Hololens}
-- Prototyp für hololens Demo
-- Deckt Hologram Interaktionen ab
 
-- Aufbau Szene
-- Funktionsweise der GameObjekte/ Skripte
+Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine Prototypische Demo-Anwendung entwickelt, die die Hololens eigenen Gesten genutzt hat. Die Anwendung hat eine zweidimensionale Darstellung der MRT-Bilder als Hologramm in den Raum projiziert, welches der Nutzer durch Hololens eigene Gesten manipulieren konnte. Dabei wurden alle vorhandenen Manipulierungsformen eines Hologramms abgedeckt, sowie das Scrollen durch die Bildschichten. Um die Hololens Gesten zu Nutzen wurde das HoloToolkit verwendet. 
+Anhand dieser Demo sollte geprüft werden, ob die Interaktionsmöglichkeiten, die die Hololens bietet ausreichend sind, um einem Neurologen die effektive Untersuchung von MRT-Bildern zu ermöglichen.
+Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und Anforderungen eines Arztes an mARt noch weiter spezifiziert werden.  
+
+Wie im Kapitel \ref{konzept}erläutert haben sich die Gesten der Hololens zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig, z.B. zum Wechseln der Manipulationsart. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die Motion Leap in das System integriert.
+% Genauer auf Implementierung eingehen
+
 \subsection{HoloToolkit}
 
 \section{Interaktion Vive}

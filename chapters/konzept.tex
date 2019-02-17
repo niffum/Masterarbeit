@@ -7,26 +7,29 @@ Im folgenden werden Konzepte diskutiert, um die in Kapitel \ref{anforderung} her
 
 \section{3D Darstellung}
 
-- Da das innere der 3D Darstellung erkennbar sein soll, muss eine semi-transparente Darstellung erzeugt werden, die sowohl die Form des Gehirns abbildet, als auch die innere Struktur
-- Relevant sind nur die Pixel, die das Gehirn darstellen. Der Bereich darum (Schädel und Hintergrund) muss gefiltert werden. Das gewünschte Ergebniss wäre, wenn das Gehirn frei im Raum "schwebt" (Bei Ray Casting noch mal erwähnen?)
+Im Kapitel\ref{grundlagen} wurden verschiedene Methoden vorgestellt, um ein Volumen zu visualisieren. An dieser Stelle soll diskutiert werden, welche davon sich am besten für die Umsetzung in mARt eignet.
+Die 3D-Darstellung sollte die in Kapitel \ref{anforderung} beschriebenen Eigenschaften haben:
 
-- Daten liegen dreidimensional in Schichten vor
-- verschiedene Möglichkeiten zur 3D Visualisierung
-- - Voxel
-- - Volume Rendering (Ray Casting)
-- - Marching Cubes
-- - ...?
+\begin{itemize}
+\item Die innere Struktur des Gehirns sollte erkennbar sein (REf)
+\item Die Markierung des vom Schlaganfall betroffenes Bereichs sollte die MRT-Darstellung nicht unkenntlich machen.
+\item Es sollte möglich sein durch die Schichten des Volumes zu scrollen. 
+\end{itemize}
 
-- Ist es notwendig bzw. nützlich ein  Mesh zu generieren?
-	- Gut für Darstellung der Gehirnform. Relevant ist aber vor allem das "Innere" des Gehirns, da sich dort der markierte Bereich befindet. 
-	- Marching Cubes eignen nich nicht, um innere Struktur Darzustellen. Eine Transparente Ansicht würde das Modell als innen "gleich" darstellen
-	- Das Mesh müsste kontinuierlich angepasst werden, um jeweils andere Schichten beim scrollen anzuzeigen.
+Dadurch lassen sich Aussagen über das Aussehen der Darstellung herleiten.
+Da das innere der 3D Darstellung erkennbar sein soll, muss eine semi-transparente Darstellung erzeugt werden, die sowohl die Form des Gehirns abbildet, als auch die innere Struktur. Die eingeblendete Markierung sollte ebenfalls zu einen gewissen Grad transparent sein.
+Weiterhin sind sind nur die Pixel relevant, die das Gehirn darstellen. Der Bereich darum (Schädel und Hintergrund) sollten gefiltert  und nicht sichtbar gemacht werden. Das gewünschte Ergebnis ist, dass das Gehirn frei im Raum "schwebt". 
+
+Die Anforderungen sprechen gegen eine Umsetzung, die eine Oberfläche des Gehirns erzeugt und es als Mesh darstellt. Die Form des Gehirns könnte dadurch deutlich gezeigt werden und das Objekt würde von den umgebenden Pixeln getrennt werden. 
+Allerdings handelt es sich bei dem Gehirn nicht um eine Hülle sondern eher eine Masse. Es ist unwahrscheinlich, dass ein Verfahren wie Marching Cubes die inneren Gehirnstrukturen exakt genug wiedergeben könnte, damit ein Neurologe sinnvolle Schlüsse daraus ziehen kann. Weiterhin müsste das Mesh in Echtzeit kontinuierlich angepasst werden, wenn der Nutzer durch die verschiedenen Schichten scrollt. 
+Deshalb eignet sich eine Oberflächengenerieurung nicht zur Visualisierung.
+Hinzu kommt, dass in den Anforderungen kein Anwendungsfall beschrieben wird, der eine Oberfläche erfordert. Dies würde z.B. gelten, wenn 	
+	- Im Fokus der Darstellung, soll das Innere des Gehirns stehen. Ein Mesh, dass die äußere Form beschreibt ist also nicht sinnvoll, zumal keine der Anforderungen Funktionen beschreibt, für die ein Mesh nötig wäre (z.B. Kollsion (Unity)
 	
-	- Voxel könnten auch das Innere des Gehirns darstellen. Um ein deutliches und hochaufgelöstes Modell zu erhalten währen allerdings viele Voxel notwendig. Performance?
-	- Referenzen
-	
-	- Im Fokus der Darstellung, soll das Innere des Gehirns stehen. Ein Mesh, dass die äußere Form beschreibt ist also nicht sinnvoll, zumal keine der Anforderungen Funktionen beschreibt, für die ein Mesh nötig wäre (z.B. Kollsion (Unity))
-	
+Die dreidimensionale Darstellung lässt sich also besser mit einer Volume Rendering Methode umsetzten. 
+Aus den in Kapitel \ref{grundlagen} beschriebenen Methoden wurde das Volume Ray Casting ausgewählt. 
+WARUM?
+
 Wie in dem Kapitel \ref{related} beschrieben, gibt es bereits viele Lösungsansätze zur 3D Darstellung von MRT-Bildern. Obwohl verschiedene Methodne zum Einsatz kommen, ist der am weitesten verbreitete Ansatz der des Volume Rendering.
 Dies hat die folgenden Gründe:
 - 
