@@ -3,6 +3,7 @@
 \chapter{Einleitung}
 
 Der Einsatz von MRTs ermöglicht es Ärzten einen Einblick in das innere des menschlichen Körpers zu erlangen, ohne diesen dabei zu verletzten. Sie erhalten Bilder innerer Organe, anhand derer sich dessen Aufbau und Funktionalität beobachten lassen. Aber auch mögliche Fehlfunktionen oder Anomalien können so erfasst werden. So können auf MRTs-Scans gebrochene Knochen, innere Verletzungen oder Schlaganfälle erkannt und beurteilt werden. Im Fall von Schlaganfällen ist hierbei nicht nur eine Diagnose möglich sondern sogar eine Prävention. 
+// TODO: nicht Prävention
 % Wie genau?
 In beiden Fällen ist es unabdingbar, dass der Arzt eine möglichst umfassende Vorstellung von der Struktur des Gehirns des Patienten und vor allem von den vom Schlaganfall betroffenen Bereichen hat. Nur wenn dies der Fall ist, kann eine sinnvolle Therapie angewandt werden.
 Diese Arbeit stellt die Möglichkeit vor den Umgang mit MRT-Daten anschaulicher und intuitiver zu gestalten, um somit die Arbeit von Radiologen im Bereich der Schlaganfallprävention zu erleichtern und die Gesundheit ihrer Patienten zu verbessern.
@@ -10,15 +11,17 @@ Diese Arbeit stellt die Möglichkeit vor den Umgang mit MRT-Daten anschaulicher 
 \section{Motivation}
 \label{motivation}
 
-Um MRT-Scans zu studieren benutzen Ärzte in der Regel speziell dafür entwickelte Software. Diese stellt das Gehirn meist aus der Sicht von drei verschiedenen Achsen dar, sodass es von allen Seiten zusehen ist. Auf diesen Achsen kann der Nutzer die Ansicht dann durch die Schichten des Scans bewegen. Die aktuelle Position der gerade angezeigten Schicht wird in jeder der anderen Achsenansichten farbig eingezeichnet, um den Nutzer ein möglichst umfassendes Bild des gescannten Gehirns zu vermitteln. 
+Um MRT-Scans zu studieren benutzen Ärzte in der Regel speziell dafür entwickelte Software. Diese stellt das Gehirn meist aus der Sicht von drei verschiedenen Achsen dar, sodass es von allen Seiten zusehen ist. Entlang dieser Achsen kann der Nutzer die Ansicht dann durch die Schichten des Scans bewegen. Die aktuelle Position der gerade angezeigten Schicht wird in jeder der anderen Achsenansichten farbig eingezeichnet, um den Nutzer ein möglichst umfassendes Bild des gescannten Gehirns zu vermitteln. 
 Ein Beispiel für die Oberfläche solch einer eben beschriebenen Software ist in Abbildung \ref{images/mrtSoftware} zu sehen. 
 % Grundlagen?
 
 Anwendungen dieser Art sind weit verbreitet. Die zweidimensionale Ansicht, in der die Bilder vorliegen können allerdings eine falsche Vorstellung von der vorliegenden Situation schaffen. 
 %Refrerenz?
-Durch die Reduzierung um eine Dimension entsteht ein verzerrtes Bild des Gehirns. Die Darstellung der verschiedenen Achsen auf den Scans soll den Arzt bei der Orientierung unterstützen. Trotzdem muss dieser immer seinen Fokus zwischen zwei oder mehr Bildern wechseln und über ein gewisses räumliches Vorstellungsvermögen besitzen, um das Gesamtbild des Gehirns in seinem Geist zu rekonstruieren. Dies ist ein kognitiver Aufwand, der Ärzte zusätzlich belastet, während sie sich darauf konzentrieren Anomalien in den Scans eines Patienten zu erkennen und einzuschätzen. 
+Durch die Reduzierung um eine Dimension entsteht ein verzerrtes Bild des Gehirns. Die Darstellung der verschiedenen Achsen auf den Scans soll den Arzt bei der Orientierung unterstützen. Da das Gehirn allerdings durch mehrere Bilder dargestellt wird ist es diesem nicht möglich den Zustand auf einen Blick zu erfassen. Stattdessen müssen die Informationen aus zwei oder mehr Bildern im Kopf zusammengesetzt werden, was ein gewisses räumliches Vorstellungsvermögen voraussetzt. Dies ist ein kognitiver Aufwand, der Ärzte zusätzlich belastet, während sie sich darauf konzentrieren Anomalien in den Scans eines Patienten zu erkennen und einzuschätzen. 
+
 Wird auf einem Scan ein Schlaganfall entdeckt, ist es durch die Abstraktion des Organs schwierig eine korrekte Vorstellung von der Größe und Lage des betroffenen Bereichs zu bekommen, da jeweils nur eine Schicht des Gehirns sichtbar ist. 
-Eine dreidimensionale Ansicht des gescannten Gehirns würde einen sehr viel deutlicheren Einblick in den Zustand des Patienten liefern. Vor allem der vom Arzt gekennzeichnete betroffene Bereich wäre in 3D um einiges anschaulicher.    Dies ist nicht nur für den behandelnden Arzt hilfreich. Durch die klare und eindeutigere Darstellung fällt es auch leichter den anderen die Situation zu erläutern. Dies trifft auf Patienten zu oder auch auf andere Ärzte, die der behandelnde Arzt eventuell in den Fall mit einbeziehen möchte.
+Eine dreidimensionale Ansicht des gescannten Gehirns würde einen sehr viel deutlicheren Einblick in den Zustand des Patienten liefern. Vor allem der vom Arzt gekennzeichnete betroffene Bereich wäre in 3D um einiges anschaulicher. Dies ist nicht nur für den behandelnden Arzt hilfreich. Durch die klare und eindeutigere Darstellung fällt es auch leichter den anderen die Situation zu erläutern. Dies trifft auf Patienten zu oder auch auf andere Ärzte, die der behandelnde Arzt eventuell in den Fall mit einbeziehen möchte.
+
 Schließlich würde eine 3D-Darstellung auch das Verständnis in Lernzwecken begünstigen.
 Da der betroffene Bereich in einer 3D-Darstellung auf einen Blick erfasst werden kann, eignet sie sich außerdem, um den direkten Vergleich zwischen zwei zuständen zu ziehen. So fiele es leichter beispielsweise die Größe des Bereichs vor und nach einer Therapie gegenüberzustellen, um deren Erfolgt zu demonstrieren oder zu beurteilen.
 
@@ -29,6 +32,10 @@ Weiterhin ist es das Ziel die Interaktion mit den Daten möglichst intuitiv zu g
 Durch die Platzierung im Raum wäre die Darstellung anschaulicher und der Nutzer könnte direkt mit ihr interagieren. 
 Um dies zu erreichen bieten sich die virtuelle oder augementierte Realität an. 
 Eine AR-Anwendung scheint für diesen Fall allerdings besser geeignet zu sein. Durch die Umsetzung der Darstellung in AR wird die Interaktion mit den Daten direkter und intuitiver, da der Nutzer seine Hände als Eingabemedium benutzen kann. Dies macht die Verwendung der Software leichter zugänglich, was unter anderem für Lernzwecke dienlich sein kann.
+// TODO: Begründung AR statt VR -> Verweis auf Grundlagen
+
+//TODO: WARUM ist AR besser, was macht meine anwendung besonder? -> stichpunkte
+
 Zudem wird die Nutzung der Anwendung dadurch interessanter und unterhaltsamer.
 Gleichzeitig ist durch die kabellosen, tragbaren AR-Headsets eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen. 
 

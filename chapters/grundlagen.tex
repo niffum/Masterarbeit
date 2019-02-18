@@ -5,15 +5,19 @@
 %-------------------------------------------------------------
 \section{AR in der Medizin}												 %
 %-------------------------------------------------------------
-...
-Ein großer Anwendungsbereich sind dabei Operationen und deren Vorbereitung dar. 
+ // TODO:
+ Relevante Arbeiten identifizieren
+ genau beschreiben: TEchniken? Unterschiede zu meiner arbeit warum relevant?
+ 
+Der Nutzen, den AR-Anwendungen in der Medizin darstellen wurde bereits von zahlreichen Arbeiten belegt. Die Einsatzbereiche sind dabei vielfältig.
+Beispielsweise stellt \footcite{Voinea16} eine AR-Anwendung vor die den Lernprozess im Bereich der Biomechanik unterstützt.
 
-\cite{Voinea16} stellt eine AR-Anwendung vor die den Lernprozess im Bereich der Biomechanik unterstützt.
 
+\subsection{Bildgestütze medizinische Eingriffe}
 
-\subsection{AR und MRT}
-
-Da die Visualisierung von inneren Organen durch MRT-Scans eines der wichtigsten bildgebenden Mittel in der Medizin und für Diagnosen im Körperinneren unabdingbar ist, 
+Ein großer Anwendungsbereich ist der Einsatz von AR in der Ausführung und Vorbereitung von Operationen. Bei einem chirurgischen Eingriff kann für den Patienten ein hohes Risiko, eventuell sogar Lebensgefahr bestehen. Deshalb ist es wichtig, dass der operierende Arzt sich bestmöglich auf seine Aufgabe vorbereiten kann, wobei AR-Anwendungen ihn unterstützen können.
+Die Kerneigenschaft von AR ist die Fähigkeit der Technologe die Umgebung des Nutzers mit zusätzlichen Informationen anzureichern. Im Rahmen einer Operation bedeutet das Daten und Bildmaterial zum Fall des Patienten anzuzeigen. Um dem Arzt bei der Orientierung während des Eingriffs zu unterstützen ist es sinnvoll ihm anatomische Bilder zur Verfügung zu stellen, die er vorher bereits studiert hat. Diese stammen meist aus zuvor erzeugten MRT-Daten, die unter Umständen weiterverarbeitet wurden. Durch AR können diese in Echtzeit an der realen Positionen angezeigt werden. 
+Die folgenden Arbeiten haben sich mit der Umsetzung dieses Konzeptes beschäftigt.
 
 % Hololens
 
@@ -31,9 +35,10 @@ Image guided surgery :\cite{grimson99} und  \cite{KerstenOertel2013TheSO}
 \cite{GasquesRodrigues17} untersucht die Einsatzmöglichkeiten von AR und VR im operativen medizinischen Bereich. Dazu gehört unter anderem die Entwicklung einer AR-Anwendung für die Hololens, die die Ausbildung von Ärzten in Anatomie und Operationen unterstützen soll. 
 \cite{Wendt03} entwickelt eine HMD basierte AR-Anwendung, die MRT-Bilder bei Eingriffen auf den Patienten Projiziert. Die Anwendung wurde mit Bildern des Gehirns an einem Kopfphantom getestet.
 \cite{Watts17} stellt ebenfalls eine AR-Anwendung vor, die Bilder auf den Körper des Patienten projiziert. Allerdings ein Projektoraufbau verwendet, sodass mehrere Betrachter gleichzeitig die Augmentierung sehen können. Wie in den meisten genannten Arbeiten werden Marker auf dem Patienten angebracht, um das Bild anzupassen.
+\cite{Tabrizi15}
 
 
-visualisierung
+\subsection{Visualisierung von medizinischem Bildmaterial}
 % Lesen, Referenzen?
 \cite{Mangina17} beschäftigt sich mit der Erzeugung von zum 3D-Druck geeigneten Modellen des Herzens, sowie der Integration dessen in eine AR- bzw. VR-Anwendung, die zur Planung von Herzoperationen genutzt werden kann.
 \cite{Mangina17_2} untersucht die Möglichkeiten zur Erzeugung eines 3D Models aus MRT-Daten genauer.
@@ -41,6 +46,7 @@ visualisierung
 Vr 
 \cite{SORENSEN2001193} beschreibt ebenfalls, wie aus MRT-Bildern des Herzens ein 3D-Modell generiert wird. Das Modell wird anschließend in einem eigenen VR-System platziert, durch dessen Verwendung der Arzt vor einer Operation einen besseren Überblick über das Organ erhält.
 
+\citep{Calvin01} projiziert 2D und 3D Gehirnbilder aus MRTs auf Kopfphantom für Gehirnoperationen.
 
 %-------------------------------------------------------------
 \section{MRT}
@@ -97,6 +103,11 @@ DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeicher
 Wie bereits erwähnt speichert eine DICOM-Datei neben den Bilddaten weitere Informationen. Dazu können eine ID oder der Patientenname zählen, die als Attribute des DICOM-Objektes hinterlegt werden. 
 ..
 
+// TODO:
+DICOM genauer beshcreiben
+Header vergleichen
+vorteile nachteilel
+
 MRT-Bilder werden außerhalb des medizinischen Umfelds allerdings auch in anderen Formaten gespeichert. 
 Ein Beispiel dafür ist das PVM-Format, das zum Speichern von volumetrischen Daten genutzt wird. Das Format geht davon aus, dass das Volumen aus quadratischen Voxeln besteht und enthält die Voxelwerte und Größeninformationen über das Volumen.
 % http://paulbourke.net/dataformats/pvm/
@@ -113,7 +124,6 @@ Ein wichtiger Aspekt dieser Arbeit ist die dreidimensionale Visualisierung von M
 Diese Punkte aus denen sich der Volumen-Würfel zusammensetzt werden auch Voxel genannt. Ähnlich wie Pixel in zweidimensionalen Bildern stellen sie die kleinsten Teilchen in einem Volumen dar. 
 Die Skalarwerte werden auch als Isowerte des Volumens bezeichnet bei MRT-Daten bildet jeder Wert eine Graustufe ab und liegt damit in dem Bereich von 0-255. 
 Über das Volumen verteilt haben benachbarte Werte oft ähnliche Isowerte. Eine Gruppe dieser Werte wird als Isofläche bezeichnet. Isoflächen innerhalb eines Volumens entsprechen oft tatsächlichen Oberflächen des darzustellenden Objektes. Durch das Vergleichen benachbarter Werte ist es also möglich Oberflächen von Objekten zu ermittlen (siehe \ref{marchingCubes}). 
-Der Prozess, durch den Voxel aufgrund ihrer Werte als Teil eines Objektes bzw. dessen Oberfläche eingeordnet werden wird als Klassifikation bezeichnet. ...
 
 Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben der Vorstellung eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen und 
 
@@ -125,24 +135,19 @@ Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dies
 Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
 Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
-IMfolgenden werden grundlegende Techniken des Volume Rendering erläutert.
+Im Folgenden werden grundlegende Techniken des Volume Rendering erläutert.
 
-\subsection{Komposition}
+//TODO: 
+Beispielarbeiten recherchieren, beschreiben
+REFERENZEN-> GPU GEMS
 
-Wie eben erwähnt, werden die einzelnen Werte entlang eines Strahls mit einander verrechnet. Dabei werden sie in der Regel auf einander addiert. Dieser Vorgang wird Komposition genannt. Hierbei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
+\subsection{Klassifikation}
 
-$\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
+Die Klassifikation von Voxeln bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. In diesem Schritt wird somit definiert, welche Farbe und Opazität die einzelnen Voxel, wodurch verschiedene Bereichen, wie z.B. Gewebestrukturen voneinander unterscheidbar werden. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren. Auf diese wird im folgenden Abschnitt näher eingegangen. 
 
-$\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}$
+Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann durchlaufen werden vor oder nach der Interpolation der Volumendaten.
 
-Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
-Sollen die Werte von hinten nach vorne addiert werden, wird dies durch die folgende Formel beschrieben.
-
-$\hat{C}_{i}=C_{i}+(1-\hat{A}_{i})\hat{C}_{i+1}$
-
-$\hat{A}_{i}=A_{i}+(1-\hat{A}_{i})\hat{A}_{i+1}$
-
-Die Komposition erfolgt für jeden Strahl am Ende des Renderingprozesses. Die Eigenschaften des Voxels können in dessen Verlauf verändert werden. Beispielsweise durch die Verwendung einer Transferfunktion oder eines Shaders.
+Welche Interpolation? Wann?
 
 \subsection{Transferfunktion}
 
@@ -150,10 +155,15 @@ Transferfunktionen werden verwendet, um verschiedenen Bereichen bzw. Beschaffenh
 
 Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da über die Transferfunktion definiert ist, welche Isowerte welchem Gewebe entsprechen.
 
+//TODO:
+Klassifikationen unterscheiden
+
 \subsection{Beleuchtung}
 \label{beleuchtung}
 
-Um dem gerenderten Objekt einen möglichst plastischen Eindruck zu verleihen ist es sinnvoll dieses zu beleuchten. Die Beleiuchtung wird in in der Regel durch einen Shader implementiert. Jeder Voxel wird dabei einzeln nach der Anwendung der Transfertextur geshadet, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
+Um dem gerenderten Objekt einen möglichst plastischen Eindruck zu verleihen und es somit realistischer aussehen zu lassen ist es sinnvoll dieses zu beleuchten. 
+Die Beleuchtung wird in in der Regel durch einen Shader implementiert. Jeder Voxel wird dabei einzeln nach der Anwendung der Transfertextur geshadet, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
+
 
 Die lokale Beleuchtung betrachtet ausschließlich den Voxel und wie sich das Licht zu diesem verhält. 
 Globale Beleuchtung bezieht unter anderem den Schatten des gesamten Volumens mit ein..
@@ -161,6 +171,8 @@ Globale Beleuchtung bezieht unter anderem den Schatten des gesamten Volumens mit
 globale Beleuchtung
 
 Bei einer lokalen Beleuchtung der einzelnen Voxel kommt meist das Phong-Beleuchtungsmodell zum Einsatz. 
+
+//TODO: Vergliech globale, lokale beleuchtung
 
 \begin{figure}
 	\centering
@@ -177,6 +189,8 @@ Die folgende Formel beschreibt, wie die Beleuchtung berechnet wird. Die Terme zw
 $I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
 
 $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Transferfunktion durch diese bestimmt wird. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
+
+//TODO: Andere Beleuchtungsformen? -> Vergleich
 
 \subsection{Gradientenberechnung}
 
@@ -197,9 +211,33 @@ f(x, y, z + h) - f(x, y, z - h)
 \end{matrix} \right )
 $
 
+//TODO:
 Convolution?
 On´The fly gradientenberechnung
+genau vorstellen
+Vergleich der versch. formen -> BUCH
+
 Segmentierung
+
+\subsection{Komposition}
+
+Komposition bezeichnet die Verrechung einzelner Voxelwerte. Abhängig von der Blickrichtung der Kamera beeinflussen die Eigenschaften eines Wertes das Aussehen anderer Werte um ihn herum, z.B. bei zwei Voxeln, die hintereinander liegen. Um die Endgültige Farbe eines Pixels zu erhalten werden die Werte von hintereinander liegenden Voxlen in der Regel auf addiert. Hierbei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
+
+$\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
+
+$\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}$
+
+Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
+Sollen die Werte von hinten nach vorne addiert werden, wird dies durch die folgende Formel beschrieben.
+
+$\hat{C}_{i}=C_{i}+(1-\hat{A}_{i})\hat{C}_{i+1}$
+
+$\hat{A}_{i}=A_{i}+(1-\hat{A}_{i})\hat{A}_{i+1}$
+
+Die Komposition erfolgt für jeden Strahl am Ende des Renderingprozesses. Die Eigenschaften des Voxels können in dessen Verlauf verändert werden. Beispielsweise durch die Verwendung einer Transferfunktion oder eines Shaders.
+
+
+\section{Volume Rendering Methoden}
 
 \subsection{Volumetrisches Ray-Casting}
 \label{rayCasting}
@@ -241,6 +279,11 @@ Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sic
 
 https://dl.acm.org/citation.cfm?id=329138
 
+// TODO:
+implementierung auf der grfikkarte mit 2d texuren nachteil: nur flächen nicht geometrie
+3d texure based? 	
+kann man shaden?
+
 \subsection{Shear-Warp}
 
 Shear-Warp verfolgt den selben Ansatz wie das Ray-Casting. Anstatt die Strahlen allerdings von der tatsächlichen Kameraposition aus zu verschießen, werden die Strahlen orthogonal zu den Volumenschichten in das Volumen gefeuert. Auf diese Weise wird die Berechnung der Strahlen und die Komposition der Darstellung deutlich beschleunigt. 
@@ -256,6 +299,7 @@ Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um e
 	\caption{Shear-Warp Verfahren. Rechts: Ohne Verschiebung würden die Strahlen der Bildebene schräg auf das Volumen treffen. Mitte: Die Schichten des Volumen werden verschoben, sodass die Strahlen orthogonal darauf treffen. Das resultierende Bild ist verzerrt. Rechts: Das verzerrte Bild wird transformiert, um das Volumen korrekt darzustellen.}
 	\label{img:shearwarp}
 \end{figure}
+
 
 
 
@@ -315,7 +359,22 @@ Erweiterungen/ Abwandlungen
 %-------------------------------------------------------------
 \section{Vergleich der Methoden im Überblick}											 %
 %-------------------------------------------------------------
+\begin{tabular}{lrr} 
+\toprule
+Vergleich von Methoden zur 3D Darstellung von Volumendaten\\  
+\midrule 
+Methode & Ergebnis & Komplexität & Vorteile & Nachteile \\ 
+\midrule 
+Volumerisches Ray-Casting & Rendering &  & \\
+Shear-Warp & Redering & 8,20 & \\
+2D-Texturbasiertes Volume Rendering & Redering  & 10,00 & \\ 
+3D-Texturbasiertes Volume Rendering & Redering  & 10,0 & 0\\ 
+Marching Cubes & 3D-Mesh der Bestandteile des Gehirns  & 10,00 & 0 \\ 
+\bottomrule
+\end{tabular}
 
+//TODO
+Tabelle
 %-------------------------------------------------------------
 \section{AR und VR (MR?)}									 %
 %-------------------------------------------------------------
@@ -361,6 +420,9 @@ An dieser Stelle sollen auch VR-Geräte, wie die HTC Vive Pro genannt werden, di
 
 Ebenfalls als HMD zu bezeichnen ist die \textit{Google Glass} von Google. Dabei handelt es sich um ein Brillengestell, dass vor einem der Augen des Nutzers einen durchsichtigen Bildschirm fixiert, auf dem digitale Inhalte dargestellt werden können. Google Glass wird momentan allerdings nur noch in großen Firmen verwendet.
 
+// TODO:
+verlgiech systeme
+
 
 \subsection{Virtual Reality}
 
@@ -403,6 +465,9 @@ Im Folgenden sind Hersteller von VR-Systemen aufgelistet, sowie die Modelle, die
 \item Lenovo (Lenovo Explorer für Windows Mixed Reality und Lenovo Mirage Solo für Google Daydream)
 \end{itemize}
 
+//TODO:
+Durchegehen
+Vergleich der Hardware Vorteile, nachteile
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
@@ -410,6 +475,7 @@ Obwohl die Darstellung von MRT-Bildern in direktem Zusammenhang mit ihrem Zweck 
 
 \subsection{Arbeit eines Neurologen}
 Wie bereits in Kapitel \ref{motivation} oberflächlich erläutert wurde, besteht der Nutzen eines MRTs darin, dass der behandelnde Arzt einen Einblick in die betreffenden Organe (hier das Gehirn) erhält. Dazu studiert er die einzelnen Schichten des Gehirns und hält Ausschau nach Anomalien.
+
 Im Fall von Schlaganfällen sind diese ...
 
 Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf jeder einzelnen Schicht. 
@@ -419,18 +485,13 @@ Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf je
 % https://www.dicomlibrary.com/meddream/md5/index.html?study=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170
 %Use Cases
 %Bsp
-Die Untersuchung der MRT-Daten werden digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Software, die diesen darstellen kann und weiterhin relevante Funktionen bietet. Beispiele für solche Software sind die Programme
+Um eine Diagnose stellen zu können muss der Arzt die MRT-Bilder eines Patieten genau studieren. Diese Untersuchung der Daten wird digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Anzeigeprogramme, die diesen darstellen kann und weiterhin relevante Funktionen bietet. 
+  
+Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM oder nifti Datenformat vor. Um die Dateien öffnen zu können, bedarf es deshalb bestimmter Software. Es stehen viele verschiedene Programme zur Darstellung von MRT-Bildern zur Verfügung. Und die Auswahl eines Programms hängt meist an der persönlichen Präferenz des Arztes. 
+In Krankenhäusern besteht allerding in der Regel die Situation, dass die Bilder in einem Picture Archiving and Communication System (PACS) gespeichert. (Fußnote?) Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit herkömmlichen Computern über den Browser auch die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. Die Speicherung und Verteilung von medizinischen Bilddaten ist oft durch den DICOM-Standart geregelt, der im Abschnitt \ref{datenformate} genauer beschrieben ist.
 
-Drei Achsen (namen?)
-verschiedene Sequnzen?
-Interaktionen
+Die meisten Viewer Programme für MRT-Bilder, unabhängig davon, ob es sich um PACS-Viewer handelt oder nicht ähneln sich stark in den Funktionen die sie anbieten und ihrem Aufbau.
 
-Seit es die Technologie erlaubt (?) erfolgt die Verarbeitung von MRT-Daten digital. Dazu gehört auch, dass der Arzt die Bilder genau studiert, um eine Diagnose stellen zu können. 
-Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM oder nifti Datenformat vor. Um die Dateien öffnen zu können, bedarf es bestimmter Software. Diese kann sich von Arzt zu Arzt unterscheiden. In Krankenhäusern werden die Bilder allerdings in der Regel in einem Picture Archiving and Communication System (PACS) gespeichert. (Fußnote?) Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral Speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit herkömmlichen Computern über den Browser auch die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. ??
-
-Diese PACS-Viewer unterscheiden sich oft nicht stark von anderen DICOM Viewern, von denen eine Vielzahl gibt. Teilweise lassen sich kostenlose Viewer im Internet finden.
-
-Vom Aufbau her sind diese wie gesagt alle recht ähnlich. 
 Wie im Kapitel \ref{motivation} bereits oberflächlich beschrieben, stellen sie das betreffende Organ, z.B. ein Gehirn, aus drei verschiedenen Blickwinkeln dar, die an den X-, Y- und Z-Achsen ausgerichtet sind. Orthogonal zum Blickachse steht jeweils eine Ebene, die gleichzeitig den Querschnitt durch das Gehirn darstellt. Diese Ebenen können entlang der Achsen verschoben werden. Auf diese Weise scrollt der Neurologe durch die verschiedenen Schichten des Gehirns. 
 Bei den drei Ebenen handelt es sich um die Frontal- oder Coronalebene, die das Gehirn in vorne und hinten teilt, die Sagittalebene, die zwischen links und rechts verläuft und die Transversalebene, die eine Teilung zwischen oben und unten bewirkt. 
 Die drei Ebenen sind dabei in jeder Ansicht farbkodiert eingezeichnet, sodass der Arzt ein besseres Bild davon bekommt, welchen Teil des Gehirns er gerade betrachtet. 
@@ -451,6 +512,9 @@ Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken
 \end{description}
 
 Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt.
+
+//TODO:
+Viewer mit dreidimensionaler ansicht? oder in Volumerenderin?
 
 %-------------------------------------------------------------
 \section{Interaktion in AR/VR}	
@@ -522,6 +586,9 @@ Die \textit{Leap Motion} erkennt weiterhin vier Handgesten. Diese sind \textit{C
 Consolen Controller
 \subsection{Interaktionsdesign}
 
+//TODO:
+Paper zur interaktion finden
+-> was ist gut zur interaktion inAR warum?
 
 
 
