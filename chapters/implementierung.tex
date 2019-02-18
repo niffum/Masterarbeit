@@ -169,9 +169,13 @@ Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt u
 \subsection{Transferfunktion}
 \label{transfer}
 
-- lookup
+Erzeugen der transfer textur
 
-- erzeugen von transferfunktion
+Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. In einem vom Rest der Anwendung unabhängigen Skript wird aus diesen einzelnen Punkten eine Textur erzeugt, indem zwischen den festgelegten Werten eine Interpolation stattfindet.
+Liniar?
+Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung wurden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
+Allerdings werden von Unity keine 1D-Texturen als Shader Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-TExtur verwendet, die eine einzige Y-Koordinate besitzt. 
+Die Textur wird dann über das Material an den Shader übergeben. Hier wird für jeden Voxel der Farb- und Opazitätswert ausgelesen und damit weiter gerechnet. 
 
 \subsection{Illumination}
 \label{illumination}

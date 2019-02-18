@@ -42,41 +42,63 @@ Anforderungen an Shader??
 
 In Kapitel \ref{grundlagen} wurden die verschiedenen Volume Render Techniken mit einander verglichen. D
 
-//TODO:
+%//TODO:
 Argumentation für verwendete Technik
 
 
 
 \section{Darstellung des gekennzeichneten Bereichs}
 
-//TODO:
+%//TODO:
 Beschreiben des Kozepts
 Mit argumentation der 3D Darstellung in verbindung setzen.
+
+
 \section{Endgerät}
 
-- Hololens oder HTC Vive?
-- Leistung
-- Interaktionsmöglichkeiten
-- Tragekompfort
-- ...
+Im Kapitel \ref{grundlagen} wurde die Vor- und Nachteile von AR und VR gegenüber gestellt.
+Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem Medizinischen Arbeitsumfeld.
+Für den Arbeitsalltag eines Arztes und die Zusammenarbeit mit Patienten eignet sich ein durchsichtiges Display deutlich besser als ein undurchsichtiges. Der Nutzer verliert somit nicht seine Umwelt aus den Augen, wodurch er sich sicherer in der Benutzung fühlt. In einem Anwendungsszenario, in dem er mit anderen Menschen kommuniziert, während er die Anwendung bedient gilt dies umso mehr. Die mögliche Verwendung von mARt in während einer Operation oder Behandlung wäre damit unmöglich. Die Reduzierung auf die virtuelle Realität biete zudem keinen Vorteil für die Funktion der Anwendung, da die Umwelt in der Anwendung nicht verändert werden soll. 
+
+Ein weiterer Vorteil eines AR-HMDs ist seine Portabilität. Dies ist vor allem entscheidend, wenn die Daten anderen Personen, wie z.B. Patienten gezeigt werden sollen. Das Gerät lässt sich einfach in ein anderes Zimmer mitnehmen, was mit einem VR-System deutlich schwieriger umzusetzen ist.
+ 
+Eine große Einschränkung bietet die geringe Anzahl an Gesten und Interaktionsmöglichkeiten, die bisherige AR Technik zur Verfügung stellen. Dies ist allerdings hinfällig, wenn stattdessen die Leap Motion verwendet wird um Nutzereingaben zu erfassen. Die Vorteile des Gerätes werden im folgenden Abschnitt erläutert.
+
+Es ist zu erwarten, dass AR HMDs in den folgenden Jahren deutlich verbessern werden, was Tragekomfort und Leistungfähigkeit angeht. Da mARt als Prototyp einer medizinischen Anwendung anzusehen ist, kann davon ausgegangen werden, dass bei einer Weiterentwicklung der Anwendung Technologie zur Verfügung steht, die viele der genannten Mängel behebt.
+
+Obwohl sich eine AR-Anwendung also besser für die Umsetzung eignet, ist die Leistung des Gerätes nicht ausreichend um die intensiven Berechnungen durchzuführen, die für das Volume Ray Casting erforderlich sind. 
+In einer Demo, in der die 3D-Darstellung auf der Hololens getestet wurde, wurde eine Framerate von X erreicht. 
+Dies ist nicht ausreichend um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
+
+Aus diesem Grund wurde die die AR-Anwendung mit eingschränkter Funktionalität entwickelt. Für die dreidimensionale Darstellung wurden vorgerenderte Bilder eingesetzt, um Testern eine Vorstellung davon zu geben.
+Zusätzlich dazu wurde die Anwendung als VR-Erfahrung umgesetzt. Die Funktionalität bleibt dabei die selbe. 
+Durch Verwendung der Motion Leap ist selbst die Interaktion mit dem Modell in beiden Anwendungen identisch. 
+
 % Bezug Hololens2?
 
 %Benchmarks!
 
-//TODO
-Agumentation anhand von tabelle aus grundlage
+%//TODO
 
 \section{Interaktion/ UI } 
 
+In diesem Abschnitt wird das Konzept der Interaktion innerhalb der Anwendung beschrieben. Dazu wird zunächst diskutiert, mit welcher Technik die Nutzereingabe erfasst werden soll. Dann wird auf die Gestaltung der Bedienelemente in der Anwendung eingegangen.
+
 \subsection{Nutzereingabe}
-//TODO:
-Diskussion Controller, Motion Leap etc
+%//TODO:
+Referenzen?
 
-- beide haben nutzereingabe
-- interaktion kosistent über geräte hinweg
-- intuitiv
-- Controller schlecht, da einzelteile, immobil
+Wie bereits im vorherigen Abschnitt erwähnt, wird die Leap Motion in Kombination mit dem jeweiligen HMD benutzt, um den Nutzer mit der Anwendung interagieren zu lassen. 
+Die Leap Motion trackt die Hände des Nutzers und stellt diese als 3D-Modelle innerhalb der Anwendung dar. Die Bewegungen der Hände werden dabei sehr genau nachempfunden, sodass die Illusion entsteht die simulierten Hände wären die eigenen. 
+Das Gerät fördert den intuitiven Umgang mit der Anwendung enorm und ermöglicht damit ein positives Nutzungserlebnis. Weiterhin wird dadurch das erlernen komplexer Gesten oder die Verwendung von Controllern umgangen. Beides sind Hindernisse, die Nutzer, die mit der Technik nicht vertraut sind abschrecken könnten. 
+Nachteilig ist, dass das Sichtfeld der Kamera begrenzt ist. Da diese vorne auf dem HMD angebracht ist, wird dieses noch weiter nach vorne verschoben. Damit die seine Hände erkannt werden muss der Nutzer sie deshalb in einiger Entfernung genau vor sein Gesicht halten. 
+Dafür bietet die Leap Motion mehr Freiheit in der Interaktion. Dies gilt besonders, im Vergleich mit den Eingabemöglichkeiten der Hololens. 
+Die Gestenerkennung des Geräts ist stark begrenzt. Um alle notwendigen Manipulationen der Darstellungen abzudecken müssten daher entweder deutlich mehr Bedienelemente eingebaut werden oder die Interaktion müsste zu großen Teilen auf Sprachsteuerung beruhen. 
+Letzteres ist im Arbeitsalltag eher umständlich, vor allem, wenn man sich im selben Raum wie andere Personen befindet. Zudem wirft es die Problematik der Mehrsprachigkeit auf. 
 
+Da mARt schielßlich in Form einer AR- und VR-Anwendung umgesetzt wird stellt sich weiterhin die Frage nach den Bedienmöglichkeiten in VR. Die Verwendung der Leap Motion ermöglicht es hier einerseits, dass beide Anwendung durch dieselben Interaktionen bedient werden können. Andererseits bietet sie auch gegenüber der Steuerung durch Controller Vorteile. 
+Wie bereits erwähnt, kann die Bedienung der Controller einen ungeübten Nutzer verwirren. Dazu kommt, dass sich dabei um eigene Geräte handelt. Im Arbeitsalltag müsste immer sicher gestellt werden, dass sie nicht Abhanden kommen und zu jedem Zeitpunkt aufgeladen sind. 
+Hinzu kommt, dass die Controller zur Verwendung in der Hand gehalten werden müssen. Der Nutzer wird somit der Fähigkeit des Multi-Tasking beraubt, wozu z.B. das Schreiben von Notizen während der Nutzung der Anwendung fällt. 
 
 \subsection{Konzeption der Interaktionselemente}
 % 2D 
@@ -113,9 +135,7 @@ Weiterhin sollte es dem Nutzer möglich sein die Ebene ununterbrochen zu verschi
 Das Rad ist dabei ähnlich einer Wählscheibe konzipiert, die der Nutzer mit einer Kreisbewegung rotiert. Verglichen mit einem Drehknopf, wie z.B. einem Lautstärkeregler, unterstützt der größere Radius mehr Kontrolle. Zudem lässt sich eine endlose Bewegung ohne Umgreifen realisieren und die Bewegung ist vom System leichter erkennbar. 
 Um dem Nutzer den Eindruck von haptischen Feedback zu vermitteln und den Zustand des Elements zu verdeutlichen, wird die Berührung und Bewegung des Rades durch den Einsatz von Farbe und Ton untermalt.
 
-scrollwn wird oft als swipr bewegung implementiert: ungenau zu stoppen
-
-http://blog.leapmotion.com/designing-cat-explorer/
+%http://blog.leapmotion.com/designing-cat-explorer/
 
 % Zoom
 Zu den geforderten Interaktionen gehört auch die die Vergrößerung von Bildern, um dem Nutzer eine genaue Untersuchung zu erlauben. Bei der Vergrößerung handelt es sich im Grunde genommen um eine Skalierung bzw. ein "Heranzoomen" des Bildes. Auch dies lässt sich gut mit einer direkten Handbewegung in Berührung mit der Darstellung umsetzten. Aus anderen Anwendungen sind Nutzern zwei Bedienmöglichkeiten dieser Funktionalität bekannt. Bei Bildschirmanwendungen wird oft das Mausrad zum Zoomen verwendet. Allerdings werden Räder bereits für andere Aktionen verwendet und ein mehrdeutiger Einsatz könnte zu Verwirrung führen. Von der Bedienung von Touchdisplays sind Nutzer weiterhin daran gewöhnt zu zoomen, indem sie den Bildschirm mit Daumen und Zeigefinger berühren und die Finder dann aufeinander zu oder voneinander weg zu bewegen. Diese Bewegung lässt sich gut in die Anwendung übertragen. Um ein eindeutigeres Ergebnis zu erhalten und dem Nutzer mehr Kontrolle zu geben werden statt zwei Fingern allerdings die beiden Hände verwendet. Wird das Bild von beiden Händen mit Daumen und Zeigefinder gegriffen kann es durch die Bewegung der Hände zueinander manipuliert werden.
@@ -141,9 +161,8 @@ Indem der Nutzer einen Datensatz auswählt, wird dieser auf der Bildfläche ange
 Stattdessen wird die Synchronisierung der Manipulation über einen weiteren Knopf im Handmenü gesteuert. Dieser ist nur aktiv, wenn tatsächlich zwei Bilder angezeigt werden. Dann funktioniert er als Schalter. Indem der Nutzer in betätigt wird jeweils nur eine Benutzeroberfläche neben beiden Bildern angezeigt oder sie wird dupliziert und für jede Darstellung eingeblendet. 
  
 
-//TODO:
+%//TODO:
 Wechsel zwischen 2D/3D
-auf probleme bei der visualisierung auf Hololens hinweisen, VR App 
 
 bezug zu interaktion in grundlagen
 
@@ -152,35 +171,18 @@ bezug zu interaktion in grundlagen
 \subsection{Interaktion VR}
 % Leap motion
 
-U06  Als Nutzer möchte ich durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden.
 
-U07  Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position im Raum anzupassen.
-
-U08 Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen.
-
-U09  Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. 
-
-U10  Als Nutzer will ich, dass die Darstellung nicht von anderen Elementen verdeckt wird, damit ich sie uneingeschränkt sehen kann. 
-
-U11  Als Nutzer möchte ich mit einem Scrollrad durch die Darstellung scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden.
-
-U12  Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann.  
-
-U14  Als Nutzer möchte ich aus aus verschiedenen Darstellungen wählen können, die nebeneinander angezeigt werden, um direkte Vergleiche zwischen diesen ziehen zu können.
 
 
 \section{Unterstützung von Dateiformaten} 
 
-Die User Story U13 verlangt nach einer Unterstützung des nifti-Dateiformats.
+In den im Kapite \ref{anforderung} beschriebenen Anforderungen ist durch REF beschrieben, dass mARt gängige Dateiformate zur Speicherung von medizinischen Bilddaten, wie NIfTI oder DICOM unterstützt. Beide Formate wurden im Kapitel \ref{grundlagen} beschrieben. 
+Unity unterstützt diese Formate nicht. Um die MRT-Bilder also zu verarbeiten und darstellen zu können, muss eine Parser oder Converter in das Programm eingebunden werden. 
+Der Nutzer könnte dann über eine Schnittstelle die Daten direkt in die Anwendung laden, wo sie umgewandelt und angezeigt würden. 
 
-nifti-Dateien, sind Bilddateien, die oft in der Medizin verwendet werden. Sie speichern Bildsequenzen und eigenen sich somit für MRT-Bilder. 
-% Referenz nifti
-Ein weiteres für diesen Zweck weitverbreitetes Dateiformat ist DICOM. ...
-% Referenz DICOM
+In einer realen Arbeitsumgebung ist diese Funktionalität mehr als sinnvoll. Wie allerdings in \ref{anforderung} beschrieben, soll es sich bei mARt in erster Linie um einen Prototyp handeln.
+Der Fokus soll dabei auf der Darstellung der Daten und der Interaktion mit ihnen liegen. Da der zur Entwicklung und zum Testen zur Verfügung stehende Datensatz gering ist, ist die Nützlichkeit in diesem Szenario nicht gegeben. Der benötigte Zeitaufwand zur Implementierung wird somit nicht durch einen Mehrwert gerechtfertigt.
+Weiterhin kann so die Komplexität und der Umfang der Anwendung gering gehalten werden, was es dem Nutzer erlaubt sich auf die Kernfunktionen zu konzentrieren. 
 
-Es ist weiterhin sinnvoll gängigere Dateiformate, wie JPEG oder PNG zu unterstützen. 
-
-Wie in \ref{anforderung} beschrieben, soll es sich bei mARt in erster Linie um einen Prototyp handeln. 
-Der Datensatz, der dargestellt werden soll ist gering. Um die Komplexität und den Umfang der Anwendung möglichst gering zu halten kann darauf verzichtet werden, dem Nutzer die Möglichkeit zu geben, aus verschiedenen Dateitypen oder Datensätzen zu wählen. Es ist ausreichend, wenn der entsprechende Datensatz vor dem Build gewählt wird.
-
-Da die Darstellung und interaktion eines Datensatzes also im Vordergrund stehhen soll, ist es sinnvoll, die Dateien in ein Format umzuwandeln, das einfacher zu verarbeiten ist (JPEG, PNG). Hierzu kann ein externes Tool verwendet werden (ImageJ Bezug in Implementierung).
+Trotzdem können mehrere Datensätze in mARt dargestellt werden. Diese werden durch Verwendung der externen Bildsoftware ImageJ manuell in PNG-Dateien umgewandelt und in die Anwendung integriert, bevor diese gebaut wird. 
+Obwohl dieser manuelle Vorgang umständlich ist, ist er für dden Zweck der Anwendung und den Umfang dieser Arbeit ausreichend.

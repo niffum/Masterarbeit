@@ -5,13 +5,12 @@
 %-------------------------------------------------------------
 \section{AR in der Medizin}												 %
 %-------------------------------------------------------------
- // TODO:
+ %// TODO:
  Relevante Arbeiten identifizieren
  genau beschreiben: TEchniken? Unterschiede zu meiner arbeit warum relevant?
  
 Der Nutzen, den AR-Anwendungen in der Medizin darstellen wurde bereits von zahlreichen Arbeiten belegt. Die Einsatzbereiche sind dabei vielfältig.
 Beispielsweise stellt \footcite{Voinea16} eine AR-Anwendung vor die den Lernprozess im Bereich der Biomechanik unterstützt.
-
 
 \subsection{Bildgestütze medizinische Eingriffe}
 
@@ -39,14 +38,22 @@ Image guided surgery :\cite{grimson99} und  \cite{KerstenOertel2013TheSO}
 
 
 \subsection{Visualisierung von medizinischem Bildmaterial}
+
+Neben der Entwicklung von AR-Sytemen, die währen eines Eingriffs verwendet werden können steht im Fokus vieler Arbeiten die Möglichkeiten der dreidimensionalen Visualisierung der Menschlichen Anatomie. Indem ein realitätsgetreues Abbild eines Organs erzeugt wird, können Diagnosen und Behandlungsmöglichkeiten erleichtert werden.
+
 % Lesen, Referenzen?
-\cite{Mangina17} beschäftigt sich mit der Erzeugung von zum 3D-Druck geeigneten Modellen des Herzens, sowie der Integration dessen in eine AR- bzw. VR-Anwendung, die zur Planung von Herzoperationen genutzt werden kann.
+\cite{Mangina17} stellt einen Ansatz zur Erzeugung dreidimensionalen Modellen des Herzens vor, um diese zu Lernzwecken und zur Vorbereitung auf Operationen zu verwendet. Um den Nutzen der 3D-Modelle zu maximieren werden sie in einer AR- und VR-Anwendung platziert. Die Daten die dem Modell zugrunde liegen stammen aus einem MRT-Scan.Die Arbeit verfolgt demnach ein ähnliches Ziel wie diese. 
+Zur Implementierung der Anwendungen wurde die Spiele Engine Unity 3D verwendet (s. Kapite\ref{implementierung}).
+Ziel der Anwendung war es eine Interaktive Lernerfahrung zu schaffen, die es dem Nutzer ermöglicht das Herz in seine verschiedenen Komponenten zu zerlegen. Für diesen Anwendungsfall wird ein Mesh des Organs benötigt, das seine Oberfläche abbildet. Die inneren Strukturen sind dabei irrelevant. Hierin unterscheidet sich  die Ansätze der beiden Arbeiten. mARt setzt den Fokus der 3D-Visualisierung auf das Innere des Gehirns.
+Auf Grund der Notwendigkeit eines Meshs wurde der Marching-Cubes Algorithmus zu dessen Erzeugung eingesetzt. Dieser wird in Kapitel \ref{grundlagen} erläutert.
 \cite{Mangina17_2} untersucht die Möglichkeiten zur Erzeugung eines 3D Models aus MRT-Daten genauer.
 
-Vr 
-\cite{SORENSEN2001193} beschreibt ebenfalls, wie aus MRT-Bildern des Herzens ein 3D-Modell generiert wird. Das Modell wird anschließend in einem eigenen VR-System platziert, durch dessen Verwendung der Arzt vor einer Operation einen besseren Überblick über das Organ erhält.
+Ein weiter Ansatz zur Erzeuggung von 3D-Modellen des Herzens wird in \cite{SORENSEN2001193} beschrieben. Hier soll das Modell ebenfalls in eine VR-Anwendung integriert werden, um von Ärzten als Vorbereitung auf eine operation genutzt werden. 
+Auch hier soll ein Mesh des Organs erzeugt werden. Die Generierung soll dabei möglichst automatisierbar sein.  Hierzu werden zuerst die Konturen aus den MRT-Bildern extrahiert. Dies resultiert in ein Gitter aus Konturen die dann algorithmisch durch polygone verbunden werden. 
+Für die Anwendung, in der das Modell dargestellt wird wurde ein damals erhältliches VR-System eingesetzt, das mit einem HMD und zwei Controllern funktionierte. 
+Durch die Controller wurde eine eine einfache aber intuitive Interaktion umgesetzt. Der Nutzer kann das Modell Vergrößern und rotieren.  
 
-\citep{Calvin01} projiziert 2D und 3D Gehirnbilder aus MRTs auf Kopfphantom für Gehirnoperationen.
+\cite{Calvin01} projiziert 2D und 3D Gehirnbilder aus MRTs auf Kopfphantom für Gehirnoperationen.
 
 %-------------------------------------------------------------
 \section{MRT}
@@ -95,15 +102,19 @@ Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen ve
 MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches z.B. neben den Bildern auch Patientendaten speichert.
 
 Das NIfTI-Format wurde 2003 von der Data Format Working Group (DFWG) als Alternative zum vorherigen Analyze 7.5-Format entwickelt, das Probleme mit der Orientierung der Daten aufwies. Durch fehlende Informationen, wie die Daten im Raum liegen war oft nicht klar, welche Gehirnhälfte die rechte und welche die linke ist. Deshalb wird im NIfTI-Format in Header festgelegt, wie die Koordinaten der Voxel auf Weltkoordinaten abgebildet sind. Beide Formate werden im Bereich des Neuroimaging verwendet.
-Bilderinformationen werden bei ersterem in einer einzigen Daten mit der Endung .nii gespeichert. Um mit dem Analyze-Format kompatibel zu bleiben besitzen auch NIfTI-Dateien einen 348 Byte Header. 
+Bilderinformationen werden bei ersterem in einer einzigen Daten mit der Endung .nii gespeichert, während Analyze 7.5 die Daten in zwei verschiedenen Dateien abgelegt hat: Einer Header-Datei und einer, die die Volumendaten enthalten hat. Um mit dem Analyze-Format kompatibel zu bleiben besitzen auch NIfTI-Dateien einen 348 Byte Header.
+ 
 Dem Header folgen die Volumedaten des Scans. Es ist möglich bis zu sieben Dimensionen in der Datei abzulegen. Die ersten drei sind dabei für die X-,Y- und Z-Dimensionen des Volumens reserviert.
 % https://brainder.org/2012/09/23/the-nifti-file-format/
 
-DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeichert werden, sondern auch legt auch ein Kommunikationsprotokoll zum Austausch von medizinischen Daten fest. Der DICOM-Standart wird in den meisten medizinischen Einrichtungen verwendet. 
+DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeichert werden, sondern auch legt auch ein Kommunikationsprotokoll zum Austausch von medizinischen Daten fest. Der DICOM-Standart wird in den meisten medizinischen Einrichtungen verwendet, um medizinische Bilddaten zu speichern und auszutauschen.
+Der DICOM-Standart besteht aus 16 Teilen.
+%https://hpi.de/fileadmin/user_upload/fachgebiete/meinel/papers/Old_Source/TR_Med_Bildverarbeitung.pdf
+
 Wie bereits erwähnt speichert eine DICOM-Datei neben den Bilddaten weitere Informationen. Dazu können eine ID oder der Patientenname zählen, die als Attribute des DICOM-Objektes hinterlegt werden. 
 ..
 
-// TODO:
+%// TODO:
 DICOM genauer beshcreiben
 Header vergleichen
 vorteile nachteilel
@@ -135,9 +146,10 @@ Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dies
 Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
 Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
-Im Folgenden werden grundlegende Techniken des Volume Rendering erläutert.
 
-//TODO: 
+Im Folgenden werden grundlegende Techniken, sowie verschiedene Verfahren der Umsetzung des Volume Rendering erläutert.
+
+%//TODO: 
 Beispielarbeiten recherchieren, beschreiben
 REFERENZEN-> GPU GEMS
 
@@ -145,18 +157,46 @@ REFERENZEN-> GPU GEMS
 
 Die Klassifikation von Voxeln bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. In diesem Schritt wird somit definiert, welche Farbe und Opazität die einzelnen Voxel, wodurch verschiedene Bereichen, wie z.B. Gewebestrukturen voneinander unterscheidbar werden. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren. Auf diese wird im folgenden Abschnitt näher eingegangen. 
 
-Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann durchlaufen werden vor oder nach der Interpolation der Volumendaten.
+Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann vor oder nach der Interpolation der Volumendaten durchlaufen werden.
+
+Die Daten müssen interpoliert werden, da das Volumen wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese wird in der Regel durch die Verwendung eines Filters bzw. einer Convolution umgesetzt.
+
+Werden die Voxel vor dieser Interpolation klassifiziert, wird dies als Pre-Klassifikation bezeichnet. Diese Vorgehensweise hat den Vorteil, dass sie zur Laufze
 
 Welche Interpolation? Wann?
 
-\subsection{Transferfunktion}
-
-Transferfunktionen werden verwendet, um verschiedenen Bereichen bzw. Beschaffenheiten eines Objektes verschiedene Farben und Opazitäten zu geben. Unterschiedliche Geweben können auf diese Weise eingefärbt oder ausgeblendet werden. In der Umsetzung besteht eine Transferfunktion meistens aus einer Textur, aus der für jeden Isowert eine Farbe und Opazität gelesen werden kann. Die Textur kann dabei eindimensional sein, wenn als Index lediglich der Isowert des Voxels verwendet wird. Für eine bessere Unterscheidung der Gewebe eines Objektes können allerdings auch multidimensionale Transferfunktionen eingesetzt werden. Hierbei werden neben dem Isowert z.B. auch der Betrag des Gradienten des jeweiligen Voxels als Koordinaten für die Transfer-Textur verwendet. Eine gut Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden können und von dem jeweiligen Datensatz abhängen. Teilweise werden Widgets eingesetzt, die es den Nutzer erlauben eine Transferfunktion zu erstellen, die direkt auf ein gerendertes Volumen angewandt wird.
-
-Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da über die Transferfunktion definiert ist, welche Isowerte welchem Gewebe entsprechen.
-
 //TODO:
 Klassifikationen unterscheiden
+
+\subsection{Transferfunktion}
+
+Transferfunktionen werden verwendet, um verschiedenen Bereichen bzw. Beschaffenheiten eines Objektes verschiedene Farben und Opazitäten zu geben. Unterschiedliche Geweben können auf diese Weise eingefärbt oder ausgeblendet werden. In der Umsetzung besteht eine Transferfunktion meistens aus einer Textur, aus der für jeden Isowert eine Farbe und Opazität gelesen werden kann. Die Textur kann dabei eindimensional sein, wenn als Index lediglich der Isowert des Voxels verwendet wird. Für eine bessere Unterscheidung der Gewebe eines Objektes können allerdings auch multidimensionale Transferfunktionen eingesetzt werden. Hierbei werden neben dem Isowert z.B. auch der Betrag des Gradienten des jeweiligen Voxels als Koordinaten für die Transfer-Textur verwendet. In Abbildung \ref{img:transferfunction} ist der Unterschied zwischen der Verwendung von ein- und zweidimensionalen Transferfunktionen verdeutlicht. Der Zugriff auf die Transferfunktion erfolgt genauso wie bei anderen Texturen. Im folgenden Codebeispiel ist demonstriert, wie in einem Shader auf die 3D-Textur des Volumens und die 1D-Textur der Transferfunktion zugegriffen wird. \cite{Fernando04}
+
+\lstset{inputencoding=utf8/latin1}
+\begin{lstlisting}[language=c] [frame=single]
+void main(sampler3D _Volume,
+          sampler1D _TransferTexture,
+          float3 texCoord : TEXCOORD0,
+          float4 color : COLOR)
+{
+  // Der Isowert des Volumens wird für die aktuelle Position ausgelesen
+  float isoValue = tex3D(_Volume, texCoord);
+  // Die Farbe des Volumens wird für die aktuelle Position ausgelesen
+  color = tex1D(_TransferTexture, isoValue);
+}
+\end{lstlisting}
+
+Eine gut Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden können und von dem jeweiligen Datensatz abhängen. Teilweise werden Widgets eingesetzt, die es den Nutzer erlauben eine Transferfunktion zu erstellen, die direkt auf ein gerendertes Volumen angewandt wird.
+
+\begin{figure}
+	\centering
+	%http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch39.html
+	\includegraphics[width=0.7\linewidth]{images/transferfunction.jpg}
+	\caption{Abbildung zweier gerenderter Volumen und der jeweils dafür verwendeten Transferfunktion. In den Darstellungen a) und c) wurde eine eindimensionale Transferfunktion verwendet. b) und c) benutzen zweidimensionale Tranfserfunktionen, wodurch verschiedene Bereiche des Volumens anders eingefärbt sind. }
+	\label{img:phong}
+\end{figure}
+
+Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da über die Transferfunktion definiert ist, welche Isowerte welchem Gewebe entsprechen.
 
 \subsection{Beleuchtung}
 \label{beleuchtung}
@@ -359,17 +399,17 @@ Erweiterungen/ Abwandlungen
 %-------------------------------------------------------------
 \section{Vergleich der Methoden im Überblick}											 %
 %-------------------------------------------------------------
-\begin{tabular}{lrr} 
+\begin{tabular}{lrrrr} 
 \toprule
 Vergleich von Methoden zur 3D Darstellung von Volumendaten\\  
 \midrule 
 Methode & Ergebnis & Komplexität & Vorteile & Nachteile \\ 
 \midrule 
-Volumerisches Ray-Casting & Rendering &  & \\
-Shear-Warp & Redering & 8,20 & \\
-2D-Texturbasiertes Volume Rendering & Redering  & 10,00 & \\ 
-3D-Texturbasiertes Volume Rendering & Redering  & 10,0 & 0\\ 
-Marching Cubes & 3D-Mesh der Bestandteile des Gehirns  & 10,00 & 0 \\ 
+Volumerisches Ray-Casting & Rendering &  & & \\
+Shear-Warp & Redering & 8,20 & & \\
+2D-Texturbasiertes Volume Rendering & Redering  & 10,00 & & \\ 
+3D-Texturbasiertes Volume Rendering & Redering  & 10,0 & 0 &\\ 
+Marching Cubes & 3D-Mesh der Bestandteile des Gehirns  & 10,00 & 0 &\\ 
 \bottomrule
 \end{tabular}
 
@@ -589,6 +629,27 @@ Consolen Controller
 //TODO:
 Paper zur interaktion finden
 -> was ist gut zur interaktion inAR warum?
+
+\section{AR und VR im Vergleich}
+
+Nachdem die AR- und VR-Systeme vorgestellt wurden, sollen die beiden Technologien an dieser Stelle verglichen werden.
+
+\begin{tabular}{lrr} 
+\toprule
+Vergleich AR und VR\\  
+\midrule 
+Technologie & Vorteile & Nachteile\\ 
+\midrule 
+AR & Unabhängig von anderen Geräten & Eingeschränkte Interaktionsmöglichkeiten\\
+   & Bewegungsfreiheit				& Entwicklung an Hersteller gebunden\\
+   & Be								& Begrenzte Leisutung\\
+   & Interaktion mit Umwelt möglich & Langes Tragen unkomfortabel\\
+   & 								& Eingeschränktes augmentiertes Sichtfeld\\
+VR & Leistungfähigkeit nur durch Rechner beschränkt  & Totale Abkapselung von der Umwelt \\
+	& Kann auch kabellos verwendet werden		  	 & Langes Tragen unkomfortabel\\
+	& & \\
+\bottomrule
+\end{tabular}
 
 
 
