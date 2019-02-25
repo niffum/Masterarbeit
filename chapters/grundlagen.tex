@@ -138,17 +138,22 @@ Die Skalarwerte werden auch als Isowerte des Volumens bezeichnet bei MRT-Daten b
 
 Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben der Vorstellung eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen und 
 
+Die Verfahren zur dreidimensionalen Visualisierung von MRT-Daten lassen sich in drei Bereiche teilen: Multiplanar Reformation (MPR), Surface Rendering (SR), and Volume Rendering (VR). \cite{Zhang10} In den folgenden Abschnitten werden diese verfahren erläutert.
+
 %------------------------------------------------------
 \section{Volume Rendering}							  %
 %------------------------------------------------------
 %https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch39.html
 % Bezug zu Motivation
 Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
+
 Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
 
 Im Folgenden werden grundlegende Techniken, sowie verschiedene Verfahren der Umsetzung des Volume Rendering erläutert.
 
+\cite{Kaufman03}
+\cite{kniss02}
 %//TODO: 
 Beispielarbeiten recherchieren, beschreiben
 REFERENZEN-> GPU GEMS
@@ -249,6 +254,7 @@ $I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
 
 $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Transferfunktion durch diese bestimmt wird. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
 
+\cite{phong75}
 //TODO: Andere Beleuchtungsformen? -> Vergleich
 
 \subsection{Gradientenberechnung}
@@ -359,7 +365,14 @@ Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um e
 	\label{img:shearwarp}
 \end{figure}
 
+%-------------------------------------------------------------
+\section{Beispiele für Volume Rendering Implementiertungen}
+%-------------------------------------------------------------
 
+Volume Rendering Techniken werden von verschiedenen Programmen und Arbeiten zur 3D-Vosualisierung von MRT-Daten eingesetzt.
+
+Beispielsweise nutzt die kostenpflichtige Unity-Erweiterung Volume Viewer Pro Volume Ray Casting zur Darstellung von 3D-Daten. Die Anwendung ermöglicht dem Nutzer weiterhin das Erstellen eine Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren, sowie das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
+\cite{volumeViewerPro}
 
 
 %-------------------------------------------------------------
@@ -388,7 +401,7 @@ Die Vorstellung einer Grenze zwischen den Voxeln lässt sich auf die Würfel üb
 
 Um also die Oberfläche zu erzeugen, die das gesamte Volumen aufteilt, wird jeder Würfel zuerst einzeln betrachtet und es wird ermittelt, ob und wie die Polygonfläche diesen einzelnen Würfel aufteilt.  Da diese Teilung auch einzelne Eckpunkte betreffen kann, setzt sich diese Oberfläche aus dreieckigen Polygonen zusammen. ?
 
-Die Anzahl an Möglichkeiten einen Würfel aufzuteilen lässt sich errechnen. Für jeden der acht Eckpunkte des Würfels gilt eine von zwei Möglichkeiten: Entweder befindet er sich unter der Oberfläche und damit im Objekt oder eben nicht. Demnach ergeben sich für alle Punkte zusammen $2^8=256$ mögliche Fälle der Aufteilung. Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden, die in Abbildung \ref{img:marchingCubes} dargestellt sind. Der Fall, dass die Eckpunkte gar nicht getrennt werden ist dabei berücksichtigt. 
+Die Anzahl an Möglichkeiten einen Würfel aufzuteilen lässt sich errechnen. Für jeden der acht Eckpunkte des Würfels gilt eine von zwei Möglichkeiten: Entweder befindet er sich unter der Oberfläche und damit im Objekt oder eben nicht. Demnach ergeben sich für alle Punkte zusammen $2^8=256$ mögliche Fälle der Aufteilung. \cite{aigner07} Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden, die in Abbildung \ref{img:marchingCubes} dargestellt sind. Der Fall, dass die Eckpunkte gar nicht getrennt werden ist dabei berücksichtigt. 
 
 \begin{figure}
 	\centering
@@ -407,6 +420,8 @@ Auf die selbe Weise wird für jeden Vertex der Polygone dessen Normale berechnet
 Nach und nach werden so für jeden Voxel-Würfel Polygone berechnet, die in einer Liste gespeichert und schließlich gezeichnet werden.
 
 Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terrain eingesetzt. In diesem Fall ist es entscheidend, wie die Dichtewerte des Volumens generiert werden. Bei der Visualisierung von medizinischen Daten, wie MRT-Bildern werden die Bilddaten als Eingabewerte genommen.
+
+\cite{Lorensen87}
 
 Beschleunigung durch Unterstützung der Grafikkarte??
 
@@ -601,6 +616,9 @@ Auch AR-Systeme, wie die \textit{Magic Leap} oder die \textit{Hololens} besitzen
 Die andere ist die Steuerung über Gesten, die vor allem AR-Systeme verwenden und die zweite Kategorie darstellt.
 Die in den Systemen verbaute Kamera erfasst dabei die Hände des Nutzers in ihrem Blickfeld und erkennt bestimmte Handgesten, auf die dann reagiert wird. 
 Die \textit{Hololens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Boolm} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
+
+//TODO: 
+Hololens2
 Die \textit{Magic Leaop} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
 
 
