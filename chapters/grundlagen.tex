@@ -229,14 +229,42 @@ Um dem gerenderten Objekt einen möglichst plastischen Eindruck zu verleihen und
 Die Beleuchtung wird in in der Regel durch einen Shader implementiert. Jeder Voxel wird dabei einzeln nach der Anwendung der Transfertextur geshadet, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
 
 
-Die lokale Beleuchtung betrachtet ausschließlich den Voxel und wie sich das Licht zu diesem verhält. 
-Globale Beleuchtung bezieht unter anderem den Schatten des gesamten Volumens mit ein..
-// TODO:
-globale Beleuchtung
+Die lokale Beleuchtung betrachtet nur die Beziehung des Lichtes zu dem Objekt. Dabei bleiben Beleuchtungseffekte, wie Schatten, den das Volumen wirft oder indirekte Beleuchtung außen vor. Zudem ist das Beleuchtungsmodell auf Oberflächen ausgelegt und nicht auf ein Volumen. 
+
+Eine realistischere Beleuchtung bietet daher die globale Beleuchtung mit Schatten und indirekter Beleuchtung.
+Um Schatten im Volumen darzustellen, muss bestimmt werden, wie viel Licht bei einem Voxel ankommt, nachdem das Licht andere diesen umgebende Voxel passiert hat und dadurch abgeschwächt wurde. 
+Dazu könnte ein Schatten-Volumen erstellt werden, indem jeder Voxel aus Sicht des Lichts gerendert wird, welches mit den Werten aus der Transfertextur verrechnet wird. Dieses Vorgehen ist allerdings unperformant und liefert unschöne Ergebnisse.\cite{Fernando04}
+Stattdessen wird das Volumen durch Texture Slicing aus der GPU (?) in Schichten unterteilt. Jede Schicht dann wird jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
+Die Lage der Schichten wird durch die die Winkelhalbierende des Blickrichtungswinkels und des Lichtrichtungswinkels bestimmt. Dadurch treffen beide Vektoren im selben Winkel auf die Schichten. Abhängig von dem Skalarprodukt der Vektoren kann auch die Inverse des Blickwinkels verwendet werden. Das Skalarprodukt bestimmt außerdem, ob die Schichten aus Kamerasicht von hinten nach vorne oder von vorne nach hinten durchlaufen werden. Während für das Licht immer von vorne nach hinten gerendert wird.
+Die Position der Vektoren und der winkelhalbierenden Schicht ist in Abbildung \ref{img:halfAngleSlice} dargestellt.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/halfAngleSlice.png}
+	\caption{Durch Bestimmung der Winkelhalbierenden des Licht- und Kamerarichtungsvektors, wird die Lage der Schichten bestimmt, die sowohl aus Licht- als auch Kamerasicht gerendert werden. Bei einem Skalarprodukt $>=0$ wird der Kameravektor verwendet (a), bei einem negativen Skalarprodukt dessen Inverse (b). \cite{Hadwiger06}}
+	\label{img:halfAngleSlice}
+\end{figure}
+
+
+Jede Schicht wird dann zuerst aus Sicht der Kamera gerendert. Die aus Lichtsicht gerenderte vorhergehende Schicht ist dabei bereits bekannt. So kann jeder Punkt des Kamera-Textur-Buffers mit jedem des Licht-Textur-Buffers der vorherigen Schicht verrechnet werden. Dabei wird durch den Wert des Kamera-Buffers die Farbe und Opazität aus der Transferfunktion gelesen. Die entsprechende Farbe wird dann mit dem Wert aus dem Licht-Buffer multipliziert. Die so berechnete Schicht wird wieder in den Kamera-Buffer geschrieben. Dann wird die aktuelle Schicht aus Sicht der Lichtquelle in den Licht-Buffer gerendert, um diesen für die nächste Schicht zu verwenden.
+Für jede Schicht wird ein eigener Pass durchlaufen.
+\cite{Hadwiger06}
+\cite{Fernando04}
+
+//TODO:
+IndirekteBeleuchtung/Scattering? /Translucency  
+Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren reflektiert, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wach oder Haut.
+
+Die globale Beleuchtung ist somit von der Umsetzung her deutlich komplexer. Bietet allerdings auch mehr Plastizität und Realismus. Dies wird in Abbildung \ref{img:localGlobalIll} deutlich, in der die Ergebnisse der beiden Vorgehensweisen gegenübergestellt sind.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/localGlobalIllumination.png}
+	\caption{Vergleich zweier Volumen, die mit lokaler Oberflächenbeleuchtung (links) und direkter Beleuchtung und Schatten (rechts) gerendert wurden. \cite{Hadwiger06}}
+	\label{img:localGlobalIll}
+\end{figure}
 
 Bei einer lokalen Beleuchtung der einzelnen Voxel kommt meist das Phong-Beleuchtungsmodell zum Einsatz. 
-
-//TODO: Vergliech globale, lokale beleuchtung
 
 \begin{figure}
 	\centering
