@@ -1,4 +1,11 @@
 % Motivation
+%
+\begin{figure}
+	\centering
+	%\includegraphics[width=0.3\linewidth]{images/teaser.png}
+	\caption{}
+	\label{img:teaser}
+\end{figure}
 
 \chapter{Einleitung}
 
@@ -26,17 +33,16 @@ Da der betroffene Bereich in einer 3D-Darstellung auf einen Blick erfasst werden
 
 % UX  
 % Software zum Vergleichen finden
-Die eben beschriebenen Vorteile einer 3D-Darstellung würden theoretisch auch in einer Bildschirmanwendung gelten. Allerdings würde das Potenzial der Räumlichkeit damit nicht vollkommen ausgeschöpft werden. 
-Weiterhin ist es das Ziel die Interaktion mit den Daten möglichst intuitiv zu gestalten, damit der Fokus des Nutzers auf den Bildern selbst liegen kann.
-Durch die Platzierung im Raum wäre die Darstellung anschaulicher und der Nutzer könnte direkt mit ihr interagieren. 
-Um dies zu erreichen bieten sich die virtuelle oder augementierte Realität an. 
-Eine AR-Anwendung scheint für diesen Fall allerdings besser geeignet zu sein. Durch die Umsetzung der Darstellung in AR wird die Interaktion mit den Daten direkter und intuitiver, da der Nutzer seine Hände als Eingabemedium benutzen kann. Dies macht die Verwendung der Software leichter zugänglich, was unter anderem für Lernzwecke dienlich sein kann.
-%// TODO: Begründung AR statt VR -> Verweis auf Grundlagen
+Um die Anschaulichkeit und Plastizität der 3D-Darstellung voll zur Geltung zu bringen muss sie auch im dreidimensionalen Raum platziert werden. Eine volumetrische Darstellung der Daten in einer Bildschirmanwendung ist nur eine Projektion auf eine zweidimensionale Fläche. Die Darstellung wird dabei abstrahiert und der Nutzer kann nicht direkt mit dem Objekt interagieren.
+Die Platzierung des 3D-Objekts in der dreidimensionalen Welt des Nutzers löst diese Barrieren auf. AR- und VR-Technologien ermöglichen sowohl die Visualisierung von dreidimensionalen virtuellen Objekten in der Umgebung des Nutzers, als auch die direkte Interaktion mit diesen. Diese gestaltet sich dabei auch deutlich intuitiver als die Bedienung eines Programms mit konventionellen Eingabemodulen, wie z.B. einer Maus. Das trifft vor allem auf AR-HMDs zu, deren Steuerung in der Regel ohne externe Steuerungsgeräte, wie Controller erfolgt. Dies ermöglicht eine verständliche und schnelle Bedienung,  was ungeübten Nutzern, wie z.B. einem Patienten oder Studenten zu Gute kommt. Die Nutzung der Anwendung wird dadurch zudem interessanter und unterhaltsamer.\\
+
+Die Steuerung durch die Hände des Nutzers ist im medizinischen Bereich außerdem von besonderem Wert. So kann die Anwendung auch in sterilen Räumen oder sogar während einer Operation eingesetzt werden. In diesem Szenario kommt ein weiterer Vorteil eines AR-HMDs zur Geltung: Durch das transparente Display kann ist es dem Nutzer möglich während der Nutzung der Anwendung seine Umgebung im Auge zu behalten. 
+Eine AR-Anwendung ermöglicht es also einem Arzt während einer Operation relevante Daten abzurufen.
 
 %//TODO: WARUM ist AR besser, was macht meine anwendung besonder? -> stichpunkte
+Durch die kabellosen, tragbaren AR-Headsets ist gleichzeitig eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen. 
 
-Zudem wird die Nutzung der Anwendung dadurch interessanter und unterhaltsamer.
-Gleichzeitig ist durch die kabellosen, tragbaren AR-Headsets eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen. 
+Die Vorteile einer AR-Anwendung werden im Kapitel \ref{konzept} noch einmal erläutert.
 
 AR-Anwendungen entwickeln sich stetig weiter und werden in der Zukunft einen immer größeren Teil des Alltags einnehmen. Diese Entwicklung wirkt sich auch auf den medizinischen Bereich aus. 
 % Referenz?
@@ -44,10 +50,19 @@ AR-Anwendungen entwickeln sich stetig weiter und werden in der Zukunft einen imm
 in welchen Einsatzgebieten man einen Nutzen aus diesen ziehen kann. (Studie)
 Eine Anwendung wie mARt eignet sich gut, um den praktischen Einsatz von AR prototypisch zu testen.
 
+mArt bietet somit die folgenden Vorteile :
+
+\begin{itemize}
+\item 3D-Darstellung der MRT-Daten verbessert allgemeines Verständnis 
+\item Direkte Interaktion mit Daten ermöglicht intuitive und ansprechende Interaktion
+\item Handsteuerung und Portabilität einer AR-Anwendung ermöglichen Gebrauch im OP
+\end{itemize}
+
+
 \section{Zielsetzung}
 % hier techniken kokretisieren
 
-Ziel dieser Arbeit ist es, die Möglichkeiten der Darstellung von und Interaktion mit MRT-Daten in AR untersuchen. Der Fokus liegt dabei auf der Darstellung von Gehirnscans, die in der Schlaganfallprävention und -diagnose verwendet werden.
+Ziel dieser Arbeit ist es, die Möglichkeiten der Darstellung von und Interaktion mit MRT-Daten in AR untersuchen. Der Fokus liegt dabei auf der Darstellung von Gehirnscans, die in der Schlaganfalldiagnose und -behandlung verwendet werden.
 Hierzu soll eine prototypische Anwendung konzipiert und implementiert werden, die die eben genannten Möglichkeiten demonstriert: mARt.
 Die MRT-Bilder werden innerhalb einer AR-Anwendung dreidimensional dargestellt. Außerdem soll eine möglichst intuitive Interaktion mit der Darstellung ermöglicht werden. 
 Um eine nützliche Anwendung zu entwickeln, die den Anforderungen eines Einsatzes im Arbeitsfeld eines Radiologen entspricht, werden Interviews mit einem Radiologen geführt werden. Aus diesen wird dann die nötige Funktionalität der Anwendung abgeleitet. 

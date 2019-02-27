@@ -51,35 +51,75 @@ In Kapitel \ref{grundlagen} wurden die verschiedenen Volume Render Techniken mit
 %//TODO:
 Argumentation für verwendete Technik
 
+Wie im Kapitel \ref{grundlagen} beschrieben, werden beim Volume Rendering in der Regel Transferfunktionen eingesetzt, um verschiedene Gewebestrukturen oder Materialien zu unterscheiden. Wobei es sich um eine Look-Up-Tabelle in Form einer Textur handelt, die jedem Isowert eine Farbe und Opazität zuweist.
+Die Herausforderung bei der Implementierung einer Transferfunktion ist dabei die Generierung einer zum Datensatz passenden Textur. Selbst bei einer Transferfunktion mit nur einer Dimension müssen häufig verschiedene Wertzuweisungen ausprobiert werden, um ein gutes Ergebnis zu erhalten.
+Um eine bzw. mehrere Transferfunktionen zu genieren, die den Ansprüchen des Nutzers genügt und die für verschiedene Datensätze passend sind, ist es deshalb sinnvoll dem Nutzer eine Benutzeroberfläche zur Verfügung zu stellen, mit deren Hilfe er die verwendete Transferfunktion zur Laufzeit manipulieren kann. 
+
+In einem Volumen gibt es in der Regel bestimmte Isowerte, die Grenzwerte zwischen verschiedenen Materialien darstellen. Diese dienen als Kontrollpunkte, zwischen denen dann interpoliert wird, um einen Farbverlauf zwischen den Materialien zu erhalten. 
+Um die Transfertextur zu beeinflussen muss der Nutzer diese Kontrollpunkte verändern können. Zur Umsetzung einer solchen Manipulation eignet sich eine Spline-Interpolation. 
+TODO:
+Wie funktioniert das?
+Die nutzergesteuerte Generierung von Transferfunktionen konnte aus zeitlichen Gründen im Rahmen dieser Arbeit nicht umgesetzt werden.
+
 
 
 \section{Darstellung des gekennzeichneten Bereichs}
+\label{maske}
 
-%//TODO:
-Beschreiben des Kozepts
-Mit argumentation der 3D Darstellung in verbindung setzen.
+In den Anforderungen XY wird beschrieben, dass der vorher von einem Arzt gekennzeichnete Bereich des Gehirn, der vom Schlaganfall betroffen ist in der Darstellung angezeigt werden soll, wenn dies gewünscht ist. 
+Der Bereich wird durch Masken definiert, die zuvor von einem Arzt in einem externen Programm erstellt wurden und ebenfalls im NIfTI-Format vorliegen. Für jede Schicht in einem Datensatz existiert ebenfalls eine Schicht im Maskendatensatz. 
 
+Der Bereich soll sowohl in der zwei- als auch in der dreidimensionalen Ansicht dargestellt werden. Bei letzterer sollte er auch in den Querschnitten erkennbar sein, die sich durch das Scrollen durch das Volumen ergeben. Das Verhalten von MRT-Daten und markiertem Bereich ist also gleich.
+
+Da die Daten im selben Format vorliegen und sich gleich verhalten sollen, ist es naheliegend, dass sie auf die selbe Weise implementiert werden. Dementsprechend werden auch die Maskenbilder in eine 3D-Textur übertragen, die dann durch Volume Ray Tracing gerendert wird. Damit aber nicht jeder Strahl doppelt verschossen werden muss, der das Volumen durchdringt, wird der Zugriff auf die Maskentextur in den Shader integriert, der bereits das MRT-Volumen rendert. Für jeden Voxel, der aus der 3D-Textur der MRT-Daten gelesen wird wird  der Voxel mit denselben Koordinaten aus der Masken-3D-Textur gelesen. Die zwei Farbwerte werden zum Schluss miteinander verrechnet. Die Abfrage der Maskenwerte erfolgt nur, wenn durch das Material eine entsprechende Steuervariable gesetzt wurde.
+Dies wird im folgenden Codebeispiel veranschaulicht.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{csharp}
+void main(sampler3D _Volume,
+		  sampler3D _MaskVolume,
+          sampler1D _TransferTexture,
+          float3 texCoord : TEXCOORD0,
+          float4 maskColor : COLOR,
+          float _ShowMask)
+{
+  // Der Isowert des Volumens wird für die aktuelle Position ausgelesen
+  float isoValue = tex3D(_Volume, texCoord);
+  
+  if (_ShowMask == 1)
+	{
+		// Der Isowert des Maskenvolumens wird für die aktuelle Position ausgelesen
+		float isoValueMask = tex3D(_MaskVolume, texCoord);
+	}
+	
+  // Die Werte werden verrechnet und die Maske wird zusätzlich eingefärbt
+  return isoValue * isoValueMask * maskColor;
+}
+\end{minted}
 
 \section{Endgerät}
 
 Im Kapitel \ref{grundlagen} wurde die Vor- und Nachteile von AR und VR gegenüber gestellt.
-Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem Medizinischen Arbeitsumfeld.
-Für den Arbeitsalltag eines Arztes und die Zusammenarbeit mit Patienten eignet sich ein durchsichtiges Display deutlich besser als ein undurchsichtiges. Der Nutzer verliert somit nicht seine Umwelt aus den Augen, wodurch er sich sicherer in der Benutzung fühlt. In einem Anwendungsszenario, in dem er mit anderen Menschen kommuniziert, während er die Anwendung bedient gilt dies umso mehr. Die mögliche Verwendung von mARt in während einer Operation oder Behandlung wäre damit unmöglich. Die Reduzierung auf die virtuelle Realität biete zudem keinen Vorteil für die Funktion der Anwendung, da die Umwelt in der Anwendung nicht verändert werden soll. 
+Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem medizinischen Arbeitsumfeld.
+Für den Arbeitsalltag eines Arztes und die Zusammenarbeit mit Patienten eignet sich ein durchsichtiges Display deutlich besser als ein undurchsichtiges. Der Nutzer verliert somit nicht seine Umwelt aus den Augen, wodurch er sich sicherer in der Benutzung fühlt. In einem Anwendungsszenario, in dem er mit anderen Menschen kommuniziert, während er die Anwendung bedient gilt dies umso mehr. Die mögliche Verwendung von mARt während einer Operation oder Behandlung wäre mit einer VR-Anwendung unmöglich. Die Reduzierung auf die virtuelle Realität bietet zudem keinen Vorteil für die Funktion der Anwendung, da die Umwelt in der Anwendung nicht verändert werden soll. 
 
 Ein weiterer Vorteil eines AR-HMDs ist seine Portabilität. Dies ist vor allem entscheidend, wenn die Daten anderen Personen, wie z.B. Patienten gezeigt werden sollen. Das Gerät lässt sich einfach in ein anderes Zimmer mitnehmen, was mit einem VR-System deutlich schwieriger umzusetzen ist.
  
 Eine große Einschränkung bietet die geringe Anzahl an Gesten und Interaktionsmöglichkeiten, die bisherige AR Technik zur Verfügung stellen. Dies ist allerdings hinfällig, wenn stattdessen die Leap Motion verwendet wird um Nutzereingaben zu erfassen. Die Vorteile des Gerätes werden im folgenden Abschnitt erläutert.
 
-Es ist zu erwarten, dass AR HMDs in den folgenden Jahren deutlich verbessern werden, was Tragekomfort und Leistungfähigkeit angeht. Da mARt als Prototyp einer medizinischen Anwendung anzusehen ist, kann davon ausgegangen werden, dass bei einer Weiterentwicklung der Anwendung Technologie zur Verfügung steht, die viele der genannten Mängel behebt.
+Es ist zu erwarten, dass sich AR-HMDs in den folgenden Jahren deutlich verbessern werden, was Tragekomfort und Leistungfähigkeit angeht. Da mARt als Prototyp einer medizinischen Anwendung anzusehen ist, kann davon ausgegangen werden, dass bei einer Weiterentwicklung der Anwendung Technologie zur Verfügung steht, die viele der genannten Mängel behebt.
 
-Obwohl sich eine AR-Anwendung also besser für die Umsetzung eignet, ist die Leistung des Gerätes nicht ausreichend um die intensiven Berechnungen durchzuführen, die für das Volume Ray Casting erforderlich sind. 
+Obwohl sich eine AR-Anwendung also besser für die Umsetzung eignet, ist die Leistung des Gerätes nicht ausreichend, um die intensiven Berechnungen durchzuführen, die für das Volume Ray Casting erforderlich sind. Auch der Einsatz der Leap Motion erfordert eine hohe Rechenleistung.
 In einer Demo, in der die 3D-Darstellung auf der Hololens getestet wurde, wurde eine Framerate von X erreicht. 
-Dies ist nicht ausreichend um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
+Dies ist nicht ausreichend, um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
 
-Aus diesem Grund wurde die die AR-Anwendung mit eingschränkter Funktionalität entwickelt. Für die dreidimensionale Darstellung wurden vorgerenderte Bilder eingesetzt, um Testern eine Vorstellung davon zu geben.
+Aus diesem Grund wurde die die AR-Anwendung mit eingeschränkter Funktionalität entwickelt. Für die dreidimensionale Darstellung wurden vorgerenderte Bilder eingesetzt, um Testern eine Vorstellung davon zu geben.
 Zusätzlich dazu wurde die Anwendung als VR-Erfahrung umgesetzt. Die Funktionalität bleibt dabei die selbe. 
 Durch Verwendung der Motion Leap ist selbst die Interaktion mit dem Modell in beiden Anwendungen identisch. 
-
 % Bezug Hololens2?
 
 %Benchmarks!
@@ -134,31 +174,52 @@ Dies lässt sich bei der Visualisierung der Daten als Würfel genauso umsetzten.
 
 Um diese Bedienung darzustellen, wird die Ebene als Quadratischer Rahmen angezeigt. Damit die Daten ungestört untersucht werden können, wird dieser nur eingeblendet, wenn sich die Hand des Nutzer dieser nähert. 
 Die Position der Berührung von Hand und Rahmen kann schwer zu erfassen sein, vor allem wenn die Ebenen der verschiedenen Achsen dicht beieinander liegen. Dazu kommt außerdem, dass noch andere Funktionen durch des Greifen des Volumens umgesetzt werden. Dazu gehört z.B. dir Rotation, wie später noch beschrieben wird. Deshalb ist es sinnvoll dem Nutzer bestimmte Punkte zur Verfügung zu stellen, die er anfassen und somit die Ebenen steuern kann. Diese Punkte werden jeweils an den Eckpunkten der Ebenen angebracht und stehen in einiger Entfernung zum Volumen. Sie reagieren auf die Nähe von und den Kontakt mit Händen. Dies macht es für den Nutzer eindeutig nachvollziehbar, welche Auswirkungen seine Handbewegungen haben werden. 
+Die dreidimensionale Darstellung und deren Bedienelemente ist in Abbildung \ref{img:mARt3d} zu dargestellt.
 
 Dieses Bedienkonzept lässt sich allerdings nicht einfach in den zweidimensionalen Raum übertragen. Da jeweils nur die ausgewählte Schicht zu sehen ist und nicht das gesamte Volumen, hat der Nutzer keine Vorstellung davon, wo in dessen Innern er sich befindet. Um ihm diese zu liefern, wird die Gesamtanzahl an schichten angezeigt, sowie die wievielte gerade ausgewählt ist. 
 Die Bewegung durch die Schichten erfolgt außerdem entlang der Z-Achse, die durch den zweidimensionalen Kontext allerdings wegfällt. D.h. der Wechsel zwischen den Schichten durch Anfassen und Ziehen eines Kontaktpunktes entlang dieser, wie eben beschrieben, würde nicht in das Konzept passen. 
-Weiterhin sollte es dem Nutzer möglich sein die Ebene ununterbrochen zu verschieben. Bei einer Bewegung entlang der Z-Achse müsste er sehr weit vorne anfangen und ist in der Tiefe durch die Länge seines Armes beschränkt, die  variieren kann. Es wäre möglich das Interaktionselement als Schieberegler in die XY-Achse zu legen, die Bedienung ist dabei allerdings oft ungenau und könnte dazu führen, dass der Nutzer den Fokus auf den Regler legt, anstatt auf das Bild, das er auswählen will. Eine bessere Variante stellt ein Rad dar, durch dessen Rotation man zwischen den Bildern wechseln kann. Dies entspricht eher der Bedienung einer Bildschirmanwendung mittles eines Mausrads und ist dem Nutzer somit bereits bekannt. Außerdem lässt dich so eine kontinuierliche Bewegung in beide Richtungen ermöglichen. Der Nutzer muss zur Steuerung lediglich die Hand und nicht den Arm bewegen, was eine genauere Manipulation erlaubt. 
+Weiterhin sollte es dem Nutzer möglich sein die Ebene ununterbrochen zu verschieben. Bei einer Bewegung entlang der Z-Achse müsste er sehr weit vorne anfangen und ist in der Tiefe durch die Länge seines Armes beschränkt, die  variieren kann. Es wäre möglich das Interaktionselement als Schieberegler in die XY-Achse zu legen, die Bedienung ist dabei allerdings oft ungenau und könnte dazu führen, dass der Nutzer den Fokus auf den Regler legt, anstatt auf das Bild, das er auswählen will. Eine bessere Variante stellt ein Rad dar, durch dessen Rotation man zwischen den Bildern wechseln kann. Dies entspricht eher der Bedienung einer Bildschirmanwendung mittels eines Mausrads und ist dem Nutzer somit bereits bekannt. Außerdem lässt dich so eine kontinuierliche Bewegung in beide Richtungen ermöglichen. Der Nutzer muss zur Steuerung lediglich die Hand und nicht den Arm bewegen, was eine genauere Manipulation erlaubt. 
 Das Rad ist dabei ähnlich einer Wählscheibe konzipiert, die der Nutzer mit einer Kreisbewegung rotiert. Verglichen mit einem Drehknopf, wie z.B. einem Lautstärkeregler, unterstützt der größere Radius mehr Kontrolle. Zudem lässt sich eine endlose Bewegung ohne Umgreifen realisieren und die Bewegung ist vom System leichter erkennbar. 
 Um dem Nutzer den Eindruck von haptischen Feedback zu vermitteln und den Zustand des Elements zu verdeutlichen, wird die Berührung und Bewegung des Rades durch den Einsatz von Farbe und Ton untermalt.
 
 %http://blog.leapmotion.com/designing-cat-explorer/
+
+Wie in Abschnitt \ref{maske} beschrieben, wird der markierte vom Schlaganfall betroffene Bereich innerhalb des Volumens dargestellt. Da die Maske entweder angezeigt wird oder nicht, kann der Nutzer die gewünschte Darstellung erreichen, indem er einen Schalter bedient, der zwischen den beiden Zuständen wechselt.
+
+Zur besseren Sichtbarkeit bestimmter Bereiche fordert Anforderung REFERENZ, dass die Helligkeit und Kontrast der MRT-Bilder einstellbar sind. Dies ist über zwei Slider steuerbar, die sich oberhalb der Darstellung befinden. 
+
+Die Manipulation von Helligkeit und Kontrast wird dabei in Verbindung mit einer Gammakorrektur implementiert.
 
 % Zoom
 Zu den geforderten Interaktionen gehört auch die die Vergrößerung von Bildern, um dem Nutzer eine genaue Untersuchung zu erlauben. Bei der Vergrößerung handelt es sich im Grunde genommen um eine Skalierung bzw. ein "Heranzoomen" des Bildes. Auch dies lässt sich gut mit einer direkten Handbewegung in Berührung mit der Darstellung umsetzten. Aus anderen Anwendungen sind Nutzern zwei Bedienmöglichkeiten dieser Funktionalität bekannt. Bei Bildschirmanwendungen wird oft das Mausrad zum Zoomen verwendet. Allerdings werden Räder bereits für andere Aktionen verwendet und ein mehrdeutiger Einsatz könnte zu Verwirrung führen. Von der Bedienung von Touchdisplays sind Nutzer weiterhin daran gewöhnt zu zoomen, indem sie den Bildschirm mit Daumen und Zeigefinger berühren und die Finder dann aufeinander zu oder voneinander weg zu bewegen. Diese Bewegung lässt sich gut in die Anwendung übertragen. Um ein eindeutigeres Ergebnis zu erhalten und dem Nutzer mehr Kontrolle zu geben werden statt zwei Fingern allerdings die beiden Hände verwendet. Wird das Bild von beiden Händen mit Daumen und Zeigefinder gegriffen kann es durch die Bewegung der Hände zueinander manipuliert werden.
 
 % Verschieben
 Wenn eine Darstellung vergrößert wird, wird der im Bildausschnitt angezeigt Bereich automatisch kleiner. Um dem Nutzer die Möglichkeit zu geben einen anderen Bereich zu betrachten, ohne vorher wieder herauszoomen zu müssen, ist es sinnvoll, dass den Bildausschnitt verschieben zu können. 
-% Helligkeit/ Kontrast
 
-% Ein und Ausblenden von Maske
 
-Das Ein- und Ausblenden des markierten Schlaganfallbereichs lässt sich 
-% Daten vergleichen
-% synchron/asynchron+
+Die Bedienüberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:mARt2d} zu sehen.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/mARt2d.png}
+	\caption{Die zweidimensionale Darstellung von zwei MRT-Datensätzen, deren Manipulation nicht gleichgeschaltet ist. Über die oberen Schieberegler können Kontrast und Helligkeit beeinflusst werden. durch das Icon in der rechten Ecke kann der markierte Bereich ein- und ausgeblendet werden. Das Rad ermöglicht das Scrollen durch die Bildschichten. Die aktuelle Schicht wird in dessen Mitte angezeigt. }
+	\label{img:mARt2d}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/mARt3d.png}
+	\caption{Die 3D-Darstellung eines MRT-Datensatzes mit angezeigter Maske. Die oberen Schieberegler kontrollieren Intentsität und Schwellenwert des Renderings. Auch hier wird der markierte Bereich durch ein Icon ein- und ausgeblendet. Jede Ebene kann durch einen Anfassungspunkt verschoben werden.}
+	\label{img:mARt3d}
+\end{figure}
+
 
 Der Use Case (REFERENZ Vergleich) erfordert es weiterhin, dass man Bilder im direkten Vergleich nebeneinander betrachten kann. Dies gilt sowohl für die zwei- als auch dreidimensionale Darstellung der Daten. Die UseCases (REFERENZ Liste) und (REFERENZ synchon) erfordern außerdem eine Möglichkeit für den Nutzen aus den vorhandenen Daten einzelne auszuwählen, die angezeigt werden sollen, sowie die Daten jeweils gleichzeitig oder einzeln zu manipulieren. 
-Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden sollen oder nicht, sind beide nicht Teil der direkten Manipulation des Bildes. Sie müssen deshalb nicht in dessen unmittelbaren Umfeld stehen und der Nutzer kann während dessen Bedienung auch auf diese den Fokus setzen. 
+Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden sollen oder nicht, sind beide nicht Teil der direkten Manipulation des Bildes. Sie müssen deshalb nicht in dessen unmittelbaren Umfeld stehen und der Nutzer kann während dessen Bedienung auch auf diese den Fokus setzen.
+ 
 Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzen sein. Da die Option der Synchronizität abhängig ist von der Tatsache, ob ein oder mehrere Datensätze angezeigt werden, stehen die beiden Aktionen in Verbindung zu einander und werden deshalb in einem Menü vereint, das für beide Darstellungen verwendet wird. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Gleichzeitig fördert es die Immersion der Anwendung, da der Nutzer quasi Teil von ihr wird. Ein Effekt, der in einer Bildschirmanwendung nicht umsetzbar wäre. 
+
 Damit das Menü nicht wären der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Motion Leap bietet bereits Beispiel Code, der dies umsetzt. ?
 Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst einfach und platzsparend zu halten. Das Erfassungsfeld der Motion Leap Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionsfläche die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
 Um den Umfang des Menüs in benutzbaren Dimensionen zu halten wurde es auf drei Knöpfe reduziert. 
@@ -166,23 +227,53 @@ Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht
 Indem der Nutzer einen Datensatz auswählt, wird dieser auf der Bildfläche angezeigt. Die Auswahl ist auf zwei Datensätze beschränkt. Zu viele gleichzeitig dargestellte Bilder würden unübersichtlich wirken und die Motivation hinter dem Use Case ist der direkte Vergleich zweier Bilder. Außerdem stellen mehr Bilder auch mehr Möglichkeiten dar diese in verschiedenen Kombinationen zu manipulieren. Dies hätte die Anwendung unnötig verkompliziert. 
 Stattdessen wird die Synchronisierung der Manipulation über einen weiteren Knopf im Handmenü gesteuert. Dieser ist nur aktiv, wenn tatsächlich zwei Bilder angezeigt werden. Dann funktioniert er als Schalter. Indem der Nutzer in betätigt wird jeweils nur eine Benutzeroberfläche neben beiden Bildern angezeigt oder sie wird dupliziert und für jede Darstellung eingeblendet. 
  
+Schließlich kann der Nutzer durch das Handmenü auch zwischen der zwei. und dreidimensionalen Darstellung wechseln. Auf dem dafür zuständigen Button wird jeweils das Szenario angezeigt, in das gewechselt wird.
+Beim Wechsel sollen die Manipulationen und Einstellungen möglichst erhalten bleiben. D.h. wenn in 2D zwei Datensets angezeigt werden, eines mit und eines ohne Maske, sollte das nach dem Wechsel zu 3D ebenfalls so sein. 
 
-%//TODO:
-Wechsel zwischen 2D/3D
+//TODO: Ist das so?
 
+In Abbildung \ref{img:handUI} ist das ausgeklappte Menü, an der linken Hand dargestellt.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/handUI.png}
+	\caption{Das ausklappbare Handmenü, das erscheint, wenn der Nutzer seine Handfläche zur Kamera dreht. Über die Knöpfe kann der Nutzer die angezeigten Datensätze auswählen (oberen und Liste), zwischen 2D- und 3D-Darstellung wechseln (mitte) und die angezeigten Datensätze gleichschalten (unten). }
+	\label{img:handUI}
+\end{figure}
+
+//TODO:
 bezug zu interaktion in grundlagen
+
+Die Darstellung der MRT-Daten soll, wie in Anforderung (REFERENZ) beschrieben im Raum platzierbar sein, sodass der Nutzer um sie herum gehen und von allen Seiten betrachten kann, oder an einem bestimmten Standpunkt verankern kann. Dies wäre vor allem in einem Multi-Nutzer-Szenario nützlich, in dem mehrere Nutzer gleichzeitig die Daten betrachten.
+Die Hololens bietet diese Funktionalität in Form von Spatial oder World Anchors. Das Gerät besitzt einen internen Speicher für Anker, die von einer Anwendung angelegt werden, den sogenannten Anchor Store. Durch interne Prozesse bestimmt die Hololens in welchem Raum sie sich gerade befindet. Wird ein World Anchor in diesem Raum abgelegt, wird dessen Standort im Anchor Store gespeichert und behält somit immer seine Position im Raum, auch wenn der Nutzer sich bewegt und über mehrere Sitzungen hinweg. Nachdem ein World Anchor beim Start der Anwendung geladen wird, kann er an ein Objekt, wie ein 3D-Modell anhängt werden, sodass das Objekt an der Position des Ankers dargestellt wird. 
+
+Der Anchor Store ist allerdings, wie beschrieben nur auf der Hololens verfügbar. Wie im Kapitel \ref{implementierung} erläutert wird, wird die Anwendung im Rahmen dieser Arbeit aber nur auf der Hololens abgespielt, aber nicht deployed. Dementsprechend ist ein Zugriff auf den Anchor Store nicht möglich. Dasselbe gilt für eine Verwendung der Anwendung in einem VR-System.
+
+Als Alternative dazu könnten die Daten mit Hilfe eines Markers in den Raum projiziert werden, wie es im Kapitel \ref{grundlagen} beschreiben wurde. Unity bietet hierfür das Vuforia-Plugin, welches genau das umsetzt. Hierzu können Marker definiert werden, die das Programm erkennt und die diesen zugeordneten GameObjects anzeigt. 
+Vuforia ist für AR-Anwendungen gedacht, und funktioniert durch eine Kamera, die den Marker erkennt. Deshalb könnte die Funktion von einer HTC Vive nicht genutzt werden, von einer HTC Vive Pro jedoch schon, da diese über einen Mixed Reality Modus verfügt. Auch Hololens-Anwendungen können Vuforia nutzen. 
+
+Im zeitlichen Rahmen der Arbeit konnte dieses Funktionalität allerdings nicht mehr umgesetzt werden.
+
+//TODO 
+Bezug zu Anforderungen
 
 \subsection{Interaktion AR}
 
-- Hintergrund, Hände sichtbar, gut schlecht?
+Die Interaktionen bleiben in der AR- und VR-Version der Anwendung gleich, da für beide die Leap Motion zur Steuerung verwendet wird.
+Im Gegensatz zum Einsatz in VR sind allerdings die realen Hände des Nutzers für diesen sichtbar, während er die Anwendung in AR bedient. Da durch die Leap Motion die Hände zusätzlich virtuell simuliert werden, sieht der Nutzer vier Hände, was zuerst verwirrend wirken kann. 
+Die Leap-Controller-Hände für den Nutzer unsichtbar zu machen, wäre zaw möglich, ist allerdings nicht die beste Vorgehensweise. Obwohl die Leap Motion die Hände und Handbewegungen sehr zuverlässig nachempfindet, verhalten die virtuellen Hände sich nicht ganz deckungsgleich zu den realen. Dies hängt auch damit zusammen, dass die Leap Motion Kamera sich ein Stück vor oder über den Augen des Nutzers befindet, da sie am HMD befestigt ist. Dieses Problem wird auch in Abschnitt \ref{kombination} beschrieben.
+Die Abweichungen der Simulation sind in einer VR-Anwendung deutlich weniger auffällig. Durch die Immersion der virtuellen Welt und dem Fehlen eines direkten Vergleichs mit der realen, entsteht beim Nutzer die Illusion, dass die virtuellen Hände sich genau dort befinden, wo er seine echten Hände vermutet.
 
-\subsection{Interaktion VR}
-% Leap motion
+In AR entfällt diese Illusion. Da die beiden Hände Paare aber nicht deckungsgleich sind, kann es dazu kommen, dass ein virtueller Finger einen Knopf trifft, während es ein realer nicht tut oder umgekehrt. Wenn der Nutzer die virtuelle Hand nicht sieht, würde dies den Eindruck von fehlerhaftem Verhalten hervorrufen. 
+Aus diesem Grund werden die Leap-Controller-Hände auch in der AR-Anwendung angezeigt. Allerdings werden sie leicht transparent dargestellt, um dem Nutzer zu erlauben auch die dahinter liegende Umgebung wahrzunehmen. 
+
+TODO: 
+Bild AR Hände
 
 
 \section{Unterstützung von Dateiformaten} 
 
-In den im Kapite \ref{anforderung} beschriebenen Anforderungen ist durch REF beschrieben, dass mARt gängige Dateiformate zur Speicherung von medizinischen Bilddaten, wie NIfTI oder DICOM unterstützt. Beide Formate wurden im Kapitel \ref{grundlagen} beschrieben. 
+In den im Kapitel \ref{anforderung} beschriebenen Anforderungen ist durch REF beschrieben, dass mARt gängige Dateiformate zur Speicherung von medizinischen Bilddaten, wie NIfTI oder DICOM unterstützt. Beide Formate wurden im Kapitel \ref{grundlagen} beschrieben. 
 Unity unterstützt diese Formate nicht. Um die MRT-Bilder also zu verarbeiten und darstellen zu können, muss eine Parser oder Converter in das Programm eingebunden werden. 
 Der Nutzer könnte dann über eine Schnittstelle die Daten direkt in die Anwendung laden, wo sie umgewandelt und angezeigt würden. 
 

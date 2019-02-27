@@ -62,6 +62,14 @@ Durch die Controller wurde eine eine einfache aber intuitive Interaktion umgeset
 
 Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
 Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. in einem geschlossenen ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
+
+\begin{figure}
+	\centering
+	%https://www.flickr.com/photos/11304375@N07/3081315619/
+	\includegraphics[width=0.5\linewidth]{images/mri.jpg}
+	\caption{Ein geschlossenes MRT-Gerät. Auf die Liege im vorderen Bereich legt sich ein Patient, der dann während des Scans in die Röhre geschoben wird. }
+	\label{img:mri}
+\end{figure}
  	
 \subsection{Verfahren}
 
@@ -253,7 +261,9 @@ Für jede Schicht wird ein eigener Pass durchlaufen.
 
 //TODO:
 IndirekteBeleuchtung/Scattering? /Translucency  
-Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren reflektiert, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wach oder Haut.
+Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren reflektiert, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wachs oder Haut.
+
+Phasenfunktion 
 
 Die globale Beleuchtung ist somit von der Umsetzung her deutlich komplexer. Bietet allerdings auch mehr Plastizität und Realismus. Dies wird in Abbildung \ref{img:localGlobalIll} deutlich, in der die Ergebnisse der beiden Vorgehensweisen gegenübergestellt sind.
 
@@ -574,6 +584,9 @@ Im Folgenden sind Hersteller von VR-Systemen aufgelistet, sowie die Modelle, die
 //TODO:
 Durchegehen
 Vergleich der Hardware Vorteile, nachteile
+
+TODO: 
+HTC Vive und Vive PRo -> MR
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
@@ -593,15 +606,15 @@ Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf je
 %Bsp
 Um eine Diagnose stellen zu können muss der Arzt die MRT-Bilder eines Patieten genau studieren. Diese Untersuchung der Daten wird digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Anzeigeprogramme, die diesen darstellen kann und weiterhin relevante Funktionen bietet. 
   
-Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM oder nifti Datenformat vor. Um die Dateien öffnen zu können, bedarf es deshalb bestimmter Software. Es stehen viele verschiedene Programme zur Darstellung von MRT-Bildern zur Verfügung. Und die Auswahl eines Programms hängt meist an der persönlichen Präferenz des Arztes. 
+Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM oder NIfTI Datenformat vor. Um die Dateien öffnen zu können, bedarf es deshalb bestimmter Software. Es stehen viele verschiedene Programme zur Darstellung von MRT-Bildern zur Verfügung. Und die Auswahl eines Programms hängt meist an der persönlichen Präferenz des Arztes. 
 In Krankenhäusern besteht allerding in der Regel die Situation, dass die Bilder in einem Picture Archiving and Communication System (PACS) gespeichert. (Fußnote?) Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit herkömmlichen Computern über den Browser auch die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. Die Speicherung und Verteilung von medizinischen Bilddaten ist oft durch den DICOM-Standart geregelt, der im Abschnitt \ref{datenformate} genauer beschrieben ist.
 
 Die meisten Viewer Programme für MRT-Bilder, unabhängig davon, ob es sich um PACS-Viewer handelt oder nicht ähneln sich stark in den Funktionen die sie anbieten und ihrem Aufbau.
 
-Wie im Kapitel \ref{motivation} bereits oberflächlich beschrieben, stellen sie das betreffende Organ, z.B. ein Gehirn, aus drei verschiedenen Blickwinkeln dar, die an den X-, Y- und Z-Achsen ausgerichtet sind. Orthogonal zum Blickachse steht jeweils eine Ebene, die gleichzeitig den Querschnitt durch das Gehirn darstellt. Diese Ebenen können entlang der Achsen verschoben werden. Auf diese Weise scrollt der Neurologe durch die verschiedenen Schichten des Gehirns. 
-Bei den drei Ebenen handelt es sich um die Frontal- oder Coronalebene, die das Gehirn in vorne und hinten teilt, die Sagittalebene, die zwischen links und rechts verläuft und die Transversalebene, die eine Teilung zwischen oben und unten bewirkt. 
-Die drei Ebenen sind dabei in jeder Ansicht farbkodiert eingezeichnet, sodass der Arzt ein besseres Bild davon bekommt, welchen Teil des Gehirns er gerade betrachtet. 
-Manchmal wird noch eine vierte Ansicht ergänzt, auf der entweder die Sagittalebene von der anderen Seite abgebildet ist oder sogar durch das Ineinanderschieben der gerade angezeigten Schichten eine annähernd dreidimensionale Darstellung simuliert wird. 
+Meist können in mehreren Fenstern verschiedene Ansichten des gleichen oder unterschiedlicher Datensätze geöffnet werden. Jedes Fenster stellt dabei eine Sichtebene dar, die gleichzeitig den Querschnitt durch das Gehirn bildet. Die verschiedenen Sichtebenen können in den anderen Ansichten farblich kodiert eingezeichnet werden, damit der Arzt ein besseres Bild davon bekommt, welchen Teil des Gehirns er gerade betrachtet.
+Klassischer Weise werden drei verschiedene Blickwinkel dargestellt, die an den X-, Y- und Z-Achsen ausgerichtet sind. Die Sichtebenen verlaufen dabei orthogonal zur Blickachse. Die Ebenen können entlang der Achsen verschoben werden. Auf diese Weise scrollt der Neurologe durch die verschiedenen Schichten des Gehirns. 
+Bei den drei Ebenen handelt es sich um die Frontal- oder Coronalebene, die das Gehirn in vorne und hinten teilt, die Sagittalebene, die zwischen links und rechts verläuft und die Transversalebene, die eine Teilung zwischen oben und unten bewirkt.  
+Bei dieser Zusammensetzung von Ebenen wird manchmal noch eine vierte Ansicht ergänzt, auf der entweder die Sagittalebene von der anderen Seite abgebildet ist oder durch das Ineinanderschieben der gerade angezeigten Schichten eine annähernd dreidimensionale Darstellung simuliert wird. 
 In Abbildung \ref{img:mrtSoftware} ist die Oberfläche der XY-Viewers zu sehen, die beispielhaft die Ansichten zeigt.
 
 Die Benutzeroberfläche bietet auch einige Interaktionen. Die wichtigsten sind dabei die, die es dem Arzt ermöglichen ein möglichst eindeutiges Verständnis vom Inneren des Gehirns zu erhalten.  Dazu zählen:
@@ -617,10 +630,11 @@ Bestimmte Bereiche eines Bildes können vergrößert werden, um sie besser beurt
 Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken und in eine Richtung ziehen. Dies ermöglicht es andere Bildteile zu untersuchen, ohne zuerst herauszoomen zu müssen.
 \end{description}
 
-Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt.
+Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt, wie aus den Interviews mit Neurologen hervorging.
 
-//TODO:
-Viewer mit dreidimensionaler ansicht? oder in Volumerenderin?
+Es gitb eine Vielzahl von Viewern dieser Art zum Öffnen oder zur Verarbeitung von MRT-Bildern, viele davon stehen kostenloas im Internet zur Verfügung. 
+Zu den wahrscheinlich meist verbreitetsten gehören \cite{osirix} und \cite{horos}, für das Betriebsystem macOS. \cite{radiocafe} stellt außerdem folgende Viewer zum Gebrauch im radiologischen Kontext für Windows vor: Das kompakte und schnelle Viewerprogramm \cite{radiant}. Weiterhin \cite{prosurgical}, was sich eigentlich an Chirurgen richtet und \cite{navegatium}, ein Programm, dass auch als Windows App und somit auch für Tabletts zur Verfügung steht.
+Alle der genannten Viewer besitzen die Funktion aus MRT-Datensätzen auch Volumendarstellungen zu erzeugen.
 
 %-------------------------------------------------------------
 \section{Interaktion in AR/VR}	
