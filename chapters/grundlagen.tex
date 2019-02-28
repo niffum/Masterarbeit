@@ -22,7 +22,7 @@ Die folgenden Arbeiten haben sich mit der Umsetzung dieses Konzeptes beschäftig
 
 % Andere Hardware
 AR-Systeme werden genutzt um MRT-Daten während eines Eingriffs zugänglich zu machen. Während ein Patient sich in einem MR-Scanner befindet, können die MRT-Bilder direkt an den Arzt weitergeleitet werden. Dieser kann diese zur besseren Orientierung bei z.B. Injektionen nutzen. Offene MRT-Systeme (s. \ref{mrt}) ermöglichen dabei eine Abbildung der betroffenen Organe während des Eingriffs. Die Bildqualität ist allerdings deutlich schlechter als bei geschlossenen Systemen. Bei einem geschlossenen System hat der Arzt dagegen während des Scans keinen Zugang zum Patienten. Um einen MRT-gestützen Eingriff durchführen zu können werden die vorher erstellten MRT-Bilder auf den Patienten projiziert. zur Umsetzung eines Systems gibt es verschiedene Ansätze.
-In \citep{Fritz2012} wird ein System vorgestellt, bei dem eines transparenten Spiegels MRT-Bilder über einen Patienten bzw. ein Modell projiziert werden. Die Visualisierung soll Ärzte bei der Nadelführung für Injektionen der Wirbelsäule unterstützen. 
+In \citet{Fritz2012} wird ein System vorgestellt, bei dem eines transparenten Spiegels MRT-Bilder über einen Patienten bzw. ein Modell projiziert werden. Die Visualisierung soll Ärzte bei der Nadelführung für Injektionen der Wirbelsäule unterstützen. 
 \cite{khamene03} verwendet für einen ähnlichen Anwendungsdall ein HMD und projiziert die Bilder abhängig vom Blickwinkel des Arztes auf den Patienten. Das HMD wurde in \cite{khamene01} weiterentwickelt, sodass der Arzt es während einer Gehirnoperation tragen kann. Dabei wird das Körperinnere durch eine dreidimensionale Visualisierung sichtbar gemacht, die aus MRT-Bildern gewonnen wurde. 
 
 Bildgestüzte Operationen 
@@ -410,7 +410,8 @@ Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um e
 Volume Rendering Techniken werden von verschiedenen Programmen und Arbeiten zur 3D-Vosualisierung von MRT-Daten eingesetzt.
 
 Beispielsweise nutzt die kostenpflichtige Unity-Erweiterung Volume Viewer Pro Volume Ray Casting zur Darstellung von 3D-Daten. Die Anwendung ermöglicht dem Nutzer weiterhin das Erstellen eine Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren, sowie das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
-\cite{volumeViewerPro}
+\citet{volumeViewerPro}
+Ein weiteres Unity-Plugin, dass Volume Rendering ermöglicht ist \citet{volumeRenderingUnity}. Auch hier wird Volume Ray Casting verwendet und der Nutzer kann die Farbgebung der Rendering über eine Transferfunktion beeinflussen.
 
 
 %-------------------------------------------------------------
@@ -565,6 +566,16 @@ Durch die Verwendung eines Laufbands, das auf die Laufbewegung des Nutzers reagi
 Auf die Möglichkeiten der Nutzerinteraktion in VR-Systemen wird im Abschnitt \ref{VRInteraktion} genauer eingegangen.
 
 Heutzutage bestehen die meistgenutzten VR-Systeme meist aus einem HMD, welches über eine Kamera verfügt, Eingabemedien (z.B. Controllern), einem Trackingsystem, das die Position der ersten beiden Komponenten verfolgt und einem Computer, der die Komponenten miteinander verknüpft und auf dem die VR-Anwendung läuft. 
+In Abbildung \ref{img:vive} ist das HMD und die Controller während der Nutzung abgebildet.
+
+\begin{figure}
+	\centering
+	%https://sco.wikipedia.org/wiki/Virtual_reality#/media/File:Reality_check_ESA384313.jpg
+	\includegraphics[width=0.5\linewidth]{images/vive.jpg}
+	\caption{Ein Nutzer trägt das HMD der HTC Vive und bedient dessen Controller.}
+	\label{img:vive}
+\end{figure}
+
   
 Im Folgenden sind Hersteller von VR-Systemen aufgelistet, sowie die Modelle, die derzeit auf dem Markt zum freien Verkauf stehen.
 

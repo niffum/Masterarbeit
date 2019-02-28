@@ -5,122 +5,72 @@
 
 \section{Interviews}
 
-Zur Bestimmung der Anforderungen, die von der Anwendung erfüllt werden sollen wurden iterativ mehrere Interviews mit dem betreuenden Neurologen der Charité geführt.
-
 Wie bereits beschrieben, ist es das Ziel dieser Arbeit Neurologen eine dreidimensionale Darstellung von Gehirn-MRT-Scans in einer interaktiven AR- bzw. VR-Anwendung zur Verfügung zu stellen, um zu untersuchen, inwiefern diese die Ärzte in ihrer Arbeit besser unterstützt, als bisher verwendete Darstellungssoftware. Die hypothetischen Vorteile eines solchen Programmes wurden im Kapitel \ref{motivation} erläutert.
 Für den Vergleich mit bisheriger Software ist eine Anwendung prototypischen Charakters ausreichend. Diese soll auf die grundlegenden Interaktionen beschränkt sein, die ein Neurologe für die Verarbeitung der Daten benötigt.
 
-Der Fokus der Untersuchung liegt auf dem Bereich der akuten Schlaganfall Behandlung. Wie im Kapitel \ref{grundlagen} beschrieben untersucht der Neurologe hierfür die Abbildungen des Gehirns eines Patienten, die durch den MRT-Scan erzeugt wurden. Dabei hält er nach Bereichen Ausschau, die von einem Schlaganfall betroffen sein könnten, um die Art des Schlaganfalls zu bestimmen, ? sowie den entstandenen Schaden einschätzen zu können. Betroffene Bereiche werden anschließend markiert. Die Markierung kann danach ein- und ausgeblendet werden.
+Der Fokus der Untersuchung liegt auf dem Bereich der akuten Schlaganfallbehandlung. Wie im Kapitel \ref{grundlagen} beschrieben untersucht der Neurologe hierfür die Abbildungen des Gehirns eines Patienten, die durch den MRT-Scan erzeugt wurden. Dabei hält er nach Bereichen Ausschau, die von einem Schlaganfall betroffen sein könnten, um die Art des Schlaganfalls zu bestimmen, ? sowie den entstandenen Schaden einschätzen zu können. Betroffene Bereiche werden anschließend vom Arzt markiert. Diese Markierung kann danach ein- und ausgeblendet werden.
 
-% ZU MOTIVATION
-Weiterhin könnte man anhand des Modells auch Voraussagen von Therapieerfolgen anschaulich demonstrieren.
-%%
+Um zu bestimmen, welche Interaktionen und Funktionen ein Neurologe benötigt, um effektiv mit der Anwendung arbeiten zu können, wurden iterativ mehrere Interviews mit dem betreuenden Neurologen der Charité Berlin geführt. Die Antworten des Arztes wurden in Anforderungen übertragen, die im folgenden Abschnitt festgehalten wurden. 
 
-Folgende Anforderungen haben sich aus den Interviews des Neurolgen ergeben, die erfüllt sein sollten, um den erfolgreichen Einsatz von mARt zu ermöglichen.
+\section{Anforderungen als User Stories}
 
-\subsection{Anforderungen aus Interviews}
-Die aus dem Interview ermittelten Anforderungen wurden in der folgenden Tabelle aufgelistet. Zur besseren Referenzierung wurden sie jeweils mit Bezeichner versehen. Weiterhin wurde die Priorität jeder Anforderungen auf niedrig, mittel, oder hoch geschätzt.
+Die im Gespärch mit dem Arzt entwickelten Anforderungen an mARt wurden in Tabelle \ref{tab:userStories} als User Stories \footcite[vgl. User-Stories nach:][]{UserStoriesApplied} zusammengefasst. 
+User Stories werden in der Software-Entwicklung verwendet, um einzelne Funktionen zu definieren, die möglichst unabhängig voneinander implementiert werden können. 
+Zur besseren Referenzierung wurden die Stories jeweils mit Bezeichnern versehen. Da viel der Interaktionen sowohl für die zwei- als auch dreidimensionale Darstellung benötigt werden wurde weiterhin gekennzeichnet, welche Darstellung von der jeweiligen Story betroffen ist.
 
-\begin{table}
-\begin{tabular}{|c|p{10cm}|c|}
-\hline
-Anforderungsbezeichnung & Anforderung & Priorität \\
-\hline
-A01 & 3D Darstellung der MRT Daten & hoch\\
-\hline
-A02 & Einblenden des gekennzeichneten Bereichs in 3D & hoch\\
-\hline
-A03 & Scrollen durch Schichten der 3D-Darstellung auf mindestens einer Achse& mittel\\
-\hline
-A04 & Erkennbarkeit der inneren Struktur des Gehirns (entsprechend der MRT-Bilder) & hoch\\
-\hline
-A05 & Scrollbare 2D Darstellung der MRT-Bilder auf mindestens einer Achse & mittel\\
-\hline
-A06 & Kontrast und Helligkeit sollten einstellbar sein & hoch\\
-\hline
-A07 & Man sollte die Darstellung vergrößern können & hoch\\
-\hline
-A08 & Die Darstellung sollte verschiebbar sein & hoch\\
-\hline
-A09 & Interaktionselemente sollten die Darstellung nicht verdecken & niedrig\\
-\hline
-A10 & Scrollen durch Verwendung eines Scrollrads & niedrig\\
-\hline
-A11 & Auswahl verschiedener MRT-Sequenzen (falls vorhanden) & niedrig\\
-\hline
-A12 & Unterstützung von nifti-Daten & mittel\\
-\hline
-A13 & Verschiedene Ansichten können nebeneinander dargestellt werden. (z.B. vor und nach Therapie) & mittel\\
-\hline
+\begin{longtable} {p{.125\textwidth}p{.50\textwidth}p{.05\textwidth}p{.225\textwidth}}
+\toprule
+Bezeichnung & User Story & 2D/3D & Anforderungsreferenz \\
+\toprule
+U01 & Als Nutzer möchte ich eine möglichst genaue und gut erkennbare Abbildung der MRT-Bilder, damit ich eine Vorstellung habe, wie das Gehirn des Patienten aussieht. & beide & A05\\
+\midrule 
+U02 & Als Nutzer möchte ich die Daten als zweidimensionale Schichten aus mindestens einem Winkel betrachten können, um diese wie gewohnt untersuchen zu können.  & 2D & A02\\
+\midrule 
+U03 & Als Nutzer möchte ich die Daten als dreidimensionales Volumen betrachten können, um ein besseres Verständnis für den Zustand des Gehirns zu erhalten. & 3D & A02\\
+\midrule 
+U04 & Als Nutzer möchte ich mindestens zwei Datensätze nebeneinander anzeigen lassen, um direkte Vergleiche zwischen diesen ziehen zu können. & beide & A14\\
+\midrule 
+U05 & Als Nutzer möchte ich aus verschiedenen Datensätzen auswählen können, welche angezeigt werden. & beide & A01\\
+\midrule
+U06 & Als Nutzer möchte ich entscheiden können, ob ich mehrere angezeigte Datensätze gleichzeitig oder einzeln manipuliere (z.B. Kontrast). & beide & A14\\
+\midrule 
+U07 & Als Nutzer möchte ich auf mindestens einer Achse durch beide Darstellungen scrollen können, um das Innere des Organs zu untersuchen. & beide & A04\\
+\midrule 
+U08 & Als Nutzer möchte ich mit einem Scrollrad durch die Darstellungen scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden. & beide & A11\\
+\midrule 
+U09 & Als Nutzer möchte ich zwischen einer zwei- und dreidimensionalen Darstellung der Daten wechseln können. & beide & A02\\
+\midrule 
+U10 & Als Nutzer möchte dass bisherige Manipulationen beim Wechsel zwischen 2D und 3D übernommen werden. & beide & A13\\
+\midrule 
+U11  & Als Nutzer möchte ich den gekennzeichneten vom Schlaganfall betroffenen Bereich ein- und ausblenden können, um mich auf diesen, oder die Darstellung an sich konzentrieren zu können. & beide & A02\\
+\midrule
+U12 & Als Nutzer möchte ich auch dann noch die Strukturen des Gehirns erkennen, wenn der gekennzeichnete Bereich eingeblendet ist. & beide & A03\\
+\midrule 
+U13 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & 3D & A09\\
+\midrule 
+U14 & Als Nutzer möchte ich die Helligkeit und den Kontrast der Darstellung verändern können, um Strukturen besser deutlich zu machen. & beide & A09\\
+\midrule 
+U15 & Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen. & beide & A08\\
+\midrule 
+U16 & Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position anzupassen. & beide & A07\\
+\midrule 
+U17 & Als Nutzer möchte ich, dass das Hologram seine Position im Raum behält, um es von allen Seiten betrachten zu können. & beide & A13\\
+\midrule 
+U18 & Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann. & beide & A12\\
+\midrule 
+U19 & Als Nutzer möchte ich Dateien im NIfTI-Format in der Anwendung verwenden können, damit ich sie nicht vorher umwandeln muss. & beide & A13\\
+\midrule 
+U20 & Als Nutzer möchte ich Dateien im DICOM-Format in der Anwendung verwenden können, damit ich sie nicht vorher umwandeln muss. & beide & A13\\
 
-// TODO:
-Anforderungen noch mal klar definieren
-
-\end{tabular}
-\caption{\label{tab:table-name} Durch Interview bestimmte Anforderungen.}
-\end{table}
-
-\section{User Stories}
-
-Anhand dieser Anforderungen wurden User Stories formuliert. 
-%Referenz User Stories
-
-\begin{table}
-\begin{tabular}{|c|p{10cm}|c|c|c|}
-\hline
-Story-Bezeichnung & User Story & 2D & 3D & Anforderungsreferenz \\
-\hline
-U01 & Als Nutzer möchte ich Aus verschiedenen Datensätzen auswählen können, welcher angezeigt wird. & X & X A01\\
-\hline
-U02 & Als Nutzer möchte ich zwischen einer zwei- und dreidimensionalen Ansicht wechseln können. & X & X & A02\\
-\hline
-U02 & Als Nutzer möchte ich die Daten als dreidimensionales Volumen betrachten können, um ein besseres Verständnis für den Zustand des Gehirns zu erhalten. & & X & A02\\
-\hline
-U02 & Als Nutzer möchte ich die Daten als zweidimensionale Schichten betrachten können, um diese wie gewohnt untersuchen zu können.  & X & & A02\\
-\hline
-U03  & Als Nutzer möchte ich den gekennzeichneten vom Schlaganfall betroffenen Bereich ein- und ausblenden können, um mich auf diesen, oder die Darstellung an sich konzentrieren zu können. & X & X & A02\\
-\hline
-U04 & Als Nutzer möchte ich auch dann noch die Strukturen des Gehirns erkennen, wenn der gekennzeichnete Bereich eingeblendet ist. & X & X & A03\\
-\hline
-U05 & Als Nutzer möchte ich eine möglichst genaue und gut erkennbare Abbildung der MRT-Bilder, damit ich eine Vorstellung habe, wie das Gehirn des Patienten aussieht. & X & X & A05\\
-\hline
-U06 & Als Nutzer möchte ich auf mindestens einer Achse durch das 3D-Modelll scrollen können, um es vergleichbar mit der 2D Darstellung zu verwenden. & & X & A04\\
-\hline
-U07 & Als Nutzer möchte ich die MRT-Darstellungen frei im Raum bewegen können, um sie meiner Position im Raum anzupassen. & X & X & A07\\
-\hline
-U08 & Als Nutzer möchte ich die MRT-Darstellungen skalieren können, um die Darstellung gut zu erkennen. & X & X & A08\\
-\hline
-U09 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & & X & A09\\
-\hline
-U09 & Als Nutzer möchte ich die die Helligkeit und den Kontrast der Darstellung verändern können, um Strukturen besser deutlich zu machen. & & X & A09\\
-\hline
-U09 & Als Nutzer möchte ich die MRT-Darstellungen drehen können, um den besten Blickwinkel auf den für mich relevanten Bereich zu bekommen. & & X & A09\\
-\hline
-U14 & Als Nutzer möchte ich mindestens zwei Datensätze nebeneinander angezeigen lassen, um direkte Vergleiche zwischen diesen ziehen zu können. & X & X & A14\\
-\hline
-U14 & Als Nutzer möchte ich entscheiden können, ob ich mehrere Angezeigte Datensätze gleichzeitig oder einzeln manipuliere (z.B. Kontrast). & X & X & A14\\
-\hline
-U10 & Als Nutzer will ich, dass die Darstellung nicht von anderen Elementen verdeckt wird, damit ich sie uneingeschränkt sehen kann. & X & X & A10\\
-\hline
-U11 & Als Nutzer möchte ich mit einem Scrollrad durch die Darstellung scrollen können, um genaue Kontrolle darüber zu haben, welche Schichten angezeigt werden. & X & X & A11\\
-\hline
-U12 & Als Nutzer möchte ich alle vorhandenen MRT-Sequenzen sehen und zwischen ihnen wählen können, damit ich alle notwendigen Informationen zu dem Scan nutzen kann. & X & X & A12\\
-\hline
-U13 & Als Nutzer möchte ich Dateien im nifti-Format in der Anwendung verwenden können, damit ich sie nicht vorher umwandeln muss. & X & X & A13\\
-\hline
-U13 & Als Nutzer möchte dass meine Einstellungen beim Wechel zwischen 2D und 3D übernommen werden. & X & X & A13\\
-\hline
-U13 & Als Nutzer möchte das Hologram im Raum ablegen können, um es von allen Seiten zu betrachten. & X & X & A13\\
-\hline
+\bottomrule
+\caption{\label{tab:userStories}Aus Interviews abgeleitete User Stories.}
+\end{longtable}
 
 //TODO:
 User stories klar definieren
 Requirements engenieering 
 Referenzen?
 
-\end{tabular}
-\caption{\label{tab:table-name}Aus Anforderungen abgeleitete User Stories.}
-\end{table}
 
 \section{Technische Anforderungen}
 % Anforderungen, die ich aus User Stories ableite
