@@ -60,7 +60,7 @@ Die Leap Motion wird über ihr Kabel mit Strom versorgt. Sie kann also im Gegens
 Aus diesen Gründen muss die Leap Motion während des Betriebs per Kabel mit einem Rechner verbunden sein. Um das Gerät trotzdem in Verbindung mit der Hololens nutzen zu können, müssen entweder die Sensordaten der Leap Motion an die Anwendung in der Hololens übertragen werden oder die gesamte Anwendung läuft auf dem Rechner und wird zur Wiedergabe an die Hololens übermittelt. Beides geschieht über Wlan.
 
 Die Übertragung der Sensordaten ist dabei um einiges aufwändiger und erfordert die Integration weiterer Tools. 
-Um die Anwendung lediglich auf der Hololens wiederzugeben, kann die Hololens-App \textit{Holographic Remote} genutzt werden. Die Anwendung wird dabei direkt aus dem Unity-Editor übertragen.
+Um die Anwendung lediglich auf der Hololens wiederzugeben, kann die Hololens-App \textit{Holographic Remoting Player} von \citet{remoteApp} genutzt werden. Die Anwendung wird dabei direkt aus dem Unity-Editor übertragen.
 Die Wiedergabequalität der Anwendung ist dabei abhängig von der Stabilität der Wlan-Verbindung.
 //TODO:
 Pro Kontra Begründung welche Lösung
@@ -101,6 +101,7 @@ Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader au
 
 \section{Volume Rendering}
 - Grundlage: GitHub Projekt
+\citet{volumeRenderingGit}
 
 Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns mit Hilfe von Volume Rendering umgesetzt. 
 
@@ -216,3 +217,7 @@ Unterscheidung direktionales und Punktlicht?
 
 \subsection{Gradientenberechnung}
 \label{gradienten}
+
+
+//TODO:
+Wo Rendering zeigen? Qualität der Daten ansprechen?

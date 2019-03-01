@@ -23,21 +23,20 @@ Die 3D-Darstellung sollte die in Kapitel \ref{anforderung} beschriebenen Eigensc
 \item Es sollte möglich sein durch die Schichten des Volumes zu scrollen. \textbf{(U07)}
 \end{itemize}
 
-Dadurch lassen sich Aussagen über das Aussehen der Darstellung herleiten.
-Da das innere der 3D Darstellung erkennbar sein soll, muss eine semi-transparente Darstellung erzeugt werden, die sowohl die Form des Gehirns abbildet, als auch die innere Struktur. Die eingeblendete Markierung sollte ebenfalls zu einen gewissen Grad transparent sein.
+Dadurch lassen sich Aussagen über das gewünschte Aussehen der Darstellung herleiten.
+Da das Innere der 3D Darstellung erkennbar sein soll, muss eine semi-transparente Darstellung erzeugt werden, die sowohl die Form des Gehirns abbildet, als auch die innere Struktur. Die eingeblendete Markierung sollte ebenfalls zu einen gewissen Grad transparent sein.
 Weiterhin sind sind nur die Pixel relevant, die das Gehirn darstellen. Der Bereich darum (Schädel und Hintergrund) sollten gefiltert  und nicht sichtbar gemacht werden. Das gewünschte Ergebnis ist, dass das Gehirn frei im Raum "schwebt". 
 
 Die Anforderungen sprechen gegen eine Umsetzung, die eine Oberfläche des Gehirns erzeugt und es als Mesh darstellt. Die Form des Gehirns könnte dadurch deutlich gezeigt werden und das Objekt würde von den umgebenden Pixeln getrennt werden. 
-Allerdings handelt es sich bei dem Gehirn nicht um eine Hülle sondern eher eine Masse. Es ist unwahrscheinlich, dass ein Verfahren wie Marching Cubes die inneren Gehirnstrukturen exakt genug wiedergeben könnte, damit ein Neurologe sinnvolle Schlüsse daraus ziehen kann. Weiterhin müsste das Mesh in Echtzeit kontinuierlich angepasst werden, wenn der Nutzer durch die verschiedenen Schichten scrollt. 
+Allerdings handelt es sich bei dem Gehirn nicht um eine Hülle sondern eine Masse. Es ist unwahrscheinlich, dass ein Verfahren wie Marching Cubes die inneren Gehirnstrukturen exakt genug wiedergeben könnte, damit ein Neurologe sinnvolle Schlüsse daraus ziehen kann. Die binäre Aufteilung der Voxel kann außerdem dazu führen, dass Teile des Gehirn fehlerhafter Weise nicht angezeigt werden, obwohl sie es sollten. Weiterhin müsste das Mesh in Echtzeit kontinuierlich angepasst werden, wenn der Nutzer durch die verschiedenen Schichten scrollt. 
 Deshalb eignet sich eine Oberflächengenerieurung nicht zur Visualisierung.
-Hinzu kommt, dass in den Anforderungen kein Anwendungsfall beschrieben wird, der eine Oberfläche erfordert. Dies würde z.B. gelten, wenn 	
-	- Im Fokus der Darstellung, soll das Innere des Gehirns stehen. Ein Mesh, dass die äußere Form beschreibt ist also nicht sinnvoll, zumal keine der Anforderungen Funktionen beschreibt, für die ein Mesh nötig wäre (z.B. Kollsion (Unity)
+Hinzu kommt, dass in den Anforderungen kein Anwendungsfall beschrieben wird, der eine Oberfläche erfordert, wie z.B. die Berechnung einer Kollision des Gehirns mit einem anderen Objekt.	
 	
-Die dreidimensionale Darstellung lässt sich also besser mit einer Volume Rendering Methode umsetzten. 
+Die dreidimensionale Darstellung lässt sich demnach besser mit einer Volume Rendering Methode umsetzten. 
 Aus den in Kapitel \ref{grundlagen} beschriebenen Methoden wurde das Volume Ray Casting ausgewählt. 
 WARUM?
 
-Wie in dem Kapitel \ref{grundlagen} beschrieben, gibt es bereits viele Lösungsansätze zur 3D Darstellung von MRT-Bildern. Obwohl verschiedene Methodne zum Einsatz kommen, ist der am weitesten verbreitete Ansatz der des Volume Rendering.
+Wie in dem Kapitel \ref{grundlagen} beschrieben, gibt es bereits viele Lösungsansätze zur 3D Darstellung von MRT-Bildern. Obwohl verschiedene Methoden zum Einsatz kommen, ist der am weitesten verbreitete Ansatz der des Volume Rendering.
 Dies hat die folgenden Gründe:
 - 
 - ...
@@ -104,6 +103,9 @@ void main(sampler3D _Volume,
   return isoValue * isoValueMask * maskColor;
 }
 \end{minted}
+
+//TODO:
+Manipulation der Maske
 
 \section{2D Darstellung}
 \textbf{U02}
