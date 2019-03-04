@@ -63,6 +63,8 @@ Durch die Controller wurde eine eine einfache aber intuitive Interaktion umgeset
 Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
 Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. in einem geschlossenen ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
 
+Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von \citet{weishaupt09} beschrieben.
+
 \begin{figure}
 	\centering
 	%https://www.flickr.com/photos/11304375@N07/3081315619/
@@ -78,9 +80,8 @@ Während einer MRT wird mit einer Hochfrequenz-Spule (HF-Spule), die in dem MRT-
 Dadurch, dass alle Protonen in dieselbe Richtung zeigen (phasengleich sind), verstärken sie gegenseitig das Signal, dass sie abgeben. Das Signal wird schwächer, sobald sie wieder auseinander laufen (Dephasierung).
 Die Zeit, die die Protonen brauchen, um sich wieder am Magnetfeld auszurichten wird als Relaxtionzeit bezeichnet. Dabei wird zwischen T1- und T2-Relaxtion unterschieden.
 Die Relaxionszeit ist dabei abhängig von der Zusammensetzung des umgebenden Gewebes. Das gemessene MR-Signal, das durch diese beeinflusst wird, ist also für verschiedene Gewebearten verschieden stark.
-\citet{weishaupt09}
 
-\subsection{Datenverarbeitung}
+\subsection{Erfassung dreidimensionaler Daten}
 
 Mit dem eben beschriebenen Verfahren werden jeweils Werte auf der XY-Ebene erfasst. Um dreidimensionale Daten zu erhalten wird diese XY-Ebene entlang der Z-Achse Verschoben. Das Gehirn wird auf diese Weise in einzelne Schichten unterteilt, von denen jede ein zweidimensionales Bild ist.
 Diese Unterteilung in Schichten wird erreicht, indem weitere Spulen verwendet werden, die ein ein zusätzliches Magnetfeld (Gradientenfeld) erzeugen, welches das erste Magnetfeld inhomogen macht. Dementsprechend fällt es zu einer Seite hin ab, was sich durch einen Gradienten, den Z-Gradienten, beschreiben lässt. So kann jeder Z-Schicht eine bestimmte Stärke im Magnetfeld zugewiesen und einzelne Schichten durch die Verwendung bestimmter Frequenzen angeregt werden. In Abbildung \ref{img:zGradient} ist schematisch dargestellt, wie die Schichten entlang des Z-Gradienten hintereinander liegen und eine von ihnen angeregt wird.
@@ -104,6 +105,7 @@ Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, i
 
 Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen verwendet. Allerdings wird der Patient dabei auch der Belastung von radioaktiver Strahlung ausgesetzt ist, die stärker ist als beim normalen Röntgen. Außerdem ist können Weichteile mit einer MRT besser darstellt werden. Sie eignet sich also mehr zur Untersuchung des Gehirns.
 
+REFERENZ
 
 \subsection{Datenformate}
 
@@ -570,12 +572,15 @@ Ebenfalls als HMD zu bezeichnen ist die \textit{Google Glass} von Google. Dabei 
 // TODO:
 verlgiech systeme
 
+//TODO:
+Hololens genauer, eingeschränktes sichtfeld -> Ergebnisse
+
 
 \subsection{Virtual Reality}
 
 Wenn die Realität durch AR also erweitert wird, so wird sie durch Virtual Reality völlig ersetzt. D.h. der Nutzer wird von seiner realen Umgebung abgeschnitten und in eine simulierte versetzt, mit der er in Echtzeit 
 interagieren kann. Dabei wird in der Regel eine möglichst hohe Immersion angestrebt. 
-Im Kontext von VR bezeichnet Immersion den Effekt, dass ein Nutzer dermaßen in die simulierte Welt, die umgibt eintaucht, dass sich diese für ihn real anfühlt und Interaktionen mit ihr natürlich werden. Wie immersiv eine Anwendung ist hängt dabei von der Anwendung selbst ab, sowie auch von dem verwendeten VR-System. 
+Im Kontext von VR bezeichnet Immersion den Effekt, dass ein Nutzer dermaßen in die simulierte Welt, die umgibt eintaucht, dass sich diese für ihn real anfühlt und Interaktionen mit ihr natürlich werden (vgl. \citet{Witmer98}). Wie immersiv eine Anwendung ist hängt dabei von der Anwendung selbst ab, sowie auch von dem verwendeten VR-System. 
 
 Im Laufe der Zeit wurden verschiedene Systeme entwickelt, die eine möglichst immersive Realität erschaffen sollten. 
 Bereits in den 50er Jahren wurde versucht den Nutzer in das Geschehen eines Films zu versetzten, indem er von seiner realen Umgebung isoliert wurde, und seine Wahrnehmung so auf bestimmte Reize gebündelt wurde. % Referenz Sensorama
@@ -684,7 +689,7 @@ Alle der genannten Viewer besitzen die Funktion aus MRT-Datensätzen auch Volume
 %-------------------------------------------------------------
 \subsection{Systeminterne Nutzereingaben}
 
-VR und AR Systeme, die es heutzutage zu kaufen gibt besitzen in der Regel  eine oder mehrere Formen der Eingabe, um mit dem System zu interagieren.
+VR- und AR-Systeme, die es heutzutage zu kaufen gibt besitzen in der Regel  eine oder mehrere Formen der Eingabe, um mit dem System zu interagieren. Da mARt als AR-Anwendung konzipiert ist, werden die verschiedenen Mittel zur Eingabe an dieser Stelle vorgestellt.
 
 Die Eingabemöglichkeiten sind dabei teilweise von der Art des Systems abhängig. 
 Beispielsweise kann für Smartphone-Apps der Touchbildschirm des Gerätes für die Nutzereingabe genutzt werden. 
@@ -700,10 +705,9 @@ Auch AR-Systeme, wie die \textit{Magic Leap} oder die \textit{Hololens} besitzen
 Die andere ist die Steuerung über Gesten, die vor allem AR-Systeme verwenden und die zweite Kategorie darstellt.
 Die in den Systemen verbaute Kamera erfasst dabei die Hände des Nutzers in ihrem Blickfeld und erkennt bestimmte Handgesten, auf die dann reagiert wird. 
 Die \textit{Hololens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Boolm} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
+Die derzeit angekündigte \textit{Hololens 2} verfügt dagegen über eine Hand-Tracking-Funktionalität, die jede Bewegung der Hände, wie z.B. das Greifen von Objekten erkennt (vgl. \citet{hololens2}). 
 
-//TODO: 
-Hololens2
-Die \textit{Magic Leaop} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
+Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
 
 
 \begin{figure}
@@ -732,20 +736,11 @@ Schließlich besitzen in vielen Fällen auch die HMDs der Systeme Knöpfe oder R
 Controller
 \subsection{Leap Motion}
 
-Die \textit{Leap Motion} ist ein externes Gerät, dass die Hände des Nutzers tracked und die genauen Handbewegungen an einen Computer übermitteln kann. 
-Dies funktioniert mittels Tiefeninformationen, die die in \textit{Leap Motion} eingebaute Kamera sammelt. Das Gerät wird über USB an einen Rechner angeschlossen und kann dann als unabhängiges Eingabemedium verwendet werden. Allerdings ist auch eine Verwendung in Kombination mit AR- oder VR-Systemen möglich. 
-Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers verlässlich anchzuemfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. 
+Die \textit{Leap Motion} von \citet{leapMotion} ist ein externes Gerät, dass die Hände des Nutzers tracked und die genauen Handbewegungen an einen Computer übermitteln kann. 
+Um die Informationen zu sammeln, ist die \textit{Leap Motion} mit drei Infrarotemittern und zwei Kameras ausgestattet (vgl. \citet{Weichert13}). Das Gerät wird über USB an einen Rechner angeschlossen und kann dann als unabhängiges Eingabemedium verwendet werden. Allerdings ist auch eine Verwendung in Kombination mit AR- oder VR-Systemen möglich. 
+Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers verlässlich nachzuempfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. 
 
-Die \textit{Leap Motion} erkennt weiterhin vier Handgesten. Diese sind \textit{Circle}, \textit{Swipe}, \textit{Tap} und \textit{Screen Tap}. Die Gesten sind in Abbildung \ref{img:motionGestures} zu sehen. 
-
-\begin{figure}
-	\centering
-	%https://developer-archive.leapmotion.com/documentation/v2/csharp/devguide/Leap_Gestures.html
-	\includegraphics[width=0.7\linewidth]{images/motionGesture.pdf}
-	\caption{Handgesten, die die Leap Motion erkennt. \textit{Circle} (a), \textit{Swipe} (b), \textit{Tap} (c) und \textit{Screen Tap} (d).}
-	\label{img:motionGestures}
-\end{figure}
-
+Wie in Kaptel \ref{konzept} erläutert wird, wird die die \textit{Leap Motion} mit einem HMD kombiniert, um dem Nutzer die Möglichkeit zu geben mARt mit seinen Händen zu steuern.
 
 \subsection{Andere}
 Consolen Controller

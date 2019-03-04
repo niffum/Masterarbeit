@@ -4,12 +4,12 @@
 
 \section{Zusammenfassung}
 
-Im Rahmen dieser Arbeit wurde untersucht, inwiefern eine interactive dreidimensionale Darstellung von MRT-Daten in einer AR-Anwendung einen Mehrwert für Neurologen im Bereich der Behandlung von Schlaganfällen bietet. 
+Im Rahmen dieser Arbeit wurde untersucht, inwiefern eine interaktive dreidimensionale Darstellung von MRT-Daten in einer AR-Anwendung einen Mehrwert für Neurologen im Bereich der Behandlung von Schlaganfällen bietet. 
 Hierzu wurden zunächst technische Hintergründe zu MRT-Daten, den Möglichkeiten der 3D-Darstellung von diesen sowie AR- und VR-Technologien erläutert. Sowie damit in Zusammenhang stehende Arbeiten genannt. Einer der Schwerpunkte dieses Abschnitts war die Vorstellung verschiedener Volume Rendering Techniken.
 
-Als Grundlage zur Konzeption der AR-Anwendung wurden dann Anforderungen aufgestellt, die durch Interviews mit einem Ratiologen der Charitßé Berlin erarbeitet wurden. Diese wurden als User Stories formuliert.
+Als Grundlage zur Konzeption der AR-Anwendung wurden dann Anforderungen aufgestellt, die durch Interviews mit einem Neurologen der Charitßé Berlin erarbeitet wurden. Diese wurden als User Stories formuliert.
 
-Anschließend wurde diskutiert, wie die einzelnen Funktionalitäten von mARt umgesetzt werden können. Hierbei wurden sowohl Aspekte der Implementierung als auch der Gestaltung von Bedienelementen und Aussehen der Anwendung berücksichtigt. Unter anderem wurde aus den zuvor beschriebenen Techniken die geeignetsten ausgewählt. 
+Anschließend wurde diskutiert, wie die einzelnen Funktionalitäten von mARt umgesetzt werden können. Hierbei wurden sowohl Aspekte der Implementierung als auch der Gestaltung von Bedienelementen und Aussehen der Anwendung berücksichtigt. Unter anderem wurden aus den zuvor beschriebenen Techniken die geeignetsten ausgewählt. 
 
 Das beschriebene Konzept wurde implementiert und einzelne relevante Punkte der Umsetzung wurden erläutert. Die Ergebnisse der Implementierung wurden präsentiert.
 
@@ -36,6 +36,21 @@ Testen von anderen verfahren
 Globale illumination
 
 \subsection{Übertragen der Anwendung auf andere Hardware}
-Hololens2, Magic Leap
+
+Im Rahmen dieser Arbeit wurde mARt als AR-Anwendung nur auf der Hololens getestet. 
+Die Verwendung der Anwendung zusammen mit anderen AR-Systemen, könnte noch mehr Aufschluss über die Möglichkeiten von AR-Systemen im medizinischen Bereich bieten. 
+mARt könnte dabei auf vergleichbaren AR-Systemen, wie der Magic Leap getestet werden.
+Da die Entwicklung solcher Systeme momentan weiter fortschreitet, kommen allerdings auch noch nicht erschienene Geräte in Betracht.
+
+Wie im Kapitel \ref{evaluation} beschreiben wurde, ist die Interaktion mit mARt durch das geringe Sichtfeld der Hololens erschwert. Die Inhalte werden abgeschnitten und die virtuellen Hände nehmen viel Platz ein. 
+Dieses und andere Probleme, die bei der Verwendung von mARt auf der Hololens festgestellt wurden, könnten eventuell durch die Verwendung auf der Hololens 2 behoben werden. 
+Das Gerät wurde im Februar 2019 vorgestellt und soll voraussichtlich im April 2019 erscheinen. 
+Die neue Version der Hololens besitzt ein mehr als doppelt so großes Sichtfeld, wie ihr Vorgänger (vgl. \citet{hololens2}), was dem eben genannten Problem entgegen wirkt. 
+Weiterhin verfügt die Hololens 2 eine eingebaute Hand-Tracking-Funktion (vgl. \citet{hololens2}). Diese könnte an Stelle der Leap Motion zum Erfassen der Händer des Nutzers verwendet werden. Dadurch entstehen zwei Vorteile gegenüber der aktuellen Anwendung. Zum Einen, ist anzunehmen, dass die virtuellen Hände nicht länger angezeigt werden müssen. Dies vereinfacht die Benutzung und lässt mehr Raum im Sichtfeld für tatsächliche Inhalte. Zum Anderen, könnte die Anwendung auf die Hololens2 deployed und somit kabellos verwendet werden. 
+
+Weiterhin ist davon auszugehen, dass die Hololens 2 über eine Höhere Rechenleistung verfügt, als ihr Vorgänger. Dies könnte, neben der eben genannten Optimierung des Renderingverfahrens, eine flüssige Darstellung der 3D-MRT-Daten ermöglichen.
+
+Eine Übertragung der Anwendung auf die Hololens 2 könnte die Benutzbarkeit der Anwendung demnach stark erhöhen.
+
 
 \section{Fazit}
