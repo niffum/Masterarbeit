@@ -111,7 +111,7 @@ REFERENZ
 
 \subsection{Datenformate}
 
-MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches z.B. neben den Bildern auch Patientendaten speichert.
+MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches neben den Bildern z.B. auch Patientendaten speichert.
 
 Das NIfTI-Format wurde 2003 von der Data Format Working Group (DFWG) als Alternative zum vorherigen Analyze 7.5-Format entwickelt, das Probleme mit der Orientierung der Daten aufwies. Durch fehlende Informationen, wie die Daten im Raum liegen war oft nicht klar, welche Gehirnhälfte die rechte und welche die linke ist. Deshalb wird im NIfTI-Format in Header festgelegt, wie die Koordinaten der Voxel auf Weltkoordinaten abgebildet sind. Beide Formate werden im Bereich des Neuroimaging verwendet.
 Bilderinformationen werden bei ersterem in einer einzigen Daten mit der Endung .nii gespeichert, während Analyze 7.5 die Daten in zwei verschiedenen Dateien abgelegt hat: Einer Header-Datei und einer, die die Volumendaten enthalten hat. Um mit dem Analyze-Format kompatibel zu bleiben besitzen auch NIfTI-Dateien einen 348 Byte Header.
@@ -178,12 +178,10 @@ Die Klassifikation von Voxeln bestimmt deren optische Eigenschaften in Abhängig
 
 Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann vor oder nach der Interpolation der Volumendaten durchlaufen werden.
 
-Die Daten müssen interpoliert werden, da das Volumen wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese wird in der Regel durch die Verwendung eines Filters bzw. einer Convolution umgesetzt. Sir findet während des Rasterisierungsschrittes statt?
+Die Daten müssen interpoliert werden, da das Volumen wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese wird in der Regel durch die Verwendung eines Filters bzw. einer Convolution umgesetzt. Sie findet während des Rasterisierungsschrittes statt?
 
 Werden die Voxel vor dieser Interpolation klassifiziert, wird dies als Pre-Klassifikation bezeichnet. Dabei werden jedem Isowert die entsprechenden Eigenschaften zugewiesen. Die Zwischen den Voxeln bestehenden Lücken werden aufgefüllt, indem zwischen den Farb- und Opazitätswerten interpoliert wird. 
 Im Gegensatz dazu, werden bei der Post-Klassifakation zuerst alle Skalarwerte durchlaufen und der Bereich zwischen ihnen durch Interpolation der Isowerte überbrückt. Erst danach werden den Werten durch die Klassifizierung Eigenschaften zugewiesen. Der Unterschied besteht also darin, ob die Erzeugung von neuen Werten, die die vorhandenen verbinden auf Basis der Voxelwerte oder der Werte ihrer Eigenschaften stattfindet. \citet{Hadwiger06}
-
-
 
 Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlich unterschiedlichen Ergebnissen. Die Interpolation der Voxeleigenschaften bei der Pre-Klassifizierung führt zu Artefaktbildung, da die lediglich Eigenschaftswerte "gestreckt" werden, ohne die Formen des Volumens zu beachten. Bei der Post-Klassifikation werden die fehlenden Daten anhand der Struktur des Objektes erzeugt. Dies führt zu einer deutlich klareren Darstellung des Volumens. Der Vergleich ist in \ref{img:prepost} veranschaulicht.
 
@@ -194,6 +192,23 @@ Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlic
 	\caption{Vergleich zweier Volumen Renderings mit unterschiedlicher Klassifizierung. Durch die Verwendung von Pre-Klassifikation (links) entstehen Artefakte. Die Post-Klassifikation (rechts) liefert eine bessere Darstellung des Volumens.}
 	\label{img:repost}
 \end{figure}
+
+Falls eine Transferfunktion eine hohe Frquenz, schnelle Veränderung auffweist, können diese bei der Abtastung des Volumens durch Strahlen verlohren gehen, wenn die Abstände zwischen den Abtastungspunkten zu groß sind. 
+Dies ist z.B. der Fall bei Pre-Klassifikation. 
+Um dem entgegen zu wirken, kann die Abtastungsfrequenz des Strahl in der Post-Klassifikation erhöht werden. Dies resultiert allerdings in einen höheren Rechenaufwand, der das Rendering verlangsamt. 
+Um dieses Problem zu lösen kann die pre-integrierte Klassifikation angewandt werden. Dabei ist der abstand zwischen den Abtastungspunkten konstant. Es werden jeweils zwei Abtastungspunkten betrachtet, wobei einer der vordere und einer der hintere ist. 
+Um den Alphawert eines Punktes $i$ zu bestimmen, wird ein Integral über die Alphawerte von $i$ und $i+1$ berechenet. Der Integral beschreibt die Fläche des unter der Transferfunktion liegenden Bereichs zwischen zwei Punkten. 
+Der negative Wert des Integrals wird als Exponent einer Exponentialfunktion eingesetzt und der daraus resultierende Wert schließlich von $1$ abgezogen. Das Endergebnis ist der Opazitätswert des Punktes $i$.
+
+Segmente statt voxel
+Funktion für alpha (K), funktion für lookup iso (s), funktion um uv werte zu erhalten (x)
+lambda ist p, das etlang strahl erhöh wird
+Die Berechnung des Alphawertes $\alpha_i$ des $i$-ten Segments wird wie folgt berechnet:
+
+\begin{align}
+   a_i = 1-exp\left ( \int_{id}^{(i+1)d)} \kappa\left ( s(\mathbf{x}(\lambda)) \right ) d\lambda  \right )
+\end{align}
+
 
 Welche Interpolation? Wann?
 
@@ -299,7 +314,10 @@ Bei einer lokalen Beleuchtung der einzelnen Voxel kommt meist das Phong-Beleucht
 Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Diese werden aufeinander addiert und ergeben so das Phong-Beleuchtungsmodell.  In Abbildung \ref{img:phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie in Kombination die vollständige Beleuchtung ergeben.
 Die folgende Formel beschreibt, wie die Beleuchtung berechnet wird. Die Terme zwischen den $+$-Zeichen stehen für die Berechnungen der genannten Komponenten.
 
-$I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n$
+\begin{align}
+I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n
+\end{align}
+
 
 $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Transferfunktion durch diese bestimmt wird. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
 
@@ -316,14 +334,14 @@ Zur Berechnung der Gradienten können verschiedene Verfahren eingesetzt werden. 
 Ist ersteres der Fall werden die Gradienten in den meisten Fällen per Pixel mit Hilfe der Finite-Differenzen-Methode berechnet. 
 Dabei wird jeweils die Differenz zwischen dem Isowert eines Voxels und den Voxeln in seiner festgelegten Umgebung gebildet. Dies lässt sich als folgende Formel ausdrücken: 
 
-$
+\begin{align}
 \Delta f(x,y,z)\approx \frac{1}{2h}
 \left ( \begin{matrix}
 f(x + h, y, z) - f(x - h, y, z)\\ 
 f(x, y + h, z) - f(x, y - h, z)\\ 
 f(x, y, z + h) - f(x, y, z - h)
 \end{matrix} \right )
-$
+\end{align}
 
 //TODO:
 Convolution?
@@ -339,16 +357,23 @@ Segmentierung
 
 Komposition bezeichnet die Verrechung einzelner Voxelwerte. Abhängig von der Blickrichtung der Kamera beeinflussen die Eigenschaften eines Wertes das Aussehen anderer Werte um ihn herum, z.B. bei zwei Voxeln, die hintereinander liegen. Um die Endgültige Farbe eines Pixels zu erhalten werden die Werte von hintereinander liegenden Voxlen in der Regel auf addiert. Hierbei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
 
-$\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
+\begin{align}
+\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}
+\end{align}
+\begin{align}
+\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}
+\end{align}
 
-$\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}$
 
 Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
 Sollen die Werte von hinten nach vorne addiert werden, wird dies durch die folgende Formel beschrieben.
 
-$\hat{C}_{i}=C_{i}+(1-\hat{A}_{i})\hat{C}_{i+1}$
-
-$\hat{A}_{i}=A_{i}+(1-\hat{A}_{i})\hat{A}_{i+1}$
+\begin{align}
+\hat{C}_{i}=C_{i}+(1-\hat{A}_{i})\hat{C}_{i+1}
+\end{align}
+\begin{align}
+\hat{A}_{i}=A_{i}+(1-\hat{A}_{i})\hat{A}_{i+1}
+\end{align}
 
 Die Komposition erfolgt für jeden Strahl am Ende des Renderingprozesses. Die Eigenschaften des Voxels können in dessen Verlauf verändert werden. Beispielsweise durch die Verwendung einer Transferfunktion oder eines Shaders.
 

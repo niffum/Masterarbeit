@@ -122,13 +122,17 @@ Um die Schnittpunkte des Strahls zu ermitteln nimmt man an, dass die sechs Seite
 Der Würfel wird durch zwei Eckpunkte beschrieben. Da der Würfel Koordinaten von -0,5 bis 0,5 hat können wir hierfür die jeweils kleinsten und größten Koordinaten nutzen. 
 Die Schnittpunkte des Strahls, mit den x-, y- und z-Ebenen ergeben sich durch das Umstellen der Formel, die einen Strahl beschreibt:
 
-$p=r_{Ursprung}+t*r_{Richtung}$
+\begin{align}
+p=r_{Ursprung}+t*r_{Richtung}
+\end{align}
 
 $r_{Ursprung}$ ist dabei der Ursprung des Strahls und $r_{Richtung}$ seine Richtung. $p$ ist ein Punkt auf dem Strahl und $t$ ein Parameter, der bestimmt wie weit der Punkt vom Ursprung entfernt ist.
 
 Um die Schnittpunkte mit den Ebenen zu erhalten wird die Formel nach $t$ umgestellt:
 
-$t=(p-r_{Ursprung})/r_{Richtung}$
+\begin{align}
+t=(p-r_{Ursprung})/r_{Richtung}
+\end{align}
 
 Für $p$ werden jeweils die beiden Eckpunkte des Würfels eingesetzt, die den Würfel beschreiben. Dadurch sind in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ insgesamt 6 Schnittpunkte mit den Ebenen bekannt. Zwei auf jeder Ebene. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt (und damit welche Ebene) weiter vorne liegt. 
 % Was wenn Strahl parallel zur Ebene ist??
@@ -171,9 +175,12 @@ Der Alphawert der so erhaltenen Farbe wird noch einmal halbiert, um die Darstell
 Schließlich wird der erhaltene Farbwert mit den vorhergehenden verrechnet. Die Komposition erfolgt dabei von vorne nach hinten, da der Strahl in dieser Richtung abgetastet wird, wie folgt:
 % Referenz GPU Gems
 
-$\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}$
-
-$\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}$
+\begin{align}
+\hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}
+\end{align}
+\begin{align}
+\hat{A}_{i}=(1-\hat{A}_{i-1})A_{i}+\hat{A}_{i-1}
+\end{align}
 
 Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
 Wenn diese Farbe einen vorher definierten Schwellenwert überschreitet wird die Schleife abgebrochen. Der Schwellenwert kann vom Nutzer manipuliert werden und bestimmt die ?Helligkeit? der Darstellung.
