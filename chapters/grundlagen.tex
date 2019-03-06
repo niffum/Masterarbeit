@@ -174,11 +174,13 @@ REFERENZEN-> GPU GEMS
 
 \subsection{Klassifikation}
 
-Die Klassifikation von Voxeln bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. Diese beschreiben, die Aufnahme und Abgabe von Licht eines einzelnen Voxels. Die Abgabe von Licht manifestiert sich aus der Sicht des Betrachters in der Farbe eines Voxels. Die Aufnahme äußert sich in dem Grad der Opazität. Durch die Unterschiede in Farbe und Opazität einzelner Voxel, werden verschiedene Bereichen, wie z.B. Gewebestrukturen voneinander unterscheidbar. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren. Auf diese wird im folgenden Abschnitt näher eingegangen. 
+Die Klassifikation von Voxeln bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. Diese beschreiben, die Aufnahme und Abgabe von Licht eines einzelnen Voxels. Die Abgabe von Licht manifestiert sich aus der Sicht des Betrachters in der Farbe eines Voxels. Die Aufnahme äußert sich in dem Grad der Opazität. Durch die Unterschiede in Farbe und Opazität einzelner Voxel, werden verschiedene Bereichen, wie z.B. Gewebestrukturen voneinander unterscheidbar. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren, durch die jedem Isowert ein Opazitäts- und Farbwert zugewiesen wird. Auf diese wird im folgenden Abschnitt näher eingegangen. 
+
+An dieser Stelle soll ein Überblick über verschiedene Klassifikationen gegeben werden.
 
 Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann vor oder nach der Interpolation der Volumendaten durchlaufen werden.
 
-Die Daten müssen interpoliert werden, da das Volumen wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese wird in der Regel durch die Verwendung eines Filters bzw. einer Convolution umgesetzt. Sie findet während des Rasterisierungsschrittes statt?
+Die Daten müssen interpoliert werden, da das Volumen wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese findet während des Rasterisierungsschrittes der Grafikpipeline statt.
 
 Werden die Voxel vor dieser Interpolation klassifiziert, wird dies als Pre-Klassifikation bezeichnet. Dabei werden jedem Isowert die entsprechenden Eigenschaften zugewiesen. Die Zwischen den Voxeln bestehenden Lücken werden aufgefüllt, indem zwischen den Farb- und Opazitätswerten interpoliert wird. 
 Im Gegensatz dazu, werden bei der Post-Klassifakation zuerst alle Skalarwerte durchlaufen und der Bereich zwischen ihnen durch Interpolation der Isowerte überbrückt. Erst danach werden den Werten durch die Klassifizierung Eigenschaften zugewiesen. Der Unterschied besteht also darin, ob die Erzeugung von neuen Werten, die die vorhandenen verbinden auf Basis der Voxelwerte oder der Werte ihrer Eigenschaften stattfindet. \citet{Hadwiger06}
@@ -193,29 +195,30 @@ Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlic
 	\label{img:repost}
 \end{figure}
 
-Falls eine Transferfunktion eine hohe Frquenz, schnelle Veränderung auffweist, können diese bei der Abtastung des Volumens durch Strahlen verlohren gehen, wenn die Abstände zwischen den Abtastungspunkten zu groß sind. 
-Dies ist z.B. der Fall bei Pre-Klassifikation. 
-Um dem entgegen zu wirken, kann die Abtastungsfrequenz des Strahl in der Post-Klassifikation erhöht werden. Dies resultiert allerdings in einen höheren Rechenaufwand, der das Rendering verlangsamt. 
-Um dieses Problem zu lösen kann die pre-integrierte Klassifikation angewandt werden. Dabei ist der abstand zwischen den Abtastungspunkten konstant. Es werden jeweils zwei Abtastungspunkten betrachtet, wobei einer der vordere und einer der hintere ist. 
-Um den Alphawert eines Punktes $i$ zu bestimmen, wird ein Integral über die Alphawerte von $i$ und $i+1$ berechenet. Der Integral beschreibt die Fläche des unter der Transferfunktion liegenden Bereichs zwischen zwei Punkten. 
-Der negative Wert des Integrals wird als Exponent einer Exponentialfunktion eingesetzt und der daraus resultierende Wert schließlich von $1$ abgezogen. Das Endergebnis ist der Opazitätswert des Punktes $i$.
+Aber auch bei der Verwendung einer Post-klassifikation können Artefakte entstehen.
+Um das Volumen darzustellen, werden einzelne Voxel entlang eines Strahls abgetastet und ihre Eigenschaftswerte mit einander verrechnet (s. Abschnitt \ref{rayCasting}). 
+Die Frequenz in denen die Werte geprüft werden, kann dabei variieren. Ist der Abstand zwischen zwei Voxeln zu groß, kann es dazu kommen, dass Wertveränderungen, die zwischen diesen liegen nicht erfasst werden, was zu Artefakten führt. 
+Um dem entgegen zu wirken, könnte die Abtastfrequenz erhöht werden. Dies resultiert allerdings in einen höheren Rechenaufwand, der das Rendering verlangsamt.
+Eine alternative Lösung dazu ist die Verwendung einer pre-integrierten Klassifikation.
+Um alle Werte zwischen zwei Voxeln zu erfassen, wird hierbei nicht nur der Wert eines Voxels betrachtet, sondern der Bereich zwischen diesem und dem nächsten, der abgetastet werden soll. 
 
-Segmente statt voxel
-Funktion für alpha (K), funktion für lookup iso (s), funktion um uv werte zu erhalten (x)
-lambda ist p, das etlang strahl erhöh wird
-Die Berechnung des Alphawertes $\alpha_i$ des $i$-ten Segments wird wie folgt berechnet:
+Der Strahl, der das Volumen durchläuft wird somit in Segmente aufgeteilt, die jeweils durch einen vorderen und hinteren Punkt begrenzt werden. Für jedes Segement und damit für jeden Abtastpunkt, wird durch Bildung eines Integrals sowohl der Opazitäts- als auch der Farbwert approximiert. 
+Die Errechnung des Opazitätwertes $a_i$ des  $i$-ten Abtastpunktes lässt sich wie folgt beschreiben:
 
 \begin{align}
    a_i = 1-exp\left ( \int_{id}^{(i+1)d)} \kappa\left ( s(\mathbf{x}(\lambda)) \right ) d\lambda  \right )
 \end{align}
+ 
+Durch die Funktion  $\mathbf{x}(\lambda)$ werden die Koordinaten des Volumens berechnet, an denen der Punkt sich befindet. $\lambda$ repräsentiert dabei den aktuellen Punkt auf dem Strahl. 
+Die Koordinaten werden $s(x)$ übergeben, wodurch die Isowerte an dieser Stelle bestimmt werden. $\kappa(x)$ ist die Transferfunktion für die Opazitätwerte, die anschließend noch mit dem Abstand zwischen den Abtastpunkten $d$ und $\lambda$ multipliziert wird.
 
+Der Integral, dieser Funktion beschreibt die Fläche des Bereich unter ihr, zwischen den Punkten $id$ und $(i+1)d$. Veränderungen der Funktion zwischen diesen Punkten wirken sich auf diese Fläche aus. 
+Der Flächenwert dient als Exponent einer Exponentialfunktion, deren Ergebnis anschließend von $1$ abgezogen wird. Dadurch wird der Integralwert in einen Bereich zwischen $0$ und $1$ überführt. 
 
-Welche Interpolation? Wann?
-
-Pre-Integrierte Tandferfunktion ? 
+\citet{Hadwiger06}
 
 //TODO:
-Klassifikationen unterscheiden
+Welche Klassifikation wird verwendet? Relevanz für Arbeit
 
 \subsection{Transferfunktion}
 
@@ -256,15 +259,15 @@ Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da
 \label{beleuchtung}
 
 Um dem gerenderten Objekt einen möglichst plastischen Eindruck zu verleihen und es somit realistischer aussehen zu lassen ist es sinnvoll dieses zu beleuchten. 
-Die Beleuchtung wird in in der Regel durch einen Shader implementiert. Jeder Voxel wird dabei einzeln nach der Anwendung der Transfertextur geshadet, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
-
+%Die Beleuchtung wird in der Regel durch einen Shader implementiert.
+Für jeden Voxel wird dabei einzeln die Auswirkung der Beleuchtung ermittelt nachdem die  Transfertextur angewendet wurde, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
 
 Die lokale Beleuchtung betrachtet nur die Beziehung des Lichtes zu dem Objekt. Dabei bleiben Beleuchtungseffekte, wie Schatten, den das Volumen wirft oder indirekte Beleuchtung außen vor. Zudem ist das Beleuchtungsmodell auf Oberflächen ausgelegt und nicht auf ein Volumen. 
 
 Eine realistischere Beleuchtung bietet daher die globale Beleuchtung mit Schatten und indirekter Beleuchtung.
-Um Schatten im Volumen darzustellen, muss bestimmt werden, wie viel Licht bei einem Voxel ankommt, nachdem das Licht andere diesen umgebende Voxel passiert hat und dadurch abgeschwächt wurde. 
-Dazu könnte ein Schatten-Volumen erstellt werden, indem jeder Voxel aus Sicht des Lichts gerendert wird, welches mit den Werten aus der Transfertextur verrechnet wird. Dieses Vorgehen ist allerdings unperformant und liefert unschöne Ergebnisse.\citet{Fernando04}
-Stattdessen wird das Volumen durch Texture Slicing aus der GPU (?) in Schichten unterteilt. Jede Schicht dann wird jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
+Um Schatten im Volumen darzustellen, muss bestimmt werden, wie viel Licht bei einem Voxel ankommt, nachdem das Licht anderer diesen umgebende Voxel passiert hat und dadurch abgeschwächt wurde. 
+Dazu könnte ein Schatten-Volumen erstellt werden, indem jeder Voxel aus Sicht des Lichts gerendert wird, welches mit den Werten aus der Transfertextur verrechnet wird. Dieses Vorgehen ist allerdings unperformant und liefert unschöne Ergebnisse.(\citet{Fernando04})
+Stattdessen wird das Volumen durch Texture Slicing aus der GPU (?) in Schichten unterteilt. Jede Schicht wird dann jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
 Die Lage der Schichten wird durch die die Winkelhalbierende des Blickrichtungswinkels und des Lichtrichtungswinkels bestimmt. Dadurch treffen beide Vektoren im selben Winkel auf die Schichten. Abhängig von dem Skalarprodukt der Vektoren kann auch die Inverse des Blickwinkels verwendet werden. Das Skalarprodukt bestimmt außerdem, ob die Schichten aus Kamerasicht von hinten nach vorne oder von vorne nach hinten durchlaufen werden. Während für das Licht immer von vorne nach hinten gerendert wird.
 Die Position der Vektoren und der winkelhalbierenden Schicht ist in Abbildung \ref{img:halfAngleSlice} dargestellt.
 
@@ -310,6 +313,9 @@ Bei einer lokalen Beleuchtung der einzelnen Voxel kommt meist das Phong-Beleucht
 	\label{img:phong}
 \end{figure}
 
+Aufgrund der hohen Komplexität der globalen Beleuchtung, wird im Rahmen dieser Arbeit nur eine lokale Beleuchtung implementiert werden. 
+Hierzu wird in vielen Fällen das Phong-Beleuchtungmodell verwendet und wird auch für mARt implementiert.
+
 % PHONG
 Das Modell setzt sich aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Diese werden aufeinander addiert und ergeben so das Phong-Beleuchtungsmodell.  In Abbildung \ref{img:phong} ist zu sehen, wie die einzelnen Komponenten isoliert aussehen und wie sie in Kombination die vollständige Beleuchtung ergeben.
 Die folgende Formel beschreibt, wie die Beleuchtung berechnet wird. Die Terme zwischen den $+$-Zeichen stehen für die Berechnungen der genannten Komponenten.
@@ -322,7 +328,6 @@ I = k_{a}+I_{L}k_{d}(\vec{l}\cdot\vec{n})+I_{L}k_{s}(\vec{r}\cdot\vec{v})^n
 $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Transferfunktion durch diese bestimmt wird. $\vec{n}$ ist die Normale und $\vec{l}$ ist der Richtungsvektor zum Licht. $I_{l}$ ist die Intensität des Lichtes. $\vec{r}$ und $\vec{v}$ sind der Reflexionsvektor des einfallenden Lichtes und der Richtungsvektor zur Kamera. Weiterhin setzt sich die Formel aus dem ambienten, diffusen und spiegelndem Koeffizienten $k_{a}$, $k_{d}$ und $k_{s}$ zusammen. Hinzu kommt der Exponent $n$, der konstant ist und die Stärke der Reflexion bestimmt. (?)
 
 \citet{phong75}
-//TODO: Andere Beleuchtungsformen? -> Vergleich
 
 \subsection{Gradientenberechnung}
 
@@ -342,6 +347,8 @@ f(x, y + h, z) - f(x, y - h, z)\\
 f(x, y, z + h) - f(x, y, z - h)
 \end{matrix} \right )
 \end{align}
+
+Für die Phong-Beleuchtung, die in dieser Arbeit implementiert wird, werden die Gradienten durch die Finite-Differenzen-Methode ermittelt. 
 
 //TODO:
 Convolution?
@@ -381,6 +388,8 @@ Die Komposition erfolgt für jeden Strahl am Ende des Renderingprozesses. Die Ei
 \section{Volume Rendering Methoden}
 //TODO:
 Splatting??
+
+An dieser Stelle werden verschiedene Methoden erläutert, mit denen Volume Rendering umgesetzt werden kann. Die Implementierung dieser Arbeit verwendet das Ray-Casting Verfahren. Es werden allerdings auch andere prominente Methoden beschreiben, um einen Überblick über die Thematik und Vergleichspotenzial zu schaffen.
 
 \subsection{Volumetrisches Ray-Casting}
 \label{rayCasting}
@@ -569,12 +578,12 @@ Laut \citet{azuma97} zeichnet sich eine AR-Anwendung durch folgende Eigenschafte
 
 AR und VR verbindet eine ähnliche Geschichte. Die frühesten VR-Systeme waren nach heutiger Definition AR-Systeme.
 %Geshcihte?
-Auch einige AR-HMDs funktionieren mit Stereoskopie. Die eben genannten Definition lässt allerdings auch andere Systeme zu. Tatsächlich gibt es eine Vielzahl von AR-Systemen. 
-Beispielsweise kann eine AR-Anwendung mit oder manche ohne einen Bildschirm konzipiert werden, der die Augmentierung darstellt. Im letzteren Fall werden dann meist Beamer o.Ä. verwendet, um die Objekte in die reale Welt zu projizieren. 
+Auch einige AR-HMDs funktionieren mit Stereoskopie (s. \ref{vr}). Die eben genannten Definition lässt allerdings auch andere Systeme zu. Tatsächlich gibt es eine Vielzahl von AR-Systemen. 
+Beispielsweise kann eine AR-Anwendung mit oder ohne einen Bildschirm konzipiert werden, der die Augmentierung darstellt. Im letzteren Fall werden dann meist Beamer o.Ä. verwendet, um die Objekte in die reale Welt zu projizieren. 
 Die Mehrzahl von AR-Software verwendet wahrscheinlich allerdings Bildschirme. %Warum?
 Aber auch hier gibt es verschiedene Lösungsansätze. Dies betrifft zum einen die Positionierung des Bildschirms. Dieser kann direkt vor dem Auge des Nutzers, in der Welt oder in einem tragbaren Endgerät platziert werden.
-Weiterhin können Bildschirme durchsichtig oder undurchsichtig sein. Handelt es sich um einen durchsichtigen Bildschirm, wird darauf nur die Augmentierung dargestellt. Des Vorteil hierbei ist, dass der seine Umgebung größtenteils unverfälscht wahrnehmen kann. Damit ist aber gleichzeitig der Kontrast zu den nicht unbedingt realitätsnahen 3D-Objekten größer.
-Bei undurchsichtigen Bildschirmen nimmt eine Kamera die Umgebung auf und gibt sie augmentiert auf dem Bildschirm aus. Diese Technik wird z.B. verwendet wenn AR-Anwendungen für Smartphones oder Tablets entwickelt werden. In Abbildung \ref{img:ARPhone} ist dargestellt, wie eine solche Anwendung auf einem Smartphone aussieht.
+Weiterhin können Bildschirme durchsichtig oder undurchsichtig sein. Handelt es sich um einen durchsichtigen Bildschirm, wird darauf nur die Augmentierung dargestellt. Der Vorteil hierbei ist, dass der Nutzer seine Umgebung größtenteils unverfälscht wahrnehmen kann. Damit ist aber gleichzeitig der Kontrast zu den nicht unbedingt realitätsnahen 3D-Objekten größer.
+Bei undurchsichtigen Bildschirmen nimmt eine Kamera die Umgebung auf und gibt sie augmentiert auf dem Bildschirm aus. Diese Technik wird z.B. verwendet wenn AR-Anwendungen für Smartphones oder Tablets entwickelt werden. In Abbildung \ref{img:ARMarker} ist dargestellt, wie eine solche Anwendung auf einem Smartphone aussieht.
 
 \begin{figure}
 	\centering
@@ -585,16 +594,16 @@ Bei undurchsichtigen Bildschirmen nimmt eine Kamera die Umgebung auf und gibt si
 \end{figure}
 
 Alle Techniken haben gemeinsam, dass eine Kamera Teil des Systems ist, die die Umgebung des Nutzers aufnimmt. Dadurch werden Tiefen- und Bildinformationen gesammelt. Durch die Auswertung dieser und anderer Informationen, wie z.B. GPS- oder Wlan-Daten, können 3D-Objekte korrekt mit der Umgebung in Beziehung gesetzt werden. So ist es möglich ein virtuelles Objekt auf oder hinter ein reales zu stellen. Durch ein möglichst umfassendes Verständnis des umgebenden Raumes ist es auch möglich, dass die Elemente der erweiterten Realität in der realen Welt an der richtigen Stelle platziert werden und dort auch bleiben.
-Alternativ dazu können am gewünschten Ort Markierungen gesetzt werden, die das System erkennt und somit genau dort das 3D-Modell darstellen kann. Solche Marker können verschieden aussehen. Oft werden komplexe weiße Muster dafür verwendet, weil diese gut zu identifizieren und schwer zu verwechseln sind. In Abbildung \ref{img:ARMarker} ist ein 3D-Objekt zu sehen, dass auf einem Marker platziert wurde. 
+Alternativ dazu können am gewünschten Ort Markierungen gesetzt werden, die das System erkennt und somit genau dort das 3D-Modell darstellen kann. Solche Marker können verschieden aussehen. Oft werden komplexe schwarz-weiße Muster dafür verwendet, weil diese gut zu identifizieren und schwer zu verwechseln sind. In Abbildung \ref{img:ARMarker} ist ein 3D-Objekt zu sehen, dass auf einem Marker platziert wurde. 
 
 Zurzeit gibt es verschiedene AR-Systeme auf dem Markt, die sich teilweise in ihrer Funktionsweise unterscheiden. Die wichtigsten sind hier aufgezählt.
 
-Smartphones. Wie bereits erwähnt können Smartphones oder Tablets als Fenster in die erweiterte Realität dienen. Dazu kann wahrscheinlich jedes Smartphone mit Kamera genutzt werden. Es gibt verschiedene SDKs und Frameworks zur Entwicklung von AR-Apps. Dazu gehören unter anderem \textit{ARKit} von Apple, \textit{ARCore} von Google und \textit{Vuforia}.
+Smartphones. Wie bereits erwähnt können Smartphones oder Tablets als Fenster in die erweiterte Realität dienen. Dazu kann wahrscheinlich jedes Smartphone mit Kamera genutzt werden. Es gibt verschiedene SDKs und Frameworks zur Entwicklung von AR-Apps. Dazu gehören unter anderem \textit{ARKit} von \citet{ARKit}, \textit{ARCore} von \citet{ARCore} und \textit{Vuforia} von \citet{vuforia}.
 
-Binoculare HMDs. Hierzu zählen HMDs, die vor jedem Auge des Nutzers einen Bildschirm platzieren und so stereoskopisch dreidimensionale Inhalte simulieren. Im AR-Bereich sind dabei die \textit{Hololens} von Microsoft sowie das Headset von Magic Leap die wichtigsten Vertreter der Technologie. Beide Geräte haben durchsichtige Bildschirme und können unabhängig von einem Rechner verwendet werden. 
-An dieser Stelle sollen auch VR-Geräte, wie die HTC Vive Pro genannt werden, die durch ihre eingebaute Kamera auch die Umgebung auf ihren Bildschirmen darstellen kann. Diese kann dabei natürlich auch mit virtuellen Inhalten erweitert werden. 
+Binoculare HMDs. Hierzu zählen HMDs, die vor jedem Auge des Nutzers einen Bildschirm platzieren und so stereoskopisch dreidimensionale Inhalte simulieren. Im AR-Bereich sind dabei die \textit{Hololens} von \citet{hololens} sowie die \textit{Magic Leap One} von \citet{magicLeap} nennenswerte Vertreter der Technologie. Beide Geräte haben durchsichtige Bildschirme und können unabhängig von einem Rechner verwendet werden. 
+An dieser Stelle sollen auch VR-Geräte, wie die \textit{HTC Vive Pro} von \citet{vivePro} genannt werden, die durch ihre eingebaute Kamera auch die Umgebung auf ihren Bildschirmen darstellen kann. Diese kann dabei natürlich auch mit virtuellen Inhalten erweitert werden. 
 
-Ebenfalls als HMD zu bezeichnen ist die \textit{Google Glass} von Google. Dabei handelt es sich um ein Brillengestell, dass vor einem der Augen des Nutzers einen durchsichtigen Bildschirm fixiert, auf dem digitale Inhalte dargestellt werden können. Google Glass wird momentan allerdings nur noch in großen Firmen verwendet.
+%Ebenfalls als HMD zu bezeichnen ist die \textit{Google Glass} von \citet{googleGlass}. Dabei handelt es sich um ein Brillengestell, dass vor einem der Augen des Nutzers einen durchsichtigen Bildschirm fixiert, auf dem digitale Inhalte dargestellt werden können. Google Glass wird momentan allerdings nur noch von Firmen verwendet.
 
 // TODO:
 verlgiech systeme
@@ -604,18 +613,19 @@ Hololens genauer, eingeschränktes sichtfeld -> Ergebnisse
 
 
 \subsection{Virtual Reality}
+\label{vr}
 
 Wenn die Realität durch AR also erweitert wird, so wird sie durch Virtual Reality völlig ersetzt. D.h. der Nutzer wird von seiner realen Umgebung abgeschnitten und in eine simulierte versetzt, mit der er in Echtzeit 
 interagieren kann. Dabei wird in der Regel eine möglichst hohe Immersion angestrebt. 
-Im Kontext von VR bezeichnet Immersion den Effekt, dass ein Nutzer dermaßen in die simulierte Welt, die umgibt eintaucht, dass sich diese für ihn real anfühlt und Interaktionen mit ihr natürlich werden (vgl. \citet{Witmer98}). Wie immersiv eine Anwendung ist hängt dabei von der Anwendung selbst ab, sowie auch von dem verwendeten VR-System. 
+Im Kontext von VR bezeichnet Immersion den Effekt, dass ein Nutzer dermaßen in die simulierte Welt, die umgibt eintaucht, dass sich diese für ihn real anfühlt und Interaktionen mit ihr natürlich werden (vgl. \citet{Witmer98}). Wie immersiv eine Anwendung ist,		 hängt dabei von der Anwendung selbst ab, sowie auch von dem verwendeten VR-System. 
 
 Im Laufe der Zeit wurden verschiedene Systeme entwickelt, die eine möglichst immersive Realität erschaffen sollten. 
-Bereits in den 50er Jahren wurde versucht den Nutzer in das Geschehen eines Films zu versetzten, indem er von seiner realen Umgebung isoliert wurde, und seine Wahrnehmung so auf bestimmte Reize gebündelt wurde. % Referenz Sensorama
-In den 1960ern wurden dann erste Versionen eines Head Mounted Displays (HMD) entwickelt. %Referenz Sword of Dmaocles -> Eigentlich AR
+Bereits in den 50er Jahren wurde versucht den Nutzer in das Geschehen eines Films zu versetzten, indem er von seiner realen Umgebung isoliert wurde, und seine Wahrnehmung so auf bestimmte Reize gebündelt wurde, z.B. durch das \textit{Sensorama} (vgl. \citet{sensorama}). % Referenz Sensorama
+In den 1960ern wurden unter anderem von \citet{Sutherland68} erste Versionen eines Head Mounted Displays (HMD) entwickelt. %Referenz Sword of Dmaocles -> Eigentlich AR
 Dabei handelt es sich um eine Art Brille, mit zwei Bildschirmen vor den Augen, auf die simulierte Inhalte projiziert werden.
-Um den Eindruck von Dreidimensionalität zu erzeugen, wird dabei das Prinzip der Stereoskopie verwendet. Hierzu werden jeweils dem linken und rechten Auge des Nutzers zwei Bilder des selben Objektes aus leicht unterschiedlichen Blickwinkeln  gezeigt. Da die Augen beim normalen Sehen ein Objekt tatsächlich aus zwei verschiedenen Winkeln wahrnehmen, werden die Bilder im Gehirn zusammengefügt, sodass der Eindruck von Tiefe entsteht. Die Bilder werden dabei auf zwei Bildschirmen direkt vor dem Auge angezeigt, vor die eine Linse gesetzt wird, um ??
+Um den Eindruck von Dreidimensionalität zu erzeugen, wird dabei in den meisten Fällen das Prinzip der Stereoskopie verwendet. Hierzu werden jeweils dem linken und rechten Auge des Nutzers zwei Bilder des selben Objektes aus leicht unterschiedlichen Blickwinkeln  gezeigt. Da die Augen beim normalen Sehen ein Objekt tatsächlich aus zwei verschiedenen Winkeln wahrnehmen, werden die Bilder im Gehirn zusammengefügt, sodass der Eindruck von Tiefe entsteht. Die Bilder werden dabei auf zwei Bildschirmen direkt vor dem Auge angezeigt, vor die eine Linse gesetzt wird, um die Illusion zu erzeugen, dass das Gezeigte weiter entfernt ist als in der Realität und es dem Auge zu ermöglichen die Bilder trotz der Nähe zu fokussieren.
 
-Der Blickwinkel auf ein Objekt hängt dabei von der Kopfposition des Nutzers ab. Um diesem die Möglichkeit zu geben, den Kopf zu bewegen und damit den Eindruck eines 3D Objektes zu verstärken wird die Position des Kopfes getracked. Auf diese Weise können die stereoskopischen Bilder dem Blickwinkel des Nutzers angpasst werden. Dieser erhält somit das Gefühl, er könne um das dargestellte Objekt herumgehen. 
+Der Blickwinkel auf ein Objekt hängt dabei von der Kopfposition des Nutzers ab. Um diesem die Möglichkeit zu geben, den Kopf zu bewegen und damit den Eindruck eines 3D Objektes zu verstärken wird die Position des Kopfes getracked. Auf diese Weise können die stereoskopischen Bilder dem Blickwinkel des Nutzers angepasst werden. Dieser erhält somit das Gefühl, er könne um das dargestellte Objekt herumgehen. 
 
 Die Bewegungsfreiheit der Nutzers war allerdings durch die damalige Technik eingeschränkt, denn das System, mit dem das HMD verbunden war, war zu schwer, um es zu tragen und deshalb fest installiert. 
 In den 90er Jahren gab es deshalb Entwicklungen in eine andere Richtung. Anstatt die virtuelle Realität nur direkt vor den Augen des Nutzers darzustellen, sollte diese um ihn herum erzeugt werden. Dazu wird der Nutzer in einem abgeschlossenen Raum platziert, an dessen Wände und Boden die Umgebung des jeweiligen Szenarios projiziert wurde. Die Immersion des Erlebnisses kann gesteigert werden, indem z.B. 3D-Brillen eingesetzt werden. Sogenannte CAVE-Systeme (Cave Automatic Virtual Environment) kommen auch heute noch zum Einsatz. Da sie allerdings sehr unhandlich und in ihrer Umsetzung kostspielig sind, eignen sie sich nicht als Massenprodukt oder für private Nutzung.
@@ -634,32 +644,12 @@ In Abbildung \ref{img:vive} ist das HMD und die Controller während der Nutzung 
 	\centering
 	%https://sco.wikipedia.org/wiki/Virtual_reality#/media/File:Reality_check_ESA384313.jpg
 	\includegraphics[width=0.5\linewidth]{images/vive.jpg}
-	\caption{Ein Nutzer trägt das HMD der HTC Vive und bedient dessen Controller.}
+	\caption{Ein Nutzer trägt das HMD der \textit{HTC Vive} und bedient dessen Controller.}
 	\label{img:vive}
 \end{figure}
 
   
-Im Folgenden sind Hersteller von VR-Systemen aufgelistet, sowie die Modelle, die derzeit auf dem Markt zum freien Verkauf stehen.
-
-% REDO?
-\begin{itemize}
-\item Facebook (Oculus Rift und Oculus Go)
-\item Google (Google Cardboard, Google Daydream)
-\item HTC \& Valve (HTC Vive)
-\item Microsoft (Microsoft HoloLens, Windows Mixed Reality)
-\item Razer (OSVR Hacker Dev Kit)
-\item Samsung (Samsung Gear VR)
-\item Sony Computer Entertainment (PS VR)
-\item Starbreeze Studios (StarVR)
-\item Lenovo (Lenovo Explorer für Windows Mixed Reality und Lenovo Mirage Solo für Google Daydream)
-\end{itemize}
-
-//TODO:
-Durchegehen
-Vergleich der Hardware Vorteile, nachteile
-
-TODO: 
-HTC Vive und Vive PRo -> MR
+\textit{HTC Vice} von \citet{vive} -> 
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
