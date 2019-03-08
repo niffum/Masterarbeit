@@ -160,9 +160,6 @@ Jetzt muss bestimmt werden, ob diese Schnittpunkte sich innerhalb des Würfels b
 Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für das $t$ der näher gelegenen Ebene wird der maximale, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren ts größer als der des entfernten, schneidet der Strahl den Würfel nicht. Andersherum tut er es.
 Das Verhältnis der Schnittpunkte zueinander und wie dieses durch den Verlauf des Strahls bestimmt wird ist in Abbildung \ref{img:rayBoxHit} dargestellt.
 
-//TODO
-Bild herstellen
-
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/rayBox.png}
@@ -237,7 +234,9 @@ Wie beschrieben setzt sich das Modell aus drei Komponenten zusammen: Der ambient
 Die Koeffizienten werden im Shader durch Farben repräsentiert. Der diffuse Koeffizient ist dabei der vorher aus der Transferfunktion gelesene Farbwert. Um diesen nicht durch die ambiente Beleuchtung zu verfälschen, wird er mit einem konstanten Faktor multipliziert, um eine abgedunkelte Farbe zu erhalten, die als ambienter Wert verwendet wird. Die Reflextion wird weiß dargestellt.
 Als Reflexionsexponent hat sich der Wert ?10? als am besten erwiesen.
 
-Um die Reflexion berechnen zu können müssen außerdem der Lichtvektor und die normale bekannt sein.
+Um die Reflexion berechnen zu können müssen außerdem der Lichtvektor und die Normale bekannt sein.
+Wie bereits erläutert, wird der Gradient eines Voxels als Normale verwendet. 
+Der Vektor zum Licht wird aus der in Unity eingebauten Shader-Variable \textit{\_WorldSpaceLightPos0} ausgelesen.
 Unterscheidung direktionales und Punktlicht?
 
 \subsection{Gradientenberechnung}

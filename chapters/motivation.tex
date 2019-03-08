@@ -9,7 +9,7 @@
 
 \chapter{Einleitung}
 
-Der Einsatz von MRTs ermöglicht es Ärzten einen Einblick in das innere des menschlichen Körpers zu erlangen, ohne diesen dabei zu verletzten. Sie erhalten Bilder innerer Organe, anhand derer sich dessen Aufbau und Funktionalität beobachten lassen. Aber auch mögliche Fehlfunktionen oder Anomalien können so erfasst werden. So können auf MRTs-Scans gebrochene Knochen, innere Verletzungen oder Schlaganfälle erkannt und beurteilt werden. Im Fall von Schlaganfällen ist kann ein MRT aufzeigen welcher Bereich des Gehirn von diesem betroffen ist, und welchen Umfang der Schaden hat.
+Der Einsatz von MRTs ermöglicht es Ärzten einen Einblick in das innere des menschlichen Körpers zu erlangen, ohne diesen dabei zu verletzten. Sie erhalten Bilder innerer Organe, anhand derer sich dessen Aufbau und Funktionalität beobachten lassen. Aber auch mögliche Fehlfunktionen oder Anomalien können so erfasst werden. So können auf MRT-Scans gebrochene Knochen, innere Verletzungen oder Schlaganfälle erkannt und beurteilt werden. Im Fall von Schlaganfällen kann ein MRT aufzeigen welcher Bereich des Gehirns von diesem betroffen ist, und welchen Umfang der Schaden hat.
 % Wie genau?
 Um den Fall eines Patienten richtig beurteilen zu können ist es unabdingbar, dass der Arzt eine möglichst umfassende Vorstellung von der Struktur des Gehirns des Patienten und vor allem von den vom Schlaganfall betroffenen Bereichen hat. Nur wenn dies der Fall ist, kann eine sinnvolle Therapie angewandt werden.
 Diese Arbeit stellt die Möglichkeit vor den Umgang mit MRT-Daten anschaulicher und intuitiver zu gestalten, um somit die Arbeit von Radiologen im Bereich der Schlaganfallbehandlung zu erleichtern und die Gesundheit ihrer Patienten zu verbessern.
@@ -17,11 +17,11 @@ Diese Arbeit stellt die Möglichkeit vor den Umgang mit MRT-Daten anschaulicher 
 \section{Motivation}
 \label{motivation}
 
-Um MRT-Scans zu studieren benutzen Ärzte in der Regel speziell dafür entwickelte Software. Diese stellt das Gehirn meist aus der Sicht von drei verschiedenen Achsen dar, sodass es von allen Seiten zusehen ist. Entlang dieser Achsen kann der Nutzer die Ansicht dann durch die Schichten des Scans bewegen. Die aktuelle Position der gerade angezeigten Schicht wird in jeder der anderen Achsenansichten farbig eingezeichnet, um den Nutzer ein möglichst umfassendes Bild des gescannten Gehirns zu vermitteln. 
+Um MRT-Scans zu studieren benutzen Ärzte in der Regel speziell dafür entwickelte Software. Diese stellt das Gehirn meist aus drei verschiedenen Blickwinkeln dar, sodass es von allen Seiten zusehen ist. Entlang dieser Achsen kann der Nutzer die Ansicht durch die Schichten des Scans bewegen. Die aktuelle Position der gerade angezeigten Schicht wird in jeder der anderen Achsenansichten farbig eingezeichnet, um dem Nutzer ein möglichst umfassendes Bild des gescannten Gehirns zu vermitteln. 
 Ein Beispiel für die Oberfläche solch einer eben beschriebenen Software ist in Abbildung \ref{images/mrtSoftware} zu sehen. 
 % Grundlagen?
 
-Anwendungen dieser Art sind weit verbreitet. Die zweidimensionale Ansicht, in der die Bilder vorliegen können allerdings eine falsche Vorstellung von der vorliegenden Situation schaffen. 
+Die zweidimensionale Ansicht, in der die Bilder vorliegen können allerdings eine falsche Vorstellung von der vorliegenden Situation schaffen. 
 %Refrerenz?
 Durch die Reduzierung um eine Dimension entsteht ein verzerrtes Bild des Gehirns. Die Darstellung der verschiedenen Achsen auf den Scans soll den Arzt bei der Orientierung unterstützen. Da das Gehirn allerdings durch mehrere Bilder dargestellt wird ist es diesem nicht möglich den Zustand auf einen Blick zu erfassen. Stattdessen müssen die Informationen aus zwei oder mehr Bildern im Kopf zusammengesetzt werden, was ein gewisses räumliches Vorstellungsvermögen voraussetzt. Dies ist ein kognitiver Aufwand, der Ärzte zusätzlich belastet, während sie sich darauf konzentrieren Anomalien in den Scans eines Patienten zu erkennen und einzuschätzen. 
 
@@ -34,20 +34,19 @@ Da der betroffene Bereich in einer 3D-Darstellung auf einen Blick erfasst werden
 % UX  
 % Software zum Vergleichen finden
 Um die Anschaulichkeit und Plastizität der 3D-Darstellung voll zur Geltung zu bringen muss sie auch im dreidimensionalen Raum platziert werden. Eine volumetrische Darstellung der Daten in einer Bildschirmanwendung ist nur eine Projektion auf eine zweidimensionale Fläche. Die Darstellung wird dabei abstrahiert und der Nutzer kann nicht direkt mit dem Objekt interagieren.
-Die Platzierung des 3D-Objekts in der dreidimensionalen Welt des Nutzers löst diese Barrieren auf. AR- und VR-Technologien ermöglichen sowohl die Visualisierung von dreidimensionalen virtuellen Objekten in der Umgebung des Nutzers, als auch die direkte Interaktion mit diesen. Diese gestaltet sich dabei auch deutlich intuitiver als die Bedienung eines Programms mit konventionellen Eingabemodulen, wie z.B. einer Maus. Das trifft vor allem auf AR-HMDs zu, deren Steuerung in der Regel ohne externe Steuerungsgeräte, wie Controller erfolgt. Dies ermöglicht eine verständliche und schnelle Bedienung,  was ungeübten Nutzern, wie z.B. einem Patienten oder Studenten zu Gute kommt. Die Nutzung der Anwendung wird dadurch zudem interessanter und unterhaltsamer.\\
+Die Platzierung des 3D-Objekts in der dreidimensionalen Welt des Nutzers löst diese Barrieren auf. AR- und VR-Technologien ermöglichen sowohl die Visualisierung von dreidimensionalen virtuellen Objekten in der Umgebung des Nutzers, als auch die direkte Interaktion mit diesen. Diese gestaltet sich dabei auch deutlich intuitiver als die Bedienung eines Programms mit konventionellen Eingabemodulen, wie z.B. einer Maus. Das trifft vor allem auf tragbare AR-Brillen zu, deren Steuerung in der Regel ohne externe Steuerungsgeräte, wie Controller erfolgt. Dies ermöglicht eine verständliche und schnelle Bedienung,  was ungeübten Nutzern, wie z.B. einem Patienten oder Studenten zu Gute kommt. Die Nutzung der Anwendung wird dadurch zudem interessanter und unterhaltsamer.\\
 
-Die Steuerung durch die Hände des Nutzers ist im medizinischen Bereich außerdem von besonderem Wert. So kann die Anwendung auch in sterilen Räumen oder sogar während einer Operation eingesetzt werden. In diesem Szenario kommt ein weiterer Vorteil eines AR-HMDs zur Geltung: Durch das transparente Display kann ist es dem Nutzer möglich während der Nutzung der Anwendung seine Umgebung im Auge zu behalten. 
+Die Steuerung durch die Hände des Nutzers ist im medizinischen Bereich außerdem von besonderem Wert. So kann die Anwendung auch in sterilen Räumen oder sogar während einer Operation eingesetzt werden. In diesem Szenario kommt ein weiterer Vorteil eines tragbaren AR-Headsets zur Geltung: Durch das transparente Display kann ist es dem Nutzer möglich während der Nutzung der Anwendung seine Umgebung im Auge zu behalten. 
 Eine AR-Anwendung ermöglicht es also einem Arzt während einer Operation relevante Daten abzurufen.
 
-%//TODO: WARUM ist AR besser, was macht meine anwendung besonder? -> stichpunkte
-Durch die kabellosen, tragbaren AR-Headsets ist gleichzeitig eine höhere Mobilität gegeben, als durch einen Rechner. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen. 
+Durch die kabellosen, tragbaren AR-Headsets ist gleichzeitig eine höhere Mobilität gegeben, als durch einen Desktop-PC. Dadurch kann die Anwendung unabhängig von der Umgebung überall zum Einsatz kommen. 
 
 Die Vorteile einer AR-Anwendung werden im Kapitel \ref{konzept} noch einmal erläutert.
 
-AR-Anwendungen entwickeln sich stetig weiter und werden in der Zukunft einen immer größeren Teil des Alltags einnehmen. Diese Entwicklung wirkt sich auch auf den medizinischen Bereich aus. 
+AR-Anwendungen entwickeln sich stetig weiter und werden in der Zukunft einen immer größeren Teil des Alltags einnehmen (\citet{forbes}). Diese Entwicklung wird sich voraussichtlich auch auf den medizinischen Bereich auswirken. 
 % Referenz?
 Ärzte sind sich der neuen Möglichkeiten bewusst und sind daran interessiert, 
-in welchen Einsatzgebieten man einen Nutzen aus diesen ziehen kann. (Studie)
+in welchen Einsatzgebieten man einen Nutzen aus diesen ziehen kann, wie \citet{holomed1} zeigen.
 Eine Anwendung wie mARt eignet sich gut, um den praktischen Einsatz von AR prototypisch zu testen.
 
 mArt bietet somit die folgenden Vorteile :
