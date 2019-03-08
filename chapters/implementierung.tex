@@ -79,7 +79,7 @@ Foto von Halterung?
 
 \section{Shader in Unity}
 
-Das Volume Rendering der MRT-Daten wird innerhalb eines Shaders berechnet. An dieser Stelle soll ein Überblick über die Funktionsweise und den Aufbau von Unity-Shadern gegeben werden. 
+Wie in Kapitel \ref{konzept} beschrieben, wird das Volume Rendering der MRT-Daten in einem Shaders umgesetzt. An dieser Stelle soll ein Überblick über die Funktionsweise und den Aufbau von Unity-Shadern gegeben werden. 
 
 Wie ein Objekt in einer Szene gerendert wird hängt in Unity davon ab, welches Material diesem zugewiesen ist. Das Material fungiert dabei als eine Art Behälter für sämtliche Parameter, die das Aussehen des Objektes beeinflussen, wie z.B. die Textur oder Farbe. Welche Parameter das Material besitzt und wie diese miteinander verrechnet werden bestimmt der Shader des Materials. Innerhalb des Shaders wird in Abhängigkeit zu den diesem übergebenen Werten die Farbe für jeden Pixel errechnet. 
 % https://docs.unity3d.com/Manual/Shaders.html
@@ -93,7 +93,7 @@ Neben dem Shader-Code besitzt ein Subshader Tags, die bestimmen, wann und wie ei
 Nach den Tags folgt die Definition eines \textit{Pass}. Als Render Pass wird der gesamte Prozess bezeichnet, der durchlaufen wird, um einen Pixel zu rendern. Angefangen bei der Berechnung einzelner Vertices eines Meshes über den Vertex-Shader bis zum Fragment-Shader. D.h. im Pass werden in verschiedenen Methoden die tatsächlichen Berechnungen beschrieben, die zum Aussehen jedes Pixels führen. 
 Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie oft ein Pass durchlaufen werden soll. 
 % Render setup ????
-Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics) geschrieben, einer Shading-Sprache syntaktisch stark HLSL (High-Level Shading Language). 
+Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics) geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
 Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss (?). Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
 
 Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader auf die genaue Implementierung wird im Folgenden eingegangen. 
@@ -103,17 +103,31 @@ Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader au
 - Was sind compute, surface, unlit shader?
 - Graphic pipeline?
 
+\section{Grundlage}
 
+Die in Kapitel \ref{anforderung} beschriebenen Anforderungen stellen den Umfang der zu implementierenden Anwendung dar. 
+Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Datstellung durch Ray-Casting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
+Wie in Kapitel \ref{grundlagen} beschrieben wurde, gibt es bereits viele Implementierungen von Volume Ray-Casting zur Visualisierung von medizinischem Bildmaterial. 
+Die dort genannten Unity-spezifischen Lösungen sind allerdings kostenpflichtig und/oder ihre Codebasis ist nicht einsehbar. Es wäre allerdings von Vorteil die Kontrolle über die Implementierung der 3D-Darstellung zu haben, um so die Möglichkeit zu haben, sie den Anforderungen entsprechend anpassen zu können.
+Aus diesem Grund wurde die Open-Source-Implementierung von \citet{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet. 
+Diese wurde erweitert, um die Anforderungen an mARt zu erfüllen. 
+Im Rahmen der Arbeit wurden folgende Bestandteile implementiert:
+
+\begin{itemize}
+\item Erweiterung des Shaders
+\item Umwandlung von Bilddaten in 3D-Texturen und der Berechnung ihrer Gradienten
+\item Anpassung der Bedienelemente an 3D-Szene
+\item Anwendungslogik
+\end{itemize}
+Der verwendete Code ist im Projekt markiert.
 \section{Volume Rendering}
-- Grundlage: GitHub Projekt
-\citet{volumeRenderingGit}
 
-Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns mit Hilfe von Volume Rendering umgesetzt. 
+Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns mit Hilfe von Volume Ray-Casting umgesetzt. 
 
-Im Kapitel \ref{grundlagen} wurde der theoretische Vorgang dieser Technik beschrieben. Dieses Kapitel fokussiert sich auf die Implementierung der einzelnen Schritte.
+Im Kapitel \ref{grundlagen} wurde der theoretische Vorgang dieser Technik beschrieben. Dieser Abschnitt fokussiert sich auf die Implementierung der einzelnen Schritte.
 
 Die volumetrische Darstellung des Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
-Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg/HLSL Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
+Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg-Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
 % WARUM??
 
 \subsection{Ray Casting}
@@ -139,34 +153,45 @@ Um die Schnittpunkte mit den Ebenen zu erhalten wird die Formel nach $t$ umgeste
 t=(p-r_{Ursprung})/r_{Richtung}
 \end{align}
 
-Für $p$ werden jeweils die beiden Eckpunkte des Würfels eingesetzt, die den Würfel beschreiben. Dadurch sind in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ insgesamt 6 Schnittpunkte mit den Ebenen bekannt. Zwei auf jeder Ebene. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt (und damit welche Ebene) weiter vorne liegt. 
+Für $p$ werden jeweils die beiden Eckpunkte des Würfels, die jeweils auf drei der Würfelebenen liegen, eingesetzt.
+Dadurch sind insgesamt sechs $t$s und damit sechs Schnittpunkte mit den Ebenen bekannt. Zwei auf jeder Ebene. Die Entfernungen werden in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ gespeichert. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt und damit welche zweier paralleler Ebenen weiter vorne liegt. 
 % Was wenn Strahl parallel zur Ebene ist??
 Jetzt muss bestimmt werden, ob diese Schnittpunkte sich innerhalb des Würfels befinden.
-Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für den näher gelegenen t-Vektor wird der maximale bestimmt, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren ts größer als der des entfernten, liegt der Schnittpunkt nicht in dem Würfel. Andersherum tut er es.
+Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für das $t$ der näher gelegenen Ebene wird der maximale, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren ts größer als der des entfernten, schneidet der Strahl den Würfel nicht. Andersherum tut er es.
+Das Verhältnis der Schnittpunkte zueinander und wie dieses durch den Verlauf des Strahls bestimmt wird ist in Abbildung \ref{img:rayBoxHit} dargestellt.
+
+//TODO
+Bild herstellen
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/rayBox.png}
+	\caption{Zweidimensionale Darstellung, wie ein Strahl durch eine Box (links) und daran vorbei (rechts) verläuft. Die Schnittpunkte des Strahls (gelb) mit den Würfelebenen (blau) sind eingezeichnet. Der Vergleich derer Abstände zum Ursprung des Strahls (rot) zeigt, ob der Strahl die Box schneidet oder nicht.}
+	\label{img:rayBoxHit}
+\end{figure}
 
 %----------------------------------------
 Die beiden t-Werte werden als $t_{nah}$ und $t_{fern}$ gespeichert.
 Mit dem Ursprung des Strahls und $t_{fern}$ werden Anfang, Ende und die Länge des Strahls berechnet. Mit Hilfe der Länge kann ermittelt werden um wie weit pro Iteration am Strahl entlang gegangen werden soll. Dadurch wird der Strahl nur bis zu seinem Austritt aus dem Würfel abgetastet. 
 
 In einer for-Schleife wird jeder Strahl nun abgetastet. In jeder Iteration wird jeweils ein Punkt betrachtet. Der Punkt verschiebt sich entlang des Strahls um die zuvor berechnete Distanz.
-Für jeden Punkt werden zuerst die uv-Koordinaten berechnet, da sonst nur ein viertel des MRT-Bildes dargestellt würde.
+Für jeden Punkt werden zuerst die uv-Koordinaten berechnet, da sonst nur ein Viertel des MRT-Bildes dargestellt würde.
 % WARUM???
 Für die Koordinaten werden dann die jeweiliges Isowerte aus der 3D-Textur gelesen, die zuvor mit den MRT-Bildern befüllt wurde.
 
 %---------------SAMPLE VOLUME-------------
 Hierbei werden lediglich die uv-Koordinaten als Indices für die Textur verwendet. 
-Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um eine Farbe sondern nur einen Grauwert handelt, können die anderen Farbkanäle der Textur mit der ?Magnitude? des jeweiligen Pixels befüllt werden. Darauf wird in der Sektion Transferfunktion genauer eingegangen.
-% VERWEIS Transferfunktion
+Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um eine Farbe sondern nur einen Grauwert handelt, können die anderen Farbkanäle der Textur mit dem Gradienten des jeweiligen Pixels befüllt werden. Darauf wird im Abschnitt \ref{gradienten} genauer eingegangen.
+
 Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutzer beeinflussen kann.
+TODO: Kann er?
 An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist, oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
 Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
 % UBERPRÜFEN Warum?
 Der Punkt wird dann mit den minimalen und maximalen x-, y-, und z-Werten der verschiebbaren Schicht verglichen. Das Ergebnis des Vergleichs wird dabei in einer Variable gespeichert. Ist der Punkt kleiner als das Minimum oder größer als das Maximum wird 0 gespeichert, ansonsten 1. 
 Die beiden Werte werden anschließend mit dem Isowert multipliziert.Ist einer der Werte null, ist auch der ermittelte Isowert null, was im Alphakanal totale Transparenz bedeutet. 
-
-
+Das Ergebnis dieser Berechnung wird zunächst für jedem Farbkanal zugewiesen.
 %-----------------------------------------
-Dies tritt ein, da der Isowert zunächst für alle Farbkanäle verwendet wird, um eine neue Farbe zu deklarieren. ?
 
 An dieser Stelle wird über die Transferfunktion der entsprechende Farbwert aus der zugehörigen Textur gelesen. Dazu wird der Isowert als Index verwendet. Die Funktionsweise und Implementierung der Transferfunktion wird in der Sektion \ref{transfer} beschrieben.
 % Bezug Transferfunktion!
@@ -190,19 +215,7 @@ Schließlich wird der erhaltene Farbwert mit den vorhergehenden verrechnet. Die 
 Wobei $\hat{C}_{i}$ die Farbe und $\hat{A}_{i}$ die Transparenz der Farbe des vordersten Voxels ist.
 Wenn diese Farbe einen vorher definierten Schwellenwert überschreitet wird die Schleife abgebrochen. Der Schwellenwert kann vom Nutzer manipuliert werden und bestimmt die ?Helligkeit? der Darstellung.
 
-Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt und mit der Farbe der Maske verrechnet.
-
-% MASKE
-% PHONG
-% ILLUMINATION 
-
-
-- Transferfunktion: Erstellen einer Textur
-
-- Illumination: Gradient vector = normal
-- Gradient: 
-
-
+Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt und mit der Farbe der Maske verrechnet, die auf dem selben Weg bestimmt wurde.
 
 \subsection{Transferfunktion}
 \label{transfer}
@@ -231,5 +244,12 @@ Unterscheidung direktionales und Punktlicht?
 \label{gradienten}
 
 
-//TODO:
-Wo Rendering zeigen? Qualität der Daten ansprechen?
+Die Gradienten werden vor dem Start der Anwendung berechnet und zusammen mit den Isowerten in eine 3D-Textur geschrieben. Der Gradientenvektor wird dabei in den RGB-Kanälen gespeichert und der Isowert im Alpha-Kanal, da es sich nur um einen einzelnen Wert handelt. 
+
+Die Berechnung der Gradienten erfolgt im selben Schritt, wie das Übertragen der Skalarwerte aus den Bilddaten in eine 3D-Textur.
+Dafür werden alle Bilddateien in einem Dateiverzeichnis auf das ein vorher definierter Pfad zeigt ausgelesen und in ein Array übertragen, das der Größe der Bilder entspricht. Die dritte Dimension des Arrays wird durch die Anzahl der Bilder bestimmt. 
+
+Entsprechend der in Kapitel \ref{grundlagen} beschriebenen Finite-Differenzen-Methode, werden durch eine Convolution die Gradienten für jeden Farbwert berechnet und ebenfalls in ein Array gespeichert.
+Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters geglättet, bevor die Werte in eine 3D-Textur gespeichert werden. 
+
+Diese wird im Assets-Verzeichnis des Projektes abgelegt. Sie werden in der Szene referenziert, um bei Bedarf an einen Shader übergeben zu werden, der den entsprechenden Datensatz darstellt. 
