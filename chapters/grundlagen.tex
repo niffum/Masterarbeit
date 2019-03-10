@@ -25,12 +25,11 @@ Während ein Patient sich in einem MR-Scanner befindet, können die MRT-Bilder d
 \todo{Bilder}
 
 Der Einsatz von AR-Anwendungen während einer Operation wurde auch von anderen Arbeiten untersucht.
-Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle Visualisierung der Bilddaten wurden von \citet{grimson99} beschrieben. Einen Überblick über Techniken, die bildgestütze Operationen ermöglichen liefern \citet{KerstenOertel2013TheSO}.
+Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle Visualisierung der Bilddaten wurden von \citet{grimson99} beschrieben. Einen Überblick über Techniken, die bildgestützte Operationen ermöglichen liefern \citet{KerstenOertel2013TheSO}.
 
 \citet{Wendt03}, \citet{Maurer01} sowie \citet{fuchs98} entwickeln eine AR-Anwendung für ein tragbares Display, die MRT-Bilder bzw. Bilder einer Laparoskopie bei Eingriffen auf den Patienten projiziert. Die Anwendungen der ersten beiden Arbeiten wurden mit Bildern des Gehirns an einem Kopfphantom getestet.
 
 \citet{MISCHKOWSKI2006478} untersuchen eine bildschirmbasierte AR-Anwendung, die bei Kieferoperationen zum Einsatz kommt. Mit Hilfe der Anwendung kann der Eingriff geplant werden und während der Operation hilft sie dabei, die Position des Kiefers zu überprüfen. 
-
 
 \citet{GasquesRodrigues17} untersuchen die Einsatzmöglichkeiten von AR und VR im operativen medizinischen Bereich. Dazu gehört unter anderem die Entwicklung einer AR-Anwendung für die Hololens, die die Ausbildung von Ärzten in Anatomie und Operationen unterstützen soll. 
 
@@ -107,57 +106,53 @@ Die eben erläuterte Erfassung der MRT-Daten wurde von \citet{weishaupt09} besch
 Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, ist die Computer-Tomographie. Werden die Organe in einem MRT durch magnetische Stimulation ihrer Protonen sichtbar gemacht, wird er Patient bei einer CT schichtenweise geröntgt. D.h. sein Körper wird mit Röntgenstrahlung beschossen, die je nach Gewebe, auf das sie treffen unterschiedlich stark abgeschwächt werden, was anschließend gemessen wird. Die so entstandenen "Querschnitte" des Körpers werden anschließend mit Hilfe eines Computers zu einem dreidimensionalen Bild zusammengesetzt. 
 
 Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen verwendet. Allerdings wird der Patient dabei auch der Belastung von radioaktiver Strahlung ausgesetzt, die stärker ist als beim normalen Röntgen. Außerdem können Weichteile mit einer MRT besser darstellt werden. 
-Auf die Einsatzbereiche von CT und MRT im Bezug auf Schlaganfälle wird in Abschnitt \ref{schalganfälleMRT} eingegangen.
+Auf die Einsatzbereiche von CT und MRT im Bezug auf Schlaganfälle wird in Abschnitt \ref{schalganfaelleMRT} eingegangen.
 
 Beide Verfahren liefern Volumendaten als Ergebnis und können demnach in Folgeschritten ähnlich verarbeitet werden.
 
 \todo{REFERENZ}
 
 \subsection{Datenformate}
-
-MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches neben den Bildern z.B. auch Patientendaten speichert.
+ \todo{Relevanz?}
+MRT-Bilder werden meist in Dateiformaten gespeichert, die in der Medizin üblich sind. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches neben den Bildern z.B. auch Patientendaten speichert. Beide Formate wurden von \citet{Larobina13} beschrieben.
 
 Das NIfTI-Format wurde 2003 von der Data Format Working Group (DFWG) als Alternative zum vorherigen Analyze 7.5-Format entwickelt, das Probleme mit der Orientierung der Daten aufwies. Durch fehlende Informationen, wie die Daten im Raum liegen war oft nicht klar, welche Gehirnhälfte die rechte und welche die linke ist. Deshalb wird im NIfTI-Format im Header festgelegt, wie die Koordinaten der Voxel auf Weltkoordinaten abgebildet sind. Beide Formate werden im Bereich des Neuroimaging verwendet.
-Bilderinformationen werden bei ersterem in einer einzigen Daten mit der Endung .nii gespeichert, während Analyze 7.5 die Daten in zwei verschiedenen Dateien abgelegt hat: Einer Header-Datei und einer, die die Volumendaten enthalten hat. Um mit dem Analyze-Format kompatibel zu bleiben besitzen auch NIfTI-Dateien einen 348 Byte langen Header.
+Bilderinformationen werden bei ersterem in einer einzigen Daten mit der Endung .nii gespeichert, während Analyze 7.5 die Daten in zwei verschiedenen Dateien abgelegt hat: Einer Header-Datei und einer, die die Volumendaten enthalten hat. Während die erste Version noch mit dem Analyze-Format bitweise kompatibel war, ist es die zweite nicht mehr. 
  
-Dem Header folgen die Volumedaten des Scans. Es ist möglich bis zu sieben Dimensionen in der Datei abzulegen. Die ersten drei sind dabei für die X-,Y- und Z-Dimensionen des Volumens reserviert.
-//TODO: Wofür andere dimensionen?
+Eine nii-Datei hat einen Header 540 Byte langen Header, dem die Volumedaten des Scans folgen. 
 % https://brainder.org/2012/09/23/the-nifti-file-format/
 
-DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeichert werden, sondern auch legt auch ein Kommunikationsprotokoll zum Austausch von medizinischen Daten fest. Der DICOM-Standart wird in den meisten medizinischen Einrichtungen verwendet, um medizinische Bilddaten zu speichern und auszutauschen.
-Der DICOM-Standart besteht aus 16 Teilen.
+DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeichert werden, sondern  legt auch ein Kommunikationsprotokoll zum Austausch von medizinischen Daten fest. Der DICOM-Standard wird in den meisten medizinischen Einrichtungen verwendet, um medizinische Bilddaten zu speichern und auszutauschen.
 %https://hpi.de/fileadmin/user_upload/fachgebiete/meinel/papers/Old_Source/TR_Med_Bildverarbeitung.pdf
 
-Wie bereits erwähnt speichert eine DICOM-Datei neben den Bilddaten weitere Informationen. Dazu können eine ID oder der Patientenname zählen, die als Attribute des DICOM-Objektes hinterlegt werden. 
-..
+Wie bereits erwähnt speichert eine DICOM-Datei neben den Bilddaten weitere Informationen. Dazu können eine ID oder der Patientenname zählen, die als Attribute des DICOM-Objektes hinterlegt werden. Die Idee dahinter ist, dass die Bilder ohne Metadaten keine Bedeutung haben. 
 
-%// TODO:
+
+\todo{
 DICOM genauer beshcreiben
-Header vergleichen
-vorteile nachteilel
-
+}
 MRT-Bilder werden außerhalb des medizinischen Umfelds allerdings auch in anderen Formaten gespeichert. 
 Ein Beispiel dafür ist das PVM-Format, das zum Speichern von volumetrischen Daten genutzt wird. Das Format geht davon aus, dass das Volumen aus quadratischen Voxeln besteht und enthält die Voxelwerte und Größeninformationen über das Volumen.
 % http://paulbourke.net/dataformats/pvm/
 
 Die Daten können weiterhin in herkömmlichen Bildformaten, wie JPEG oder PNG gespeichert werden. Dabei entspricht dann eine Bilddatei einer Schicht des Scans. 
  
- \citet{Larobina13} stellen medizinische Bilddateiformate vor.
- \citet{graham05} beschrieben DICOM Format und DICOM Viewer.
+%\citet{graham05} beschrieben DICOM Format und DICOM Viewer.
 %16 bit int images, pvm ? Standart?
 
 %------------------------------------------------------
 \section{Volumendaten}							  	  %
 %------------------------------------------------------
 
-Ein wichtiger Aspekt dieser Arbeit ist die dreidimensionale Visualisierung von MRT-Daten. Deshalb soll an dieser Stelle auf einige grundlegende Aspekte und Begriffe im Zusammenhang mit Volumendaten eingegangen werden. Da das Gehirn durch einen MRT-Scan dreidimensional erfasst wird, liegen die MRT-Daten als Volumendaten vor. Die Daten werden durch ein Skalarfeld repräsentiert. Ein Skalarfeld ist ein Sammlung von Skalarwerten, die in einem Raum verteilt sind. Durch eine Funktion kann jedem Punkt im Raum ein Skalarwert zugewiesen werden. Im Fall von Volumendaten handelt es sich um ein dreidimensionales Skalarfeld. D.h. die Skalarwerte sind innerhalb eines Würfels angeordnet für jeden Skalarwert existieren X-, Y- und Z-Koordinaten, die dessen Position beschreiben. 
+Ein wichtiger Aspekt dieser Arbeit ist die dreidimensionale Visualisierung von MRT-Daten. Deshalb soll an dieser Stelle auf einige grundlegende Aspekte und Begriffe im Zusammenhang mit Volumendaten eingegangen werden.
+Da das Gehirn durch einen MRT-Scan dreidimensional erfasst wird, liegen die MRT-Daten als Volumendaten vor. Die Daten werden durch ein Skalarfeld repräsentiert. Ein Skalarfeld ist ein Sammlung von Skalarwerten, die in einem Raum verteilt sind. Durch eine Funktion kann jedem Punkt im Raum ein Skalarwert zugewiesen werden. Im Fall von Volumendaten handelt es sich um ein dreidimensionales Skalarfeld. D.h. die Skalarwerte sind innerhalb eines Würfels angeordnet für jeden Skalarwert existieren X-, Y- und Z-Koordinaten, die dessen Position beschreiben. 
 Diese Punkte aus denen sich der Volumen-Würfel zusammensetzt werden auch Voxel genannt. Ähnlich wie Pixel in zweidimensionalen Bildern stellen sie die kleinsten Teilchen in einem Volumen dar. 
 Die Skalarwerte werden auch als Isowerte des Volumens bezeichnet bei MRT-Daten bildet jeder Wert eine Graustufe mit einer Farbauflösung von 256 Stufen ab. 
 Über das Volumen verteilt haben benachbarte Werte oft ähnliche Isowerte. Eine Gruppe dieser Werte wird als Isofläche bezeichnet. Isoflächen innerhalb eines Volumens entsprechen oft tatsächlichen Oberflächen des darzustellenden Objektes. Durch das Vergleichen benachbarter Werte ist es also möglich Oberflächen von Objekten zu ermittlen (siehe \ref{marchingCubes}). 
 
-Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben der Vorstellung eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen und 
+Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben der Vorstellung eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen.
 
-Die Verfahren zur dreidimensionalen Visualisierung von MRT-Daten lassen sich in drei Bereiche teilen: Multiplanar Reformation (MPR), Surface Rendering (SR), und (direktes) Volume Rendering (VR). \citet{Zhang10} In den folgenden Abschnitten werden diese Verfahren erläutert.
+Die Verfahren zur dreidimensionalen Visualisierung von MRT-Daten werden von \citet{Zhang10} in drei Bereiche geteilt: Multiplanar Reformation, Surface Rendering, und (direct) Volume Rendering.  In den folgenden Abschnitten werden verschiedene Verfahren des Volume Renderings sowie eine prominente Surface Rendering Technik erläutert.
 
 %------------------------------------------------------
 \section{Volume Rendering}							  %
@@ -173,43 +168,47 @@ Im Folgenden werden grundlegende Techniken, sowie verschiedene Verfahren der Ums
 
 \citet{Kaufman03}
 \citet{kniss02}
-%//TODO: 
-Beispielarbeiten recherchieren, beschreiben
-REFERENZEN-> GPU GEMS
+\todo{Beispielarbeiten recherchieren, beschreiben
+REFERENZEN-> GPU GEMS}
 
 \subsection{Klassifikation}
 
-Die Klassifikation von Voxeln bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. Diese beschreiben, die Aufnahme und Abgabe von Licht eines einzelnen Voxels. Die Abgabe von Licht manifestiert sich aus der Sicht des Betrachters in der Farbe eines Voxels. Die Aufnahme äußert sich in dem Grad der Opazität. Durch die Unterschiede in Farbe und Opazität einzelner Voxel, werden verschiedene Bereiche, wie z.B. Gewebestrukturen voneinander unterscheidbar. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren, durch die jedem Isowert ein Opazitäts- und Farbwert zugewiesen wird. Auf diese wird im folgenden Abschnitt näher eingegangen. 
+Die Klassifikation von Voxeln, nach \citet{Hadwiger06} bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. Diese beschreiben, die Aufnahme und Abgabe von Licht eines einzelnen Voxels. Die Abgabe von Licht manifestiert sich aus der Sicht des Betrachters in der Farbe eines Voxels. Die Aufnahme äußert sich in dem Grad der Opazität. Durch die Unterschiede in Farbe und Opazität einzelner Voxel, werden verschiedene Bereiche, wie z.B. Gewebestrukturen voneinander unterscheidbar. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren, durch die jedem Isowert ein Opazitäts- und Farbwert zugewiesen wird. Auf diese wird im folgenden Abschnitt näher eingegangen. 
 
 An dieser Stelle soll ein Überblick über verschiedene Klassifikationen gegeben werden.
 
 Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann vor oder nach der Interpolation der Volumendaten durchlaufen werden.
 
-Die Daten müssen interpoliert werden, da das Volumen wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese findet während des Rasterisierungsschrittes der Grafikpipeline statt.
+Die Daten müssen interpoliert werden, da das Volumen, wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese findet während des Rasterisierungsschrittes der Grafikpipeline statt.
 
 Werden die Voxel vor dieser Interpolation klassifiziert, wird dies als Pre-Klassifikation bezeichnet. Dabei werden jedem Isowert die entsprechenden Eigenschaften zugewiesen. Die Zwischen den Voxeln bestehenden Lücken werden aufgefüllt, indem zwischen den Farb- und Opazitätswerten interpoliert wird. 
-Im Gegensatz dazu, werden bei der Post-Klassifakation zuerst alle Skalarwerte durchlaufen und der Bereich zwischen ihnen durch Interpolation der Isowerte überbrückt. Erst danach werden den Werten durch die Klassifizierung Eigenschaften zugewiesen. Der Unterschied besteht also darin, ob die Erzeugung von neuen Werten, die die vorhandenen verbinden auf Basis der Voxelwerte oder der Werte ihrer Eigenschaften stattfindet. \citet{Hadwiger06}
+Im Gegensatz dazu, werden bei der Post-Klassifakation zuerst alle Skalarwerte durchlaufen und der Bereich zwischen ihnen durch Interpolation der Isowerte überbrückt. Erst danach werden den Werten durch die Klassifizierung Eigenschaften zugewiesen. Der Unterschied besteht also darin, ob die Erzeugung von neuen Werten, die die vorhandenen verbinden auf Basis der Voxelwerte oder der Werte ihrer Eigenschaften stattfindet. 
 
-Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlich unterschiedlichen Ergebnissen. Die Interpolation der Voxeleigenschaften bei der Pre-Klassifizierung führt zu Artefaktbildung, da die lediglich Eigenschaftswerte "gestreckt" werden, ohne die Formen des Volumens zu beachten. Bei der Post-Klassifikation werden die fehlenden Daten anhand der Struktur des Objektes erzeugt. Dies führt zu einer deutlich klareren Darstellung des Volumens. Der Vergleich ist in \ref{img:prepost} veranschaulicht.
+\todo{Referenz richtig setzen}
 
-\begin{figure}
+Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlich unterschiedlichen Ergebnissen. Die Interpolation der Voxeleigenschaften bei der Pre-Klassifizierung führt zu Artefaktbildung, da die Eigenschaftswerte lediglich "gestreckt" werden, ohne die Formen des Volumens zu beachten. Bei der Post-Klassifikation werden die fehlenden Daten anhand der Struktur des Objektes erzeugt. Dies führt zu einer deutlich klareren Darstellung des Volumens. Der Vergleich ist in \ref{img:prepost} veranschaulicht.
+
+\begin{figure}[!htb]
 	\centering
 	%http://schorsch.efi.fh-nuernberg.de/roettger/index.php/VolumeRendering/Pre-AndPost-Classification
 	\includegraphics[width=0.7\linewidth]{images/prepostclassification.png}
 	\caption{Vergleich zweier Volumen Renderings mit unterschiedlicher Klassifizierung. Durch die Verwendung von Pre-Klassifikation (links) entstehen Artefakte. Die Post-Klassifikation (rechts) liefert eine bessere Darstellung des Volumens.}
 	\label{img:prepost}
 \end{figure}
+\FloatBarrier
 
-Aber auch bei der Verwendung einer Post-klassifikation können Artefakte entstehen.
+Aber auch bei der Verwendung einer Post-Klassifikation können Artefakte entstehen.
 Um das Volumen darzustellen, werden einzelne Voxel entlang eines Strahls abgetastet und ihre Eigenschaftswerte mit einander verrechnet (s. Abschnitt \ref{rayCasting}). 
 Die Frequenz in denen die Werte geprüft werden, kann dabei variieren. Ist der Abstand zwischen zwei Voxeln zu groß, kann es dazu kommen, dass Wertveränderungen, die zwischen diesen liegen nicht erfasst werden, was zu Artefakten führt. 
 Um dem entgegen zu wirken, könnte die Abtastfrequenz erhöht werden. Dies resultiert allerdings in einen höheren Rechenaufwand, der das Rendering verlangsamt.
+\todo{evtl. algorithmische komplexität mit anführen}
 Eine alternative Lösung dazu ist die Verwendung einer pre-integrierten Klassifikation.
 Um alle Werte zwischen zwei Voxeln zu erfassen, wird hierbei nicht nur der Wert eines Voxels betrachtet, sondern der Bereich zwischen diesem und dem nächsten, der abgetastet werden soll. 
 
 Der Strahl, der das Volumen durchläuft wird somit in Segmente aufgeteilt, die jeweils durch einen vorderen und hinteren Punkt begrenzt werden. Für jedes Segement und damit für jeden Abtastpunkt, wird durch Bildung eines Integrals sowohl der Opazitäts- als auch der Farbwert approximiert. 
 Die Errechnung des Opazitätwertes $a_i$ des  $i$-ten Abtastpunktes lässt sich wie folgt beschreiben:
 
+\todo{Symbole in Liste aufschlüsseln}
 \begin{align}
    a_i = 1-exp\left ( \int_{id}^{(i+1)d)} \kappa\left ( s(\mathbf{x}(\lambda)) \right ) d\lambda  \right )
 \end{align}
@@ -217,17 +216,15 @@ Die Errechnung des Opazitätwertes $a_i$ des  $i$-ten Abtastpunktes lässt sich 
 Durch die Funktion  $\mathbf{x}(\lambda)$ werden die Koordinaten des Volumens berechnet, an denen der Punkt sich befindet. $\lambda$ repräsentiert dabei den aktuellen Punkt auf dem Strahl. 
 Die Koordinaten werden $s(x)$ übergeben, wodurch die Isowerte an dieser Stelle bestimmt werden. $\kappa(x)$ ist die Transferfunktion für die Opazitätwerte, die anschließend noch mit dem Abstand zwischen den Abtastpunkten $d$ und $\lambda$ multipliziert wird.
 
-Der Integral, dieser Funktion beschreibt die Fläche des Bereich unter ihr, zwischen den Punkten $id$ und $(i+1)d$. Veränderungen der Funktion zwischen diesen Punkten wirken sich auf diese Fläche aus. 
+Der Integral, dieser Funktion beschreibt die Fläche des Bereichs unter ihr, zwischen den Punkten $id$ und $(i+1)d$. Veränderungen der Funktion zwischen diesen Punkten wirken sich auf diese Fläche aus. 
 Der Flächenwert dient als Exponent einer Exponentialfunktion, deren Ergebnis anschließend von $1$ abgezogen wird. Dadurch wird der Integralwert in einen Bereich zwischen $0$ und $1$ überführt. 
 
-\citet{Hadwiger06}
 
-//TODO:
-Welche Klassifikation wird verwendet? Relevanz für Arbeit
+\todo{Welche Klassifikation wird verwendet? Relevanz für Arbeit}
 
 \subsection{Transferfunktion}
 
-Transferfunktionen werden verwendet, um verschiedenen Bereichen bzw. Beschaffenheiten eines Objektes verschiedene Farben und Opazitäten zu geben. Unterschiedliche Geweben können auf diese Weise eingefärbt oder ausgeblendet werden. In der Umsetzung besteht eine Transferfunktion meistens aus einer Textur, aus der für jeden Isowert eine Farbe und Opazität gelesen werden kann. Die Textur kann dabei eindimensional sein, wenn als Index lediglich der Isowert des Voxels verwendet wird. Für eine bessere Unterscheidung der Gewebe eines Objektes können allerdings auch multidimensionale Transferfunktionen eingesetzt werden. Hierbei werden neben dem Isowert z.B. auch der Betrag des Gradienten des jeweiligen Voxels als Koordinaten für die Transfer-Textur verwendet. In Abbildung \ref{img:transferfunction} ist der Unterschied zwischen der Verwendung von ein- und zweidimensionalen Transferfunktionen verdeutlicht. Der Zugriff auf die Transferfunktion erfolgt genauso wie bei anderen Texturen. Im folgenden Codebeispiel ist demonstriert, wie in einem Shader auf die 3D-Textur des Volumens und die 1D-Textur der Transferfunktion zugegriffen wird. \citet{Fernando04}
+Transferfunktionen, nach \citet{Fernando04} bilden den Isowert auf beliebige Eigenschaften, wie ab Farbe und Opazität.  Unterschiedliche Geweben können auf diese Weise eingefärbt oder ausgeblendet werden. In der Umsetzung besteht eine Transferfunktion meistens aus einer Textur, die als Look-Up-Tabelle verwendet wird. Daraus kann für jeden Isowert eine Farbe und Opazität gelesen werden. Die Textur kann dabei eindimensional sein, wenn als Index lediglich der Isowert des Voxels verwendet wird. Für eine bessere Unterscheidung der Gewebe eines Objektes können allerdings auch multidimensionale Transferfunktionen eingesetzt werden. Hierbei werden neben dem Isowert z.B. auch der Betrag des Gradienten des jeweiligen Voxels als Koordinaten für die Transfer-Textur verwendet. In Abbildung \ref{img:transferfunction} ist der Unterschied zwischen der Verwendung von ein- und zweidimensionalen Transferfunktionen verdeutlicht. Der Zugriff auf die Transferfunktion erfolgt genauso wie bei anderen Texturen. Im folgenden Codebeispiel ist demonstriert, wie in einem Shader auf die 3D-Textur des Volumens und die 1D-Textur der Transferfunktion zugegriffen wird. 
 
 \begin{minted}[mathescape,
                linenos,
@@ -247,76 +244,70 @@ void main(sampler3D _Volume,
 }
 \end{minted}
 
-Eine gut Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden können und von dem jeweiligen Datensatz abhängen. Teilweise werden Widgets eingesetzt, die es den Nutzer erlauben eine Transferfunktion zu erstellen, die direkt auf ein gerendertes Volumen angewandt wird.
+Eine gute Transferfunktion zu implementieren ist sehr schwierig, da die korrekten Werte oft nur durch Ausprobieren gefunden werden können und von dem jeweiligen Datensatz abhängen. Teilweise werden Widgets eingesetzt, die es den Nutzer erlauben eine Transferfunktion zu erstellen, die direkt auf ein gerendertes Volumen angewandt wird.
 \citet{salama06} und \citet{Knig99} beschreiben die Entwicklung von Benutzeroberflächen zur Erstellung von Transferfunktionen.
+Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da über die Transferfunktion definiert ist, welche Isowerte welchem Gewebe entsprechen.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch39.html
 	\includegraphics[width=0.7\linewidth]{images/transferfunction.jpg}
 	\caption{Abbildung zweier gerenderter Volumen und der jeweils dafür verwendeten Transferfunktion. In den Darstellungen a) und c) wurde eine eindimensionale Transferfunktion verwendet. b) und c) benutzen zweidimensionale Tranfserfunktionen, wodurch verschiedene Bereiche des Volumens anders eingefärbt sind. }
-	\label{img:phong}
+	\label{img:transferfunction}
 \end{figure}
+\FloatBarrier
 
-Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da über die Transferfunktion definiert ist, welche Isowerte welchem Gewebe entsprechen.
 
 \subsection{Beleuchtung}
 \label{beleuchtung}
 
 Um dem gerenderten Objekt einen möglichst plastischen Eindruck zu verleihen und es somit realistischer aussehen zu lassen ist es sinnvoll dieses zu beleuchten. 
 %Die Beleuchtung wird in der Regel durch einen Shader implementiert.
-Für jeden Voxel wird dabei einzeln die Auswirkung der Beleuchtung ermittelt nachdem die  Transfertextur angewendet wurde, sodass dessen Eigenschaften zusätzlich zur dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden.
+Für jeden Voxel wird dabei einzeln die Auswirkung der Beleuchtung ermittelt nachdem die  Transfertextur angewendet wurde, sodass dessen Eigenschaften zusätzlich zu dieser verändern werden. Es können verschiedene Modelle zur Beleuchtung verwendet werden. Außerdem ist zwischen lokaler und globaler Beleuchtung zu unterscheiden. Die Beleuchtung von Volumen wurde von \citet{Fernando04} erläutert.
 
 Die lokale Beleuchtung betrachtet nur die Beziehung des Lichtes zu dem Objekt. Dabei bleiben Beleuchtungseffekte, wie Schatten, den das Volumen wirft oder indirekte Beleuchtung außen vor. Zudem ist das Beleuchtungsmodell auf Oberflächen ausgelegt und nicht auf ein Volumen. 
 
-Eine realistischere Beleuchtung bietet daher die globale Beleuchtung mit Schatten und indirekter Beleuchtung.
-Um Schatten im Volumen darzustellen, muss bestimmt werden, wie viel Licht bei einem Voxel ankommt, nachdem das Licht anderer diesen umgebende Voxel passiert hat und dadurch abgeschwächt wurde. 
-Dazu könnte ein Schatten-Volumen erstellt werden, indem jeder Voxel aus Sicht des Lichts gerendert wird, welches mit den Werten aus der Transfertextur verrechnet wird. Dieses Vorgehen ist allerdings unperformant und liefert unschöne Ergebnisse.(\citet{Fernando04})
-Stattdessen wird das Volumen durch Texture Slicing aus der GPU (?) in Schichten unterteilt. Jede Schicht wird dann jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
+Eine realistischeres Ergebnis liefert daher die globale Beleuchtung, bei der das Objekt Schatten wirft und indirekt beleuchtet wird. 
+Um Schatten im Volumen darzustellen, muss bestimmt werden, wie viel Licht bei einem Voxel ankommt, nachdem das Licht andere, diesen umgebende Voxel passiert hat und dadurch abgeschwächt wurde. 
+Dazu könnte ein Schatten-Volumen erstellt werden, indem jeder Voxel aus Sicht des Lichts gerendert wird, welches mit den Werten aus der Transfertextur verrechnet wird. Dieses Vorgehen ist allerdings unperformant und liefert unschöne Ergebnisse.
+\todo{Besser referenzieren}
+\todo{TExture Slicing korrekt?}
+Stattdessen wird das Volumen durch Texture Slicing aus der GPU in Schichten unterteilt. Jede Schicht wird dann jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
 Die Lage der Schichten wird durch die die Winkelhalbierende des Blickrichtungswinkels und des Lichtrichtungswinkels bestimmt. Dadurch treffen beide Vektoren im selben Winkel auf die Schichten. Abhängig von dem Skalarprodukt der Vektoren kann auch die Inverse des Blickwinkels verwendet werden. Das Skalarprodukt bestimmt außerdem, ob die Schichten aus Kamerasicht von hinten nach vorne oder von vorne nach hinten durchlaufen werden. Während für das Licht immer von vorne nach hinten gerendert wird.
 Die Position der Vektoren und der winkelhalbierenden Schicht ist in Abbildung \ref{img:halfAngleSlice} dargestellt.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/halfAngleSlice.png}
-	\caption{Durch Bestimmung der Winkelhalbierenden des Licht- und Kamerarichtungsvektors, wird die Lage der Schichten bestimmt, die sowohl aus Licht- als auch Kamerasicht gerendert werden. Bei einem Skalarprodukt $>=0$ wird der Kameravektor verwendet (a), bei einem negativen Skalarprodukt dessen Inverse (b). \citet{Hadwiger06}}
+	\caption{Durch Bestimmung der Winkelhalbierenden des Licht- und Kamerarichtungsvektors, wird die Lage der Schichten bestimmt, die sowohl aus Licht- als auch Kamerasicht gerendert werden. Bei einem Skalarprodukt $>=0$ wird der Kameravektor verwendet (a), bei einem negativen Skalarprodukt dessen Inverse (b). (\citet{Hadwiger06})}
 	\label{img:halfAngleSlice}
 \end{figure}
-
+\FloatBarrier
 
 Jede Schicht wird dann zuerst aus Sicht der Kamera gerendert. Die aus Lichtsicht gerenderte vorhergehende Schicht ist dabei bereits bekannt. So kann jeder Punkt des Kamera-Textur-Buffers mit jedem des Licht-Textur-Buffers der vorherigen Schicht verrechnet werden. Dabei wird durch den Wert des Kamera-Buffers die Farbe und Opazität aus der Transferfunktion gelesen. Die entsprechende Farbe wird dann mit dem Wert aus dem Licht-Buffer multipliziert. Die so berechnete Schicht wird wieder in den Kamera-Buffer geschrieben. Dann wird die aktuelle Schicht aus Sicht der Lichtquelle in den Licht-Buffer gerendert, um diesen für die nächste Schicht zu verwenden.
 Für jede Schicht wird ein eigener Pass durchlaufen.
 \citet{Hadwiger06}
 \citet{Fernando04}
+\todo{Richtig referenzieren}
 
-//TODO:
-IndirekteBeleuchtung/Scattering? /Translucency  
-Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren reflektiert, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wachs oder Haut.
+\todo{IndirekteBeleuchtung/Scattering? /Translucency  }
+Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren gebrochen, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wachs oder Haut.
 
 \citet{hansen03} stellen ein Shading Modell vor, dass realistisches Rendering von transluzenten Materialien erlaubt.
 
-Phasenfunktion 
+\todo{Phasenfunktion} 
 
-Die globale Beleuchtung ist somit von der Umsetzung her deutlich komplexer. Bietet allerdings auch mehr Plastizität und Realismus. Dies wird in Abbildung \ref{img:localGlobalIll} deutlich, in der die Ergebnisse der beiden Vorgehensweisen gegenübergestellt sind.
+Die globale Beleuchtung ist somit von der Umsetzung deutlich komplexer, bietet allerdings auch mehr Plastizität und Realismus. Dies wird in Abbildung \ref{img:localGlobalIll} deutlich, in der die Ergebnisse der beiden Vorgehensweisen gegenübergestellt sind.
 
 \citet{Jnsson14} untersuchen derzeit verwendete Beleuchtungmethoden von Volumen.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/localGlobalIllumination.png}
 	\caption{Vergleich zweier Volumen, die mit lokaler Oberflächenbeleuchtung (links) und direkter Beleuchtung und Schatten (rechts) gerendert wurden. \citet{Hadwiger06}}
 	\label{img:localGlobalIll}
 \end{figure}
-
-Bei einer lokalen Beleuchtung der einzelnen Voxel kommt meist das Phong-Beleuchtungsmodell zum Einsatz. 
-
-\begin{figure}
-	\centering
-	%https://commons.wikimedia.org/wiki/File:Phong_components_version_4.png
-	\includegraphics[width=0.7\linewidth]{images/Phong_components_version_4.png}
-	\caption{Visuelle Aufteilung des Phon-Beleuchtungsmodells in seine drei Komponenten. Die Farbe pro Pixel wird für jede Komponente einzeln berechnet und die Komponenten schließlich zusammen addiert, um die Beleuchtung zu erhalten. }
-	\label{img:phong}
-\end{figure}
+\FloatBarrier
 
 Aufgrund der hohen Komplexität der globalen Beleuchtung, wird im Rahmen dieser Arbeit nur eine lokale Beleuchtung implementiert werden. 
 Hierzu wird in vielen Fällen das Phong-Beleuchtungmodell verwendet und wird auch für mARt implementiert.
@@ -334,14 +325,24 @@ $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Trans
 
 \citet{phong75}
 
+\begin{figure}[!htb]
+	\centering
+	%https://commons.wikimedia.org/wiki/File:Phong_components_version_4.png
+	\includegraphics[width=0.7\linewidth]{images/Phong_components_version_4.png}
+	\caption{Visuelle Aufteilung des Phon-Beleuchtungsmodells in seine drei Komponenten. Die Farbe pro Pixel wird für jede Komponente einzeln berechnet und die Komponenten schließlich zusammen addiert, um die Beleuchtung zu erhalten. }
+	\label{img:phong}
+\end{figure}
+\FloatBarrier
+
 \subsection{Gradientenberechnung}
 
-Um die in \ref{beleuchtung} erläuterte Beleuchtung umzusetzen, müssen wie beschrieben die Normalen der einzelnen Voxel bekannt sein. Da es die Voxel allerdings keine Oberfläche bilden, besitzen sie auch keine Normalen. Als Ersatz können stattdessen die Gradienten der Voxel verwendet werden. Diese beschreiben die Wertveränderung in der Umgebung eines Voxels und zeigen dabei auf die Größte Veränderung. Benachbarte Voxel mit ähnlichen Isowerten bilden eine Isofläche, die durch die Gradienten beschrieben wird. 
+Um die in \ref{beleuchtung} erläuterte Beleuchtung umzusetzen, müssen wie beschrieben die Normalen der einzelnen Voxel bekannt sein. Da die Voxel allerdings keine Oberfläche bilden, besitzen sie auch keine Normalen. Als Ersatz können stattdessen die Gradienten der Voxel verwendet werden. Diese beschreiben die Wertveränderung in der Umgebung eines Voxels und zeigen dabei auf die Größte Veränderung. Benachbarte Voxel mit ähnlichen Isowerten bilden eine Isofläche, die durch die Gradienten beschrieben wird. 
 % ??
 
 Zur Berechnung der Gradienten können verschiedene Verfahren eingesetzt werden. Der Unterschied in der Berechnung liegt vor allem in dem Zeitpunkt zu dem diese ausgeführt werden. Gradienten können entweder vor dem Start des Programmes berechnet werden oder zur Laufzeit. 
 
 Ist ersteres der Fall werden die Gradienten in den meisten Fällen per Pixel mit Hilfe der Finite-Differenzen-Methode berechnet. 
+\todo{REFERENZ}
 Dabei wird jeweils die Differenz zwischen dem Isowert eines Voxels und den Voxeln in seiner festgelegten Umgebung gebildet. Dies lässt sich als folgende Formel ausdrücken: 
 
 \begin{align}
@@ -355,19 +356,19 @@ f(x, y, z + h) - f(x, y, z - h)
 
 Für die Phong-Beleuchtung, die in dieser Arbeit implementiert wird, werden die Gradienten durch die Finite-Differenzen-Methode ermittelt. 
 
-//TODO:
-Convolution?
-On´The fly gradientenberechnung
-genau vorstellen
-Vergleich der versch. formen -> BUCH
+\todo{Convolution?}
+\todo{On´The fly gradientenberechnung}
+\todo{genau vorstellen}
+\todo{Vergleich der versch. formen -> BUCH}
+
 
 \citet{Correa11} haben verschiedene Methoden zur Bestimmung von Gradienten verglichen.
 
-Segmentierung
+\todo{Segmentierung}
 
 \subsection{Komposition}
 
-Komposition bezeichnet die Verrechung einzelner Voxelwerte. Abhängig von der Blickrichtung der Kamera beeinflussen die Eigenschaften eines Wertes das Aussehen anderer Werte um ihn herum, z.B. bei zwei Voxeln, die hintereinander liegen. Um die Endgültige Farbe eines Pixels zu erhalten werden die Werte von hintereinander liegenden Voxlen in der Regel auf addiert. Hierbei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
+Komposition bezeichnet die Verrechnung einzelner Voxelwerte. Abhängig von der Blickrichtung der Kamera beeinflussen die Eigenschaften eines Wertes das Aussehen anderer Werte um ihn herum, z.B. bei zwei Voxeln, die hintereinander liegen. Um die endgültige Farbe eines Pixels zu erhalten werden die Werte von hintereinander liegenden Voxeln in der Regel aufaddiert. Hierbei ist es von Relevanz, in welcher Reihenfolge die Werte durchlaufen werden. Wird das Volumen von vorne nach hinten durchlaufen, erfolgt die Komposition wie folgt:
 
 \begin{align}
 \hat{C}_{i}=(1-\hat{A}_{i-1})C_{i}+\hat{C}_{i-1}
@@ -391,27 +392,31 @@ Die Komposition erfolgt für jeden Strahl am Ende des Renderingprozesses. Die Ei
 
 
 \section{Volume Rendering Methoden}
-//TODO:
-Splatting??
+\todo{Splatting??}
 
 An dieser Stelle werden verschiedene Methoden erläutert, mit denen Volume Rendering umgesetzt werden kann. Die Implementierung dieser Arbeit verwendet das Ray-Casting Verfahren. Es werden allerdings auch andere prominente Methoden beschreiben, um einen Überblick über die Thematik und Vergleichspotenzial zu schaffen.
 
 \subsection{Volumetrisches Ray-Casting}
 \label{rayCasting}
 
-\begin{figure}
+\todo{REFERENZEN}
+
+\begin{figure}[!htb]
 	\centering
 	%https://de.wikipedia.org/wiki/Datei:Volume_Ray_Casting-de.svg
 	\includegraphics[width=0.7\linewidth]{images/rayCasting.png}
 	\caption{Schematische Darstellung des volumetrischen Ray Castings. Ein Strahl (Pfeil) durchläuft das Volumen (Würfel). Die Eigenschaften (Farbe und Opazität) jedes Voxels, der passiert wird werden zusammengerechnet, um die Farbe eines Pixels des Renderings zu erhalten.}
 	\label{img:rayCasting}
 \end{figure}
+\FloatBarrier
 
-\textbf{Ray-Casting} ist eine bekannte Rendering-Methode, die auch beim Rendern von 3D-Szenen zur Anwendung kommt die keine Volumendaten enthalten.
+\textbf{Ray-Casting} ist eine bekannte Rendering-Methode, die auch beim Rendern von 3D-Szenen zur Anwendung kommt, die keine Volumendaten enthalten.
 In diesem Fall werden von der Position der Kamera für jeden Pixel Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser die Oberfläche eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Pixel in der Farbe des Objektes eingefärbt, wobei der verwendete Shader diese beeinflusst. Es wird außerdem berücksichtigt, welche Länge der Strahl zu dem Schnittpunkt hat, da nur der Eintrittspunkt relevant ist.
 Weiterhin existieren die Techniken Ray-Tracing und Ray-Marching, die ebenfalls auf der Kollision zwischen Strahlen und Objekten beruhen.
-Beim \textbf{Ray-Tracing} werden dabei neben dem ursprünglichen Strahl, der das Objelt trifft noch weitere berechnet, die durch die gesamte Szene laufen können um z.B. die Reflexion von Objekten aufeinander zu ermitteln. 
-\textbf{Ray-Marching} ist eine schnellere Version des Ray-Castings. Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau kalkuliert. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung etwas weniger genau ist, ist wie bereits gesagt schneller als Ray-Casting.
+Beim \textbf{Ray-Tracing} werden dabei neben dem ursprünglichen Strahl, der das Objekt trifft noch weitere berechnet, welche vom Treffpunkt des Objekts, abhängig von seiner Oberflächenbeschaffenheit und seinem Material reflektiert und weiter durch die Szene verfolgt werden
+\textbf{Ray-Marching} ist eine schnellere Version des Ray-Castings. 
+\todo{Wird Ray marching nur für volumen verwendet?}
+Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau kalkuliert. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung etwas weniger genau ist, ist wie bereits gesagt schneller als Ray-Casting.
 
 %Ray-Casting bzw. Ray-Marching wird auch zum Rendering von Volumen benutzt.
 Bei beiden Verfahren muss allerdings die Oberfläche bzw. die Form des Objektes bekannt sein, um bestimmen zu können, wann der Strahl in sie eintritt. Dies ist bei Volumendaten in der Regel nicht gegeben, da nicht zur das Objekt selbst, sondern auch dessen Umgebung darin gespeichert sind. Weiterhin werden durch die eben beschriebenen Prozesse nur die Oberflächen der Objekte gerendert, nicht aber ihr Inneres.
@@ -422,49 +427,51 @@ Hier liegt der Unterschied zum Rendering von Volumen. In diesem Fall werden beid
 \subsection{Texture Based Volume Rendering}
 
 Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann mit Alpha Blending übereinander geblendet werden. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den dann mit Hilfe von Texture Mapping die Textur gerendert wird.
-Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt auf welche Art die Volumendaten vorliegen. In Abbildung \ref{img:2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dadurch wird verhindert, dass der Betrachter zwischen zwei Texturen durchsehen kann, wenn diese annähernd parallel zu seiner Blickrichtung stehen. Dies ist in Abbildung \ref{img:textureBased} dargestellt.
+Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form die Volumendaten vorliegen. In Abbildung \ref{img:2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dadurch wird verhindert, dass der Betrachter zwischen zwei Texturen durchsehen kann, wenn diese annähernd parallel zu seiner Blickrichtung stehen. Dies ist in Abbildung \ref{img:textureBased} dargestellt.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://www.evl.uic.edu/aej/524/lecture06.html
 	\includegraphics[width=0.7\linewidth]{images/texture_2d3d.pdf}
 	\caption{Links: Texturen beim werden entlang des Volumens ausgerichtet. Recht: Texturen werden entlang des Blickwinkels ausgerichtet.}
 	\label{img:2D3DTex}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}
+Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sichtachse. Dazu werden sogenannte Proxy Geometrien erzeugt, Polygone, die einen Querschnitt beschreiben. Auf diesen Proxy Geometrien wird dann die Textur erstellt, indem die entsprechenden Volumendaten abgefragt werden. Dadurch, dass die Querschnitte an der Sichtachse ausgerichtet sind, ist nur ein Texturstapel notwendig. 
+
+
+\todo{https://dl.acm.org/citation.cfm?id=329138}
+
+\todo[inline]{implementierung auf der grfikkarte mit 2d texuren nachteil: nur flächen nicht geometrie}
+\todo{3d texure based? }	
+\todo{kann man shaden?}
+
+\begin{figure}[!htb]
 	\centering
 	%https://www.researchgate.net/figure/Object-aligned-slice-stacks-with-2d-texture-mapping_fig1_226214561
 	\includegraphics[width=0.7\linewidth]{images/textureStacks.png}
 	\caption{Texturen werden als Stapel in der 	XY-, YZ- und XZ-Ebene angeordnet.}
 	\label{img:textureBased}
 \end{figure}
-
-Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sichtachse. Dazu werden sogenannte Proxy Geometrien erzeugt, Polygone, die einen Querschnitt beschreiben. Auf diesen Proxy Geometrien wird dann die Textur erstellt, indem die entsprechenden Volumendaten abgefragt werden. Dadurch, dass die Querschnitte an der Sichtachse ausgerichtet sind, ist nur ein Texturstapel notwendig. 
-
-
-https://dl.acm.org/citation.cfm?id=329138
-
-// TODO:
-implementierung auf der grfikkarte mit 2d texuren nachteil: nur flächen nicht geometrie
-3d texure based? 	
-kann man shaden?
-
+\FloatBarrier
 \subsection{Shear-Warp}
 
 Shear-Warp verfolgt den selben Ansatz wie das Ray-Casting. Anstatt die Strahlen allerdings von der tatsächlichen Kameraposition aus zu verschießen, werden die Strahlen orthogonal zu den Volumenschichten in das Volumen gefeuert. Auf diese Weise wird die Berechnung der Strahlen und die Komposition der Darstellung deutlich beschleunigt. 
-Damit auch bei einem nicht orthogonalen Blickwinkel das Volumen korrekt dargestellt wird, wird vor dem Ray Casting eine vom Blickwinkel abhängige Scherung auf die Volumendaten angewandt. In Abbildung \ref{img:shearwarp} ist Dargestellt, wie die Scherung die einzelnen Schichten entsprechend des Blickwinkels verschiebt, um einen orthogonalen Einfallswinkel zu simulieren. 
-Das durch das Ray Casting entstandene Bild wird zunächst in einen Buffer gerendered. Durch die Scherung ist das Bild zu diesem Zeitpunkt noch verzerrt. Deshalb wird es anschließend noch einmal transformiert, sodass eine korrekte Abbildung des Volumens auf die Bildschirmebene projiziert wird. In Abbildung \ref{img:shearwarp} ist zu sehen, wie das gerenderte Bild vor und nach der Transformation aussieht. 
+Damit auch bei einem nicht orthogonalen Blickwinkel das Volumen korrekt dargestellt wird, wird vor dem Ray Casting eine vom Blickwinkel abhängige Scherung auf die Volumendaten angewandt. In Abbildung \ref{img:shearwarp} ist dargestellt, wie die Scherung die einzelnen Schichten entsprechend des Blickwinkels verschiebt, um einen orthogonalen Einfallswinkel zu simulieren. 
+Das durch das Ray Casting entstandene Bild wird zunächst in einen Buffer gerendert. Durch die Scherung ist das Bild zu diesem Zeitpunkt noch verzerrt. Deshalb wird es anschließend noch einmal transformiert, sodass eine korrekte Abbildung des Volumens auf die Bildschirmebene projiziert wird. In Abbildung \ref{img:shearwarp} ist zu sehen, wie das gerenderte Bild vor und nach der Transformation aussieht. 
 
 Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um einiges schneller.
+\todo{begründen warum (GPU-Berechnung, Rasterisierung vs Raytracing)}
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=97AC0E2CDFD635B2917DF8DF86E99224?doi=10.1.1.548.9543&rep=rep1&type=pdf
 	\includegraphics[width=0.7\linewidth]{images/shearwarp.png}
 	\caption{Shear-Warp Verfahren. Rechts: Ohne Verschiebung würden die Strahlen der Bildebene schräg auf das Volumen treffen. Mitte: Die Schichten des Volumen werden verschoben, sodass die Strahlen orthogonal darauf treffen. Das resultierende Bild ist verzerrt. Rechts: Das verzerrte Bild wird transformiert, um das Volumen korrekt darzustellen.}
 	\label{img:shearwarp}
 \end{figure}
+\FloatBarrier
 
 %-------------------------------------------------------------
 \section{Beispiele für Volume Rendering Implementiertungen}
@@ -476,7 +483,7 @@ Volume Rendering Techniken werden von verschiedenen Programmen und Arbeiten zur 
 Beispiele für Volume Rendering Software sind \textit{MRIcroGL} von \citet{MRIcroGL} und \textit{Voreen}, entwickelt von \citet{voreen}. Die Programme erlauben dabei die Manipulation der Transferfunktion. Ersteres ermöglicht es außerdem bestimmte Bereiche zu markieren und kann durch eigene Skripte erweitert werden.
 Die im späteren Abschnitt \ref{radiologieSoftware} genannte MRT-Viewer Software besitzt ebenfalls die Funktionalität die Daten in 3D darzustellen.
 
-Um Volume Rendering spezifisch in Unity zu umzusetzen, existieren die kostenpflichtige Unity-Erweiterung \textit{Volume Viewer Pro} von \citet{volumeViewerPro} sowie das Unity-Plugin \textit{Unity® Volume Rendering} von \citet{volumeRenderingUnity}. Beide nutzen Volume Ray Casting zur Darstellung von 3D-Daten und ermöglichen dem Nutzer das Erstellen eine Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren. textit{Volume Viewer Pro} bietet weiterhin das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
+Um Volume Rendering spezifisch in Unity zu umzusetzen, existieren die kostenpflichtige Unity-Erweiterung \textit{Volume Viewer Pro} von \citet{volumeViewerPro} sowie das Unity-Plugin \textit{Unity® Volume Rendering} von \citet{volumeRenderingUnity}. Beide nutzen Volume Ray Casting zur Darstellung von 3D-Daten und ermöglichen dem Nutzer das Erstellen einer Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren. textit{Volume Viewer Pro} bietet weiterhin das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
 
 Eine der frühesten Arbeiten, die Volume Rendering Techniken vorstellen stammt von \citet{Drebin88}.
 
@@ -485,7 +492,8 @@ Eine der frühesten Arbeiten, die Volume Rendering Techniken vorstellen stammt v
 
 \citet{Kutter08} beschäftigen sich mit der Optimierung von Volume Rendering durch ein AR-HMD. Das Rendering soll interaktiv sein und von den Händen des Nutzers verdeckt werden können.
 
-Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisierung von Volumen verwendet. Dabei handelt es sich um ein Verfahren ähnlich dem Ray Tracing, bei dem zufällig Strahlen in eine Szene geschossen werden, wobei ihr "Pfad" in der Szene verfolgt wird , der durch Reflexion und Absorption, sowie bei Volumen, Streuung bestimmt wird. Auf diese Weise wird eine globale Beleuchtung der Szene erzeugt. Die Technik wird vor allem zum rendern von nicht-körperlichen Volumen, wie Wolken oder Rauch eingesetzt. (?) 
+Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisierung von Volumen verwendet. Dabei handelt es sich um ein Verfahren ähnlich dem Ray Tracing, bei dem zufällig Strahlen in eine Szene geschossen werden, wobei ihr Pfad in der Szene verfolgt wird , der durch Reflexion und Absorption, sowie bei Volumen, Streuung bestimmt wird. Auf diese Weise wird eine globale Beleuchtung der Szene erzeugt. Die Technik wird vor allem zum rendern von nicht-körperlichen Volumen, wie Wolken oder Rauch eingesetzt. 
+\todo{Prüfen}
 \citet{Fong17} beschreiben Volume Rendering unter Verwendung von Path Tracing, vobei der Fokus auf dessen Einsatz in der Produktion liegt.
 
 %-------------------------------------------------------------
@@ -503,6 +511,7 @@ Im Folgenden werden diese erläutert.
 \subsection{Marching Cubes}
 \label{marchingCubes}
 %https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch01.html
+\todo{REFERENZEN}
 
 Das Marching Cubes Verfahren wird eingesetzt, um eine Polygonenoberfläche zu erzeugen, die ein volumetrisches Objekt visualisiert. 
 Der Visualisierung liegen Volumendaten, die in Form eines Skalarfeldes vorliegen zu Grunde.
@@ -512,31 +521,33 @@ Um die Grenze zwischen den Voxeln zu ermitteln, werden diese zunächst in Würfe
 
 Die Vorstellung einer Grenze zwischen den Voxeln lässt sich auf die Würfel übertragen. Dabei liegt dann ein bestimmter Teil der Würfel des Volumens mit allen Eckpunkten innerhalb und ein bestimmter Teil außerhalb des Objektes. Diese Würfel liegen nicht auf der Grenze und alle ihre Eckpunkte haben jeweils ähnliche Werte. Andererseits gibt es Würfel, durch die die Grenze verläuft. Die Eckpunkte dieser Würfel können sich in ihren Werten stark unterscheiden, da jeweils ein Punkt zum Inneren und ein anderer zum Äußeren des Objektes gehören kann. 
 
-Um also die Oberfläche zu erzeugen, die das gesamte Volumen aufteilt, wird jeder Würfel zuerst einzeln betrachtet und es wird ermittelt, ob und wie die Polygonfläche diesen einzelnen Würfel aufteilt.  Da diese Teilung auch einzelne Eckpunkte betreffen kann, setzt sich diese Oberfläche aus dreieckigen Polygonen zusammen. ?
+Um also die Oberfläche zu erzeugen, die das gesamte Volumen aufteilt, wird jeder Würfel zuerst einzeln betrachtet und es wird ermittelt, ob und wie die Polygonfläche diesen einzelnen Würfel aufteilt.  Da diese Teilung auch einzelne Eckpunkte betreffen kann, setzt sich diese Oberfläche aus dreieckigen Polygonen zusammen.
+\todo{Prüfen}
 
 Die Anzahl an Möglichkeiten einen Würfel aufzuteilen lässt sich errechnen. Für jeden der acht Eckpunkte des Würfels gilt eine von zwei Möglichkeiten: Entweder befindet er sich unter der Oberfläche und damit im Objekt oder eben nicht. Demnach ergeben sich für alle Punkte zusammen $2^8=256$ mögliche Fälle der Aufteilung. \citet{aigner07} Durch in Betracht ziehen von Symmetrie, könnten diese auf 15 verschiedene Möglichkeiten reduziert werden, die in Abbildung \ref{img:marchingCubes} dargestellt sind. Der Fall, dass die Eckpunkte gar nicht getrennt werden ist dabei berücksichtigt. 
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://en.wikipedia.org/wiki/Marching_cubes#/media/File:MarchingCubes.svg
 	\includegraphics[width=0.7\linewidth]{images/MarchingCubes.png}
 	\caption{Die 15 verschiedenen Möglichkeiten, wie eine Polygonfläche einen Würfel in zwei Bereiche teilen kann.}
 	\label{img:marchingCubes}
 \end{figure}
+\FloatBarrier
 
 Bei der Implementierung des Algorithmus werden nun alle 256 Teilungsmöglichkeiten eines Würfels in einer Look-up-Tabelle gespeichert. Um auszulesen, welcher Fall auf den momentan betrachteten Würfel zutrifft, bedarf es eines Indexes. 
 Der Index ist eine achtstellige Binärzahl. Sie wird ermittelt, indem für jeden der acht Eckpunkte des Würfels geprüft wird, ob er unter dem Schwellenwert liegt, der die Unterscheidung zwischen Innen und Außen definiert oder nicht. Die Ergebnisse der Prüfung, die durch 1 oder 0 repräsentiert werden, werden aneinander gefügt. Nach der Prüfung aller Eckpunkte ist so ein achtstelliger Index entstanden. 
 
-Durch die Verwendung dieses Index und der Tabelle lässt sich so auslesen, wie die Polygone in dem Würfel liegen. Damit ist auch bekannt, auf welchen Würfelkanten sich deren Vertices befinden. Für die Erzeugung einer Oberfläche muss weiterhin die genaue Position des Vertex auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Würfel-Eckpunkte, zwischen denen die betreffende Kante verläuft. ??
+Durch die Verwendung dieses Index und der Tabelle lässt sich so auslesen, wie die Polygone in dem Würfel liegen. Damit ist auch bekannt, auf welchen Würfelkanten sich deren Vertices befinden. Für die Erzeugung einer Oberfläche muss weiterhin die genaue Position des Vertex auf der jeweiligen Kante ermittelt werden. Dies geschieht durch lineare Interpolation zwischen den Werten der Würfel-Eckpunkte, zwischen denen die betreffende Kante verläuft. 
+\todo{Prüfen}
 Auf die selbe Weise wird für jeden Vertex der Polygone dessen Normale berechnet, indem die Normalen der Eckpunkte interpoliert werden.
 
 Nach und nach werden so für jeden Voxel-Würfel Polygone berechnet, die in einer Liste gespeichert und schließlich gezeichnet werden.
 
 Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terrain eingesetzt. In diesem Fall ist es entscheidend, wie die Dichtewerte des Volumens generiert werden. Bei der Visualisierung von medizinischen Daten, wie MRT-Bildern werden die Bilddaten als Eingabewerte genommen.
 
+\todo{Richtig referenzieren.}
 \citet{Lorensen87}
-
-Beschleunigung durch Unterstützung der Grafikkarte??
 
 Erweiterungen/ Abwandlungen
 %https://dl.acm.org/citation.cfm?id=3264776
@@ -564,8 +575,7 @@ Marching Cubes & 3D-Mesh der Bestandteile des Gehirns  & 10,00 & 0 &\\
 \caption{Description of the table}\label{volumeRenderingVergleich}
 \end{table}
 
-//TODO
-Tabelle
+\todo{Tabelle}
 %-------------------------------------------------------------
 \section{AR und VR (MR?)}									 %
 %-------------------------------------------------------------
@@ -586,18 +596,19 @@ AR und VR verbindet eine ähnliche Geschichte. Die frühesten VR-Systeme waren n
 %Geshcihte?
 Auch einige AR-HMDs funktionieren mit Stereoskopie (s. \ref{vr}). Die eben genannten Definition lässt allerdings auch andere Systeme zu. Tatsächlich gibt es eine Vielzahl von AR-Systemen. 
 Beispielsweise kann eine AR-Anwendung mit oder ohne einen Bildschirm konzipiert werden, der die Augmentierung darstellt. Im letzteren Fall werden dann meist Beamer o.Ä. verwendet, um die Objekte in die reale Welt zu projizieren. 
-Die Mehrzahl von AR-Software verwendet wahrscheinlich allerdings Bildschirme. %Warum?
+Wie aus den vorgestellten Arbeiten hervorgeht, verwendet die Mehrzahl von AR-Software allerdings Bildschirme. 
 Aber auch hier gibt es verschiedene Lösungsansätze. Dies betrifft zum einen die Positionierung des Bildschirms. Dieser kann direkt vor dem Auge des Nutzers, in der Welt oder in einem tragbaren Endgerät platziert werden.
 Weiterhin können Bildschirme durchsichtig oder undurchsichtig sein. Handelt es sich um einen durchsichtigen Bildschirm, wird darauf nur die Augmentierung dargestellt. Der Vorteil hierbei ist, dass der Nutzer seine Umgebung größtenteils unverfälscht wahrnehmen kann. Damit ist aber gleichzeitig der Kontrast zu den nicht unbedingt realitätsnahen 3D-Objekten größer.
 Bei undurchsichtigen Bildschirmen nimmt eine Kamera die Umgebung auf und gibt sie augmentiert auf dem Bildschirm aus. Diese Technik wird z.B. verwendet wenn AR-Anwendungen für Smartphones oder Tablets entwickelt werden. In Abbildung \ref{img:ARMarker} ist dargestellt, wie eine solche Anwendung auf einem Smartphone aussieht.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://commons.wikimedia.org/wiki/File:App_iSkull,_an_augmented_human_skull.jpg
 	\includegraphics[width=0.5\linewidth]{images/App_iSkull,_an_augmented_human_skull.jpg}
 	\caption{Eine tabletbasierte AR-Anwendung, die auf einem Marker des 3D-Modell  eines Schädels projiziert.}
 	\label{img:ARMarker}
 \end{figure}
+\FloatBarrier
 
 Alle Techniken haben gemeinsam, dass eine Kamera Teil des Systems ist, die die Umgebung des Nutzers aufnimmt. Dadurch werden Tiefen- und Bildinformationen gesammelt. Durch die Auswertung dieser und anderer Informationen, wie z.B. GPS- oder Wlan-Daten, können 3D-Objekte korrekt mit der Umgebung in Beziehung gesetzt werden. So ist es möglich ein virtuelles Objekt auf oder hinter ein reales zu stellen. Durch ein möglichst umfassendes Verständnis des umgebenden Raumes ist es auch möglich, dass die Elemente der erweiterten Realität in der realen Welt an der richtigen Stelle platziert werden und dort auch bleiben.
 Alternativ dazu können am gewünschten Ort Markierungen gesetzt werden, die das System erkennt und somit genau dort das 3D-Modell darstellen kann. Solche Marker können verschieden aussehen. Oft werden komplexe schwarz-weiße Muster dafür verwendet, weil diese gut zu identifizieren und schwer zu verwechseln sind. In Abbildung \ref{img:ARMarker} ist ein 3D-Objekt zu sehen, dass auf einem Marker platziert wurde. 
@@ -611,11 +622,9 @@ An dieser Stelle sollen auch VR-Geräte, wie die \textit{HTC Vive Pro} von \cite
 
 %Ebenfalls als HMD zu bezeichnen ist die \textit{Google Glass} von \citet{googleGlass}. Dabei handelt es sich um ein Brillengestell, dass vor einem der Augen des Nutzers einen durchsichtigen Bildschirm fixiert, auf dem digitale Inhalte dargestellt werden können. Google Glass wird momentan allerdings nur noch von Firmen verwendet.
 
-// TODO:
-verlgiech systeme
+\todo{verlgiech systeme}
 
-//TODO:
-Hololens genauer, eingeschränktes sichtfeld -> Ergebnisse
+\todo{Hololens genauer, eingeschränktes sichtfeld -> Ergebnisse}
 
 
 \subsection{Virtual Reality}
@@ -631,7 +640,7 @@ In den 1960ern wurden unter anderem von \citet{Sutherland68} erste Versionen ein
 Dabei handelt es sich um eine Art Brille, mit zwei Bildschirmen vor den Augen, auf die simulierte Inhalte projiziert werden.
 Um den Eindruck von Dreidimensionalität zu erzeugen, wird dabei in den meisten Fällen das Prinzip der Stereoskopie verwendet. Hierzu werden jeweils dem linken und rechten Auge des Nutzers zwei Bilder des selben Objektes aus leicht unterschiedlichen Blickwinkeln  gezeigt. Da die Augen beim normalen Sehen ein Objekt tatsächlich aus zwei verschiedenen Winkeln wahrnehmen, werden die Bilder im Gehirn zusammengefügt, sodass der Eindruck von Tiefe entsteht. Die Bilder werden dabei auf zwei Bildschirmen direkt vor dem Auge angezeigt, vor die eine Linse gesetzt wird, um die Illusion zu erzeugen, dass das Gezeigte weiter entfernt ist als in der Realität und es dem Auge zu ermöglichen die Bilder trotz der Nähe zu fokussieren.
 
-Der Blickwinkel auf ein Objekt hängt dabei von der Kopfposition des Nutzers ab. Um diesem die Möglichkeit zu geben, den Kopf zu bewegen und damit den Eindruck eines 3D Objektes zu verstärken wird die Position des Kopfes getracked. Auf diese Weise können die stereoskopischen Bilder dem Blickwinkel des Nutzers angepasst werden. Dieser erhält somit das Gefühl, er könne um das dargestellte Objekt herumgehen. 
+Der Blickwinkel auf ein Objekt hängt dabei von der Kopfposition des Nutzers ab. Um diesem die Möglichkeit zu geben, den Kopf zu bewegen und damit den Eindruck eines 3D Objektes zu verstärken wird die Position des Kopfes verfolgt. Auf diese Weise können die stereoskopischen Bilder dem Blickwinkel des Nutzers angepasst werden. Dieser erhält somit das Gefühl, er könne um das dargestellte Objekt herumgehen. 
 
 Die Bewegungsfreiheit der Nutzers war allerdings durch die damalige Technik eingeschränkt, denn das System, mit dem das HMD verbunden war, war zu schwer, um es zu tragen und deshalb fest installiert. 
 In den 90er Jahren gab es deshalb Entwicklungen in eine andere Richtung. Anstatt die virtuelle Realität nur direkt vor den Augen des Nutzers darzustellen, sollte diese um ihn herum erzeugt werden. Dazu wird der Nutzer in einem abgeschlossenen Raum platziert, an dessen Wände und Boden die Umgebung des jeweiligen Szenarios projiziert wurde. Die Immersion des Erlebnisses kann gesteigert werden, indem z.B. 3D-Brillen eingesetzt werden. Sogenannte CAVE-Systeme (Cave Automatic Virtual Environment) kommen auch heute noch zum Einsatz. Da sie allerdings sehr unhandlich und in ihrer Umsetzung kostspielig sind, eignen sie sich nicht als Massenprodukt oder für private Nutzung.
@@ -646,29 +655,30 @@ Auf die Möglichkeiten der Nutzerinteraktion in VR-Systemen wird im Abschnitt \r
 Heutzutage bestehen die meistgenutzten VR-Systeme meist aus einem HMD, welches über eine Kamera verfügt, Eingabemedien (z.B. Controllern), einem Trackingsystem, das die Position der ersten beiden Komponenten verfolgt und einem Computer, der die Komponenten miteinander verknüpft und auf dem die VR-Anwendung läuft. 
 In Abbildung \ref{img:vive} ist das HMD und die Controller während der Nutzung abgebildet.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://sco.wikipedia.org/wiki/Virtual_reality#/media/File:Reality_check_ESA384313.jpg
 	\includegraphics[width=0.5\linewidth]{images/vive.jpg}
 	\caption{Ein Nutzer trägt das HMD der \textit{HTC Vive} und bedient dessen Controller.}
 	\label{img:vive}
 \end{figure}
+\FloatBarrier
 
   
-\textit{HTC Vice} von \citet{vive} -> 
+\todo{\textit{HTC Vive} von \citet{vive} -> }
+
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten}						 %
 %-------------------------------------------------------------
-Obwohl die Darstellung von MRT-Bildern in direktem Zusammenhang mit ihrem Zweck steht, bleibt die Verarbeitung der Daten auch bei verschiedenen Darstellungsformen gleich. 
 
 \subsection{Arbeit eines Neurologen}
 Wie bereits in Kapitel \ref{motivation} oberflächlich erläutert wurde, besteht der Nutzen eines MRTs darin, dass der behandelnde Arzt einen Einblick in die betreffenden Organe (hier das Gehirn) erhält. Dazu studiert er die einzelnen Schichten des Gehirns und hält Ausschau nach Anomalien.
+Im Folgenden wird erläutert, wie ein Schlaganfall durch bildgebende Verfahren diagnostiziert wird.
 
-Im Fall von Schlaganfällen sind diese ...
-
-Wurde eine entsprechender Bereich identifiziert, markiert der Arzt diesen auf jeder einzelnen Schicht. 
-\subsubsection{Schlaganfälle auf einem MRT}
-\label{schalganfälleMRT}
+Der vom Schlaganfall betroffene Bereich des Gehirns wird anschließend vom Arzt diesen auf jeder einzelnen Schicht markiert.
+ 
+\subsubsection{Schlaganf\"alle auf einem MRT}
+\label{schalganfaelleMRT}
 
 Laut der \citet{schlaganfall} bezeichnet ein Schlaganfall eine plötzlich auftretende Störung der Gehirnfunktionen durch eine mangelhafte Durchblutung von Gehirnpartien. Die Nerven im Gehirn werden dabei nicht mit genügend Sauerstoff versorgt, was irgendwann zu Beschädigungen des Gehirns führen kann.
 
@@ -692,7 +702,7 @@ Nach der Diagnose wird versucht, das Blutgerinnsel durch Verabreichung von Medik
 Um eine Diagnose stellen zu können muss der Arzt die MRT-Bilder eines Patieten genau studieren. Diese Untersuchung der Daten wird digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Anzeigeprogramme, die diesen darstellen kann und weiterhin relevante Funktionen bietet. 
   
 Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM oder NIfTI Datenformat vor. Um die Dateien öffnen zu können, bedarf es deshalb bestimmter Software. Es stehen viele verschiedene Programme zur Darstellung von MRT-Bildern zur Verfügung. Und die Auswahl eines Programms hängt meist an der persönlichen Präferenz des Arztes. 
-In Krankenhäusern besteht allerding in der Regel die Situation, dass die Bilder in einem Picture Archiving and Communication System (PACS) gespeichert. (Fußnote?) Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit herkömmlichen Computern über den Browser auch die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. Die Speicherung und Verteilung von medizinischen Bilddaten ist oft durch den DICOM-Standart geregelt, der im Abschnitt \ref{datenformate} genauer beschrieben ist.
+In Krankenhäusern besteht allerdings in der Regel die Situation, dass die Bilder in einem Picture Archiving and Communication System (PACS) gespeichert werden. Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit herkömmlichen Computern über den Browser auch die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. Die Speicherung und Verteilung von medizinischen Bilddaten ist oft durch den DICOM-Standart geregelt, der im Abschnitt \ref{datenformate} genauer beschrieben ist.
 
 Die meisten Viewer Programme für MRT-Bilder, unabhängig davon, ob es sich um PACS-Viewer handelt oder nicht ähneln sich stark in den Funktionen die sie anbieten und ihrem Aufbau.
 
@@ -702,13 +712,15 @@ Bei den drei Ebenen handelt es sich um die Frontal- oder Coronalebene, die das G
 Bei dieser Zusammensetzung von Ebenen wird manchmal noch eine vierte Ansicht ergänzt, auf der entweder die Sagittalebene von der anderen Seite abgebildet ist oder durch das Ineinanderschieben der gerade angezeigten Schichten eine annähernd dreidimensionale Darstellung simuliert wird. 
 In Abbildung \ref{img:mrtSoftware} ist die Oberfläche der XY-Viewers zu sehen, die beispielhaft die Ansichten zeigt.
 
+\todo{Bild software}
+
 Die Benutzeroberfläche bietet auch einige Interaktionen. Die wichtigsten sind dabei die, die es dem Arzt ermöglichen ein möglichst eindeutiges Verständnis vom Inneren des Gehirns zu erhalten.  Dazu zählen:
 
 \begin{description}
 \item [Scrollen durch die einzelnen Bildschichten]\hfill \\
 Dies geschieht in der Regel durch die Auswahl einer der Ansichten und die Betätigung des Mausrads. 
-\item [Einstellen von Kontrast und Helligkeit D]\hfill \\
-adurch können schlecht sichtbare Strukturen erkennbarer gemacht werden. Das Werkzeug dazu muss in der Taskleiste ausgewählt werden. In einem separaten Fenster können die Werte dann angepasst werden. ??
+\item [Einstellen von Kontrast und Helligkeit]\hfill \\
+Dadurch können schlecht sichtbare Strukturen erkennbarer gemacht werden. Das Werkzeug dazu muss in der Taskleiste ausgewählt werden. In einem separaten Fenster können die Werte dann angepasst werden. \todo{Nur kontrast und helligkeit?}
 \item [Heranzoomen]\hfill \\
 Bestimmte Bereiche eines Bildes können vergrößert werden, um sie besser beurteilen zu können.
 \item [Verschieben des Bildausschnitts]\hfill \\
@@ -717,8 +729,8 @@ Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken
 
 Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt, wie aus den Interviews mit Neurologen hervorging.
 
-Es gitb eine Vielzahl von Viewern dieser Art zum Öffnen oder zur Verarbeitung von MRT-Bildern, viele davon stehen kostenloas im Internet zur Verfügung. 
-Zu den wahrscheinlich meist verbreitetsten gehören \textit{Osirix} von \citet{osirix} und \textit{Horos} von \citet{horos}, für das Betriebsystem macOS. \citet{radiocafe} stellt außerdem folgende Viewer zum Gebrauch im radiologischen Kontext für Windows vor: Das kompakte und schnelle Viewerprogramm \textit{RadiAnt} von \citet{radiant}. Weiterhin \textit{Stratovan Pro Surgical 3D} von \citet{prosurgical}, was sich eigentlich an Chirurgen richtet und \textit{Navegatium DICOM Viewer}von \citet{navegatium}, ein Programm, dass auch als Windows App und somit auch für Tabletts zur Verfügung steht.
+Es gibt eine Vielzahl von Viewern dieser Art zum Öffnen oder zur Verarbeitung von MRT-Bildern. Viele davon stehen kostenlos im Internet zur Verfügung. 
+Zu den wahrscheinlich meist verbreitetsten gehören \textit{Osirix} von \citet{osirix} und \textit{Horos} von \citet{horos}, für das Betriebsystem \textit{macOS} von \citet{macOs}. \citet{radiocafe} stellt außerdem folgende Viewer zum Gebrauch im radiologischen Kontext für andere Betriebssysteme vor: Das kompakte und schnelle Viewerprogramm \textit{RadiAnt} von \citet{radiant}. Weiterhin \textit{Stratovan Pro Surgical 3D} von \citet{prosurgical}, was sich eigentlich an Chirurgen richtet und \textit{Navegatium DICOM Viewer}von \citet{navegatium}, ein Programm, dass auch als Windows App und somit auch für Tabletts zur Verfügung steht.
 Alle der genannten Viewer besitzen die Funktion aus MRT-Datensätzen auch Volumendarstellungen zu erzeugen.
 
 %-------------------------------------------------------------
@@ -727,28 +739,29 @@ Alle der genannten Viewer besitzen die Funktion aus MRT-Datensätzen auch Volume
 %-------------------------------------------------------------
 \subsection{Systeminterne Nutzereingaben}
 
-VR- und AR-Systeme, die es heutzutage zu kaufen gibt besitzen in der Regel  eine oder mehrere Formen der Eingabe, um mit dem System zu interagieren. Da mARt als AR-Anwendung konzipiert ist, werden die verschiedenen Mittel zur Eingabe an dieser Stelle vorgestellt.
+VR- und AR-Systeme, die momentan auf dem Markt verfügbar sind, besitzen in der Regel  eine oder mehrere Formen der Eingabe, um mit dem System zu interagieren. Da mARt als AR-Anwendung konzipiert ist, werden die verschiedenen Mittel zur Eingabe an dieser Stelle vorgestellt.
 
 Die Eingabemöglichkeiten sind dabei teilweise von der Art des Systems abhängig. 
 Beispielsweise kann für Smartphone-Apps der Touchbildschirm des Gerätes für die Nutzereingabe genutzt werden. 
 
-Theoretisch kann jedes System mit jedem Eingabemediun verknüpft werden. Dies ist allerdings für Nutzer und Entwickler mit entsprechendem Aufwand verbunden. Die Techniken, die von den derzeit erhältlichen AR und VR Systemen verwendet werden, um Nutzereingaben zu erfassen lassen sich in zwei Kategorien teilen. 
+Theoretisch kann jedes System mit jedem Eingabemedium verknüpft werden. Dies ist allerdings für Nutzer und Entwickler mit entsprechendem Aufwand verbunden. Die Techniken, die von den derzeit erhältlichen AR und VR Systemen verwendet werden, um Nutzereingaben zu erfassen lassen sich in zwei Kategorien teilen. 
 %IMMERSION
 \paragraph{Controller}
+\todo{Produkte Referenzieren}
 Zum einen gibt es Controller, die mit dem System zusammen hergestellt werden und die der Nutzer während der Verwendung des Systems in der Hand hält. Im Fall von VR Systemen sind meistens zwei Controller vorhanden, einer für jede Hand. Diese sind jeweils mit einer Anzahl an Knöpfen oder auch Touchpads versehen, die des Nutzer bedienen kann. Im Aussehen sind sich Controller dieser Art recht ähnlich. In Abbildung \ref{img:VRController} ist der Controller des HTC Vive Systems zusehen.
-Allerdings existieren auch Systeme für dessen Bedienung nur ein Controller vorgesehen ist. Ein VR-Beispiel ist die \textit{Oculu Go}, ein eigenständiges System für grafisch weniger anspruchsvolle Anwendungen. 
+Allerdings existieren auch Systeme für dessen Bedienung nur ein Controller vorgesehen ist. Ein VR-Beispiel ist die \textit{Oculus Go}, ein eigenständiges System für grafisch weniger anspruchsvolle Anwendungen. 
 Auch AR-Systeme, wie die \textit{Magic Leap} oder die \textit{Hololens} besitzen nur einen Controller. Diese haben im Vergleich zu den zuerst genannten VR-Controllern deutlich weniger Eingabemöglichkeiten. Im Falle der \textit{Hololens} handelt es sich um einen flachen Kontroller, den sich der Nutzer an den Finger steckt. Indem er Druck ausübt, kann er klicken. Daneben wird nur die Position und Rotation des Clickers verfolgt, durch die der Nutzer mit dem System interagieren kann. Das Gerät stellt damit eine von zwei möglichen Eingabemethoden dar. 
 
 \paragraph{Gesten}
 Die andere ist die Steuerung über Gesten, die vor allem AR-Systeme verwenden und die zweite Kategorie darstellt.
 Die in den Systemen verbaute Kamera erfasst dabei die Hände des Nutzers in ihrem Blickfeld und erkennt bestimmte Handgesten, auf die dann reagiert wird. 
-Die \textit{Hololens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Boolm} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
+Die \textit{Hololens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Bloom} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
 Die derzeit angekündigte \textit{Hololens 2} verfügt dagegen über eine Hand-Tracking-Funktionalität, die jede Bewegung der Hände, wie z.B. das Greifen von Objekten erkennt (vgl. \citet{hololens2}). 
 
 Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
 
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://www.researchgate.net/figure/The-common-air-tap-gesture-used-in-the-HoloLens-application_fig2_32914899
 	\includegraphics[width=0.7\linewidth]{images/hololensGestures.png}
@@ -756,13 +769,14 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 	\label{img:hololensGestures}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://next.reality.news/news/new-magic-leap-gesture-documentation-offers-insight-into-hands-will-make-its-digital-world-come-alive-0183614/
 	\includegraphics[width=0.7\linewidth]{images/magicleapGestures.jpg}
 	\caption{Handgesten, die die Magic Leap erkennt.}
 	\label{img:magicGestures}
 \end{figure}
+\FloatBarrier
 
 \paragraph{Kopfposition und Blickrichtung}
 
@@ -771,43 +785,21 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 Schließlich besitzen in vielen Fällen auch die HMDs der Systeme Knöpfe oder Räder. Diese dienen allerdings meistens zur Konfiguration des Systems und Steuern z.B. die Lautstärke.
 %Linsenabstand? Capture?
 
-Controller
 \subsection{Leap Motion}
 
-Die \textit{Leap Motion} von \citet{leapMotion} ist ein externes Gerät, dass die Hände des Nutzers tracked und die genauen Handbewegungen an einen Computer übermitteln kann. 
+Die \textit{Leap Motion} von \citet{leapMotion} ist ein externes Gerät, dass die Hände des Nutzers verfolgt und die genauen Handbewegungen an einen Computer übermitteln kann. 
 Um die Informationen zu sammeln, ist die \textit{Leap Motion} mit drei Infrarotemittern und zwei Kameras ausgestattet (vgl. \citet{Weichert13}). Das Gerät wird über USB an einen Rechner angeschlossen und kann dann als unabhängiges Eingabemedium verwendet werden. Allerdings ist auch eine Verwendung in Kombination mit AR- oder VR-Systemen möglich. 
 Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers verlässlich nachzuempfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. 
 
 Wie in Kaptel \ref{konzept} erläutert wird, wird die die \textit{Leap Motion} mit einem HMD kombiniert, um dem Nutzer die Möglichkeit zu geben mARt mit seinen Händen zu steuern.
 
 \subsection{Andere}
-Consolen Controller
+\todo{Consolen Controller}
+
 \subsection{Interaktionsdesign}
 
-//TODO:
-Paper zur interaktion finden
--> was ist gut zur interaktion inAR warum?
+\todo{Paper zur interaktion finden -> was ist gut zur interaktion inAR warum?}
 
-\section{AR und VR im Vergleich}
-
-Nachdem die AR- und VR-Systeme vorgestellt wurden, sollen die beiden Technologien an dieser Stelle verglichen werden.
-
-\begin{tabular}{lrr} 
-\toprule
-Vergleich AR und VR\\  
-\midrule 
-Technologie & Vorteile & Nachteile\\ 
-\midrule 
-AR & Unabhängig von anderen Geräten & Eingeschränkte Interaktionsmöglichkeiten\\
-   & Bewegungsfreiheit				& Entwicklung an Hersteller gebunden\\
-   & Be								& Begrenzte Leisutung\\
-   & Interaktion mit Umwelt möglich & Langes Tragen unkomfortabel\\
-   & 								& Eingeschränktes augmentiertes Sichtfeld\\
-VR & Leistungfähigkeit nur durch Rechner beschränkt  & Totale Abkapselung von der Umwelt \\
-	& Kann auch kabellos verwendet werden		  	 & Langes Tragen unkomfortabel\\
-	& & \\
-\bottomrule
-\end{tabular}
 
 
 

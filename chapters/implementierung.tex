@@ -5,15 +5,15 @@
 
 \section{Aufbau Struktur des Projektes}
 
-Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der grafischen Leistungsfähigkeit der Hololens, wurde die Anwendung sowohl für die Hololens als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Die VR-Anwednung ermöglicht dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
+Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der Leistungsfähigkeit der Hololens, wurde die Anwendung sowohl für die Hololens als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Die VR-Anwendung ermöglicht dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
 Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen GameEngines verwendet, da sie als Oberfläche diesen, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
-Zur Implementierung von mARt wurde \textit{Unity} von \citet{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \citet{unityRelations} selbst, werden 60\% von AR/VR inhalten mit Unity entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. Unity bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
+Zur Implementierung von mARt wurde \textit{Unity} von \citet{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \citet{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit Unity entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. Unity bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
 
 Microsoft empfiehlt weiterhin Unity zur Entwicklung für Hololens-Software zu Nutzen (\citet{unityHololens}) und bietet mit \textit{Mixed Reality Toolkit} (MRTK) (\citet{holoToolkit}) ein Framework, das Hololens Funktionen innerhalb von Unity zur Verfügung stellt.
 Unity verwendet C\# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
 %Wieso?
 
-mARt wurde in Unity entwickelt und sollte dann sowohl für die HoloLens und als VR-Anwendung gebaut werden. Eine Anwendung, die auf die HoloLens deployed wird konnte allerdings nicht gebaut werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert. Auf die Entwicklung für die unterschiedlichen Plattformen wird im Abschnitt \ref{plattformen} näher eingegangen.
+mARt wurde in Unity entwickelt und sollte dann sowohl für die HoloLens und als VR-Anwendung gebaut werden. Die Anwendung konnte allerdings nicht für die HoloLens bereitgestellt werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert. Auf die Entwicklung für die unterschiedlichen Plattformen wird im Abschnitt \ref{plattformen} näher eingegangen.
 
 Um die Unity Anwendung auf dem VR-System abzuspielen, wird die \textit{SteamVR}-Software von \citep{steam} in das Projekt integriert. Um die Anwendung starten zu können muss sie auf dem jeweiligen Rechner installiert sein.
 
@@ -55,9 +55,9 @@ Meistens funktioniert dies indem einzelne Skripte, die das gewünschte Verhalten
 Sowohl Vive als auch HoloLens sollen in Verbindung mit der Leap Motion funktionieren. Dazu muss zum Einen die Leap Motion Kamera in beide Systeme integriert werden und zum Anderen die Funktionalität in die Unity jeweiligen Szenen eingebaut werden. 
 
 Das Einbinden der Leap Motion in eine VR Anwendung, sowie die Kombination mit dem HTC Vive Headset sind unproblematisch. Das Orion SDK der Leap Motion unterstützt den Einsatz in VR-Szenen. Sofern SteamVR installiert und eine VR-Brille angeschlossen ist, ist kein größerer Aufwand nötig, um die Hände des Nutzers in VR anzuzeigen. 
-Die Inetegration in das VR-System ist vergleichbar einfach. Die Leap Motion Kamera wird vorne auf dem HMD über der eingebauten Kamera befestigt und ihre Kabel zusammen mit den anderen der Brille über den Kopf des Nutzers geführt. 
+Die Integration in das VR-System ist vergleichbar einfach. Die Leap Motion Kamera wird vorne auf dem HMD über der eingebauten Kamera befestigt und ihre Kabel zusammen mit den anderen der Brille über den Kopf des Nutzers geführt. 
 
-Dagegen bringt die Verbindung von Motion Leap und Hololens einige Herausforderungen mit sich. Zunächst ist in einer Hololens-Szene nur eine Kamera, die des HMDs, vorgesehen. Das Vorhanden sein einer zweiten Kamera, wie die der Leap Motion würde beim Build zu Fehlern führen. Und ein Deploy eines gebauten Programmes auf die Hololens ist nicht möglich.
+Dagegen bringt die Verbindung von Motion Leap und Hololens einige Herausforderungen mit sich. Zunächst ist in einer Hololens-Szene nur eine Kamera, die des HMDs, vorgesehen. Das Vorhandensein einer zweiten Kamera, wie die der Leap Motion würde beim Erstellungsprozess zu Fehlern führen,sodass das Bereitstellen des Programmes für die Hololens nicht möglich ist.
 Die Leap Motion wird über ihr Kabel mit Strom versorgt. Sie kann also im Gegensatz zu der Hololens nicht kabellos funktionieren. 
 Über das Kabel werden außerdem die von der Leap Motion Kamera erfassten Daten weitergeleitet, die dann verarbeitet werden. Die dafür notwendige Software ist nicht für die Hololens verfügbar und es ist fragwürdig, ob sie die dafür notwendige Rechenleistung besitzt. 
 
@@ -69,12 +69,11 @@ Die Wiedergabequalität der Anwendung ist dabei abhängig von der Stabilität de
 
 Auch das Anbringen der Leap Motion an das HMD ist bei der HoloLens umständlicher als bei der HTC Vive. 
 Da es die Vive einen undurchsichtigen Bildschirm besitzt, kann die Leap Motion Kamera einfach vorne auf der Brille befestigt werden. Die Form des Gerätes bietet dazu ausreichend Fläche.
-Bei der HoloLens sollte der Bildschirm, durch den der Nutzer sieht nicht verdeckt werden. Eine Installation  im oberen Teil der Frontseite ist ebenfalls nicht umsetzbar, da dieser von den HoloLens-Kameras eingenommen wird, die die Umgebung und Nutzergesten tracken.
+Bei der HoloLens sollte der Bildschirm, durch den der Nutzer sieht nicht verdeckt werden. Eine Installation  im oberen Teil der Frontseite ist ebenfalls nicht umsetzbar, da dieser von den HoloLens-Kameras eingenommen wird, die die Umgebung und Nutzergesten verfolgen.
 Somit ist die einzige sinnvolle Möglichkeit, die Leap Motion auf der HoloLens zu platzieren. Hierbei muss sie außerdem nach vorne geneigt werden, um die Hände des Nutzers in der Anwendung möglichst genau an den realen Händen auszurichten. 
 Um die Anwendung auf der HoloLens bedienen zu können, wurde eine eigene Haltungsvorrichtung gebaut.
 
-TODO:
-Foto von Halterung?
+\todo{Foto von Halterung?}
 
 
 \section{Shader in Unity}
@@ -85,7 +84,7 @@ Wie ein Objekt in einer Szene gerendert wird hängt in Unity davon ab, welches M
 % https://docs.unity3d.com/Manual/Shaders.html
 
 Shader in Unity sind in der Unity eigenen Shader-Sprache \textit{Shader Lab} geschrieben. Im Shader ist definiert, welche Eigenschaften dieser besitzt und welche Sub- und Fallback-Shader er verwendet.
-Die Eigenschaften sind die eben genannten Parameter, dessen Werte dann über das Material gesetzt werden. Hier werden deren Namen, Typen, ihr Wertebereich, sowie ihre Standartwerte definiert. 
+Die Eigenschaften sind die eben genannten Parameter, dessen Werte dann über das Material gesetzt werden. Hier werden deren Namen, Typen, ihr Wertebereich, sowie ihre Standardwerte definiert. 
 
 Schließlich werden im Shader auch sogenannte Subshader definiert, die den eigentlichen Shader-Code enthalten.
 Ein Shader kann mehrere Subshader enthalten für den Fall, dass einer der Shader von einem Gerät nicht unterstützt wird. Wird keiner unterstützt wird der Fallback-Shader verwendet. 
@@ -93,20 +92,22 @@ Neben dem Shader-Code besitzt ein Subshader Tags, die bestimmen, wann und wie ei
 Nach den Tags folgt die Definition eines \textit{Pass}. Als Render Pass wird der gesamte Prozess bezeichnet, der durchlaufen wird, um einen Pixel zu rendern. Angefangen bei der Berechnung einzelner Vertices eines Meshes über den Vertex-Shader bis zum Fragment-Shader. D.h. im Pass werden in verschiedenen Methoden die tatsächlichen Berechnungen beschrieben, die zum Aussehen jedes Pixels führen. 
 Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie oft ein Pass durchlaufen werden soll. 
 % Render setup ????
-Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics) geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
+Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics)
+\todo{REFERENZ} geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
 Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss (?). Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
 
 Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader auf die genaue Implementierung wird im Folgenden eingegangen. 
 
 % https://docs.unity3d.com/Manual/SL-Shader.html
+\todo{
 -Was is cg hlsl?
 - Was sind compute, surface, unlit shader?
 - Graphic pipeline?
-
+}
 \section{Grundlage}
 
 Die in Kapitel \ref{anforderung} beschriebenen Anforderungen stellen den Umfang der zu implementierenden Anwendung dar. 
-Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Datstellung durch Ray-Casting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
+Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Darstellung durch Ray-Casting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
 Wie in Kapitel \ref{grundlagen} beschrieben wurde, gibt es bereits viele Implementierungen von Volume Ray-Casting zur Visualisierung von medizinischem Bildmaterial. 
 Die dort genannten Unity-spezifischen Lösungen sind allerdings kostenpflichtig und/oder ihre Codebasis ist nicht einsehbar. Es wäre allerdings von Vorteil die Kontrolle über die Implementierung der 3D-Darstellung zu haben, um so die Möglichkeit zu haben, sie den Anforderungen entsprechend anpassen zu können.
 Aus diesem Grund wurde die Open-Source-Implementierung von \citet{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet. 
@@ -114,7 +115,7 @@ Diese wurde erweitert, um die Anforderungen an mARt zu erfüllen.
 Im Rahmen der Arbeit wurden folgende Bestandteile implementiert:
 
 \begin{itemize}
-\item Erweiterung des Shaders
+\item Erweiterung des Shaders (Maske, Beleuchtung)
 \item Umwandlung von Bilddaten in 3D-Texturen und der Berechnung ihrer Gradienten
 \item Anpassung der Bedienelemente an 3D-Szene
 \item Anwendungslogik
@@ -128,7 +129,7 @@ Im Kapitel \ref{grundlagen} wurde der theoretische Vorgang dieser Technik beschr
 
 Die volumetrische Darstellung des Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
 Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg-Code, der den Vertex- und Fragmentshader implementiert ist dabei in ein eigenes Script ausgelagert.
-% WARUM??
+\todo{Warum?}
 
 \subsection{Ray Casting}
 
@@ -173,7 +174,7 @@ Mit dem Ursprung des Strahls und $t_{fern}$ werden Anfang, Ende und die Länge d
 
 In einer for-Schleife wird jeder Strahl nun abgetastet. In jeder Iteration wird jeweils ein Punkt betrachtet. Der Punkt verschiebt sich entlang des Strahls um die zuvor berechnete Distanz.
 Für jeden Punkt werden zuerst die uv-Koordinaten berechnet, da sonst nur ein Viertel des MRT-Bildes dargestellt würde.
-% WARUM???
+\todo{Warum?}
 Für die Koordinaten werden dann die jeweiliges Isowerte aus der 3D-Textur gelesen, die zuvor mit den MRT-Bildern befüllt wurde.
 
 %---------------SAMPLE VOLUME-------------
@@ -181,7 +182,7 @@ Hierbei werden lediglich die uv-Koordinaten als Indices für die Textur verwende
 Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um eine Farbe sondern nur einen Grauwert handelt, können die anderen Farbkanäle der Textur mit dem Gradienten des jeweiligen Pixels befüllt werden. Darauf wird im Abschnitt \ref{gradienten} genauer eingegangen.
 
 Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutzer beeinflussen kann.
-TODO: Kann er?
+\todo{Mit ergebnis abgleichen}
 An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist, oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
 Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
 % UBERPRÜFEN Warum?
@@ -217,10 +218,10 @@ Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt u
 \subsection{Transferfunktion}
 \label{transfer}
 
-Erzeugen der transfer textur
+\todo{mit ergebnis abgleichen}
 
 Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. In einem vom Rest der Anwendung unabhängigen Skript wird aus diesen einzelnen Punkten eine Textur erzeugt, indem zwischen den festgelegten Werten eine Interpolation stattfindet.
-Liniar?
+\todo{welche interpolation?}
 Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung wurden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
 Allerdings werden von Unity keine 1D-Texturen als Shader Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-TExtur verwendet, die eine einzige Y-Koordinate besitzt. 
 Die Textur wird dann über das Material an den Shader übergeben. Hier wird für jeden Voxel der Farb- und Opazitätswert ausgelesen und damit weiter gerechnet. 
