@@ -65,14 +65,15 @@ Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines
 
 Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von \citet{weishaupt09} beschrieben.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	%https://www.flickr.com/photos/11304375@N07/3081315619/
 	\includegraphics[width=0.5\linewidth]{images/mri.jpg}
 	\caption{Ein geschlossenes MRT-Gerät. Auf die Liege im vorderen Bereich legt sich ein Patient, der dann während des Scans in die Röhre geschoben wird. }
 	\label{img:mri}
 \end{figure}
- 	
+\FloatBarrier
+
 \subsection{Verfahren}
 
 Um die inneren Organe eines Patienten zu visualisieren, werden kleinste Teilchen seines Körpers in Bewegung versetzt, die gemessen werden kann. Im Falle einer MRT handelt es sich dabei um Wasserstoffprotonen. Diese haben eine Eigendrehung um sich selbst, den sogenannten Kernspin. Durch ihre positive Ladung, die durch den Kernspin in Bewegung ist, besitzen die Protonen weiterhin ein eigenes Magnetfeld, welches messbar ist. 
@@ -87,13 +88,13 @@ Mit dem eben beschriebenen Verfahren werden jeweils Werte auf der XY-Ebene erfas
 Diese Unterteilung in Schichten wird erreicht, indem weitere Spulen verwendet werden, die ein ein zusätzliches Magnetfeld (Gradientenfeld) erzeugen, welches das erste Magnetfeld inhomogen macht. Dementsprechend fällt es zu einer Seite hin ab, was sich durch einen Gradienten, den Z-Gradienten, beschreiben lässt. So kann jeder Z-Schicht eine bestimmte Stärke im Magnetfeld zugewiesen und einzelne Schichten durch die Verwendung bestimmter Frequenzen angeregt werden. In Abbildung \ref{img:zGradient} ist schematisch dargestellt, wie die Schichten entlang des Z-Gradienten hintereinander liegen und eine von ihnen angeregt wird.
 Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.3\linewidth]{images/zGradientMrt.png}
 	\caption{Darstellung der Schichten während eines MRT-Scans. Links ist der abfallende Z-Gradient zu sehen, daneben drei verschiedene Schichten (Ellipsen). Durch das inhomogene Magnetfeld, kann genau eine Schicht mit einer bestimmten Frequenz angeregt werden. Die ausgewählte Schicht ist hier schraffiert. \citet{weishaupt09}}
 	\label{img:zGradient}
 \end{figure}
-
+\FloatBarrier
 
 Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem Bild Koordinaten, die der Anordnung der jeweils betrachteten Punkte in der Welt entsprechen. Stattdessen bildet der X-Wert die Frequenz und der Y-Wert die Phase ab. Wie für den Z-Wert werden auch hier Gradienten gebildet und auf das Magnetfeld gelegt. Der X-Gradient verläuft von links nach rechts und sorgt dafür, dass die Larmorfrequenz in dieser Richtung zunimmt, sodass die jeder Punkt seine eigene Frequenz hat. Der Y-Gradient, der senkrecht verläuft, beeinflusst auf dieselbe Weise die Phasen einer Schicht. Er wird dabei nur kurz nach dem Einstrahlen des Hochfrequenz-Impulses eingeschaltet, wenn sich die Protonen bereits ausgerichtet haben.
 
@@ -557,29 +558,28 @@ Erweiterungen/ Abwandlungen
 %-------------------------------------------------------------
 \section{Vergleich der Methoden im Überblick}											 %
 %-------------------------------------------------------------
-\begin{table}
-\centering
-\begin{tabular}{lrrrr}
-\toprule
-Vergleich von Methoden zur 3D Darstellung von Volumendaten\\  
+
+\begin{longtable} {p{.2\textwidth}p{.15\textwidth}p{.325\textwidth}p{.325\textwidth}}
+\toprule 
+Methode & Ergebnis & Vorteile & Nachteile \\ 
 \midrule 
-Methode & Ergebnis & Komplexität & Vorteile & Nachteile \\ 
+Volumerisches Ray-Casting & Rendering  & & \\
 \midrule 
-Volumerisches Ray-Casting & Rendering &  & & \\
-Shear-Warp & Redering & 8,20 & sehr schnell& schlechtere Bildqualität, benötigt viel Speicher\\
-2D-Texturbasiertes Volume Rendering & Redering  & 10,00 & schnell, wird auch von alten Grafikkarten unterstützt, benötigt nur bilinieare Interpolation & Artefakte, wenn aus 45° Winkel gesehen; Abstände zwischen Texturen ist abhängig von Blickrichtung \\ 
-3D-Texturbasiertes Volume Rendering & Redering  & 10,0 & keine Artefakte durch Blickwinkel; Abstand zwischen Texturen konstant & langsamer durch trilineare Interpolation; Grafikkarte braucht 3D Texturen Unterstützung\\ 
-Marching Cubes & 3D-Mesh der Bestandteile des Gehirns  & 10,00 & 0 &\\ 
+Shear-Warp & Redering & sehr schnell& schlechtere Bildqualität, benötigt viel Speicher\\
+\midrule 
+2D-Texturbasiertes Volume Rendering & Redering & schnell, wird auch von alten Grafikkarten unterstützt, benötigt nur bilinieare Interpolation & Artefakte, wenn aus 45° Winkel gesehen; Abstände zwischen Texturen ist abhängig von Blickrichtung \\ 
+\midrule 
+3D-Texturbasiertes Volume Rendering & & keine Artefakte durch Blickwinkel; Abstand zwischen Texturen konstant & langsamer durch trilineare Interpolation; Grafikkarte braucht 3D Texturen Unterstützung\\ 
+\midrule 
+Marching Cubes & 3D-Mesh & 0 &\\ 
 \bottomrule
-\end{tabular}
-\caption{Description of the table}\label{volumeRenderingVergleich}
-\end{table}
+\caption{\label{tab:volumeRenderingVergleich}Vergleich von Methoden zur 3D Darstellung von Volumendaten}
+\end{longtable}
 
 \todo{Tabelle}
 %-------------------------------------------------------------
 \section{AR und VR (MR?)}									 %
 %-------------------------------------------------------------
-Occluded Display 
 
 \subsection{Augmented Reality}
 

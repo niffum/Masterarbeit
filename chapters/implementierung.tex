@@ -36,7 +36,7 @@ Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und An
 Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der Hololens zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig, z.B. zum Wechseln der Manipulationsart. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die Motion Leap in das System integriert.
 % Genauer auf Implementierung eingehen
 
-//TODO: Bild von Demo
+\todo{Bild von Demo}
 
 \subsection{HoloToolkit}
 
@@ -94,7 +94,7 @@ Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie 
 % Render setup ????
 Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics)
 \todo{REFERENZ} geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
-Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss (?). Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
+Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss \todo{Prüfen}. Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
 
 Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader auf die genaue Implementierung wird im Folgenden eingegangen. 
 
@@ -103,6 +103,7 @@ Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader au
 -Was is cg hlsl?
 - Was sind compute, surface, unlit shader?
 - Graphic pipeline?
+REFERNZEN
 }
 \section{Grundlage}
 
@@ -161,12 +162,13 @@ Jetzt muss bestimmt werden, ob diese Schnittpunkte sich innerhalb des Würfels b
 Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für das $t$ der näher gelegenen Ebene wird der maximale, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren ts größer als der des entfernten, schneidet der Strahl den Würfel nicht. Andersherum tut er es.
 Das Verhältnis der Schnittpunkte zueinander und wie dieses durch den Verlauf des Strahls bestimmt wird ist in Abbildung \ref{img:rayBoxHit} dargestellt.
 
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/rayBox.png}
 	\caption{Zweidimensionale Darstellung, wie ein Strahl durch eine Box (links) und daran vorbei (rechts) verläuft. Die Schnittpunkte des Strahls (gelb) mit den Würfelebenen (blau) sind eingezeichnet. Der Vergleich derer Abstände zum Ursprung des Strahls (rot) zeigt, ob der Strahl die Box schneidet oder nicht.}
 	\label{img:rayBoxHit}
 \end{figure}
+\FloatBarrier
 
 %----------------------------------------
 Die beiden t-Werte werden als $t_{nah}$ und $t_{fern}$ gespeichert.

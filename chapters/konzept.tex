@@ -92,8 +92,15 @@ void main(sampler3D _Volume,
 \todo{Manipulation der Maske}
 
 \section{2D Darstellung}
-\todo{beschreiben}
-\textbf{U02}
+
+Neben der dreidimensionalen sollen die Daten auch in zwei Dimensionen untersucht werden können, wie es auch in vielen Bildschirmanwendungen der Fall ist.
+Die Betrachtung von jeweils nur einer Schicht des Datensatzes, erlaubt es den Fokus auf bestimmte Merkmale oder Regionen zu legen, die in dieser Darstellung deutlicher sein könnten als in der volumetrischen. Weiterhin wird der direkte Vergleich zwischen den Szenen deutlicher. Beispielsweise kann die Annahme von der Größe eines Bereichs in der 3D-Darstellung überprüft und so eventuell korrigiert werden.
+
+Da in User Story \textbf{U02} nur das Scollen auf einer Achse durch die Bildschichten gefordert wird, wird jeder Datensatz als quadratische Bildfläche dargestellt.
+Die Anzeige der Daten aus verschiedenen Sichtachsen wäre nicht nur aufwändiger in der Umsetzung, sondern würde die Komplexität der Anwendung auch deutlich steigern wodurch ihre Benutzbarkeit sinken könnte. 
+
+Die zweidimensionale Darstellung in mARt kann kaum einen Mehrwert gegenüber einer Bildschirmanwendung  bieten. Zwar kann sie zur Untersuchung der Daten genutzt werden, dient allerdings hauptsächlich als komplementäre Ansicht zur 3D-Visualisierung.
+
 \section{Endgerät}
 
 Im Kapitel \ref{grundlagen} wurden die Vor- und Nachteile von AR und VR gegenüber gestellt.
@@ -194,7 +201,12 @@ Wenn eine Darstellung vergrößert wird, wird der im Bildausschnitt angezeigt Be
 \todo{Mit Endprodukt abgleichen}
 
 %Drehen
-\todo{Drehen beschreiben}
+Entsprechend Anforderung \textbf{U13} soll die volumetrische Darstellung der MRT-Daten gedreht werden können. 
+Die Drehung erfolgt dabei durch das Greifen des Volumens und Bewegen der Hand. Diese direkte Manipulation ist sehr intuitiv, wenn auch nicht unbedingt genau. Eine gradgenaue Drehung würde bei der Verwendung von mARt allerdings keinen erkennbaren Vorteil bringen. 
+Wird das Volumen gedreht, drehen sich die Kontrollpunkte zum Verschieben der Bildebenen mit, um die lokale Verbindung zwischen diesen und der Ebene, die sie manipulieren zu erhalten. Würden sie sich nicht bewegen, wäre es schwer vorauszusehen, welcher Kontrollpunkt welche Ebene beeinflusst. 
+Die UI wird von der Rotation allerdings nicht beeinflusst, da ihre Bedienung nur erschwert würde, wenn sie nicht annähernd orthogonal zur Blickrichtung des Nutzer verlaufen würde. 
+Ebenso wie die Skalierung ist die Roation eine temporäre Manipulation, die beim Szenenwechsel zurück gesetzt wird.
+
 
 Die Bedienoberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:mARt2d} zu sehen.
 
@@ -219,7 +231,8 @@ Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden
  
 Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzen sein. Da die Option der Synchronizität abhängig ist von der Tatsache, ob ein oder mehrere Datensätze angezeigt werden, stehen die beiden Aktionen in Verbindung zu einander und werden deshalb in einem Menü vereint, das für beide Darstellungen verwendet wird. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Gleichzeitig fördert es die Immersion der Anwendung, da der Nutzer quasi Teil von ihr wird. Ein Effekt, der in einer Bildschirmanwendung nicht umsetzbar wäre. 
 
-Damit das Menü nicht wären der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Motion Leap bietet bereits Beispiel Code, der dies umsetzt. ?
+Damit das Menü nicht wären der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Motion Leap bietet bereits Beispiel Code, der dies umsetzt.
+\todo{Leap Motion Beispiel erwähnen?}
 Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst einfach und platzsparend zu halten. Das Erfassungsfeld der Motion Leap Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionsfläche die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
 Um den Umfang des Menüs in benutzbaren Dimensionen zu halten wurde es auf drei Knöpfe reduziert. 
 Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht werden. Deshalb kann sie bei Bedarf über einen der Knöpfe ausgeklappt werden. 
