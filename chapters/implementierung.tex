@@ -94,7 +94,7 @@ Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie 
 % Render setup ????
 Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics)
 \todo{REFERENZ} geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
-Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss \todo{Prüfen}. Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
+Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. Unity besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss. Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
 
 Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader auf die genaue Implementierung wird im Folgenden eingegangen. 
 
@@ -134,7 +134,8 @@ Die Parameter werden an den Shader übergeben, in dem das Rendering definiert is
 
 \subsection{Ray Casting}
 
-Im Fragmentshader wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt "geschossen" wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Würfeln zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
+Im Fragment Shader des \textit{Volume\_DiffuseWITHMask.sh} 
+\todo{umbenennen} wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt "geschossen" wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Würfeln zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
 
 %-----------Intersect-----------
 %Dies geschieht indem zuerst die Inverse der Strahlrichtung ermittelt wird. Die Inverse eines Vektors $v$ ist $v^-1$ und da $v^-x=\frac1}{v^x}$, ergibt sich die Inverse des Richtungsvektors des Strahls indem $1$ durch die dividiert wird.
@@ -159,7 +160,7 @@ Für $p$ werden jeweils die beiden Eckpunkte des Würfels, die jeweils auf drei 
 Dadurch sind insgesamt sechs $t$s und damit sechs Schnittpunkte mit den Ebenen bekannt. Zwei auf jeder Ebene. Die Entfernungen werden in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ gespeichert. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt und damit welche zweier paralleler Ebenen weiter vorne liegt. 
 % Was wenn Strahl parallel zur Ebene ist??
 Jetzt muss bestimmt werden, ob diese Schnittpunkte sich innerhalb des Würfels befinden.
-Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für das $t$ der näher gelegenen Ebene wird der maximale, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren ts größer als der des entfernten, schneidet der Strahl den Würfel nicht. Andersherum tut er es.
+Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für das $t$ der näher gelegenen Ebene wird der maximale, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren $t$s größer als der des entfernten, schneidet der Strahl den Würfel nicht. Andersherum tut er es.
 Das Verhältnis der Schnittpunkte zueinander und wie dieses durch den Verlauf des Strahls bestimmt wird ist in Abbildung \ref{img:rayBoxHit} dargestellt.
 
 \begin{figure}[!htb]
@@ -175,8 +176,8 @@ Die beiden t-Werte werden als $t_{nah}$ und $t_{fern}$ gespeichert.
 Mit dem Ursprung des Strahls und $t_{fern}$ werden Anfang, Ende und die Länge des Strahls berechnet. Mit Hilfe der Länge kann ermittelt werden um wie weit pro Iteration am Strahl entlang gegangen werden soll. Dadurch wird der Strahl nur bis zu seinem Austritt aus dem Würfel abgetastet. 
 
 In einer for-Schleife wird jeder Strahl nun abgetastet. In jeder Iteration wird jeweils ein Punkt betrachtet. Der Punkt verschiebt sich entlang des Strahls um die zuvor berechnete Distanz.
-Für jeden Punkt werden zuerst die uv-Koordinaten berechnet, da sonst nur ein Viertel des MRT-Bildes dargestellt würde.
-\todo{Warum?}
+Für jeden Punkt werden zuerst die uv-Koordinaten berechnet.
+
 Für die Koordinaten werden dann die jeweiliges Isowerte aus der 3D-Textur gelesen, die zuvor mit den MRT-Bildern befüllt wurde.
 
 %---------------SAMPLE VOLUME-------------
@@ -187,7 +188,7 @@ Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutze
 \todo{Mit ergebnis abgleichen}
 An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist, oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
 Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
-% UBERPRÜFEN Warum?
+\todo{ UBERPRÜFEN Warum?}
 Der Punkt wird dann mit den minimalen und maximalen x-, y-, und z-Werten der verschiebbaren Schicht verglichen. Das Ergebnis des Vergleichs wird dabei in einer Variable gespeichert. Ist der Punkt kleiner als das Minimum oder größer als das Maximum wird 0 gespeichert, ansonsten 1. 
 Die beiden Werte werden anschließend mit dem Isowert multipliziert.Ist einer der Werte null, ist auch der ermittelte Isowert null, was im Alphakanal totale Transparenz bedeutet. 
 Das Ergebnis dieser Berechnung wird zunächst für jedem Farbkanal zugewiesen.
@@ -225,8 +226,8 @@ Die Farbe wird schlussendlich noch auf einen Wert zwischen 0 und 1 festgesetzt u
 Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. In einem vom Rest der Anwendung unabhängigen Skript wird aus diesen einzelnen Punkten eine Textur erzeugt, indem zwischen den festgelegten Werten eine Interpolation stattfindet.
 \todo{welche interpolation?}
 Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung wurden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
-Allerdings werden von Unity keine 1D-Texturen als Shader Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-TExtur verwendet, die eine einzige Y-Koordinate besitzt. 
-Die Textur wird dann über das Material an den Shader übergeben. Hier wird für jeden Voxel der Farb- und Opazitätswert ausgelesen und damit weiter gerechnet. 
+Allerdings werden von Unity keine 1D-Texturen als Shader Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-Textur verwendet, die eine einzige Y-Koordinate besitzt. 
+Die Textur wird dann über das Material an den Shader übergeben. Wie im Abschnitt \ref{transfer} beschrieben, wird die Textur dann mit Hilfe eines Index' ausgelesen.
 
 \subsection{Illumination}
 \label{illumination}
@@ -235,7 +236,7 @@ Das Volumen wird mit mit dem Phong Beleuchtungsmodell illuminiert, wodurch es me
 % Referenz? warum nicht blinn?
 Wie beschrieben setzt sich das Modell aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Die Komponenten werden zusammen addiert, was in die endgültige Farbe resultiert. 
 Die Koeffizienten werden im Shader durch Farben repräsentiert. Der diffuse Koeffizient ist dabei der vorher aus der Transferfunktion gelesene Farbwert. Um diesen nicht durch die ambiente Beleuchtung zu verfälschen, wird er mit einem konstanten Faktor multipliziert, um eine abgedunkelte Farbe zu erhalten, die als ambienter Wert verwendet wird. Die Reflextion wird weiß dargestellt.
-Als Reflexionsexponent hat sich der Wert ?10? als am besten erwiesen.
+%Als Reflexionsexponent hat sich der Wert ?10? als am besten erwiesen.
 
 Um die Reflexion berechnen zu können müssen außerdem der Lichtvektor und die Normale bekannt sein.
 Wie bereits erläutert, wird der Gradient eines Voxels als Normale verwendet. 

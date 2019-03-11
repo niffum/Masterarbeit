@@ -41,6 +41,9 @@ Die Visualisierung der MRT-Daten wurde im Rahmen dieser Arbeit mit den Volume Ra
 \todo{WARUM?}
 Diese Vorgehensweise ist somit am besten für die Implementierung der Anwendung geeignet.
 
+Ebenfalls erläutert wurden in Abschnitt \ref{klassifikation} die verschiedene Arten eine Klassifikation zu implementieren. Durch die Umsetzung im Fragment Shader wird eine Post-Klassifikation umgesetzt. 
+Von der Umsetzung einer Pre-Integrierten Klassifikation wurde zum Einen auf Grund des zusätzliche Implementierungsaufwands, zum Anderen weil die Renderings keine schwerwiegenden Artefakte aufwiesen. Letzteres wird in Kapitel \ref{ergebnisse} aufgegriffen.
+
 Wie im Kapitel \ref{grundlagen} beschrieben, werden beim Volume Rendering in der Regel Transferfunktionen eingesetzt, um verschiedene Gewebestrukturen oder Materialien zu unterscheiden. Wobei es sich um eine Look-Up-Tabelle in Form einer Textur handelt, die jedem Isowert eine Farbe und Opazität zuweist.
 Die Herausforderung bei der Implementierung einer Transferfunktion ist dabei die Generierung einer zum Datensatz passenden Textur. Selbst bei einer Transferfunktion mit nur einer Dimension müssen häufig verschiedene Wertzuweisungen ausprobiert werden, um ein gutes Ergebnis zu erhalten.
 Um eine bzw. mehrere Transferfunktionen zu generieren, die den Ansprüchen des Nutzers genügt und die für verschiedene Datensätze passend sind, ist es deshalb sinnvoll dem Nutzer eine Benutzeroberfläche zur Verfügung zu stellen, mit deren Hilfe er die verwendete Transferfunktion zur Laufzeit manipulieren kann. 
@@ -104,8 +107,8 @@ Die zweidimensionale Darstellung in mARt kann kaum einen Mehrwert gegenüber ein
 \section{Endgerät}
 
 Im Kapitel \ref{grundlagen} wurden die Vor- und Nachteile von AR und VR gegenüber gestellt.
-Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem medizinischen Arbeitsumfeld.
-Für den Arbeitsalltag eines Arztes und die Zusammenarbeit mit Patienten eignet sich ein durchsichtiges Display deutlich besser als ein undurchsichtiges. Der Nutzer verliert somit nicht seine Umwelt aus den Augen, wodurch er sich sicherer in der Benutzung fühlt. In einem Anwendungsszenario, in dem er mit anderen Menschen kommuniziert, während er die Anwendung bedient gilt dies umso mehr. Die mögliche Verwendung von mARt während einer Operation oder Behandlung wäre mit einer VR-Anwendung unmöglich. Die Reduzierung auf die virtuelle Realität bietet zudem keinen Vorteil für die Funktion der Anwendung, da die Umwelt in der Anwendung nicht verändert werden soll. 
+Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-HMD-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem medizinischen Arbeitsumfeld.
+Für den Arbeitsalltag eines Arztes und die Zusammenarbeit mit Patienten eignet sich ein durchsichtiges Display deutlich besser als ein undurchsichtiges. Der Nutzer verliert somit nicht seine Umwelt aus den Augen, wodurch er sich sicherer in der Benutzung fühlt. In einem Anwendungsszenario, in dem er mit anderen Menschen kommuniziert, während er die Anwendung bedient gilt dies umso mehr. Die mögliche Verwendung von mARt während einer Operation oder Behandlung wäre mit einer VR-Anwendung oder Smartphone-App unmöglich. Die Reduzierung auf die virtuelle Realität bietet zudem keinen Vorteil für die Funktion der Anwendung, da die Umwelt in der Anwendung nicht verändert werden soll. 
 
 Ein weiterer Vorteil eines AR-HMDs ist seine Portabilität. Dies ist vor allem entscheidend, wenn die Daten anderen Personen, wie z.B. Patienten gezeigt werden sollen. Das Gerät lässt sich einfach in ein anderes Zimmer mitnehmen, was mit einem VR-System deutlich schwieriger umzusetzen ist.
  
@@ -232,7 +235,7 @@ Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden
 Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzen sein. Da die Option der Synchronizität abhängig ist von der Tatsache, ob ein oder mehrere Datensätze angezeigt werden, stehen die beiden Aktionen in Verbindung zu einander und werden deshalb in einem Menü vereint, das für beide Darstellungen verwendet wird. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Gleichzeitig fördert es die Immersion der Anwendung, da der Nutzer quasi Teil von ihr wird. Ein Effekt, der in einer Bildschirmanwendung nicht umsetzbar wäre. 
 
 Damit das Menü nicht wären der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Motion Leap bietet bereits Beispiel Code, der dies umsetzt.
-\todo{Leap Motion Beispiel erwähnen?}
+\todo{? Leap Motion Beispiel erwähnen?}
 Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst einfach und platzsparend zu halten. Das Erfassungsfeld der Motion Leap Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionsfläche die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
 Um den Umfang des Menüs in benutzbaren Dimensionen zu halten wurde es auf drei Knöpfe reduziert. 
 Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht werden. Deshalb kann sie bei Bedarf über einen der Knöpfe ausgeklappt werden. 
