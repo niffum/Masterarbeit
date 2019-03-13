@@ -7,9 +7,9 @@
 
 Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der Leistungsfähigkeit der Hololens, wurde die Anwendung sowohl für die Hololens als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Die VR-Anwendung ermöglicht dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
 Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen GameEngines verwendet, da sie als Oberfläche diesen, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
-Zur Implementierung von mARt wurde \textit{Unity} von \citet{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \citet{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit Unity entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. Unity bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
+Zur Implementierung von mARt wurde \textit{Unity} von \cite{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \cite{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit Unity entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. Unity bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
 
-Microsoft empfiehlt weiterhin Unity zur Entwicklung für Hololens-Software zu Nutzen (\citet{unityHololens}) und bietet mit \textit{Mixed Reality Toolkit} (MRTK) (\citet{holoToolkit}) ein Framework, das Hololens Funktionen innerhalb von Unity zur Verfügung stellt.
+Microsoft empfiehlt weiterhin Unity zur Entwicklung für Hololens-Software zu Nutzen (\cite{unityHololens}) und bietet mit \textit{Mixed Reality Toolkit} (MRTK) (\cite{holoToolkit}) ein Framework, das Hololens Funktionen innerhalb von Unity zur Verfügung stellt.
 Unity verwendet C\# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
 %Wieso?
 
@@ -46,7 +46,7 @@ Steam VR, normale scene
 
 \subsection{Leap Motion}
 
-Damit die Motion Leap Kamera in einer Anwendung verwendet werden kann, muss das von \citet{orion} zur Verfügung gestellte SDK \textit{Orion} eingebunden werden. Das \textit{Core SDK} ist dabei zur Erkennung und Verwendung des Gerätes notwendig, während ein erweiterndes Paket für Interaktionen die Funktionen und Beispiele bietet, wie verschiedene Bedienelemente in eine Anwendung integriert werden können, die auf die Controller, also die Hände des Nutzers reagieren.
+Damit die Motion Leap Kamera in einer Anwendung verwendet werden kann, muss das von \cite{orion} zur Verfügung gestellte SDK \textit{Orion} eingebunden werden. Das \textit{Core SDK} ist dabei zur Erkennung und Verwendung des Gerätes notwendig, während ein erweiterndes Paket für Interaktionen die Funktionen und Beispiele bietet, wie verschiedene Bedienelemente in eine Anwendung integriert werden können, die auf die Controller, also die Hände des Nutzers reagieren.
 Meistens funktioniert dies indem einzelne Skripte, die das gewünschte Verhalten implementieren als Components an GameObjects angehangen werden. Die Skripte lösen dann bestimmte Events oder Methoden aus, die mit den Funktionalitäten der Anwendung verknüpft werden. 
 
 \subsection{Kombination von Leap Motion mit Vive/Hololens}
@@ -63,8 +63,8 @@ Die Leap Motion wird über ihr Kabel mit Strom versorgt. Sie kann also im Gegens
 
 Aus diesen Gründen muss die Leap Motion während des Betriebs per Kabel mit einem Rechner verbunden sein. Um das Gerät trotzdem in Verbindung mit der Hololens nutzen zu können, müssen entweder die Sensordaten der Leap Motion an die Anwendung in der Hololens übertragen werden oder die gesamte Anwendung läuft auf dem Rechner und wird zur Wiedergabe an die Hololens übermittelt. Beides geschieht über Wlan.
 
-Die Übertragung der Sensordaten ist dabei um einiges aufwändiger und erfordert die Integration weiterer Tools. Es existieren einige Lösungsansätze für dieses Problem, beispielsweise von \citet{hololensGithub}. Auf Grund des beschränkten Zeitraums dieser Arbeit wurde dieser Ansatz allerdings nicht implementiert.
-Stattdessen wird die Anwendung lediglich auf der HoloLens wiedergegeben. Dazu wird die Hololens-App \textit{Holographic Remoting Player} von \citet{remoteApp} genutzt. Die Anwendung wird dabei direkt aus dem Unity-Editor übertragen.
+Die Übertragung der Sensordaten ist dabei um einiges aufwändiger und erfordert die Integration weiterer Tools. Es existieren einige Lösungsansätze für dieses Problem, beispielsweise von \cite{hololensGithub}. Auf Grund des beschränkten Zeitraums dieser Arbeit wurde dieser Ansatz allerdings nicht implementiert.
+Stattdessen wird die Anwendung lediglich auf der HoloLens wiedergegeben. Dazu wird die Hololens-App \textit{Holographic Remoting Player} von \cite{remoteApp} genutzt. Die Anwendung wird dabei direkt aus dem Unity-Editor übertragen.
 Die Wiedergabequalität der Anwendung ist dabei abhängig von der Stabilität der Wlan-Verbindung.
 
 Auch das Anbringen der Leap Motion an das HMD ist bei der HoloLens umständlicher als bei der HTC Vive. 
@@ -111,7 +111,7 @@ Die in Kapitel \ref{anforderung} beschriebenen Anforderungen stellen den Umfang 
 Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Darstellung durch Ray-Casting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
 Wie in Kapitel \ref{grundlagen} beschrieben wurde, gibt es bereits viele Implementierungen von Volume Ray-Casting zur Visualisierung von medizinischem Bildmaterial. 
 Die dort genannten Unity-spezifischen Lösungen sind allerdings kostenpflichtig und/oder ihre Codebasis ist nicht einsehbar. Es wäre allerdings von Vorteil die Kontrolle über die Implementierung der 3D-Darstellung zu haben, um so die Möglichkeit zu haben, sie den Anforderungen entsprechend anpassen zu können.
-Aus diesem Grund wurde die Open-Source-Implementierung von \citet{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet. 
+Aus diesem Grund wurde die Open-Source-Implementierung von \cite{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet. 
 Diese wurde erweitert, um die Anforderungen an mARt zu erfüllen. 
 Im Rahmen der Arbeit wurden folgende Bestandteile implementiert:
 

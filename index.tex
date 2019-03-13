@@ -16,7 +16,7 @@
 \usepackage{graphicx}
 \usepackage{chngcntr}
 \usepackage{csquotes}
-\usepackage[citestyle=verbose,natbib=true,backend=bibtex]{biblatex}
+\usepackage[citestyle=authoryear,natbib=true,backend=bibtex]{biblatex}
 \usepackage{footnote}
 \usepackage[section]{placeins}
 \usepackage{algpseudocode}
@@ -38,6 +38,8 @@
 
 \newcommand*{\bildquelle}[1]{\par\raggedleft\footnotesize Quelle:~#1}
 
+\let\oldcite\cite
+\renewcommand*\cite[1]{[\oldcite{#1}]}
 
 %\newglossaryentry{Canvas}
 %{
@@ -110,6 +112,13 @@ Der Anwendungsbereich für AR-Apps deckt heutzutage bereits viele Arbeitsfelder 
 Eine entscheidende Rolle in diesem Feld spielen bildgebende Verfahren wie MRT-Scans, durch die Ärzte den Körper eines Patienten von innen untersuchen können. 
 Ziel dieser Arbeit ist es eine AR-Anwendung zu entwickeln, die die Untersuchung von MRT-Daten ermöglicht, um das Potenzial der Technologie in diesem Szenario zu erforschen. Der Fokus liegt hierbei auf der Visualisierung von Gehirn-Scans, die zur Diagnose und Behandlung von Schlaganfällen dienen. 
 In Zusammenarbeit mit einem Neurologen wird dazu eine Anwendung konzipiert und implementiert, die anschließend durch Nutzertests ausgewertet wird.
+
+%\cite{Hadwiger06}
+
+%\citet{Hadwiger06}
+
+%\citep{Hadwiger06}
+
 \end{abstract}
 
 \tableofcontents
@@ -121,7 +130,6 @@ In Zusammenarbeit mit einem Neurologen wird dazu eine Anwendung konzipiert und i
 \listoftodos
 
 \include{chapters/motivation}
-%\include{chapters/related}
 \include{chapters/grundlagen}
 \include{chapters/anforderung}
 \include{chapters/konzept}
