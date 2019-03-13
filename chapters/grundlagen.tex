@@ -275,7 +275,7 @@ Eine realistischeres Ergebnis liefert daher die globale Beleuchtung, bei der das
 Um Schatten im Volumen darzustellen, muss bestimmt werden, wie viel Licht bei einem Voxel ankommt, nachdem das Licht andere, diesen umgebende Voxel passiert hat und dadurch abgeschwächt wurde. 
 Dazu könnte ein Schatten-Volumen erstellt werden, indem jeder Voxel aus Sicht des Lichts gerendert wird, welches mit den Werten aus der Transfertextur verrechnet wird. Dieses Vorgehen ist allerdings unperformant und liefert unschöne Ergebnisse.
 
-Stattdessen wird das Volumen durch Texture Slicing in Schichten unterteilt (\cite{Hadwiger06}). Jede Schicht wird dann jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
+Stattdessen wird das Volumen durch Texture Slicing in Schichten unterteilt \cite{Hadwiger06}. Jede Schicht wird dann jeweils aus Sicht der Kamera und des Lichtes gerendert. Jedes der beiden gerenderten Bilder wird in einem 2D-Textur-Buffer gespeichert. 
 Die Lage der Schichten wird durch die die Winkelhalbierende des Blickrichtungswinkels und des Lichtrichtungswinkels bestimmt. Dadurch treffen beide Vektoren im selben Winkel auf die Schichten. Abhängig von dem Skalarprodukt der Vektoren kann auch die Inverse des Blickwinkels verwendet werden. Das Skalarprodukt bestimmt außerdem, ob die Schichten aus Kamerasicht von hinten nach vorne oder von vorne nach hinten durchlaufen werden. Während für das Licht immer von vorne nach hinten gerendert wird.
 Die Position der Vektoren und der winkelhalbierenden Schicht ist in Abbildung \ref{img:halfAngleSlice} dargestellt.
 
@@ -482,14 +482,12 @@ Die im späteren Abschnitt \ref{radiologieSoftware} genannte MRT-Viewer Software
 Um Volume Rendering spezifisch in Unity zu umzusetzen, existieren die kostenpflichtige Unity-Erweiterung \textit{Volume Viewer Pro} von \cite{volumeViewerPro} sowie das Unity-Plugin \textit{Unity® Volume Rendering} von \cite{volumeRenderingUnity}. Beide nutzen Volume Ray Casting zur Darstellung von 3D-Daten und ermöglichen dem Nutzer das Erstellen einer Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren. textit{Volume Viewer Pro} bietet weiterhin das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
 
 Eine der frühesten Arbeiten, die Volume Rendering Techniken vorstellen stammt von \cite{Drebin88}.
-
 \cite{Kruger03} stellen Methoden zur Beschleunigung von Volume Rendering vor.
 \cite{Marsalek08} implementieren Volume Ray Casting mit CUDA (Compute Unified Device Architecture) von \cite{cuda}, um den Rendering Prozess zu optimieren.
-
 \cite{Kutter08} beschäftigen sich mit der Optimierung von Volume Rendering durch ein AR-HMD. Das Rendering soll interaktiv sein und von den Händen des Nutzers verdeckt werden können.
 
-Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisierung von Volumen verwendet. Dabei handelt es sich um ein Verfahren ähnlich dem Ray Tracing, bei dem zufällig Strahlen in eine Szene geschossen werden, wobei ihr Pfad in der Szene verfolgt wird , der durch Reflexion und Absorption, sowie bei Volumen, Streuung bestimmt wird. Auf diese Weise wird eine globale Beleuchtung der Szene erzeugt. Die Technik wird oft zum rendern von nicht-körperlichen Volumen, wie Wolken oder Rauch eingesetzt. 
-\cite{Fong17} beschreiben Volume Rendering unter Verwendung von Path Tracing, vobei der Fokus auf dessen Einsatz in der Produktion liegt.
+Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisierung von Volumen verwendet. Dabei handelt es sich um ein Verfahren ähnlich dem Ray Tracing, bei dem zufällig Strahlen in eine Szene geschossen werden, wobei ihr Pfad in der Szene verfolgt wird , der durch Reflexion und Absorption, sowie bei Volumen, Streuung bestimmt wird. Auf diese Weise wird eine globale Beleuchtung der Szene erzeugt. Die Technik wird oft zum Rendern von nicht-körperlichen Volumen, wie Wolken oder Rauch eingesetzt. 
+\cite{Fong17} beschreiben Volume Rendering unter Verwendung von Path Tracing, wobei der Fokus auf dessen Einsatz in der Produktion liegt.
 
 %-------------------------------------------------------------
 \section{Oberflächen Generierung (Weitere Methoden zur dreidimensionalen Darstellung von MRT-Daten)}		 %
