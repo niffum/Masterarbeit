@@ -33,6 +33,8 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{todonotes}
+\usepackage{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
 
 
 
@@ -40,6 +42,8 @@
 
 \let\oldcite\cite
 \renewcommand*\cite[1]{[\oldcite{#1}]}
+
+\newcommand{\source}[1]{\vspace{-3pt}\caption*{{#1}} }
 
 %\newglossaryentry{Canvas}
 %{
@@ -141,6 +145,8 @@ In Zusammenarbeit mit einem Neurologen wird dazu eine Anwendung konzipiert und i
 
 \pagebreak
 
-\printbibliography
+%\printbibliography
+\printbibliography[title={Literaturverzeichnis},nottype=misc]
+\printbibliography[title={Webseitenverzeichnis},type=misc]
 
 \end{document}
