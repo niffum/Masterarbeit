@@ -6,8 +6,8 @@
 \section{AR in der Medizin}												 %
 %-------------------------------------------------------------
  
-Der Nutzen, den AR-Anwendungen in der Medizin darstellen wurde bereits von zahlreichen Arbeiten belegt, von denen einige im Folgenden vorgestellt werden . Die Einsatzbereiche sind dabei vielfältig.
-Beispielsweise stellen \cite{Voinea16} eine AR-Anwendung vor die den Lernprozess im Bereich der Biomechanik unterstützt.
+Der Nutzen, den AR-Anwendungen in der Medizin darstellen wurde bereits von zahlreichen Arbeiten belegt, von denen einige im Folgenden vorgestellt werden. 
+Obwohl die Einsatzgebiete dabei vielfältig sind, sind die Mehrzahl der Arbeiten für einen operativen Kontext konzipiert. Ein weiterer Schwerpunkt ist die Visualisierung von dreidimensionalen MRT-Daten in AR bzw. VR. %Die Einsatzbereiche sind dabei vielfältig. Beispielsweise stellen \cite{Voinea16} eine AR-Anwendung vor die den Lernprozess im Bereich der Biomechanik unterstützt.
 
 \subsection{Bildgestütze medizinische Eingriffe}
 
@@ -18,7 +18,7 @@ Die folgenden Arbeiten haben sich mit der Umsetzung dieses Konzeptes beschäftig
 \todo{? Arbeiten mit Hololens?}
 
 % Andere Hardware
-Während ein Patient sich in einem MR-Scanner befindet, können die MRT-Bilder direkt an den Arzt weitergeleitet werden. Dieser kann diese zur besseren Orientierung bei z.B. Injektionen nutzen. Offene MRT-Systeme (s. \ref{mrt}) ermöglichen dabei eine Abbildung der betroffenen Organe während des Eingriffs. Die Bildqualität ist allerdings deutlich schlechter als bei geschlossenen Systemen. Bei einem geschlossenen System hat der Arzt dagegen während des Scans keinen Zugang zum Patienten. Um einen MRT-gestützen Eingriff durchführen zu können werden die vorher erstellten MRT-Bilder auf den Patienten projiziert.
+Während ein Patient sich in einem MRT-Scanner befindet, können die MRT-Bilder direkt an den Arzt weitergeleitet werden. Dieser kann diese zur besseren Orientierung bei z.B. Injektionen nutzen. Offene MRT-Systeme\footnote{Erläuterung offener/geschlossener MRT-Systeme in Abschnitt \ref{mrt}.} ermöglichen dabei eine Abbildung der betroffenen Organe während des Eingriffs. Die Bildqualität ist allerdings deutlich schlechter als bei geschlossenen Systemen. Bei einem geschlossenen System hat der Arzt dagegen während des Scans keinen Zugang zum Patienten. Um einen MRT-gestützen Eingriff durchführen zu können werden die vorher erstellten MRT-Bilder auf den Patienten projiziert.
 \cite{Fritz2012} stellen ein System vor, bei dem mittels eines transparenten Spiegels MRT-Bilder über einen Patienten bzw. ein Modell projiziert werden. Die Visualisierung soll Ärzte bei der Nadelführung für Injektionen der Wirbelsäule unterstützen. 
 \cite{khamene03} verwenden für einen ähnlichen Anwendungsfall ein tragbares Display und projizieren die Bilder abhängig vom Blickwinkel des Arztes auf den Patienten. Das tragbare Display wurde von \cite{khamene01} weiterentwickelt, sodass der Arzt es während einer Gehirnoperation tragen kann. Dabei wird das Körperinnere durch eine dreidimensionale Visualisierung sichtbar gemacht, die aus MRT-Bildern gewonnen wurde. 
 
@@ -27,11 +27,12 @@ Während ein Patient sich in einem MR-Scanner befindet, können die MRT-Bilder d
 	\includegraphics[width=0.9\linewidth]{images/relatedMedicine.png}
 	\caption{Abbildungen verschiedener AR-Systeme zur Visualisierung von MRT-Daten im operativen Kontext. a) Bildschirmanwendung zur Unterstützung von Kiefer-OPs von \cite{MISCHKOWSKI2006478}. b) Augmentierung eines Kopfphantoms durch ein tragbares Display von \cite{Wendt03}. c) Durch einen Projektor augementiertes Kopfphantom zum Einsatz in Gehirn-OPs von \cite{Tabrizi15}.}
 	\label{img:relatedMed}
+	\source{Aus den jeweiligen Arbeiten übernommen.}
 \end{figure}
 \FloatBarrier
 
 Der Einsatz von AR-Anwendungen während einer Operation wurde auch von anderen Arbeiten untersucht.
-Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle Visualisierung der Bilddaten wurden von \cite{grimson99} beschrieben. Einen Überblick über Techniken, die bildgestützte Operationen ermöglichen liefern \cite{KerstenOertel2013TheSO}.
+Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle Visualisierung der Bilddaten wurden von \cite{grimson99} beschrieben. Einen Überblick über Techniken, die bildgestützte Operationen ermöglichen, liefern \cite{KerstenOertel2013TheSO}.
 
 \cite{Wendt03}, \cite{Maurer01} sowie \cite{fuchs98} entwickeln eine AR-Anwendung für ein tragbares Display, die MRT-Bilder bzw. Bilder einer Laparoskopie bei Eingriffen auf den Patienten projiziert. Die Anwendungen der ersten beiden Arbeiten wurden mit Bildern des Gehirns an einem Kopfphantom getestet.
 
@@ -43,32 +44,32 @@ Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle 
 
 \cite{Soler04} beschreiben Methoden zur Automatisierung einer dreidimensionalen Visualisierung von MRT-Bildern der Verdauungsorgane. Sowie den Einsatz von AR bei Operationen in diesem Bereich. 
 
-In Abbildung \ref{img:relatedMed} sind einige der eben genannten Systeme dargestellt.
+In Abbildung \ref{img:relatedMed} sind die Ergebnisse einiger der eben genannten Arbeiten dargestellt.
 
 \subsection{Visualisierung von medizinischem Bildmaterial}
 
 Neben der Entwicklung von AR-Sytemen, die währen eines Eingriffs verwendet werden können, steht im Fokus vieler Arbeiten die Möglichkeiten der dreidimensionalen Visualisierung der menschlichen Anatomie. Indem ein realitätsgetreues Abbild eines Organs erzeugt wird, können Diagnosen und Behandlungsmöglichkeiten erleichtert werden.
 
 % Lesen, Referenzen?
-\cite{Mangina17} stellen einen Ansatz zur Erzeugung dreidimensionaler Modelle des Herzens vor, um diese zu Lernzwecken und zur Vorbereitung auf Operationen zu verwenden. Um den Nutzen der 3D-Modelle zu maximieren werden sie in einer AR- und VR-Anwendung platziert. Die Daten die dem Modell zugrunde liegen stammen aus einem MRT-Scan. Zur Implementierung der Anwendungen wurde die Spiele-Engine Unity 3D verwendet (s. Kapitel \ref{implementierung}).
-Ziel der Anwendung war es eine interaktive Lernerfahrung zu schaffen, die es dem Nutzer ermöglicht das Herz in seine verschiedenen Komponenten zu zerlegen. Für diesen Anwendungsfall wird ein Mesh des Organs benötigt, das seine Oberfläche abbildet. Die inneren Strukturen sind dabei irrelevant.
+\cite{Mangina17} stellen einen Ansatz zur Erzeugung dreidimensionaler Modelle des Herzens vor, um diese zu Lernzwecken und zur Vorbereitung auf Operationen zu verwenden. Um den Nutzen der 3D-Modelle zu maximieren werden sie in einer AR- und VR-Anwendung platziert. Die Daten die dem Modell zugrunde liegen stammen aus einem MRT-Scan. Zur Implementierung der Anwendungen wurde die Spiele-Engine \textit{Unity} von \cite{unity} verwendet.
+Ziel der Anwendung ist es eine interaktive Lernerfahrung zu schaffen, die es dem Nutzer ermöglicht das Herz in seine verschiedenen Komponenten zu zerlegen. Für diesen Anwendungsfall wird ein Mesh des Organs benötigt, das seine Oberfläche abbildet. Die inneren Strukturen sind dabei irrelevant.
 Auf Grund der Notwendigkeit eines Meshs wurde der Marching-Cubes Algorithmus zu dessen Erzeugung eingesetzt. Dieser wird in Kapitel \ref{grundlagen} erläutert.
 \cite{Mangina17_2} untersuchen die Möglichkeiten zur Erzeugung eines 3D Models aus MRT-Daten genauer.
 
-Ein weiter Ansatz zur Erzeugung von 3D-Modellen des Herzens wird von \cite{SORENSEN2001193} beschrieben. Hier soll das Modell ebenfalls in eine VR-Anwendung integriert werden, um von Ärzten als Vorbereitung auf eine Operation genutzt werden. 
+Ein weiter Ansatz zur Erzeugung von 3D-Modellen des Herzens wird von \cite{SORENSEN2001193} beschrieben. Hier soll das Modell ebenfalls in eine VR-Anwendung integriert und von Ärzten als Vorbereitung auf eine Operation genutzt werden. 
 Auch hier soll ein Mesh des Organs erzeugt werden. Die Generierung soll dabei möglichst automatisierbar sein.  Hierzu werden zuerst die Konturen aus den MRT-Bildern extrahiert. Dies resultiert in ein Gitter aus Konturen die dann algorithmisch durch Polygone verbunden werden. 
 Für die Anwendung, in der das Modell dargestellt wird wurde ein damals erhältliches VR-System eingesetzt, das mit einem tragbaren Display und zwei Controllern funktionierte. 
 Durch die Controller wurde eine eine einfache aber intuitive Interaktion umgesetzt. Der Nutzer kann das Modell Vergrößern und rotieren.  
 
-Visualisierungen, die durch Einsatz des Volume Rendering Verfahrens realisiert wurden, werden im Abschnitt \ref{volumeRenderingImplementierung} beschrieben.
+Neben diesen Arbeiten gibt es noch viele weitere, die sich insbesondere mit der dreidimensionalen Visualisierung von MRT-Daten befassen. Oft werden dafür Volume Rendering Verfahren verwendet. Beispiele für Umsetzungen dieser Art werden im Abschnitt \ref{volumeRenderingImplementierung} beschrieben.
 
 %-------------------------------------------------------------
-\section{MRT}
+\section{Magnetresonanztomographie}
 \label{mrt}												 %
 %-------------------------------------------------------------
 
-Die Abkürzung MRT steht für Magnetresonanztomographie. Das bildgebende Verfahren, das auch Kernspintomografie genannt wird, wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
-Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. in einem geschlossenen ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
+Magnetresonanztomographie (MRT) ist ein bildgebendes Verfahren, das auch Kernspintomografie genannt wir. Es wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
+Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. In einem geschlossenen, wie es in Abbildung \ref{img:mri} zu sehen ist, ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
 
 Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von \cite{weishaupt09} beschrieben.
 
@@ -78,28 +79,30 @@ Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von
 	\includegraphics[width=0.5\linewidth]{images/mri.jpg}
 	\caption{Ein geschlossenes MRT-Gerät. Auf die Liege im vorderen Bereich legt sich ein Patient, der dann während des Scans in die Röhre geschoben wird. }
 	\label{img:mri}
+	\source{Übernommen von: https://www.flickr.com/photos/11304375@N07/3081315619/}
 \end{figure}
 \FloatBarrier
 
-\subsection{Verfahren}
+\subsection{Physikalische Grundlagen}
 
 Um die inneren Organe eines Patienten zu visualisieren, werden kleinste Teilchen seines Körpers in Bewegung versetzt, die gemessen werden kann. Im Falle einer MRT handelt es sich dabei um Wasserstoffprotonen. Diese haben eine Eigendrehung um sich selbst, den sogenannten Kernspin. Durch ihre positive Ladung, die durch den Kernspin in Bewegung ist, besitzen die Protonen weiterhin ein eigenes Magnetfeld, welches messbar ist. 
-Während einer MRT wird mit einer Hochfrequenz-Spule (HF-Spule), die in dem MRT-System verbaut ist um den Körper des Patienten ein Magnetfeld erzeugt. Die Kernspin-Achsen der Wasserstoffprotonen richten sich an diesem aus. Anschließend wird in das Magnetfeld ein Hochfrequenzimpuls, die Larmorfrequenz eingestrahlt. Durch diesen Impuls findet eine Synchronisation der Protonen statt, wobei einige um 180° gedreht werden. Kurz danach laufen die Protonen wieder auseinander und richten sich wieder am Magnetfeld aus. 
+Während einer MRT wird mit einer Hochfrequenz-Spule (HF-Spule), die in dem MRT-System verbaut ist, um den Körper des Patienten ein Magnetfeld erzeugt. Die Kernspin-Achsen der Wasserstoffprotonen richten sich an diesem aus. Anschließend wird in das Magnetfeld ein Hochfrequenzimpuls, die Larmorfrequenz, eingestrahlt. Durch diesen Impuls findet eine Synchronisation der Protonen statt, wobei einige um 180° gedreht werden. Kurz danach laufen die Protonen wieder auseinander und richten sich wieder am Magnetfeld aus. 
 Dadurch, dass alle Protonen in dieselbe Richtung zeigen (phasengleich sind), verstärken sie gegenseitig das Signal, dass sie abgeben. Das Signal wird schwächer, sobald sie wieder auseinander laufen (Dephasierung).
 Die Zeit, die die Protonen brauchen, um sich wieder am Magnetfeld auszurichten wird als Relaxtionzeit bezeichnet. Dabei wird zwischen T1- und T2-Relaxtion unterschieden.
 Die Relaxionszeit ist dabei abhängig von der Zusammensetzung des umgebenden Gewebes. Das gemessene MR-Signal, das durch diese beeinflusst wird, ist also für verschiedene Gewebearten verschieden stark.
 
 \subsection{Erfassung dreidimensionaler Daten}
 
-Mit dem eben beschriebenen Verfahren werden jeweils Werte auf der XY-Ebene erfasst. Um dreidimensionale Daten zu erhalten wird diese XY-Ebene entlang der Z-Achse Verschoben. Das Gehirn wird auf diese Weise in einzelne Schichten unterteilt, von denen jede ein zweidimensionales Bild ist.
-Diese Unterteilung in Schichten wird erreicht, indem weitere Spulen verwendet werden, die ein ein zusätzliches Magnetfeld (Gradientenfeld) erzeugen, welches das erste Magnetfeld inhomogen macht. Dementsprechend fällt es zu einer Seite hin ab, was sich durch einen Gradienten, den Z-Gradienten, beschreiben lässt. So kann jeder Z-Schicht eine bestimmte Stärke im Magnetfeld zugewiesen und einzelne Schichten durch die Verwendung bestimmter Frequenzen angeregt werden. In Abbildung \ref{img:zGradient} ist schematisch dargestellt, wie die Schichten entlang des Z-Gradienten hintereinander liegen und eine von ihnen angeregt wird.
+Mit dem eben beschriebenen Verfahren werden jeweils Werte auf der XY-Ebene erfasst. Um dreidimensionale Daten zu erhalten wird diese XY-Ebene entlang der Z-Achse Verschoben. Der Körper des Patienten wird auf diese Weise in einzelne Schichten unterteilt, von denen jede ein zweidimensionales Bild ist.
+Diese Unterteilung in Schichten wird erreicht, indem weitere Spulen verwendet werden, die ein zusätzliches Magnetfeld (Gradientenfeld) erzeugen, welches das erste Magnetfeld inhomogen macht. Dementsprechend fällt es zu einer Seite hin ab, was sich durch einen Gradienten, den Z-Gradienten, beschreiben lässt. So kann jeder Z-Schicht eine bestimmte Stärke im Magnetfeld zugewiesen und einzelne Schichten durch die Verwendung bestimmter Frequenzen angeregt werden. In Abbildung \ref{img:zGradient} ist schematisch dargestellt, wie die Schichten entlang des Z-Gradienten hintereinander liegen und eine von ihnen angeregt wird.
 Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.3\linewidth]{images/zGradientMrt.png}
-	\caption{Darstellung der Schichten während eines MRT-Scans. Links ist der abfallende Z-Gradient zu sehen, daneben drei verschiedene Schichten (Ellipsen). Durch das inhomogene Magnetfeld, kann genau eine Schicht mit einer bestimmten Frequenz angeregt werden. Die ausgewählte Schicht ist hier schraffiert. \cite{weishaupt09}}
+	\caption{Darstellung der Schichten während eines MRT-Scans. Links ist der abfallende Z-Gradient zu sehen, daneben drei verschiedene Schichten (Ellipsen). Durch das inhomogene Magnetfeld, kann genau eine Schicht mit einer bestimmten Frequenz angeregt werden. Die ausgewählte Schicht ist hier schraffiert.}
 	\label{img:zGradient}
+	\source{Übernommen von: \cite{weishaupt09}}
 \end{figure}
 \FloatBarrier
 
@@ -108,17 +111,17 @@ Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem
 Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichert, die K-Raum genannt wird. In dieser Rohdatenmatrix sind Kontrastwerte und Bilddetails räumlich sortiert. Mit Hilfe einer Fouriertransformation werden sie in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
 Die eben erläuterte Erfassung der MRT-Daten wurde von \cite{weishaupt09} beschrieben.
 
-\subsection{Abgrenzung CT}
+\subsection{Abgrenzung zur Computer-Tomographie}
 
-Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, ist die Computer-Tomographie. Werden die Organe in einer MRT durch magnetische Stimulation ihrer Protonen sichtbar gemacht, wird er Patient bei einer CT schichtenweise geröntgt. D.h. sein Körper wird mit Röntgenstrahlung beschossen, die je nach Gewebe, auf das sie treffen unterschiedlich stark abgeschwächt werden, was anschließend gemessen wird. Die so entstandenen "Querschnitte" des Körpers werden anschließend mit Hilfe eines Computers zu einem dreidimensionalen Bild zusammengesetzt. (\cite{ct1})
+Eine von der Durchführung ähnliche Methode zur Abbildung des Körperinneren, ist die Computer-Tomographie (CT). Werden die Organe in einer MRT durch magnetische Stimulation ihrer Protonen sichtbar gemacht, wird er Patient bei einer CT schichtenweise geröntgt. D.h. sein Körper wird mit Röntgenstrahlung beschossen, die je nach Gewebe, auf das sie treffen unterschiedlich stark abgeschwächt werden, was anschließend gemessen wird. Die so entstandenen Querschnitte des Körpers werden anschließend mit Hilfe eines Computers zu einem dreidimensionalen Bild zusammengesetzt. \cite{ct1}
 
-Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen verwendet. Allerdings wird der Patient dabei auch der Belastung von radioaktiver Strahlung ausgesetzt, die stärker ist als beim normalen Röntgen. Außerdem können Weichteile mit einer MRT besser darstellt werden. (\cite{ct2})
+Die CT ist deutlich kürzer als eine MRT. Deshalb wird sie oft bei Notfällen verwendet. Allerdings wird der Patient dabei auch der Belastung von radioaktiver Strahlung ausgesetzt, die stärker ist als beim normalen Röntgen. Außerdem können Weichteile mit einer MRT besser darstellt werden. \cite{ct2}
 Auf die Einsatzbereiche von CT und MRT im Bezug auf Schlaganfälle wird in Abschnitt \ref{schalganfaelleMRT} eingegangen.
 
 Beide Verfahren liefern Volumendaten als Ergebnis und können demnach in Folgeschritten ähnlich verarbeitet werden.
 
-\subsection{Datenformate}
- \todo{? Relevanz?}
+\subsection{Medizinische Bilddatenformate}
+ \todo{? Relevanz? P}
 Im medizinischen Bereich gibt es spezielle Datenformate zum Speichern von MRT-Bildern. Dazu gehören das NIfTI-Format (Neuroimaging Informatics Technology Initiative) sowie das DICOM-Format (Digital Imaging and Communications in Medicine), welches neben den Bildern z.B. auch Patientendaten speichert. Beide Formate wurden von \cite{Larobina13} beschrieben.
 
 Das NIfTI-Format wurde 2003 von der Data Format Working Group (DFWG) als Alternative zum vorherigen Analyze 7.5-Format entwickelt, das Probleme mit der Orientierung der Daten aufwies. Durch fehlende Informationen, wie die Daten im Raum liegen war oft nicht klar, welche Gehirnhälfte die rechte und welche die linke ist. Deshalb wird im NIfTI-Format im Header festgelegt, wie die Koordinaten der Voxel auf Weltkoordinaten abgebildet sind. Beide Formate werden im Bereich des Neuroimaging verwendet.
@@ -128,7 +131,6 @@ Bilderinformationen werden bei ersterem in einer einzigen Datei mit der Endung .
 
 DICOM bezeichnet nicht nur das Dateiformat in dem medizinische Bilder gespeichert werden, sondern  legt auch ein Kommunikationsprotokoll zum Austausch von medizinischen Daten fest. Der DICOM-Standard wird in den meisten medizinischen Einrichtungen verwendet, um medizinische Bilddaten zu speichern und auszutauschen.
 %https://hpi.de/fileadmin/user_upload/fachgebiete/meinel/papers/Old_Source/TR_Med_Bildverarbeitung.pdf
-
 Wie bereits erwähnt speichert eine DICOM-Datei neben den Bilddaten weitere Informationen. Dazu können eine ID oder der Patientenname zählen, die als Attribute des DICOM-Objektes hinterlegt werden. Die Idee dahinter ist, dass die Bilder ohne Metadaten keine Bedeutung haben. 
 
 MRT-Bilder werden außerhalb des medizinischen Umfelds allerdings auch in anderen Formaten gespeichert. 
@@ -145,12 +147,13 @@ Die Daten können weiterhin in herkömmlichen Bildformaten, wie JPEG oder PNG ge
 %------------------------------------------------------
 
 Ein wichtiger Aspekt dieser Arbeit ist die dreidimensionale Visualisierung von MRT-Daten. Deshalb soll an dieser Stelle auf einige grundlegende Aspekte und Begriffe im Zusammenhang mit Volumendaten eingegangen werden.
+
 Da das Gehirn durch einen MRT-Scan dreidimensional erfasst wird, liegen die MRT-Daten als Volumendaten vor. Die Daten werden durch ein Skalarfeld repräsentiert. Ein Skalarfeld ist ein Sammlung von Skalarwerten, die in einem Raum verteilt sind. Durch eine Funktion kann jedem Punkt im Raum ein Skalarwert zugewiesen werden. Im Fall von Volumendaten handelt es sich um ein dreidimensionales Skalarfeld. D.h. die Skalarwerte sind innerhalb eines Würfels angeordnet für jeden Skalarwert existieren X-, Y- und Z-Koordinaten, die dessen Position beschreiben. 
 Diese Punkte aus denen sich der Volumen-Würfel zusammensetzt werden auch Voxel genannt. Ähnlich wie Pixel in zweidimensionalen Bildern stellen sie die kleinsten Teilchen in einem Volumen dar. 
-Die Skalarwerte werden auch als Isowerte des Volumens bezeichnet bei MRT-Daten bildet jeder Wert eine Graustufe mit einer Farbauflösung von 256 Stufen ab. 
-Über das Volumen verteilt haben benachbarte Werte oft ähnliche Isowerte. Eine Gruppe dieser Werte wird als Isofläche bezeichnet. Isoflächen innerhalb eines Volumens entsprechen oft tatsächlichen Oberflächen des darzustellenden Objektes. Durch das Vergleichen benachbarter Werte ist es also möglich Oberflächen von Objekten zu ermittlen (siehe \ref{marchingCubes}). 
+Die Skalarwerte werden auch als Isowerte des Volumens bezeichnet. Bei MRT-Daten bildet jeder Wert eine Graustufe mit einer Farbauflösung von 256 Stufen ab. 
+Über das Volumen verteilt haben benachbarte Werte oft ähnliche Isowerte. Eine Gruppe dieser Werte wird als Isofläche bezeichnet. Isoflächen innerhalb eines Volumens entsprechen oft tatsächlichen Oberflächen des darzustellenden Objektes. Durch das Vergleichen benachbarter Werte ist es also möglich Oberflächen von Objekten zu ermitteln. Auf diese Weise funktioniert der Marching-Cubes Algorithmus, der in Abschnitt \ref{marchingCubes} erläutert wird. 
 
-Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben der Vorstellung eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen.
+Volumendaten werden oft in 3D-Texturen gespeichert. Diese funktionieren auf dieselbe Weise wie 2D-Texturen und entsprechen, wie beschrieben, der Form eines Würfels. Die Textur besitzt Texturkoordinaten in drei Dimensionen.
 
 Die Verfahren zur dreidimensionalen Visualisierung von MRT-Daten werden von \cite{Zhang10} in drei Bereiche geteilt: Multiplanar Reformation, Surface Rendering, und (direct) Volume Rendering.  In den folgenden Abschnitten werden verschiedene Verfahren des Volume Renderings sowie eine prominente Surface Rendering Technik erläutert.
 
@@ -158,12 +161,12 @@ Die Verfahren zur dreidimensionalen Visualisierung von MRT-Daten werden von \cit
 \section{Volume Rendering}							  %
 %------------------------------------------------------
 
-Wie in Kapitel \ref{motivation} erläutert, sollen die MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines dreidimensionalen Volumens, meist durch ein Skalarfeld repräsentiert, auf einer zweidimensionalen Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
+Wie in Abschnitt \ref{motivation} erläutert, sollen MRT-Bilder, die der Neurologe untersucht in mARt als dreidimensionales Volumen dargestellt werden. Volume Rendering bezeichnet die Darstellung eines Volumens, das meist durch ein Skalarfeld repräsentiert wird, als zweidimensionales Bild. MRT-Bilder, die in Graustufen vorliegen bilden ein solches Skalarfeld. 
 
-Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften mit einander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
+Dadurch, dass das Volumen aus Voxeln gebildet wird, gibt es keine Oberfläche, die das abzubildende Objekt beschreibt. Die Darstellung erfolgt deshalb anhand eines optischen Modells. Jedem Wert im Datensatz werden dazu optische Eigenschaften zugewiesen, im Allgemeinen Farbe und Opazität. %Indem Strahlen durch das Volumen geschossen werden, werden diese Eigenschaften miteinander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt. Diese Technik wird im Abschnitt \ref{rayCasting} genauer beschrieben.
+Die einzelnen Voxel werden, abhängig con Blickwinkel des Nutzers miteinander verrechnet, was schließlich zur Abbildung des gesamten Volumen führt.
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
-
-Im Folgenden werden grundlegende Techniken, sowie verschiedene Verfahren der Umsetzung des Volume Rendering erläutert.
+Im Folgenden werden grundlegende Bestandteile des Volume Rendering erläutert.%Techniken, sowie verschiedene Verfahren der Umsetzung des Volume Rendering erläutert.
 
 \cite{Kaufman03}
 \cite{kniss02}
@@ -172,18 +175,16 @@ Im Folgenden werden grundlegende Techniken, sowie verschiedene Verfahren der Ums
 \subsection{Klassifikation}
 \label{klassifikation}
 
-Die Klassifikation von Voxeln, nach \cite{Hadwiger06} bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. Diese beschreiben, die Aufnahme und Abgabe von Licht eines einzelnen Voxels. Die Abgabe von Licht manifestiert sich aus der Sicht des Betrachters in der Farbe eines Voxels. Die Aufnahme äußert sich in dem Grad der Opazität. Durch die Unterschiede in Farbe und Opazität einzelner Voxel, werden verschiedene Bereiche, wie z.B. Gewebestrukturen voneinander unterscheidbar. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab.Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren, durch die jedem Isowert ein Opazitäts- und Farbwert zugewiesen wird. Auf diese wird im folgenden Abschnitt näher eingegangen. 
-
+Die Klassifikation von Voxeln, nach \cite{Hadwiger06} bestimmt deren optische Eigenschaften in Abhängigkeit zu ihrem Isowert. Diese repräsentieren die Aufnahme und Abgabe von Licht eines einzelnen Voxels. Die Abgabe von Licht manifestiert sich in der Farbe eines Voxels. Die Aufnahme äußert sich in dem Grad der Opazität. Durch die Unterschiede in Farbe und Opazität einzelner Voxel, werden verschiedene Bereiche, wie z.B. Gewebestrukturen voneinander unterscheidbar. Die Qualität des gerenderten Bildes hängt zu einem großen Teil von der Klassifikation ab. Oft wird eine Transferfunktion verwendet, um Voxel zu klassifizieren, durch die jedem Isowert ein Opazitäts- und Farbwert zugewiesen wird. Auf diese wird im folgenden Abschnitt näher eingegangen. 
 An dieser Stelle soll ein Überblick über verschiedene Klassifikationen gegeben werden.
 
 Das Ergebnis einer Klassifikation hängt von dem Zeitpunkt ab, zu dem diese durchgeführt wird. Sie kann vor oder nach der Interpolation der Volumendaten durchlaufen werden.
+Die Daten müssen interpoliert werden, da das Volumen, wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese geschieht während des Rasterisierungsschrittes der Grafikpipeline.
 
-Die Daten müssen interpoliert werden, da das Volumen, wie mehrfach beschrieben in einzelnen Werten vorliegt. Der Raum zwischen diesen Werten ist nicht definiert. Um ein zusammenhängendes Volumen darstellen zu können muss also eine Interpolation zwischen den Werten stattfinden. Diese findet während des Rasterisierungsschrittes der Grafikpipeline statt.
+Werden die Voxel vor dieser Interpolation klassifiziert, wird dies als Pre-Klassifikation bezeichnet. Dabei werden jedem Isowert die entsprechenden Eigenschaften zugewiesen. Die zwischen den Voxeln bestehenden Lücken werden aufgefüllt, indem zwischen den Farb- und Opazitätswerten interpoliert wird. 
+Im Gegensatz dazu werden bei der Post-Klassifikation zuerst alle Skalarwerte durchlaufen und der Bereich zwischen ihnen durch Interpolation der Isowerte überbrückt. Erst danach werden den Werten durch die Klassifikation Eigenschaften zugewiesen. Der Unterschied besteht also darin, ob die Erzeugung von neuen Werten, die die vorhandenen verbinden auf Basis der Voxelwerte oder der Werte ihrer Eigenschaften stattfindet. 
 
-Werden die Voxel vor dieser Interpolation klassifiziert, wird dies als Pre-Klassifikation bezeichnet. Dabei werden jedem Isowert die entsprechenden Eigenschaften zugewiesen. Die Zwischen den Voxeln bestehenden Lücken werden aufgefüllt, indem zwischen den Farb- und Opazitätswerten interpoliert wird. 
-Im Gegensatz dazu, werden bei der Post-Klassifakation zuerst alle Skalarwerte durchlaufen und der Bereich zwischen ihnen durch Interpolation der Isowerte überbrückt. Erst danach werden den Werten durch die Klassifizierung Eigenschaften zugewiesen. Der Unterschied besteht also darin, ob die Erzeugung von neuen Werten, die die vorhandenen verbinden auf Basis der Voxelwerte oder der Werte ihrer Eigenschaften stattfindet. 
-
-Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlich unterschiedlichen Ergebnissen. Die Interpolation der Voxeleigenschaften bei der Pre-Klassifizierung führt zu Artefaktbildung, da die Eigenschaftswerte lediglich "gestreckt" werden, ohne die Formen des Volumens zu beachten. Bei der Post-Klassifikation werden die fehlenden Daten anhand der Struktur des Objektes erzeugt. Dies führt zu einer deutlich klareren Darstellung des Volumens. Der Vergleich ist in \ref{img:prepost} veranschaulicht.
+Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlich unterschiedlichen Ergebnissen. Die Interpolation der Voxeleigenschaften bei der Pre-Klassifikation führt zu Artefaktbildung, da die später ermittelten Eigenschaftswerte lediglich gestreckt werden, ohne die Formen des Volumens zu beachten. Bei der Post-Klassifikation werden die fehlenden Daten anhand der Struktur des Objektes erzeugt. Dies führt zu einer deutlich klareren Darstellung des Volumens. Der Vergleich ist in Abbildung \ref{img:prepost} veranschaulicht.
 
 \begin{figure}[!htb]
 	\centering
@@ -191,6 +192,7 @@ Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlic
 	\includegraphics[width=0.7\linewidth]{images/prepostclassification.png}
 	\caption{Vergleich zweier Volumen Renderings mit unterschiedlicher Klassifizierung. Durch die Verwendung von Pre-Klassifikation (links) entstehen Artefakte. Die Post-Klassifikation (rechts) liefert eine bessere Darstellung des Volumens.}
 	\label{img:prepost}
+	\source{Übernommen von: http://schorsch.efi.fh-nuernberg.de/roettger/index.php/VolumeRendering/Pre-AndPost-Classification}
 \end{figure}
 \FloatBarrier
 
@@ -256,8 +258,9 @@ Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da
 	\centering
 	%http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch39.html
 	\includegraphics[width=0.7\linewidth]{images/transferfunction.jpg}
-	\caption{Abbildung zweier gerenderter Volumen und der jeweils dafür verwendeten Transferfunktion. In den Darstellungen a) und c) wurde eine eindimensionale Transferfunktion verwendet. b) und c) benutzen zweidimensionale Tranfserfunktionen, wodurch verschiedene Bereiche des Volumens anders eingefärbt sind. }
+	\caption{Abbildung zweier gerenderter Volumen und der jeweils dafür verwendeten Transferfunktion. In den Darstellungen a) und c) wurde eine eindimensionale Transferfunktion verwendet. b) und c) benutzen zweidimensionale Tranfserfunktionen, wodurch verschiedene Bereiche des Volumens anders eingefärbt sind.}
 	\label{img:transferfunction}
+	\source{Übernommen von: \cite{Fernando04}}
 \end{figure}
 \FloatBarrier
 
@@ -282,8 +285,9 @@ Die Position der Vektoren und der winkelhalbierenden Schicht ist in Abbildung \r
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/halfAngleSlice.png}
-	\caption{Durch Bestimmung der Winkelhalbierenden des Licht- und Kamerarichtungsvektors, wird die Lage der Schichten bestimmt, die sowohl aus Licht- als auch Kamerasicht gerendert werden. Bei einem Skalarprodukt $>=0$ wird der Kameravektor verwendet (a), bei einem negativen Skalarprodukt dessen Inverse (b). (\cite{Hadwiger06})}
+	\caption{Durch Bestimmung der Winkelhalbierenden des Licht- und Kamerarichtungsvektors, wird die Lage der Schichten bestimmt, die sowohl aus Licht- als auch Kamerasicht gerendert werden. Bei einem Skalarprodukt $>=0$ wird der Kameravektor verwendet (a), bei einem negativen Skalarprodukt dessen Inverse (b).}
 	\label{img:halfAngleSlice}
+	\source{Übernommen von: \cite{Hadwiger06}}
 \end{figure}
 \FloatBarrier
 
@@ -304,8 +308,9 @@ Die globale Beleuchtung ist somit von der Umsetzung deutlich komplexer, bietet a
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/localGlobalIllumination.png}
-	\caption{Vergleich zweier Volumen, die mit lokaler Oberflächenbeleuchtung (links) und direkter Beleuchtung und Schatten (rechts) gerendert wurden. \cite{Hadwiger06}}
+	\caption{Vergleich zweier Volumen, die mit lokaler Oberflächenbeleuchtung (links) und direkter Beleuchtung und Schatten (rechts) gerendert wurden.}
 	\label{img:localGlobalIll}
+	\source{Übernommen von: \cite{Hadwiger06}}
 \end{figure}
 \FloatBarrier
 
@@ -329,6 +334,7 @@ $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Trans
 	\includegraphics[width=0.7\linewidth]{images/Phong_components_version_4.png}
 	\caption{Visuelle Aufteilung des Phon-Beleuchtungsmodells in seine drei Komponenten. Die Farbe pro Pixel wird für jede Komponente einzeln berechnet und die Komponenten schließlich zusammen addiert, um die Beleuchtung zu erhalten. }
 	\label{img:phong}
+	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:Phong\_components\_version\_4.png}
 \end{figure}
 \FloatBarrier
 
@@ -403,6 +409,7 @@ An dieser Stelle werden verschiedene Methoden erläutert, mit denen Volume Rende
 	\includegraphics[width=0.7\linewidth]{images/rayCasting.png}
 	\caption{Schematische Darstellung des volumetrischen Ray Castings. Ein Strahl (Pfeil) durchläuft das Volumen (Würfel). Die Eigenschaften (Farbe und Opazität) jedes Voxels, der passiert wird werden zusammengerechnet, um die Farbe eines Pixels des Renderings zu erhalten.}
 	\label{img:rayCasting}
+	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:Volume\_Ray\_Casting-de.svg}
 \end{figure}
 \FloatBarrier
 
@@ -430,6 +437,7 @@ Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form 
 	\includegraphics[width=0.7\linewidth]{images/texture_2d3d.pdf}
 	\caption{Links: Texturen beim werden entlang des Volumens ausgerichtet. Recht: Texturen werden entlang des Blickwinkels ausgerichtet.}
 	\label{img:2D3DTex}
+	\source{Übernommen von: https://www.evl.uic.edu/aej/524/lecture06.html}
 \end{figure}
 \FloatBarrier
 
@@ -448,6 +456,7 @@ Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sic
 	\includegraphics[width=0.7\linewidth]{images/textureStacks.png}
 	\caption{Texturen werden als Stapel in der 	XY-, YZ- und XZ-Ebene angeordnet.}
 	\label{img:textureBased}
+	\source{Übernommen von: \cite{Benassarou05}}
 \end{figure}
 \FloatBarrier
 
@@ -466,6 +475,7 @@ Shear-Warp vereint damit die Bildqualität des Ray-Castings, ist aber dabei um e
 	\includegraphics[width=0.7\linewidth]{images/shearwarp.png}
 	\caption{Shear-Warp Verfahren. Rechts: Ohne Verschiebung würden die Strahlen der Bildebene schräg auf das Volumen treffen. Mitte: Die Schichten des Volumen werden verschoben, sodass die Strahlen orthogonal darauf treffen. Das resultierende Bild ist verzerrt. Rechts: Das verzerrte Bild wird transformiert, um das Volumen korrekt darzustellen.}
 	\label{img:shearwarp}
+	\source{Übernommen von: \cite{SCHMIDT2000583}}
 \end{figure}
 \FloatBarrier
 
@@ -479,14 +489,14 @@ Volume Rendering Techniken werden von verschiedenen Programmen und Arbeiten zur 
 Beispiele für Volume Rendering Software sind \textit{MRIcroGL} von \cite{MRIcroGL} und \textit{Voreen}, entwickelt von \cite{voreen}. Die Programme erlauben dabei die Manipulation der Transferfunktion. Ersteres ermöglicht es außerdem bestimmte Bereiche zu markieren und kann durch eigene Skripte erweitert werden.
 Die im späteren Abschnitt \ref{radiologieSoftware} genannte MRT-Viewer Software besitzt ebenfalls die Funktionalität die Daten in 3D darzustellen.
 
-Um Volume Rendering spezifisch in Unity zu umzusetzen, existieren die kostenpflichtige Unity-Erweiterung \textit{Volume Viewer Pro} von \cite{volumeViewerPro} sowie das Unity-Plugin \textit{Unity® Volume Rendering} von \cite{volumeRenderingUnity}. Beide nutzen Volume Ray Casting zur Darstellung von 3D-Daten und ermöglichen dem Nutzer das Erstellen einer Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren. textit{Volume Viewer Pro} bietet weiterhin das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
+Um Volume Rendering spezifisch in Unity zu umzusetzen, existieren die kostenpflichtige Unity-Erweiterung \textit{Volume Viewer Pro} von \cite{volumeViewerPro} sowie das Unity-Plugin \textit{Unity® Volume Rendering} von \cite{volumeRenderingUnity}. Beide nutzen Volume Ray Casting zur Darstellung von 3D-Daten und ermöglichen dem Nutzer das Erstellen einer Transferfunktion über eine Benutzeroberfläche, um das Volumen zu kolorieren. \textit{Volume Viewer Pro} bietet weiterhin das Hervorheben von Bereichen durch ein Overlay, das Laden von NIfTI- und DICOM-Dateien und einige weitere Manipulationsmöglichkeiten. 
 
 Eine der frühesten Arbeiten, die Volume Rendering Techniken vorstellen stammt von \cite{Drebin88}.
 \cite{Kruger03} stellen Methoden zur Beschleunigung von Volume Rendering vor.
 \cite{Marsalek08} implementieren Volume Ray Casting mit CUDA (Compute Unified Device Architecture) von \cite{cuda}, um den Rendering Prozess zu optimieren.
 \cite{Kutter08} beschäftigen sich mit der Optimierung von Volume Rendering durch ein AR-HMD. Das Rendering soll interaktiv sein und von den Händen des Nutzers verdeckt werden können.
 
-Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisierung von Volumen verwendet. Dabei handelt es sich um ein Verfahren ähnlich dem Ray Tracing, bei dem zufällig Strahlen in eine Szene geschossen werden, wobei ihr Pfad in der Szene verfolgt wird , der durch Reflexion und Absorption, sowie bei Volumen, Streuung bestimmt wird. Auf diese Weise wird eine globale Beleuchtung der Szene erzeugt. Die Technik wird oft zum Rendern von nicht-körperlichen Volumen, wie Wolken oder Rauch eingesetzt. 
+Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisierung von Volumen verwendet. Dabei handelt es sich um ein Verfahren ähnlich dem Ray Tracing, bei dem zufällig Strahlen in eine Szene geschossen werden, wobei ihr Pfad in der Szene verfolgt wird, der durch Reflexion und Absorption, sowie bei Volumen, Streuung bestimmt wird. Auf diese Weise wird eine globale Beleuchtung der Szene erzeugt. Die Technik wird oft zum Rendern von nicht-körperlichen Volumen, wie Wolken oder Rauch eingesetzt. 
 \cite{Fong17} beschreiben Volume Rendering unter Verwendung von Path Tracing, wobei der Fokus auf dessen Einsatz in der Produktion liegt.
 
 %-------------------------------------------------------------
@@ -524,6 +534,7 @@ Die Anzahl an Möglichkeiten einen Würfel aufzuteilen lässt sich errechnen. F�
 	\includegraphics[width=0.7\linewidth]{images/MarchingCubes.png}
 	\caption{Die 15 verschiedenen Möglichkeiten, wie eine Polygonfläche einen Würfel in zwei Bereiche teilen kann.}
 	\label{img:marchingCubes}
+	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:MarchingCubes.svg}
 \end{figure}
 \FloatBarrier
 
@@ -569,7 +580,8 @@ Marching Cubes & 3D-Mesh &  &\\
 
 \todo{Tabelle}
 %-------------------------------------------------------------
-\section{AR und VR (MR?)}									 %
+\section{AR und VR (MR?)}		
+\label{arVr}							 %
 %-------------------------------------------------------------
 
 mARt ist als AR-Anwendung konzipiert. Eine Umsetzung in VR wäre aber ebenso denkbar und dient, wie in Kapitel \ref{konzept} beschrieben als Alternative.
@@ -601,6 +613,7 @@ Bei undurchsichtigen Bildschirmen nimmt eine Kamera die Umgebung auf und gibt si
 	\includegraphics[width=0.5\linewidth]{images/App_iSkull,_an_augmented_human_skull.jpg}
 	\caption{Eine tabletbasierte AR-Anwendung, die auf einem Marker des 3D-Modell  eines Schädels projiziert.}
 	\label{img:ARMarker}
+	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:App\_iSkull,\_an\_augmented\_human\_skull.jpg}
 \end{figure}
 \FloatBarrier
 
@@ -654,6 +667,7 @@ In Abbildung \ref{img:vive} ist das HMD und die Controller während der Nutzung 
 	\includegraphics[width=0.5\linewidth]{images/vive.jpg}
 	\caption{Ein Nutzer trägt das HMD der \textit{Vive} und bedient dessen Controller.}
 	\label{img:vive}
+	\source{Übernommen von: https://sco.wikipedia.org/wiki/Virtual\_reality\#/media/File:Reality\_check\_ESA384313.jpg}
 \end{figure}
 \FloatBarrier
 
@@ -708,6 +722,7 @@ In Abbildung \ref{img:mrtSoftware} ist die Oberfläche der \textit{OsiriX DICOM 
 	\includegraphics[width=0.7\linewidth]{images/osirix.jpg}
 	\caption{Die Benutzeroberfläche des \textit{OsiriX DICOM Viewers}. Der Scan eines Kopfes wird aus den drei klassischen Perspektiven angezeigt. Die Position der ausgewählten Sichtebene ist in den übrigen Fenstern farbig eingezeichnet.}
 	\label{img:mrtSoftware}
+	\source{Übernommen von: https://www.macupdate.com/app/mac/14362/osirix}
 \end{figure}
 \FloatBarrier
 
@@ -764,6 +779,7 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 	\includegraphics[width=0.7\linewidth]{images/hololensGestures.png}
 	\caption{Handgesten, die die Hololens erkennt.}
 	\label{img:hololensGestures}
+	\source{Übernommen von: \cite{Tang18}}
 \end{figure}
 \FloatBarrier
 
@@ -773,6 +789,7 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 	\includegraphics[width=0.7\linewidth]{images/magicleapGestures.jpg}
 	\caption{Handgesten, die die Magic Leap erkennt.}
 	\label{img:magicGestures}
+	\source{Übernommen von: https://next.reality.news/news/new-magic-leap-gesture-documentation-offers-insight-into-hands-will-make-its-digital-world-come-alive-0183614/}
 \end{figure}
 \FloatBarrier
 

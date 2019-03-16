@@ -218,6 +218,7 @@ Die Bedienoberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:m
 	\includegraphics[width=0.5\linewidth]{images/mARt2d.png}
 	\caption{Die zweidimensionale Darstellung von zwei MRT-Datensätzen, deren Manipulation nicht gleichgeschaltet ist. Über die oberen Schieberegler können Kontrast und Helligkeit beeinflusst werden. durch das Icon in der rechten Ecke kann der markierte Bereich ein- und ausgeblendet werden. Das Rad ermöglicht das Scrollen durch die Bildschichten. Die aktuelle Schicht wird in dessen Mitte angezeigt. }
 	\label{img:mARt2d}
+	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
 
@@ -226,6 +227,7 @@ Die Bedienoberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:m
 	\includegraphics[width=0.5\linewidth]{images/mARt3d.png}
 	\caption{Die 3D-Darstellung eines MRT-Datensatzes mit angezeigter Maske. Die oberen Schieberegler kontrollieren Intentsität und Schwellenwert des Renderings. Auch hier wird der markierte Bereich durch ein Icon ein- und ausgeblendet. Jede Ebene kann durch einen Anfassungspunkt verschoben werden.}
 	\label{img:mARt3d}
+	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
 
@@ -253,6 +255,7 @@ In Abbildung \ref{img:handUI} ist das ausgeklappte Menü, an der linken Hand dar
 	\includegraphics[width=0.7\linewidth]{images/handUI.png}
 	\caption{Das ausklappbare Handmenü, das erscheint, wenn der Nutzer seine Handfläche zur Kamera dreht. Über die Knöpfe kann der Nutzer die angezeigten Datensätze auswählen (oberen und Liste), zwischen 2D- und 3D-Darstellung wechseln (mitte) und die angezeigten Datensätze gleichschalten (unten). }
 	\label{img:handUI}
+	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
 
@@ -271,7 +274,7 @@ Im zeitlichen Rahmen der Arbeit konnte dieses Funktionalität allerdings nicht m
 
 Die Interaktionen bleiben in der AR- und VR-Version der Anwendung gleich, da für beide die Leap Motion zur Steuerung verwendet wird.
 Im Gegensatz zum Einsatz in VR sind allerdings die realen Hände des Nutzers für diesen sichtbar, während er die Anwendung in AR bedient. Da durch die Leap Motion die Hände zusätzlich virtuell simuliert werden, sieht der Nutzer vier Hände, was zuerst verwirrend wirken kann. 
-Die Leap-Controller-Hände für den Nutzer unsichtbar zu machen, wäre zaw möglich, ist allerdings nicht die beste Vorgehensweise. Obwohl die Leap Motion die Hände und Handbewegungen sehr zuverlässig nachempfindet, verhalten die virtuellen Hände sich nicht ganz deckungsgleich zu den realen. Dies hängt auch damit zusammen, dass die Leap Motion Kamera sich ein Stück vor oder über den Augen des Nutzers befindet, da sie am HMD befestigt ist. Dieses Problem wird auch in Abschnitt \ref{kombination} beschrieben.
+Die Leap-Controller-Hände für den Nutzer unsichtbar zu machen, wäre zwar möglich, ist allerdings nicht die beste Vorgehensweise. Obwohl die Leap Motion die Hände und Handbewegungen sehr zuverlässig nachempfindet, verhalten die virtuellen Hände sich nicht ganz deckungsgleich zu den realen. Dies hängt auch damit zusammen, dass die Leap Motion Kamera sich ein Stück vor oder über den Augen des Nutzers befindet, da sie am HMD befestigt ist. Dieses Problem wird auch in Abschnitt \ref{kombination} beschrieben.
 Die Abweichungen der Simulation sind in einer VR-Anwendung deutlich weniger auffällig. Durch die Immersion der virtuellen Welt und dem Fehlen eines direkten Vergleichs mit der realen, entsteht beim Nutzer die Illusion, dass die virtuellen Hände sich genau dort befinden, wo er seine echten Hände vermutet. Dies ist durch die Dominanz der visuellen Wahrnehmung begründet, wie sie z.B. \cite{Azmandian16} beschreiben.
 
 In AR entfällt diese Illusion. Da die beiden Hände Paare aber nicht deckungsgleich sind, kann es dazu kommen, dass ein virtueller Finger einen Knopf trifft, während es ein realer nicht tut oder umgekehrt. Wenn der Nutzer die virtuelle Hand nicht sieht, würde dies den Eindruck von fehlerhaftem Verhalten hervorrufen. 
