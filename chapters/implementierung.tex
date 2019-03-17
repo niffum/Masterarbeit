@@ -5,21 +5,22 @@
 
 \section{Aufbau Struktur des Projektes}
 
-Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der Leistungsfähigkeit der Hololens, wurde die Anwendung sowohl für die Hololens als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Die VR-Anwendung ermöglicht dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
-Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen GameEngines verwendet, da sie als Oberfläche diesen, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
-Zur Implementierung von mARt wurde \textit{Unity} von \cite{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \cite{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit Unity entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. Unity bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
+Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der Leistungsfähigkeit der \textit{HoloLens}, wurde die Anwendung sowohl für die \textit{HoloLens} als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Sie ermöglicht dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
+Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen Spiele-Engines verwendet, da sie als Oberfläche dienen, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
+Zur Implementierung von mARt wurde \textit{Unity} von \cite{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \cite{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit \textit{Unity} entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. \textit{Unity} bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
 
-Microsoft empfiehlt weiterhin Unity zur Entwicklung für Hololens-Software zu nutzen \cite{unityHololens} und bietet mit \textit{Mixed Reality Toolkit} (MRTK) \cite{holoToolkit} ein Framework, das Hololens Funktionen innerhalb von Unity zur Verfügung stellt.
-Unity verwendet C\# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
+\textit{Microsoft} empfiehlt weiterhin \textit{Unity} zur Entwicklung für \textit{HoloLens}-Software zu nutzen \cite{unityHololens} und bietet mit \textit{Mixed Reality Toolkit} (MRTK) \cite{holoToolkit} ein Framework, das \textit{HoloLens}-Funktionen innerhalb von \textit{Unity} zur Verfügung stellt.
+\textit{Unity} verwendet C\# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
+\todo{Referenzen?}
 %Wieso?
 
-mARt wurde in Unity entwickelt und sollte dann sowohl für die HoloLens und als VR-Anwendung gebaut werden. Die Anwendung konnte allerdings nicht für die HoloLens bereitgestellt werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert. Auf die Entwicklung für die unterschiedlichen Plattformen wird im Abschnitt \ref{plattformen} näher eingegangen.
+mARt wurde in \textit{Unity} entwickelt und sollte dann sowohl für die \textit{HoloLens} und als VR-Anwendung gebaut werden. Die Anwendung konnte allerdings nicht für die \textit{HoloLens} bereitgestellt werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert. Auf die Entwicklung für die unterschiedlichen Plattformen wird im Abschnitt \ref{plattformen} näher eingegangen.
 
-Um die Unity Anwendung auf dem VR-System abzuspielen, wird die \textit{SteamVR}-Software von \citep{steam} in das Projekt integriert. Um die Anwendung starten zu können muss sie auf dem jeweiligen Rechner installiert sein.
+Um die \textit{Unity}-Anwendung auf dem VR-System abzuspielen, wird die \textit{SteamVR}-Software von \cite{steam} in das Projekt integriert. Um die Anwendung starten zu können muss sie auf dem jeweiligen Computer installiert sein.
 
 \subsection{Unity Projekt}
 
-Unity Projekte basieren auf 3D-Szenen. Innerhalb einer Szene können GameObjects platziert werden. Dabei kann es sich z.B. um 3D-Modelle handeln. Ein GameObject besitzt verschiedene Components, die dessen Eigenschaften und Verhalten bestimmen. Viele Funktionen und Eigenschaften werden von bereits in der Engine vorhandenen Components realisiert. Sogenannte Rigidbodys verleihen einem Objekt beispielsweise physikalische Eigenschaften, die von der Engine berechnet werden. Components können auch Skripte sein, die der Entwickler selbst verfasst hat. Über diese Skripte wird die Spiellogik und die Funktionalität der Anwendung definiert. 
+\textit{Unity} Projekte basieren auf 3D-Szenen. Innerhalb einer Szene können GameObjects platziert werden. Dabei kann es sich z.B. um 3D-Modelle handeln. Ein GameObject besitzt verschiedene Components, die dessen Eigenschaften und Verhalten bestimmen. Viele Funktionen und Eigenschaften werden von bereits in der Engine vorhandenen Components realisiert. Sogenannte Rigidbodys verleihen einem Objekt beispielsweise physikalische Eigenschaften, die von der Engine berechnet werden. Components können auch Skripte sein, die der Entwickler selbst verfasst hat. Über diese Skripte wird die Spiellogik und die Funktionalität der Anwendung definiert. 
 
 Da mARt sich hauptsächlich in die beiden Szenarien einer zwei- und dreidimensionalen Darstellung unterteilen lässt existiert für jedes Szenario eine Szene.
 Viele der Funktionen sind allerdings ähnlich oder gleich, weshalb manche Skripte in beiden Szenen verwendet werden. 
@@ -28,13 +29,14 @@ Viele der Funktionen sind allerdings ähnlich oder gleich, weshalb manche Skript
 \section{Implementierung verschiedener Technologien/Plattformen}
 \label{plattformen}
 
-\subsection{HoloLens Prototyp}
-Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine prototypische Demo-Anwendung entwickelt, die die Hololens eigenen Gesten genutzt hat. Die Anwendung hat eine zweidimensionale Darstellung der MRT-Bilder als Hologramm in den Raum projiziert, welches der Nutzer durch Hololens eigene Gesten manipulieren konnte. Dabei wurden alle vorhandenen Manipulierungsformen eines Hologramms abgedeckt, sowie das Scrollen durch die Bildschichten. Um die Hololens Gesten zu Nutzen wurde das HoloToolkit verwendet. 
-Anhand dieser Demo sollte geprüft werden, ob die Interaktionsmöglichkeiten, die die Hololens bietet ausreichend sind, um einem Neurologen die effektive Untersuchung von MRT-Bildern zu ermöglichen.
+\subsection{\textit{HoloLens} Prototyp}
+Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine prototypische Demo-Anwendung entwickelt, die die \textit{HoloLens} eigenen Gesten genutzt hat. Die Anwendung hat eine zweidimensionale Darstellung der MRT-Bilder als Hologramm in den Raum projiziert, welches der Nutzer durch \textit{HoloLens} eigene Gesten manipulieren konnte. Dabei wurden alle vorhandenen Manipulierungsformen eines Hologramms abgedeckt, sowie das Scrollen durch die Bildschichten. Um die \textit{HoloLens} Gesten zu Nutzen wurde das \textit{HoloToolkit} verwendet. 
+Anhand dieser Demo sollte geprüft werden, ob die Interaktionsmöglichkeiten, die die \textit{HoloLens} bietet ausreichend sind, um einem Neurologen die effektive Untersuchung von MRT-Bildern zu ermöglichen.
 Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und Anforderungen eines Arztes an mARt noch weiter spezifiziert werden.  
 
-Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der Hololens zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig, z.B. zum Wechseln der Manipulationsart. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die Motion Leap in das System integriert.
+Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der \textit{HoloLens} zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig, z.B. zum Wechseln der Manipulationsart. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die \textit{Leap Motion} in das System integriert.
 % Genauer auf Implementierung eingehen
+Der Prototyp wurde in der Szen \todo{Szene einfügen} realisiert und eine Datei zur Bereitstellung für die \textit{HoloLens} ist im Ergänzungsmaterial zu finden.
 
 \todo{Bild von Demo}
 
@@ -44,34 +46,34 @@ HoloToolkit, Input, Camera etc
 \section{Implementierung der Nutzereingabe}
 Steam VR, normale scene
 
-\subsection{Leap Motion}
+\subsection{\textit{Leap Motion}}
 
-Damit die Motion Leap Kamera in einer Anwendung verwendet werden kann, muss das von \cite{orion} zur Verfügung gestellte SDK \textit{Orion} eingebunden werden. Das \textit{Core SDK} ist dabei zur Erkennung und Verwendung des Gerätes notwendig, während ein erweiterndes Paket für Interaktionen die Funktionen und Beispiele bietet, wie verschiedene Bedienelemente in eine Anwendung integriert werden können, die auf die Controller, also die Hände des Nutzers reagieren.
-Meistens funktioniert dies indem einzelne Skripte, die das gewünschte Verhalten implementieren als Components an GameObjects angehangen werden. Die Skripte lösen dann bestimmte Events oder Methoden aus, die mit den Funktionalitäten der Anwendung verknüpft werden. 
+Damit die \textit{Leap Motion} Kamera in einer Anwendung verwendet werden kann, muss das von \cite{orion} zur Verfügung gestellte SDK \textit{Orion} eingebunden werden. Das \textit{Core SDK} ist dabei zur Erkennung und Verwendung des Gerätes notwendig, während ein erweiterndes Paket Funktionen und Beispiele bietet, wie verschiedene Bedienelemente in eine Anwendung integriert werden können, die auf die Controller, also die Hände des Nutzers reagieren.
+Meistens funktioniert dies indem einzelne Skripte, die das gewünschte Verhalten implementieren, als Components an GameObjects angehangen werden. Die Skripte lösen dann bestimmte Events oder Methoden aus, die mit den Funktionalitäten der Anwendung verknüpft werden. 
 
-\subsection{Kombination von Leap Motion mit Vive/Hololens}
+\subsection{Kombination von \textit{Leap Motion} mit \textit{Vive}/\textit{HoloLens}}
 \label{kombination}
 
-Sowohl Vive als auch HoloLens sollen in Verbindung mit der Leap Motion funktionieren. Dazu muss zum Einen die Leap Motion Kamera in beide Systeme integriert werden und zum Anderen die Funktionalität in die Unity jeweiligen Szenen eingebaut werden. 
+Sowohl \textit{Vive} als auch \textit{HoloLens} sollen in Verbindung mit der \textit{Leap Motion} funktionieren. Dazu muss zum Einen die \textit{Leap Motion} Kamera in beide Systeme integriert werden und zum Anderen die Funktionalität in die jeweiligen \textit{Unity} Szenen eingebaut werden. 
 
-Das Einbinden der Leap Motion in eine VR Anwendung, sowie die Kombination mit dem HTC Vive Headset sind unproblematisch. Das Orion SDK der Leap Motion unterstützt den Einsatz in VR-Szenen. Sofern SteamVR installiert und eine VR-Brille angeschlossen ist, ist kein größerer Aufwand nötig, um die Hände des Nutzers in VR anzuzeigen. 
-Die Integration in das VR-System ist vergleichbar einfach. Die Leap Motion Kamera wird vorne auf dem HMD über der eingebauten Kamera befestigt und ihre Kabel zusammen mit den anderen der Brille über den Kopf des Nutzers geführt. 
+Das Einbinden der \textit{Leap Motion} in eine VR Anwendung, sowie die Kombination mit dem \textit{Vive} Headset sind unproblematisch. Das \textit{Orion} SDK der \textit{Leap Motion} unterstützt den Einsatz in VR-Szenen. Sofern \textit{SteamVR} installiert und eine VR-Brille angeschlossen ist, ist kein größerer Aufwand nötig, um die Hände des Nutzers in VR anzuzeigen. 
+Die Integration in das VR-System ist vergleichbar einfach. Die \textit{Leap Motion} Kamera wird vorne auf dem HMD über der eingebauten Kamera befestigt und ihre Kabel zusammen mit den anderen der Brille über den Kopf des Nutzers geführt. 
 
-Dagegen bringt die Verbindung von Motion Leap und Hololens einige Herausforderungen mit sich. Zunächst ist in einer Hololens-Szene nur eine Kamera, die des HMDs, vorgesehen. Das Vorhandensein einer zweiten Kamera, wie die der Leap Motion würde beim Erstellungsprozess zu Fehlern führen,sodass das Bereitstellen des Programmes für die Hololens nicht möglich ist.
-Die Leap Motion wird über ihr Kabel mit Strom versorgt. Sie kann also im Gegensatz zu der Hololens nicht kabellos funktionieren. 
-Über das Kabel werden außerdem die von der Leap Motion Kamera erfassten Daten weitergeleitet, die dann verarbeitet werden. Die dafür notwendige Software ist nicht für die Hololens verfügbar und es ist fragwürdig, ob sie die dafür notwendige Rechenleistung besitzt. 
+Dagegen bringt die Verbindung von \textit{Leap Motion} und \textit{HoloLens} einige Herausforderungen mit sich. Zunächst ist in einer \textit{HoloLens}-Szene nur eine Kamera, die des HMDs, vorgesehen. Das Vorhandensein einer zweiten Kamera, wie die der \textit{Leap Motion} würde beim Erstellungsprozess zu Fehlern führen,sodass das Bereitstellen des Programmes für die \textit{HoloLens} nicht möglich ist.
+Die \textit{Leap Motion} wird über ihr Kabel mit Strom versorgt. Sie kann also im Gegensatz zu der \textit{HoloLens} nicht kabellos funktionieren. 
+Über das Kabel werden außerdem die von der \textit{Leap Motion} Kamera erfassten Daten weitergeleitet, die dann verarbeitet werden. Die dafür notwendige Software ist nicht für die \textit{HoloLens} verfügbar und es ist fragwürdig, ob sie die dafür notwendige Rechenleistung besitzt. 
 
-Aus diesen Gründen muss die Leap Motion während des Betriebs per Kabel mit einem Rechner verbunden sein. Um das Gerät trotzdem in Verbindung mit der Hololens nutzen zu können, müssen entweder die Sensordaten der Leap Motion an die Anwendung in der Hololens übertragen werden oder die gesamte Anwendung läuft auf dem Rechner und wird zur Wiedergabe an die Hololens übermittelt. Beides geschieht über Wlan.
+Aus diesen Gründen muss die \textit{Leap Motion} während des Betriebs per Kabel mit einem Rechner verbunden sein. Um das Gerät trotzdem in Verbindung mit der \textit{HoloLens} nutzen zu können, müssen entweder die Sensordaten der \textit{Leap Motion} an die Anwendung in der \textit{HoloLens} übertragen werden oder die gesamte Anwendung läuft auf dem Rechner und wird zur Wiedergabe an die \textit{HoloLens} übermittelt. Beides geschieht über Wlan.
 
 Die Übertragung der Sensordaten ist dabei um einiges aufwändiger und erfordert die Integration weiterer Tools. Es existieren einige Lösungsansätze für dieses Problem, beispielsweise von \cite{hololensGithub}. Auf Grund des beschränkten Zeitraums dieser Arbeit wurde dieser Ansatz allerdings nicht implementiert.
-Stattdessen wird die Anwendung lediglich auf der HoloLens wiedergegeben. Dazu wird die Hololens-App \textit{Holographic Remoting Player} von \cite{remoteApp} genutzt. Die Anwendung wird dabei direkt aus dem Unity-Editor übertragen.
+Stattdessen wird die Anwendung lediglich auf der \textit{HoloLens} wiedergegeben. Dazu wird die \textit{Hololens}-App \textit{Holographic Remoting Player} von \cite{remoteApp} genutzt. Die Anwendung wird dabei direkt aus dem \textit{Unity}-Editor übertragen.
 Die Wiedergabequalität der Anwendung ist dabei abhängig von der Stabilität der Wlan-Verbindung.
 
-Auch das Anbringen der Leap Motion an das HMD ist bei der HoloLens umständlicher als bei der HTC Vive. 
-Da es die Vive einen undurchsichtigen Bildschirm besitzt, kann die Leap Motion Kamera einfach vorne auf der Brille befestigt werden. Die Form des Gerätes bietet dazu ausreichend Fläche.
-Bei der HoloLens sollte der Bildschirm, durch den der Nutzer sieht nicht verdeckt werden. Eine Installation  im oberen Teil der Frontseite ist ebenfalls nicht umsetzbar, da dieser von den HoloLens-Kameras eingenommen wird, die die Umgebung und Nutzergesten verfolgen.
-Somit ist die einzige sinnvolle Möglichkeit, die Leap Motion auf der HoloLens zu platzieren. Hierbei muss sie außerdem nach vorne geneigt werden, um die Hände des Nutzers in der Anwendung möglichst genau an den realen Händen auszurichten. 
-Um die Anwendung auf der HoloLens bedienen zu können, wurde eine eigene Haltungsvorrichtung gebaut.
+Auch das Anbringen der \textit{Leap Motion} an das HMD ist bei der \textit{HoloLens} umständlicher als bei der \textit{Vive}. 
+Da es die \textit{Vive} einen undurchsichtigen Bildschirm besitzt, kann die \textit{Leap Motion} Kamera einfach vorne auf der Brille befestigt werden. Die Form des Gerätes bietet dazu ausreichend Fläche.
+Bei der \textit{HoloLens} sollte der Bildschirm, durch den der Nutzer sieht nicht verdeckt werden. Eine Installation im oberen Teil der Frontseite ist ebenfalls nicht umsetzbar, da dieser von den \textit{HoloLens}-Kameras eingenommen wird, die die Umgebung und Nutzergesten verfolgen.
+Somit ist die einzige sinnvolle Möglichkeit, die \textit{Leap Motion} auf der \textit{HoloLens} zu platzieren. Hierbei muss sie außerdem nach vorne geneigt werden, um die Hände des Nutzers in der Anwendung möglichst genau an den realen Händen auszurichten. 
+Um die Anwendung auf der \textit{HoloLens} bedienen zu können, wurde eine eigene Haltungsvorrichtung gebaut.
 
 \todo{Foto von Halterung?}
 
