@@ -9,9 +9,10 @@ Im folgenden werden Konzepte diskutiert, um die in Kapitel \ref{anforderung} her
 Ziel des Arbeit ist es eine prototypische AR- bzw. VR-Anwendung zur Visualisierung und Untersuchung von MRT-Daten zu implementieren. 
 
 Vor allem im Bereich der Volumendarstellung gibt es bereits viele Programme und Arbeiten, die diese erfolgreich umsetzten, wie im Kapitel \ref{grundlagen} erläutert wurde.
-Wie später beschrieben, wurden diese teilweise als Grundlage für die Anwendung verwendet. Die Anwendung soll mit der Spiele Engine Unity 3D implementiert werden, worauf ebenfalls im späteren Kapiteln eingegangen wird. Die Lösung muss also damit kompatibel sein. In Kapitel \ref{grundlagen} wurde unter anderem die Unity-Erweiterung Volume Viewer Pro beschrieben, die viele der gestellten Anforderungen bereits abdeckt. Das Programm ist allerdings kostenpflichtig. Eine unabhängige und frei zugängliche Software ist dem allerdings vorzuziehen, vor allem, da es sich um einen Prototyp handelt, der Aufschluss über die Verwendungsmöglichkeiten in diesem Bereich liefern und daher eventuell weiterentwickelt werden soll. Deshalb sollte die dreidimensionale Darstellung im Rahmen dieser Arbeit entwickelt werden und Code aus anderem Quellen nur verwendet werden, wenn er diesen Kriterien entspricht.
+Wie später beschrieben wird, baut mARt auf einer bereits implementierten Lösung auf. Die Anwendung soll mit der Spiele-Engine \textit{Unity}  implementiert werden, worauf ebenfalls im späteren Kapiteln eingegangen wird. Die Implementierung muss also mit der Software kompatibel sein. In Kapitel \ref{grundlagen} wurde unter anderem die \textit{Unity}-Erweiterung \textit{Volume Viewer Pro} beschrieben, die viele der gestellten Anforderungen bereits abdeckt. Das Programm ist allerdings kostenpflichtig. Eine unabhängige und frei zugängliche Software ist dem vorzuziehen. Vor allem, da es sich um einen Prototyp handelt, der Aufschluss über die Verwendungsmöglichkeiten in diesem Bereich liefern und daher eventuell weiterentwickelt werden soll. Deshalb sollte die dreidimensionale Darstellung im Rahmen dieser Arbeit entwickelt werden und Code aus anderem Quellen nur verwendet werden, wenn er diesen Kriterien entspricht.
 
 \section{3D Darstellung}
+\label{3dDarstellung}
 
 Im Kapitel\ref{grundlagen} wurden verschiedene Methoden vorgestellt, um ein Volumen zu visualisieren. An dieser Stelle soll diskutiert werden, welche davon sich am besten für die Umsetzung in mARt eignet.
 Die 3D-Darstellung sollte die in Kapitel \ref{anforderung} beschriebenen Eigenschaften haben:
@@ -105,6 +106,7 @@ Die Anzeige der Daten aus verschiedenen Sichtachsen wäre nicht nur aufwändiger
 Die zweidimensionale Darstellung in mARt kann kaum einen Mehrwert gegenüber einer Bildschirmanwendung  bieten. Zwar kann sie zur Untersuchung der Daten genutzt werden, dient allerdings hauptsächlich als komplementäre Ansicht zur 3D-Visualisierung.
 
 \section{Endgerät}
+\label{device}
 
 Im Kapitel \ref{grundlagen} wurden die Vor- und Nachteile von AR und VR gegenüber gestellt.
 Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-HMD-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem medizinischen Arbeitsumfeld.
@@ -197,11 +199,16 @@ Die Manipulation von Helligkeit und Kontrast wird dabei in Verbindung mit einer 
 Zu den geforderten Interaktionen gehört mit \textbf{U15} auch die die Vergrößerung von Bildern, um dem Nutzer eine genaue Untersuchung zu erlauben. Bei der Vergrößerung handelt es sich im Grunde genommen um eine Skalierung bzw. ein "Heranzoomen" des Bildes. Auch dies lässt sich gut mit einer direkten Handbewegung in Berührung mit der Darstellung umsetzten. Aus anderen Anwendungen sind Nutzern zwei Bedienmöglichkeiten dieser Funktionalität bekannt. Bei Bildschirmanwendungen wird oft das Mausrad zum Zoomen verwendet. Allerdings werden Räder bereits für andere Aktionen verwendet und ein mehrdeutiger Einsatz könnte zu Verwirrung führen. Von der Bedienung von Touchdisplays sind Nutzer weiterhin daran gewöhnt zu zoomen, indem sie den Bildschirm mit Daumen und Zeigefinger berühren und die Finder dann aufeinander zu oder voneinander weg zu bewegen. Diese Bewegung lässt sich gut in die Anwendung übertragen. Um ein eindeutigeres Ergebnis zu erhalten und dem Nutzer mehr Kontrolle zu geben werden statt zwei Fingern allerdings die beiden Hände verwendet. Wird das Bild von beiden Händen mit Daumen und Zeigefinder gegriffen kann es durch die Bewegung der Hände zueinander manipuliert werden.
 
 Um zu verhindern, dass zwei Darstellungen sich durch die Sklalierung unterscheiden und die Anwendung überschaubar zu halten, ist ein Vergrößerung nur möglich, wenn ein einzelner Datensatz angezeigt wird. 
-Das Vergrößern ist dabei als temporäre Manipulation konzipiert. Wenn der Nutzer einen zweiten Datensatz zur Visualisierung auswählt, wird der erste auf seine Ursprüngliche Größe zurück gesetzt. Die Skalierung wird auch nicht in in die andere Szene übertragen, wenn der Nutzer zwischen 2D und 3D wechselt.
+Das Vergrößern ist dabei als temporäre Manipulation konzipiert. Wenn der Nutzer einen zweiten Datensatz zur Visualisierung auswählt, wird der erste auf seine Ursprüngliche Größe zurück gesetzt. Die Skalierung wird auch nicht in in die andere Szene übertragen, wenn der Nutzer zwischen 2D und 3D wechselt. Dies kann dem Nutzer auch als bewusstes Zurücksetzten dienen, falls er die Skalierung beispielsweise versehentlich übertrieben hat.
 
 % Verschieben
-Wenn eine Darstellung vergrößert wird, wird der im Bildausschnitt angezeigt Bereich automatisch kleiner. Um dem Nutzer die Möglichkeit zu geben einen anderen Bereich zu betrachten, ohne vorher wieder herauszoomen zu müssen, ist es sinnvoll, dass den Bildausschnitt verschieben zu können. 
-\todo{Mit Endprodukt abgleichen}
+Die User Stories \textbf{UX} und \textbf{UY} fordern jeweils die Möglichkeit die Darstellung verschieben zu können. Ersteres beschreibt dabei die Verschiebung im Raum, zweiteres eine Verschiebung der Darstellung. 
+Die beiden interaktionen wurden zu einer zusammen gefasst. 
+Über den Bedienelementen einer Ansicht wird jeweils ein greifbares Objekt platziert. Durch das Greifen, Ziehen und Loslassen des Objektes kann der Nutzer die gesamte Darstellung verschieben. Damit ist die Positionierung im Raum abgedeckt. 
+Vergrößert der Nutzer eine Darstellung kann der dieselbe Verschiebung nutzen, um sich darin zu orientieren. 
+Zwar ist die Verschiebung auf die Armreichweite des Nutzers beschränkt, sofern er sich nicht im Raum bewegt, aber eine übermäßige Skalierung ist generell sowieso nicht erstrebenswert.
+Um die Darstellung der Position des Nutzers weiterhin anpassen zu können, kann diese gedreht werden. Dazu dient ein weiteres Bedienelement, welches sich vor der Darstellung befindet. Um die Anwendung übersichtlich zu gestalten, erscheint dieses nur, wenn der Nutzer das erste Element ergriffen hat und somit eine Absicht demonstriert, die Darstellung zu bewegen. 
+Sowohl Position als auch Rotation der Ansicht werden beim Szenariowechsel übernommen.
 
 %Drehen
 Entsprechend Anforderung \textbf{U13} soll die volumetrische Darstellung der MRT-Daten gedreht werden können. 
