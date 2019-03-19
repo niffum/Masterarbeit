@@ -4,22 +4,47 @@
 \chapter{Ergebnisse}
 \label{ergebnisse}
 
-\todo[inline]{Wo Rendering zeigen? Qualität der Daten ansprechen?}
+\todo{Eigenes kapitel? P}
 
-Das Ergebnis der Implementierung ist eine aus mehreren Unity Szenen bestehendes Unity Projekt, mit \todo{Code zählen} Zeilen Code. 
+Das Ergebnis der Implementierung ist eine aus mehreren \textit{Unity} Szenen bestehendes \textit{Unity} Projekt, mit \todo{Code zählen} Zeilen Code. 
+Die Vr- und AR-Anwendungen bestehen jeweils aus zwei Szenen, eine für die zwei-, eine für die dreidimensionale Darstellung sowie einer Startszene Preload.unity, in der ein GameObject namens appState liegt, über das bestimmt werden kann, welche Szene zuerst geladen werden soll. In diesem Objekt werden auch die Zustände der Szenen gespeichert und so Manipulationen übertragen.
+Die Szenen für die 2D-Darstellung heißen main_2D.unity und main_2D_AR.unity. Die für die 3D-Darstellung main_3D.unity und main_3D_AR.unity.
 
-Ausführtabre Datei -> VR
+Die VR-Anwendung ist als ausführbare Datei im Ergänzungsmaterial zu finden. Da die \textit{HoloLens}-Anwendung, wie in Kapitel \ref{konzept} erläutert, nicht für diese bereitgestellt werden konnte, existiert hierfür keine ausführbare Datei. Allerdings wurde in der ReadMe.txt Datei des Projektes, die sich ebenfalls im Ergänzungsmaterial beschrieben, wie die Anwendung auf der \textit{HoloLens} abgespielt werden kann. 
+Weiterhin ist dort zwei Videos enthalten, die die Funktionen und Bedienung der Anwendung zeigen.
 
-Um die Anwendung auf der Hololens verwenden zu können muss sie, wie in Kapitel \ref{konzept} beschrieben aus dem Editor gestartet und mit der Hololens-App \textit{Holographic Remoting Player} von auf das Gerät übertragen werden. 
-
-
-
-Ein Video, dass die Bedienung der Anwendung zeigt, ist im Ergänzungsmaterial enthalten.
-
+Die Interaktionslemente wurden bereits in Kapitel \ref{konzept} beschrieben und abgebildet. 
 Screenshots
 beschreibung der Anwendung
 
-Qualität in Abhängigkeit zu daten setzten, andere Daten zeigen
+\section{3D Darstellung}
+
+In Kapitel \ref{implementierung} wurde erläutert, wie die 3D-Darstellung mit Hilfe von Volume Raycasting erzeugt wurde. 
+Dazu wurde der Alphawert einer Transfertextur genutzt, um das Rauschen in der Umgebung des Gehirns zu entfernen und die Gehirnform eindeutiger herauszustellen. Dies führt allerdings auch zu Artefakten, dem sogenannten Holzmaserungseffekt. Da allerdings die Darstellung der inneren Strukturen des Gehirns im Vordergrund steht, wurde sich für eine Darstellung entschieden, die durch Reduzierung der Umgebung den Fokus auf das Gehirn erlaubt. 
+Im Abbildung \ref{img:results} sind die beiden Datensätze mit und ohne die Verwendung einer Transferfunktion abgebildet. 
+Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualität des Renderings auswirkt. Die vorgegebenen Datensätze des Gehirns wiesen ein hohes Maß an Bildrauschen auf. Außerdem wurden die Schichten offenbar in in Abständen solcher Größe gescannt, dass die Interpolation zwischen den Schichten Aktefakte ausweist. Auch dies in in Abbildung \ref{img:results} zu sehen.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/hololens2D.jpg}
+	\caption{Rendering der zur Verfügung gestellten Datensätze durch den in mARt verwendeten Shader. a) Datensatz 1 ohne Transferfunktion, Intensität: XY. b) Datensatz 1 mit Transferfunktion, Intensität: XY. c) Datensatz 2 ohne Transferfunktion, Intensität: XY d) Datensatz 2 mit Transferfunktion, Intensität: XY}
+	\label{img:result}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+  
+Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerendert. Das Ergebnis ist dabei von besserer Qualität als mit den Gehirndaten. Die Verwendung der Transferfunktion ist nicht notwendig, um die Darstellung deutlicher zu machen. Durch Manipulation der Intensität kann bestimmt werden, in welcher Tiefe das Gewebe gerendert werden soll. In Abbildung \ref{img:resultsVisMale} ist der Datensatz eines Kopfes mit und ohne sowie mit verschiedener Intensität dargestellt.
+  
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/hololens2D.jpg}
+	\caption{Rendering eines alternativen Datensatzes durch den in mARt verwendeten Shader. a) Rendering ohne Transferfunktion, Intensität: XY. b) Rendering mit Transferfunktion, Intensität: XY. c) Rendering ohne Transferfunktion, Intensität: yZ.}
+	\label{img:resultsVisMale}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+  
+\section{AR Anwendung}
 Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten teilweise schlecht zu erkennen. Dies betrifft vor allem die 3D-Darstellung. Wie deutlich die Visualisierung ist, hängt von den Lichtverhältnissen ab. In Abbildung \ref{img:ARLicht} ist zu erkennen, wie undeutlich die Daten dargestellt werden und außerdem, wie sich die Helligkeit der Umgebung auf die Darstellung auswirkt. (Abbildung AR?)
 
 -> Artefakte in abhängigkeit zu Daten setzen. \ref{Konzept}
