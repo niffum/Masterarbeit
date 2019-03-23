@@ -44,7 +44,7 @@ U15 & Erfüllt & Nur bei Anzeige eines Datensatzes möglich. Temporäte Manipula
 \midrule 
 U16 & Erfüllt & Die position wird nicht über mehrere Sitzungen hinweg gespeichert.\\
 \midrule 
-U17 & Offen & Nicht umsetzbar durch Abhängigkeit von einem PC.\\
+U17 & Teilweise erfüllt & Die Positionierung wird für die Dauer einer Sitzung gespeichert und wir relativ zum Nutzer gesetzt.\\
 \midrule 
 U18 & Offen & Keine unterschiedlichen Sequenzen standen zur Verfügung.\\
 \midrule 
@@ -57,33 +57,40 @@ U20 & Offen & Datensätze sind in Anwendung integriert.\\
 \end{longtable}
 
 \section{Nutzertest}
+\label{nazuertest}
 
 Um die Verwendung von mARt im Bereich der Schlaganfallbehandlung zu evaluieren wurde ein Nutzertest abgehalten. 
 Dabei wurden sowohl die AR- als auch die VR-Anwendung von einem Neurologen getestet. Anschließend wurde dieser befragt.
 
-Darstellungen waren deutlich genug
-Lage und Größe des Schlaganfalls konnten wurch 3d besser erfasst werden. Die 3d darstellung ist sehr anschaulich und sorgt für Verständniss auch bei Personen, die kein Fachwissen haben. -> Besser als Bildschirm ansicht
--> Use Case 
-Es hat spaß gemacht
-Masken darstellung gut, aber besser verstelltbar
+% VR und AR Vergleich
+Obwohl die beiden Anwendungen von Funktionsumfang und Bedienung her gleich sind, wurde die Nutzung der VR-Anwendung als angenehmer beschrieben. 
+Sie wurde als flüssiger und stabiler wahrgenommen. 
+Dies ist vor allem auf die Verzögerung zurückzuführen, die entsteht, wenn die Inhalte vom Rechner auf die \textit{HoloLens} übertragen werden. Da sie virtuellen Hände sich nicht in Echtzeit mit den realen bewegen, wird das Nutzungserlebnis negativ beeinflusst. 
+Die Verzögerung führte auch dazu, dass Interaktionen teilweise nicht wie erwartet abliefen. 
+Ein weiterer Grund für fehlerhafte Interaktionen ist das eingeschränkte Blickfeld der \textit{HoloLens}. Wie bereits beschrieben wurde, werden Inhalte nur in diesem Blickfeld dargestellt. Der Bereich, in dem die \textit{Leap Motion} die Hände des Nutzers erfasst ist allerdings um einiges größer. Dadurch werden Gesten häufig auch dann registriert, wenn der Nutzer seine Hand außerhalb des eigenen Blickfeldes bewegt. Dies wird verstärkt, durch die Tatsache, dass die \textit{Leap Motion} mit einer Neigung nach unten auf der \textit{HoloLens} angebracht wird, wodurch sich ihr Erfassungsbereich ebenfalls verschiebt.
+Manipulationen, die vermehrt nicht erwartungskonform durchgeführt wurden waren die Skalierung von Ansichten, sowie die Rotation der 3D-Darstellung.
 
-Helligkeit und Kontrast einzeln
+% Schwierigkeiten in der Bedienung 
+Die Schwierigkeiten bei der Bedienung waren teilweise ebenfalls in der VR-Anwendung festzustellen. Grundsätzlich war die Darstellung Reaktion des Programmes zwar stabiler, einzelne Interaktionen, wie das Verschieben von Schiebereglern funktionierten allerdings nicht immer entsprechend der Erwartung des Nutzers, sodass dieser mehrfach für eine Interaktion ansetzen musste. 
+Diese Fälle ließen sich allerdings kaum verlässlich reproduzieren und sich wahrscheinlich auf die \textit{Leap Motion} Technologie zurückzuführen.
 
-AR: Lag, vor allem bei Händen, 
-Teilweise nicht nachvollziehbar, ob/warum interaktion nicht geht (skalierung, drehen)
-schwieriger als ar
+Ein großer Kritikpunkt beider HMDs war außerdem der mangelnde Tragekomfort. Durch den Aufbau und das Gewicht der Brillen war das Tragen dieser für den Tester überaus unangenehm. 
 
+Weiterhin wurden Anmerkungen zu sinnvollen bzw. notwendigen Erweiterungen der Anwendungen gemacht.
+Beispielsweise könnte dem Nutzer Rückmeldung gegeben werden, wenn eine Darstellung mit beiden Händen gegriffen wurde, sodass es ihm leichter fällt eine Skalierung nachzuvollziehen.
+Die in Kapitel \ref{konzept} beschriebene Gammakorrektur, wurde für die Untersuchung der Daten nicht als ausreichend angesehen. Stattdessen müssten Helligkeit und Kontrast separat voneinander manipulierbar sein, da Datensätze in unterschiedlichen Wertebereichen vorliegen können. 
+Schließlich wurde durch den Tester angemerkt, dass obwohl für diesen Prototyp nur das Scrollen in einer Richtung für die 2D-Darstellung gefordert war, die Betrachtung der Daten aus verschiedenen Blickwinkeln für einen realen Einsatz unabdingbar sei. Dies gilt für mehrere Manipulationsmöglichkeiten, wie die Beeinflussung von Farbe und Opazität der gekennzeichneten Schlaganfallbereichs.
+
+Über die vorhandenen Bedienmöglichkeiten sagte der Tester aus, dass sie leicht verständlich und schnell erlernbar waren, was teilweise dem eingeschränkten Umfang der Anwendung zuzuschreiben ist.
 Besonders positiv aufgefallen ist die Platzierung von Bedienelementen im ausklappbaren Handmenü, welches bestimmte Optionen verbirgt bis der Nutzer beschließt den Fokus auf diese zu legen. Dabei wurde angemerkt, dass das Menü mit mehr Optionen ausgebaut werden könnte. 
 
-leichter/ intuitiver zu bedienen, was allerdings auch dem eingaschränkten umfang der Anwendung zuzuschreiben ist
+Die Anwendung wurde im Allgemeinen als positiv aufgenommen. 
+Die Darstellung der Daten wurde als deutlich genug eingeschätzt, um eine Untersuchung und Diagnose durchzuführen. 
+Vor allem die dreidimensionale Darstellung der MRT-Daten im Raum wurde als sehr anschaulich beschrieben. Der Tester hatte den Eindruck, dass das Verständnis der angezeigten Daten, insbesondere von Lage und Größe des vom Schlaganfall betroffenen Bereichs, im Vergleich zur Darstellung auf einem Bildschirm verbessert wird. Die direkte Interaktion mit der Darstellung, wie die Rotation durch Greifen verstärkt diesen Effekt zusätzlich. Dadurch kann die aktuelle Situation auch Personen ohne Fachwissen begreiflich vermittelt werden. 
+Die Verwendung von mARt beschrieb der Tester weiterhin als unterhaltsam und interessant.
 
-Zukünftige Verbesserungen:
-3 Ebenen in 2d Ansicht (nicht frei wählbar)
-
-Ein großer Kritikpunkt war der mangelnde Tragekomfort beider HMDs. Durch den Aufbau und das Gewicht der Brillen war das Tragen dieser für den Tester überaus unangenehm. 
-Genau wie andere bereits genannte Problematiken wird sich diese voraussichtlich mit der stetigen Weiterentwicklung der Technologien in der Zukunft beheben.
-
-Ergebnisse
+\todo{Weglassen?}
+Es wurde allerdings auch betont, dass ein Einsatz von mARt im derzeitigen Zustand nicht realistisch ist und dass es die Funktion von derzeitigen Viewern nicht ersetzten kann. Gleichzeitig wurde aber das Potenzial der Anwendung hervorgehoben sowie die Vielzahl an Anwendungsfällen für die eine AR-Anwendung, wie mARt sinnvoll wäre. 
 
 \section{Auswertung}
 % Was ist besser als vorher? Warum?
