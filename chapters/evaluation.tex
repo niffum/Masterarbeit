@@ -6,51 +6,51 @@
 
 \section{Vergleich mit Anforderungen}
 
-Zunächst werden in der folgenden Tabelle \ref{tab:evaluation} die implementierten Funktionen von mARt mit den in Kapitel \ref{anforderung} aufgestellten Anforderungen abgeglichen. Die Anforderung ist dabei über die entsprechende User Story referenziert. Dazu ist angegeben, inwiefern die Anforderung erfüllt wurde, so wie eventuelle Anmerkungen. 
+Zunächst werden in der folgenden Tabelle \ref{tab:evaluation} die implementierten Funktionen von mARt mit den in Kapitel \ref{anforderung} aufgestellten Anforderungen abgeglichen. Die Anforderung ist dabei über die entsprechende User Story referenziert. Zusätzlich wird diese stichwortartig beschrieben, um den Inhalt der Story wiederzugeben. Dazu ist angegeben, inwiefern die Anforderung erfüllt wurde, so wie eventuelle Anmerkungen. 
 
-\begin{longtable} {p{.125\textwidth}p{.225\textwidth}p{.60\textwidth}}
+\begin{longtable} {p{.125\textwidth}p{.2\textwidth}p{.07\textwidth}p{.5\textwidth}}
 \toprule
-User Story & Erfüllung & Anmerkungen \\
+User Story & Stichwort & Status & Anmerkungen \\
 \toprule
-U01 & Erfüllt & Die Darstellung der Daten ist zu großen Teilen abhängig von diesen selbst. Die Darstellung in AR ist abhängig von den Lichtverhältnissen.\\
+U01 & Gut erkennbare Abbildung & Erfüllt & Die Darstellung der Daten ist zu großen Teilen abhängig von diesen selbst. Die Darstellung in AR ist abhängig von den Lichtverhältnissen.\\
 \midrule 
-U02 & Erfüllt & Die Betrachtung aus einem Winkel ist möglich.\\
+U02 & 2D-Darstellung der Daten aus min. einem Blickwinkel & Erfüllt & Die Betrachtung aus einem Blickwinkel ist möglich.\\
 \midrule 
-U03 & Erfüllt & \\
+U03 & 3D-Darstellung & Erfüllt & \\
 \midrule 
-U04 & Erfüllt & Die Anzahl der angezeigten Datensätze ist auf zwei beschränkt.\\
+U04 & Min. zwei Datensätze anzeigen & Erfüllt & Die Anzahl der angezeigten Datensätze ist auf zwei beschränkt.\\
 \midrule 
-U05 & Erfüllt & Die Daten, aus denen der Nutzer wählen kann sind fest in das Programm integriert und es kann nur aus zwei Datensätzen gewählt werden.\\
+U05 & Datensätze auswählen & Erfüllt & Die Daten, aus denen der Nutzer wählen kann sind fest in das Programm integriert und es kann nur aus zwei Datensätzen gewählt werden.\\
 \midrule
-U06 & Erfüllt erfüllt & Maximal zwei Darstellungen können gleichzeitig manipuliert werden. \\
+U06 & optionale gleichgeschaltete Manipulation & Erfüllt erfüllt & Maximal zwei Darstellungen können gleichzeitig manipuliert werden. \\
 \midrule 
-U07 & Erfüllt & Die zweidimensionale Darstellung kann auf einer Achse verändert werden. Die dreidimensionale auf drei.\\
+U07 & Scrolling auf min. einer Achse & Erfüllt & Die zweidimensionale Darstellung kann auf einer Achse verändert werden. Die dreidimensionale auf drei.\\
 \midrule 
-U08 & Offen & \\
+U08 & Scrollen mit Scrollrad & Offen & \\
 \midrule 
-U09 & Erfüllt & \\
+U09 & Wechsel von 2D- und 3D-Darstellung & Erfüllt & \\
 \midrule 
-U10 & Teilweise erfüllt & Manipulationen außer Skalierung und Rotation werden übernommen, sofern der Wert in beiden Szenarien existiert.\\
+U10 & Übertragung der Manipulationen & Teilweise erfüllt & Manipulationen außer Skalierung und Rotation werden übernommen, sofern der Wert in beiden Szenarien existiert.\\
 \midrule 
-U11  & Erfüllt & \\
+U11  & Ein- und Ausblenden des markierten Bereichs & Erfüllt & \\
 \midrule
-U12 & Erfüllt & Eine Manipulation der Maske würde dem Nutzer eine Anpassung erlauben, wurde jedoch nicht umgesetzt.\\
+U12 & Erkennbare Strukturen bei Einblendung & Erfüllt & Eine Manipulation der Maske würde dem Nutzer eine Anpassung erlauben, wurde jedoch nicht umgesetzt.\\
 \midrule 
-U13 & Erfüllt & \\
+U13 & 3D-Darstellung drehen & Erfüllt & \\
 \midrule 
-U14 & Erfüllt & \\
+U14 & Manipulation von Helligkeit und Kontrast & Erfüllt & \\
 \midrule 
-U15 & Erfüllt & Nur bei Anzeige eines Datensatzes möglich. Temporäte Manipulation.\\
+U15 & Skalierung der Darstellungen & Erfüllt & Nur bei Anzeige eines Datensatzes möglich. Temporäte Manipulation.\\
 \midrule 
-U16 & Erfüllt & Die position wird nicht über mehrere Sitzungen hinweg gespeichert.\\
+U16 & Positionierung der Darstellung & Erfüllt & Die position wird nicht über mehrere Sitzungen hinweg gespeichert.\\
 \midrule 
-U17 & Teilweise erfüllt & Die Positionierung wird für die Dauer einer Sitzung gespeichert und wir relativ zum Nutzer gesetzt.\\
+U17 & Beibehalten der Position & Teilweise erfüllt & Die Positionierung wird für die Dauer einer Sitzung gespeichert und wir relativ zum Nutzer gesetzt.\\
 \midrule 
-U18 & Offen & Keine unterschiedlichen Sequenzen standen zur Verfügung.\\
+U18 & Auswahl von Scans & Offen & Keine unterschiedlichen Sequenzen standen zur Verfügung.\\
 \midrule 
-U19 & Offen & Datensätze sind in Anwendung integriert.\\
+U19 & Unterstützung des NIfTI-Formats & Offen & Datensätze sind in Anwendung integriert.\\
 \midrule 
-U20 & Offen & Datensätze sind in Anwendung integriert.\\
+U20 & Unterstützung des DICOM-Formats & Offen & Datensätze sind in Anwendung integriert.\\
 
 \bottomrule
 \caption{\label{tab:evaluation}Erfüllung der Anforderungen.}
