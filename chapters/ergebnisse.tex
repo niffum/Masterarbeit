@@ -1,12 +1,13 @@
 % Ergebnisse
 
 
-\chapter{Ergebnisse}
+%\chapter{Ergebnisse}
+\section{Ergebnisse}
 \label{ergebnisse}
 
 \todo{Eigenes kapitel? P}
 
-Das Ergebnis der Implementierung ist eine aus mehreren \textit{Unity} Szenen bestehendes \textit{Unity} Projekt, mit \todo{Code zählen} Zeilen Code. 
+Das Ergebnis der Implementierung ist eine aus mehreren \textit{Unity} Szenen bestehendes \textit{Unity} Projekt.
 Die Vr- und AR-Anwendungen bestehen jeweils aus zwei Szenen, eine für die zwei-, eine für die dreidimensionale Darstellung sowie einer Startszene Preload.unity, in der ein GameObject namens appState liegt, über das bestimmt werden kann, welche Szene zuerst geladen werden soll. In diesem Objekt werden auch die Zustände der Szenen gespeichert und so Manipulationen übertragen.
 Die Szenen für die 2D-Darstellung heißen main\_2D.unity und main\_2D\_AR.unity. Die für die 3D-Darstellung main\_3D.unity und main\_3D\_AR.unity.
 
@@ -17,7 +18,7 @@ Die Interaktionslemente wurden bereits in Kapitel \ref{konzept} beschrieben und 
 Screenshots
 beschreibung der Anwendung
 
-\section{3D Darstellung}
+\subsection{3D Darstellung}
 
 In Kapitel \ref{implementierung} wurde erläutert, wie die 3D-Darstellung mit Hilfe von Volume Raycasting erzeugt wurde. 
 Dazu wurde der Alphawert einer Transfertextur genutzt, um das Rauschen in der Umgebung des Gehirns zu entfernen und die Gehirnform eindeutiger herauszustellen. Dies führt allerdings auch zu Artefakten, dem sogenannten Holzmaserungseffekt. Da allerdings die Darstellung der inneren Strukturen des Gehirns im Vordergrund steht, wurde sich für eine Darstellung entschieden, die durch Reduzierung der Umgebung den Fokus auf das Gehirn erlaubt. 
@@ -44,7 +45,7 @@ Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerend
 \end{figure}
 \FloatBarrier
   
-\section{AR Anwendung}
+\subsection{AR Anwendung}
 Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten teilweise schlecht zu erkennen. Dies betrifft vor allem die 3D-Darstellung. Wie deutlich die Visualisierung ist, hängt von den Lichtverhältnissen ab. In Abbildung \ref{img:ARLicht} ist zu erkennen, wie undeutlich die Daten dargestellt werden und außerdem, wie sich die Helligkeit der Umgebung auf die Darstellung auswirkt. (Abbildung AR?)
 
 -> Artefakte in abhängigkeit zu Daten setzen. \ref{Konzept}

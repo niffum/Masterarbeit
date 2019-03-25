@@ -30,8 +30,8 @@ Während ein Patient sich in einem MRT-Scanner befindet, können die MRT-Bilder 
 \end{figure}
 \FloatBarrier
 
-Der Einsatz von AR-Anwendungen während einer Operation wurde auch von anderen Arbeiten untersucht.
-Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle Visualisierung der Bilddaten wurden von \cite{grimson99} beschrieben. Einen Überblick über Techniken, die bildgestützte Operationen ermöglichen, liefern \cite{KerstenOertel2013TheSO}.
+Der Einsatz von AR-Anwendungen während einer Operation wird auch von anderen Arbeiten untersucht.
+Die Vorgehensweise zur Entwicklung einer solchen Anwendung, sowie die sinnvolle Visualisierung der Bilddaten werden von \cite{grimson99} beschrieben. Einen Überblick über Techniken, die bildgestützte Operationen ermöglichen, liefern \cite{KerstenOertel2013TheSO}.
 
 \cite{Wendt03}, \cite{Maurer01} sowie \cite{fuchs98} entwickeln eine AR-Anwendung für ein tragbares Display, die MRT-Bilder bzw. Bilder einer Laparoskopie bei Eingriffen auf den Patienten projiziert. Die Anwendungen der ersten beiden Arbeiten wurden mit Bildern des Gehirns an einem Kopfphantom getestet.
 
@@ -628,7 +628,7 @@ Zurzeit gibt es verschiedene AR-Systeme auf dem Markt, die sich teilweise in ihr
 Smartphones oder Tablets können, wie bereits erwähnt als Fenster in die erweiterte Realität dienen. Das Gerät benötigt dazu lediglich eine Kamera. Es gibt verschiedene SDKs und Frameworks zur Entwicklung von AR-Apps. Dazu gehören unter anderem \textit{ARKit} von \cite{arKit}, \textit{ARCore} von \cite{ARCore} und \textit{Vuforia} von \cite{vuforia}.
 
 Zu den binokularen HMDs zählen HMDs, die vor jedem Auge des Nutzers einen Bildschirm platzieren und so stereoskopisch dreidimensionale Inhalte simulieren. Im AR-Bereich sind dabei die \textit{HoloLens} von \cite{hololens} sowie die \textit{Magic Leap One} von \cite{magicLeap} nennenswerte Vertreter der Technologie. Beide Geräte haben durchsichtige Bildschirme und können unabhängig von einem Computer verwendet werden. 
-Der Bildschirm nimmt dabei allerdings nur einen Teil des Blickfeldes des Nutzers ein. Dies führt zu dem Effekt, dass der Nutzer die augmentierten Inhalte wie durch ein Fenster sieht, sodass sie häufig teilweise abgeschnitten sind. Auf diese Problematik wird im Kapitel \ref{ergebnisse} eingegangen. 
+Der Bildschirm nimmt dabei allerdings nur einen Teil des Blickfeldes des Nutzers ein. Bei der \textit{HoloLens} beträgt das Sichtfeld 30°x17,5° \cite{hololensFOV}. Dies führt zu dem Effekt, dass der Nutzer die augmentierten Inhalte wie durch ein Fenster sieht, sodass sie häufig teilweise abgeschnitten sind. Auf diese Problematik wird im Kapitel \ref{ergebnisse} eingegangen. 
 
 An dieser Stelle sollen auch VR-Geräte, wie die \textit{HTC Vive Pro} (Vive Pro) von \cite{vivePro} genannt werden, die durch ihre eingebaute Kamera auch die Umgebung auf ihren Bildschirmen darstellen kann. Diese kann dabei auch mit virtuellen Inhalten angereicherts werden. 
 mARt ist wie im Kapitel \ref{konzept} beschrieben für ein HMD konzipiert.
@@ -815,7 +815,7 @@ Das \textit{Vive}-System wird primär durch entsprechende Controller gesteuert. 
 
 Die \textit{Leap Motion} von \cite{leapMotion} ist ein externes Gerät, dass die Hände des Nutzers verfolgt und die genauen Handbewegungen über ein Kabel an einen Computer übermittelt. 
 Um die Informationen zu sammeln, ist die \textit{Leap Motion} mit drei Infrarotemittern und zwei Kameras ausgestattet (vgl. \cite{Weichert13}). Das Gerät wird über USB an einen Rechner angeschlossen und kann als unabhängiges Eingabemedium verwendet werden. Allerdings ist auch eine Verwendung in Kombination mit AR- oder VR-Systemen möglich. 
-Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers nachzuempfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. 
+Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers nachzuempfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. Das Gerät erfasst dabei Bewegungen in einem Bereich von 150°x120° \cite{leapFOV}.
 Wie in Kaptel \ref{konzept} erläutert wird, wird die die \textit{Leap Motion} mit einem HMD kombiniert, um dem Nutzer die Möglichkeit zu geben mARt mit seinen Händen zu steuern.
 
 

@@ -4,7 +4,7 @@
 \chapter{Evaluation}
 \label{evaluation}
 
-\section{Vergleich mit Anforderungen}
+\section{Erfüllung der Anforderungen}
 
 Zunächst werden in der folgenden Tabelle \ref{tab:evaluation} die implementierten Funktionen von mARt mit den in Kapitel \ref{anforderung} aufgestellten Anforderungen abgeglichen. Die Anforderung ist dabei über die entsprechende User Story referenziert. Zusätzlich wird diese stichwortartig beschrieben, um den Inhalt der Story wiederzugeben. Dazu ist angegeben, inwiefern die Anforderung erfüllt wurde, so wie eventuelle Anmerkungen. 
 
@@ -20,11 +20,11 @@ U03 & 3D-Darstellung & Erfüllt & \\
 \midrule 
 U04 & Min. zwei Datensätze anzeigen & Erfüllt & Die Anzahl der angezeigten Datensätze ist auf zwei beschränkt.\\
 \midrule 
-U05 & Datensätze auswählen & Erfüllt & Die Daten, aus denen der Nutzer wählen kann sind fest in das Programm integriert und es kann nur aus zwei Datensätzen gewählt werden.\\
+U05 & Datensätze auswählen & Erfüllt & Der Nutzer kann aus zwei Datensätzen auswählen, die Teil der Anwendung sind.\\
 \midrule
 U06 & optionale gleichgeschaltete Manipulation & Erfüllt erfüllt & Maximal zwei Darstellungen können gleichzeitig manipuliert werden. \\
 \midrule 
-U07 & Scrolling auf min. einer Achse & Erfüllt & Die zweidimensionale Darstellung kann auf einer Achse verändert werden. Die dreidimensionale auf drei.\\
+U07 & Scrolling auf min. einer Achse & Erfüllt & Die 2D-Darstellung kann auf der z-Achse durchlaufen werden. Dabei wird immer eine Schicht angezeigt. In der 3D-Darstellung können durch drei Ebenen Querschnitte im Volumen verschoben werden.\\
 \midrule 
 U08 & Scrollen mit Scrollrad & Offen & \\
 \midrule 
@@ -40,9 +40,9 @@ U13 & 3D-Darstellung drehen & Erfüllt & \\
 \midrule 
 U14 & Manipulation von Helligkeit und Kontrast & Erfüllt & \\
 \midrule 
-U15 & Skalierung der Darstellungen & Erfüllt & Nur bei Anzeige eines Datensatzes möglich. Temporäte Manipulation.\\
+U15 & Skalierung der Darstellungen & Erfüllt & Nur bei Anzeige eines Datensatzes möglich. Temporäre Manipulation.\\
 \midrule 
-U16 & Positionierung der Darstellung & Erfüllt & Die position wird nicht über mehrere Sitzungen hinweg gespeichert.\\
+U16 & Positionierung der Darstellung & Erfüllt & Die Position wird nicht über mehrere Sitzungen hinweg gespeichert.\\
 \midrule 
 U17 & Beibehalten der Position & Teilweise erfüllt & Die Positionierung wird für die Dauer einer Sitzung gespeichert und wir relativ zum Nutzer gesetzt.\\
 \midrule 
@@ -65,9 +65,9 @@ Dabei wurden sowohl die AR- als auch die VR-Anwendung von einem Neurologen getes
 % VR und AR Vergleich
 Obwohl die beiden Anwendungen von Funktionsumfang und Bedienung her gleich sind, wurde die Nutzung der VR-Anwendung als angenehmer beschrieben. 
 Sie wurde als flüssiger und stabiler wahrgenommen. 
-Dies ist vor allem auf die Verzögerung zurückzuführen, die entsteht, wenn die Inhalte vom Rechner auf die \textit{HoloLens} übertragen werden. Da sie virtuellen Hände sich nicht in Echtzeit mit den realen bewegen, wird das Nutzungserlebnis negativ beeinflusst. 
-Die Verzögerung führte auch dazu, dass Interaktionen teilweise nicht wie erwartet abliefen. 
-Ein weiterer Grund für fehlerhafte Interaktionen ist das eingeschränkte Blickfeld der \textit{HoloLens}. Wie bereits beschrieben wurde, werden Inhalte nur in diesem Blickfeld dargestellt. Der Bereich, in dem die \textit{Leap Motion} die Hände des Nutzers erfasst ist allerdings um einiges größer. Dadurch werden Gesten häufig auch dann registriert, wenn der Nutzer seine Hand außerhalb des eigenen Blickfeldes bewegt. Dies wird verstärkt, durch die Tatsache, dass die \textit{Leap Motion} mit einer Neigung nach unten auf der \textit{HoloLens} angebracht wird, wodurch sich ihr Erfassungsbereich ebenfalls verschiebt.
+Dies ist vor allem auf die Latenz zurückzuführen, die entsteht, wenn die Inhalte vom Rechner auf die \textit{HoloLens} übertragen werden. Da die virtuellen Hände sich nicht in Echtzeit mit den realen bewegen, wird das Nutzungserlebnis negativ beeinflusst. 
+Die Latenz führte auch dazu, dass Interaktionen teilweise unerwartet oder gar nicht ausgelöst wurden. 
+Ein weiterer Grund für fehlerhafte Interaktionen ist das eingeschränkte Blickfeld der \textit{HoloLens} (30°x17,5°). Wie bereits beschrieben wurde, werden Inhalte nur in diesem Blickfeld dargestellt. Der Bereich, in dem die \textit{Leap Motion} die Hände des Nutzers erfasst ist allerdings um einiges größer (150°x120°). Dadurch werden Gesten häufig auch dann registriert, wenn der Nutzer seine Hand außerhalb des eigenen Blickfeldes bewegt. Dies wird verstärkt, durch die Tatsache, dass die \textit{Leap Motion} mit einer Neigung nach unten auf der \textit{HoloLens} angebracht wird, wodurch sich ihr Erfassungsbereich ebenfalls verschiebt.
 Manipulationen, die vermehrt nicht erwartungskonform durchgeführt wurden waren die Skalierung von Ansichten, sowie die Rotation der 3D-Darstellung.
 
 % Schwierigkeiten in der Bedienung 
@@ -90,7 +90,7 @@ Vor allem die dreidimensionale Darstellung der MRT-Daten im Raum wurde als sehr 
 Die Verwendung von mARt beschrieb der Tester weiterhin als unterhaltsam und interessant.
 
 \todo{Weglassen?}
-Es wurde allerdings auch betont, dass ein Einsatz von mARt im derzeitigen Zustand nicht realistisch ist und dass es die Funktion von derzeitigen Viewern nicht ersetzten kann. Gleichzeitig wurde aber das Potenzial der Anwendung hervorgehoben sowie die Vielzahl an Anwendungsfällen für die eine AR-Anwendung, wie mARt sinnvoll wäre. 
+Es wurde allerdings auch betont, dass ein Einsatz von mARt im derzeitigen Zustand nicht realistisch ist und dass es die Funktion von derzeitigen Viewern nicht ersetzten kann. Gleichzeitig wurde aber das Potenzial der Anwendung hervorgehoben sowie die Vielzahl an Anwendungsfällen für die eine AR-Anwendung, wie mARt sinnvoll wäre, die auch in Abschnitt \ref{motivation} genannt wurden. 
 
 \section{Auswertung}
 % Was ist besser als vorher? Warum?

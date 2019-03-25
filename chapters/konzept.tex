@@ -32,14 +32,13 @@ Weiterhin sind sind nur die Pixel relevant, die das Gehirn darstellen. Der Berei
 
 Die Anforderungen sprechen gegen eine Umsetzung, die eine Oberfläche des Gehirns erzeugt und es als Mesh darstellt. Die Form des Gehirns könnte dadurch deutlich gezeigt werden und das Objekt würde von den umgebenden Pixeln getrennt werden. 
 Allerdings handelt es sich bei dem Gehirn nicht um eine Hülle sondern eine Masse. Es ist unwahrscheinlich, dass ein Verfahren wie Marching Cubes die inneren Gehirnstrukturen exakt genug wiedergeben könnte, damit ein Neurologe sinnvolle Schlüsse daraus ziehen kann. Die binäre Aufteilung der Voxel kann außerdem dazu führen, dass Teile des Gehirn fehlerhafter Weise nicht angezeigt werden. Weiterhin müsste das Mesh in Echtzeit kontinuierlich angepasst werden, wenn der Nutzer durch die verschiedenen Schichten scrollt. 
-Deshalb eignet sich eine Oberflächengenerieurung nicht zur Visualisierung.
+Deshalb eignet sich eine Oberflächengenerierung nicht zur Visualisierung.
 Hinzu kommt, dass in den Anforderungen kein Anwendungsfall beschrieben wird, der eine Oberfläche erfordert, wie z.B. die Berechnung einer Kollision des Gehirns mit einem anderen Objekt.	
 	
 Die dreidimensionale Darstellung lässt sich demnach besser mit einer Volume Rendering Methode umsetzten.  
 In Kapitel \ref{grundlagen} wurden die verschiedenen Volume Rendering Techniken miteinander verglichen.
 Die Visualisierung der MRT-Daten wurde im Rahmen dieser Arbeit mit den Volume Raycasting Verfahren umgesetzt.
-
-Das Raycasting Verfahren liefert im Vergleich meist die beste Bildqualität. Es ist daher auch weit verbreitet bei der Implementierung von Volume Rendering Software, wie in Abschnitt \ref{volumeRenderingImplementierung} gezeigt wurde. 
+Das Raycasting Verfahren liefert die beste Bildqualität, wie aus dem Vergleich hervorgeht. Es ist daher auch weit verbreitet bei der Implementierung von Volume Rendering Software, wie in Abschnitt \ref{volumeRenderingImplementierung} gezeigt wurde. 
 Die verschiedenen Implementierungen können zur Orientierung und als Referenz für die eigene Umsetzung verwendet werden.
 Die Technik lässt sich außerdem gut durch einen Fragment-Shader realisieren. Damit eignet sie sich von den vorgestellten Methoden am meisten zur Implementierung mit \textit{Unity}. 
 Das für Texture-Based Rendering benötigte Texture Slicing und Mapping ist in der Umsetzung nicht trivial und die Ergebnisse des Verfahrens rechtfertigen diesen Aufwand nicht.
@@ -208,7 +207,7 @@ Um zu verhindern, dass zwei Darstellungen sich durch die Sklalierung unterscheid
 Das Vergrößern ist dabei als temporäre Manipulation konzipiert. Wenn der Nutzer einen zweiten Datensatz zur Visualisierung auswählt, wird der erste auf seine ursprüngliche Größe zurück gesetzt. Die Skalierung wird auch nicht in in die andere Szene übertragen, wenn der Nutzer zwischen 2D und 3D wechselt. Dies kann dem Nutzer auch als bewusstes Zurücksetzten dienen, falls er die Skalierung beispielsweise versehentlich übertrieben hat.
 
 % Verschieben
-Die User Storiy \textbf{U16} fordert die Möglichkeit die Darstellung verschieben zu können. %Ersteres beschreibt dabei die Verschiebung im Raum, zweiteres eine Verschiebung der Darstellung. 
+Die User Story \textbf{U16} fordert die Möglichkeit die Darstellung verschieben zu können. %Ersteres beschreibt dabei die Verschiebung im Raum, zweiteres eine Verschiebung der Darstellung. 
 %Die beiden interaktionen wurden zu einer zusammen gefasst. 
 Über den Bedienelementen einer Ansicht wird jeweils ein greifbares Objekt platziert. Durch das Greifen, Ziehen und Loslassen des Objektes kann der Nutzer die gesamte Darstellung verschieben. %Damit ist die Positionierung im Raum abgedeckt. 
 Vergrößert der Nutzer eine Darstellung kann er dieselbe Verschiebung nutzen, um sich darin zu orientieren. 
@@ -251,8 +250,7 @@ Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden
  
 Die Bedienung der entsprechenden Interaktionselemente sollte trotzdem intuitiv und schnell umzusetzen sein. Da die Option der Synchronizität abhängig ist von der Tatsache, ob ein oder mehrere Datensätze angezeigt werden, stehen die beiden Aktionen in Verbindung zu einander und werden deshalb in einem Menü vereint, das für beide Darstellungen verwendet wird. Dieses wird an der linken Hand des Nutzers verankert. Auf diese Weise kann es immer schnell erreicht werden und wird nicht unbeabsichtigt aus den Augen verloren. Gleichzeitig fördert es die Immersion der Anwendung, da der Nutzer quasi Teil von ihr wird. Ein Effekt, der in einer Bildschirmanwendung nicht umsetzbar wäre. 
 
-Damit das Menü nicht während der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. \textit{Leap Motion} bietet bereits Beispielcode, der dies umsetzt.
-\todo{? Leap Motion Beispiel erwähnen? P}
+Damit das Menü nicht während der Verarbeitung der Bilder stört, wird es nur dann eingeblendet, wenn der Nutzer seine Handfläche Richtung Kamera dreht und diese somit ansieht. Das \textit{Leap Motion} SDK bietet eine Beispielszene, die dies umsetzt.
 Eine besondere Herausforderung bei der Konzeption des Menüs ist es, dieses möglichst einfach und platzsparend zu halten. Der Bereich der \textit{Leap Motion} Kamera, in dem die Hände erkannt werden ist beschränkt. Deshalb kann es bei einer Interaktionsfläche, die viel Raum davon einnimmt dazu kommen, dass der Nutzer versehentlich Knöpfe betätigt. 
 Um den Umfang des Menüs in benutzbaren Dimensionen zu halten, wurde es auf drei Knöpfe reduziert. 
 Die Liste der verfügbaren Datensätze kann darin allerdings nicht untergebracht werden. Deshalb kann sie bei Bedarf über einen der Knöpfe ausgeklappt werden. 
