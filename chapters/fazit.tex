@@ -53,9 +53,9 @@ Allerdings stellt das Volume Rendering für sich einen eigenen Forschungsbereich
 
 Zum einen wurde als Rendering Verfahren das Volume RayCasting gewählt, da es sehr gute Ergebnisse liefert. Je nach dem in welche Richtung sich zukünftige Arbeiten entwickeln ist es allerdings sinnvoll weitere Verfahren zu testen, die beispielsweise weniger rechenintensiv sind. 
 Weiterhin wurde zwar eine Transferfunktion verwendet, um das Rauschen der Bilder zu beschränken allerdings ist diese nicht für jeden Datensatz optimal und es wird lediglich ihr Alphawert genutzt. 
-Idealer Weise sollte dem Nutzer die Möglichkeit gegeben werden die Transferfunktion zu beeinflussen, wie es in Kapitel \ref{konzept} bereits erläutert wurde. Dies würde die Darstellungsqualität erhöhen und dem Nutzer zu einem Rendering nach seinen Ansprüchen verhelfen. 
+Idealerweise sollte dem Nutzer die Möglichkeit gegeben werden die Transferfunktion zu beeinflussen, wie es in Kapitel \ref{konzept} bereits erläutert wurde. Dies würde die Darstellungsqualität erhöhen und dem Nutzer zu einem Rendering nach seinen Ansprüchen verhelfen. 
 Um das Rendering plastischer und realer erscheinen zu lassen kann außerdem ein globales Beleuchtungsmodell implementiert werden, wie es in Kapitel \ref{grundlagen} beschrieben ist. 
-Da die Qualität des Renderings von den Bilddaten abhängt, können diese schließlich bereinigt bzw. aufgearbeitet werden. Wie in \ref{ergebnisse} dargelegt wurde, besteht in den gegebenen Datensätzen ein hohes Maß an Rauschen. Dieses könnte auf verschiedenen Wegen herausgefiltert werden, bevor die Bilder gerendert werden. Zudem könnte eine zusätzliche Interpolation vorgenommen werden, die die großen Abstände zwischen den einzelnen Schichten besser überbrückt als es bisher der Fall ist. Damit könnten Bildartefakte reduziert werden. 
+Da die Qualität des Renderings von den Bilddaten abhängt, können diese schließlich bereinigt bzw. aufgearbeitet werden. Wie in Kapitel \ref{ergebnisse} dargelegt wurde, besteht in den gegebenen Datensätzen ein hohes Maß an Rauschen. Dieses könnte auf verschiedenen Wegen herausgefiltert werden, bevor die Bilder gerendert werden. Zudem könnte eine zusätzliche Interpolation vorgenommen werden, die die großen Abstände zwischen den einzelnen Schichten besser überbrückt als es bisher der Fall ist. Damit könnten Bildartefakte reduziert werden. 
 Für die Verbesserung der MRT-Daten könnte beispielsweise maschinelles Lernen eingesetzt werden.
 
 \subsection{Übertragen der Anwendung auf andere Hardware}
@@ -83,12 +83,11 @@ Im vorherigen Abschnitt wurde bereits der Einsatz von maschinellem Lernen zur Ve
 
 \section{Fazit}
 
-Zu Beginn dieser Arbeit wurde
-Die Motivation hinter dieser Arbeit war es zu untersuchen, inwiefern eine interaktive AR-Anwendung die Untersuchung von volumetrischen MRT-Daten verbessern kann. Obwohl der dafür entworfene Prototyp nicht längst nicht den Umfang eines MRT-Viewers abdeckt, konnten Schlüsse über die Möglichkeiten einer solchen Anwendung gezogen werden.
+Die Motivation hinter dieser Arbeit war es zu untersuchen, inwiefern eine interaktive AR-Anwendung die Untersuchung von volumetrischen MRT-Daten verbessern kann. Obwohl der dafür entworfene Prototyp längst nicht den Umfang eines MRT-Viewers abdeckt, konnten Schlüsse über die Möglichkeiten einer solchen Anwendung gezogen werden.
 Der Nutzertest hat gezeigt, dass mARt zu einem besseren Verständnis der Situation führen kann. Dies wird durch die dreidimensionale Darstellung im Raum sowie die direkte Interaktion mit den Daten erreicht.
-Eine AR-Anwendung dieser Art besitzt enormes Potenzial Nutzer in verschiedenen Anwendungsfällen zu unterstützen. Dazu gehört die Arbeit von Neurologen aber auch anderen Ärzten, sowie das Studiums von Medizinstudenten und die Kommunikation mit Patienten. 
+Eine AR-Anwendung dieser Art besitzt enormes Potenzial Nutzer in verschiedenen Anwendungsfällen zu unterstützen. Dazu gehört die Arbeit von Neurologen aber auch anderen Ärzten, sowie das Studium von Medizinstudenten und die Kommunikation mit Patienten. 
 
-Dass AR-Anwendungen wie mARt Alltagsrealität werden, liegt im Moment allerdings noch in einem unbestimmten Zeitpunkt in der Zukunft. 
+Bis AR-Anwendungen wie mARt Alltagsrealität werden bedarf es allerdings noch weiterer Entwicklungen.
 Der derzeitige Stand der AR-Technologie stellt dabei das größte Hindernis dar. Wie in der Arbeit gezeigt werden konnte, ist die Darstellung von Volumendaten ein weitreichend erforschtes Gebiet. Um eine solche Darstellung über ein HMD in einer interaktiven Anwendung zur Verfügung zu stellen, muss dieses drei Voraussetzungen erfüllen:
 
 \begin{itemize}
@@ -99,4 +98,4 @@ Der derzeitige Stand der AR-Technologie stellt dabei das größte Hindernis dar.
 
 All dies trifft momentan nicht auf AR-HMDs wie die \textit{HoloLens} zu. Es ist wahrscheinlich, dass zukünftige Systeme der ständig voranschreitenden Technologie diese Eigenschaften mitbringen werden. 
 Bis dahin gilt es zu untersuchen, was die notwendigen Interaktionen und relevantes Elemente für die jeweiligen Anwendungsfälle sind und wie diese sinnvoll in AR realisiert werden können, damit eine stabile und einsetzbare Anwendung entstehen kann, die das dargelegte Potenzial ausschöpft.
-mARt ist somit der erste Schritt einer Entwicklung, die die Arbeit und Zusammenarbeit von Ärzten, Studenten und Patienten bereichern wird.
+mARt ist somit der erste Schritt einer Entwicklung, um die Arbeit und Zusammenarbeit von Ärzten, Studenten und Patienten zu bereichern.

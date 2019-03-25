@@ -674,14 +674,13 @@ In Abbildung \ref{img:vive} ist ein HMD und die dazugehörigen Controller währe
 %-------------------------------------------------------------
 \section{Verarbeitung von MRT-Daten in der Neurologie}						 %
 %-------------------------------------------------------------
-
-\subsection{Arbeit eines Neurologen}
-Wie bereits in Abschnitt \ref{motivation} erläutert wurde, besteht der Nutzen eines MRTs darin, dass der behandelnde Arzt einen Einblick in die betreffenden Organe (hier das Gehirn) erhält. Dazu studiert er die einzelnen Schichten des Gehirns und sucht nach Anomalien.
-Im Folgenden wird erläutert, wie ein Schlaganfall durch bildgebende Verfahren diagnostiziert wird.
-Der vom Schlaganfall betroffene Bereich des Gehirns wird anschließend vom Arzt auf jeder einzelnen Schicht markiert.
  
 \subsection{Diagnose von Schlaganf\"allen durch bildgebende Verfahren}
 \label{schalganfaelleMRT}
+
+Wie bereits in Abschnitt \ref{motivation} erläutert wurde, besteht der Nutzen eines MRTs darin, dass der behandelnde Arzt einen Einblick in die betreffenden Organe (hier das Gehirn) erhält. Dazu studiert er die einzelnen Schichten des Gehirns und sucht nach Anomalien.
+Im Folgenden wird erläutert, wie ein Schlaganfall durch bildgebende Verfahren diagnostiziert wird.
+Der vom Schlaganfall betroffene Bereich des Gehirns wird anschließend vom Arzt auf jeder einzelnen Schicht markiert.
 
 Laut der \cite{schlaganfall} bezeichnet ein Schlaganfall eine plötzlich auftretende Störung der Gehirnfunktionen durch eine mangelhafte Durchblutung von Gehirnpartien. Die Nerven im Gehirn werden dabei nicht mit genügend Sauerstoff versorgt, was irgendwann zu Beschädigungen des Gehirns führen kann.
 
@@ -702,7 +701,7 @@ Nach der Diagnose wird versucht, das Blutgerinnsel durch Verabreichung von Medik
 % https://www.dicomlibrary.com/meddream/md5/index.html?study=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170
 %Use Cases
 %Bsp
-Um eine Diagnose stellen zu können muss der Arzt die MRT-Bilder eines Patieten genau studieren. Diese Untersuchung der Daten wird digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Anzeigeprogramme, die diesen darstellen können und weiterhin relevante Funktionen bieten. 
+Um eine Diagnose stellen zu können, muss der Arzt die MRT-Bilder eines Patienten genau studieren. Diese Untersuchung der Daten wird digital durchgeführt. Um dem Arzt einen Einblick in den Datensatz zu geben, gibt es spezielle Anzeigeprogramme, die diesen darstellen können und weiterhin Manipulationsmöglichkeiten bieten. 
   
 Wie bereits beschrieben, liegen die MRT-Bilder meist im DICOM- oder NIfTI-Datenformat vor. Um die Dateien öffnen zu können, bedarf es deshalb bestimmter Software. Es stehen viele verschiedene Programme zur Darstellung von MRT-Bildern zur Verfügung und die Auswahl eines Programms hängt meist von der persönlichen Präferenz des Arztes ab. 
 In Krankenhäusern besteht allerdings in der Regel die Situation, dass die Bilder in einem Picture Archiving and Communication System (PACS) gespeichert werden. Dabei handelt es sich um einen Server, der unter anderem medizinische Bilddaten zentral speichert. Die Bilder werden von bildgebenden Verfahren aus z.B. der Radiologie direkt im PACS gespeichert. Von dort aus kann entweder mit speziellen Arbeitsplatzrechnern oder auch mit privaten Computern über den Browser auf die Bilder zugegriffen werden. Dies geschieht dann meistens durch einen entsprechenden Viewer, der in das PACS integriert ist. Die Speicherung und Verteilung von medizinischen Bilddaten ist oft durch den DICOM-Standard geregelt, der im Abschnitt \ref{datenformate} beschrieben wurde.
@@ -710,7 +709,7 @@ In Krankenhäusern besteht allerdings in der Regel die Situation, dass die Bilde
 Die meisten Viewer-Programme für MRT-Bilder, unabhängig davon, ob es sich um PACS-Viewer handelt oder nicht, ähneln sich stark in den Funktionen die sie anbieten und in ihrem Aufbau.
 
 Meist können in mehreren Fenstern verschiedene Ansichten des gleichen oder unterschiedlicher Datensätze geöffnet werden. Jedes Fenster stellt dabei eine Sichtebene dar, die gleichzeitig den Querschnitt durch das Gehirn bildet. Die verschiedenen Sichtebenen können in den anderen Ansichten farblich kodiert eingezeichnet werden, damit der Arzt ein besseres Bild davon bekommt welchen Teil des Gehirns er gerade betrachtet.
-Klassischer Weise werden drei verschiedene Blickwinkel dargestellt, die an den X-, Y- und Z-Achsen ausgerichtet sind. Die Sichtebenen verlaufen dabei orthogonal zur Blickachse. Die Ebenen können entlang der Achsen verschoben werden. Auf diese Weise scrollt der Neurologe durch die verschiedenen Schichten des Gehirns. 
+Üblicherweise werden drei verschiedene Blickwinkel dargestellt, die an den X-, Y- und Z-Achsen ausgerichtet sind. Die Sichtebenen verlaufen dabei orthogonal zur Blickachse. Die Ebenen können entlang der Achsen verschoben werden. Auf diese Weise scrollt der Neurologe durch die verschiedenen Schichten des Gehirns. 
 Bei den drei Ebenen handelt es sich um die Frontal- oder Coronalebene, die das Gehirn in vorne und hinten teilt, die Sagittalebene, die zwischen links und rechts verläuft und die Transversalebene, die eine Teilung zwischen oben und unten bewirkt.  
 Bei dieser Zusammensetzung von Ebenen wird manchmal noch eine vierte Ansicht ergänzt, auf der entweder die Sagittalebene von der anderen Seite abgebildet ist oder durch das Ineinanderschieben der gerade angezeigten Schichten eine annähernd dreidimensionale Darstellung simuliert wird. 
 In Abbildung \ref{img:mrtSoftware} ist die Oberfläche de \textit{OsiriX DICOM Viewers} zu sehen, die beispielhaft die Ansichten zeigt.
@@ -731,17 +730,17 @@ Die Benutzeroberfläche bietet auch einige Interaktionen. Die wichtigsten sind d
 \item [Scrollen durch die einzelnen Bildschichten]\hfill \\
 Dies geschieht in der Regel durch die Auswahl einer der Ansichten und die Betätigung des Mausrads. 
 \item [Einstellen von Kontrast und Helligkeit]\hfill \\
-Dadurch können schlecht sichtbare Strukturen erkennbarer gemacht werden. Das Werkzeug dazu muss in der Taskleiste ausgewählt werden. In einem separaten Fenster können die Werte dann angepasst werden. \todo{Nur kontrast und helligkeit?}
+Dadurch können schlecht sichtbare Strukturen erkennbarer gemacht werden. Das Werkzeug dazu muss in der Taskleiste ausgewählt werden. In einem separaten Fenster können die Werte dann angepasst werden. 
 \item [Heranzoomen]\hfill \\
 Bestimmte Bereiche eines Bildes können vergrößert werden, um sie besser beurteilen zu können.
 \item [Verschieben des Bildausschnitts]\hfill \\
-Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken und in eine Richtung ziehen. Dies ermöglicht es andere Bildteile zu untersuchen, ohne zuerst herauszoomen zu müssen.
+Um über ein vergrößertes Bild zu navigieren, kann der Nutzer dieses anklicken und in eine Richtung ziehen. Dies ermöglicht es andere Bildteile zu untersuchen, ohne zuerst das Bild verkleinern zu müssen.
 \end{description}
 
 Obwohl über die Taskleiste oft noch weitere Optionen zur Verfügung stehen sind diese nicht essenziell zur Untersuchung der Bilder und werden meistens nicht oder nur in geringem Umfang genutzt, wie aus den Interviews mit einem Neurologen hervorging.
 
 Es gibt eine Vielzahl von Viewern dieser Art zum Öffnen oder zur Verarbeitung von MRT-Bildern. Viele davon stehen kostenlos im Internet zur Verfügung. 
-Zu den wahrscheinlich meist verbreitetsten gehören \textit{OsiriX} von \cite{osirix} und \textit{Horos} von \cite{horos}, für das Betriebsystem \textit{macOS} von \cite{macOs}. \cite{radiocafe} stellt außerdem folgende Viewer zum Gebrauch im radiologischen Kontext für andere Betriebssysteme vor: Das kompakte und schnelle Viewerprogramm \textit{RadiAnt} von \cite{radiant}. Weiterhin \textit{Stratovan Pro Surgical 3D} von \cite{prosurgical}, was sich an Chirurgen richtet und \textit{Navegatium DICOM Viewer} von \cite{navegatium}, ein Programm, dass auch als Windows App und somit auch für Tabletts zur Verfügung steht.
+Zu den wahrscheinlich meist verbreitetsten gehören \textit{OsiriX} von \cite{osirix} und \textit{Horos} von \cite{horos}, für das Betriebsystem \textit{macOS} von \cite{macOs}. \cite{radiocafe} stellt außerdem folgende Viewer zum Gebrauch im radiologischen Kontext für andere Betriebssysteme vor: Das kompakte und schnelle Viewerprogramm \textit{RadiAnt} von \cite{radiant}. Weiterhin \textit{Stratovan Pro Surgical 3D} von \cite{prosurgical}, was sich an Chirurgen richtet und \textit{Navegatium DICOM Viewer} von \cite{navegatium}, ein Programm, dass auch als App und somit auch für Tabletts zur Verfügung steht.
 Alle der genannten Viewer besitzen die Funktion aus MRT-Datensätzen auch Volumendarstellungen zu erzeugen.
 
 %-------------------------------------------------------------
@@ -761,9 +760,9 @@ Theoretisch kann jedes System mit jedem Eingabemedium verknüpft werden. Dies is
 %IMMERSION
 
 \paragraph{Controller}
-Zum einen gibt es Controller, die mit dem System zusammen hergestellt werden und die der Nutzer während der Verwendung des Systems in der Hand hält. Im Fall von VR-Systemen sind meistens zwei Controller vorhanden, einer für jede Hand. Diese sind jeweils mit einer Anzahl an Knöpfen oder auch Touchpads versehen, die des Nutzer bedienen kann. Im Aussehen sind sich Controller dieser Art recht ähnlich. In Abbildung \ref{img:VRController} ist der Controller des \textit{HTC Vive} Systems (\textit{Vive}) von \cite{vive} zusehen.
+Zum einen gibt es Controller, die mit dem System zusammen hergestellt werden und die der Nutzer während der Verwendung des Systems in der Hand hält. Im Fall von VR-Systemen sind meistens zwei Controller vorhanden, einer für jede Hand. Diese sind jeweils mit einer Anzahl an Knöpfen oder auch Touchpads versehen, die der Nutzer bedienen kann. Im Aussehen sind sich Controller dieser Art recht ähnlich. In Abbildung \ref{img:VRController} ist der Controller des \textit{HTC Vive} Systems (\textit{Vive}) von \cite{vive} zusehen.
 \todo{Bild einfügen}
-Allerdings existieren auch Systeme für dessen Bedienung nur ein Controller vorgesehen ist. Ein VR-Beispiel ist die \textit{Oculus Go} von \cite{oculus}, ein eigenständiges System für grafisch weniger anspruchsvolle Anwendungen. 
+Allerdings existieren auch Systeme für deren Bedienung nur ein Controller vorgesehen ist. Ein VR-Beispiel ist die \textit{Oculus Go} von \cite{oculus}, ein eigenständiges System für grafisch weniger anspruchsvolle Anwendungen. 
 Auch AR-Systeme, wie die \textit{Magic Leap} von \cite{magicLeap} oder die \textit{HoloLens} besitzen nur einen Controller. Diese haben im Vergleich zu den zuerst genannten VR-Controllern deutlich weniger Eingabemöglichkeiten. Im Falle der \textit{Hololens} handelt es sich um einen flachen Controller, den sich der Nutzer an den Finger steckt. Indem er Druck ausübt, kann er klicken. Daneben wird nur die Position und Rotation des Clickers verfolgt, durch die der Nutzer mit dem System interagieren kann. Das Gerät stellt damit eine von zwei möglichen handgesteuerten Eingabemethoden dar. 
 
 \paragraph{Gesten}
@@ -771,7 +770,6 @@ Die andere ist die Steuerung über Gesten, die vor allem AR-Systeme verwenden.
 Die in den Systemen verbaute Kamera erfasst dabei die Hände des Nutzers in ihrem Blickfeld und erkennt bestimmte Handgesten, auf die dann reagiert wird. 
 Die \textit{HoloLens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Bloom} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
 Die derzeit angekündigte \textit{HoloLens 2} verfügt dagegen über eine Hand-Tracking-Funktionalität, die jede Bewegung der Hände, wie z.B. das Greifen von Objekten erkennt (vgl. \cite{hololens2}). 
-
 Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
 
 
@@ -789,7 +787,7 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 	\centering
 	%https://next.reality.news/news/new-magic-leap-gesture-documentation-offers-insight-into-hands-will-make-its-digital-world-come-alive-0183614/
 	\includegraphics[width=0.7\linewidth]{images/magicleapGestures.jpg}
-	\caption{Handgesten, die die Magic Leap erkennt.}
+	\caption{Handgesten, die die \textit{Magic Leap} erkennt.}
 	\label{img:magicGestures}
 	\source{Übernommen von: https://next.reality.news/news/new-magic-leap-gesture-documentation-offers-insight-into-hands-will-make-its-digital-world-come-alive-0183614/}
 \end{figure}
@@ -807,24 +805,19 @@ Im Fall der \textit{HoloLens} bewegt der Nutzer dadurch nicht nur die virtuelle 
 Sprachsteuerung stellt eine weitere elementare Nutzereingabe der \textit{HoloLens} dar. 
 Die meisten Befehle, wie das Öffnen von Apps und die Navigation durch Menüs in der \textit{HoloLens} können durch Sprachsteuerung gegeben werden. 
 Dies liegt wahrscheinlich an der begrenzten und teilweise umständlichen Steuerung durch Gesten. Da eine Sprachsteuerung von \textit{HoloLens}-Apps vorgesehen ist, können von Entwicklern mit wenig Aufwand eigene Sprachbefehle registriert werden.
-
-Das \textit{Vive}-System wird primär durch entsprechende Controller gesteuert. Die Brille besitzt allerdings auch ein integriertes Mikrofon, durch das Sprachbefehle entgegen genommen werden könnten.
+Das \textit{Vive}-System wird primär durch entsprechende Controller gesteuert. Die Brille besitzt allerdings auch ein integriertes Mikrofon, durch das Sprachbefehle entgegen genommen werden können.
 
 %\paragraph{HMD-Knöpfe}
 %Schließlich besitzen in vielen Fällen auch die HMDs der Systeme Knöpfe oder Räder. Diese dienen allerdings meistens zur Konfiguration des Systems und Steuern z.B. die Lautstärke.
 %Linsenabstand? Capture?
 
-\subsection{Leap Motion}
+\subsection{\textit{Leap Motion}}
 
-Die \textit{Leap Motion} von \cite{leapMotion} ist ein externes Gerät, dass die Hände des Nutzers verfolgt und die genauen Handbewegungen per Kabel an einen Computer übermitteln kann. 
-Um die Informationen zu sammeln, ist die \textit{Leap Motion} mit drei Infrarotemittern und zwei Kameras ausgestattet (vgl. \cite{Weichert13}). Das Gerät wird über USB an einen Rechner angeschlossen und kann dann als unabhängiges Eingabemedium verwendet werden. Allerdings ist auch eine Verwendung in Kombination mit AR- oder VR-Systemen möglich. 
-Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers verlässlich nachzuempfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. 
-
+Die \textit{Leap Motion} von \cite{leapMotion} ist ein externes Gerät, dass die Hände des Nutzers verfolgt und die genauen Handbewegungen über ein Kabel an einen Computer übermittelt. 
+Um die Informationen zu sammeln, ist die \textit{Leap Motion} mit drei Infrarotemittern und zwei Kameras ausgestattet (vgl. \cite{Weichert13}). Das Gerät wird über USB an einen Rechner angeschlossen und kann als unabhängiges Eingabemedium verwendet werden. Allerdings ist auch eine Verwendung in Kombination mit AR- oder VR-Systemen möglich. 
+Die \textit{Leap Motion} schafft es die Handbewegungen des Nutzers nachzuempfinden, sodass die Hände in den digitalen Raum übertragen werden können. Hier kann nun eine Interaktion mit anderen digitalen Objekten stattfinden. 
 Wie in Kaptel \ref{konzept} erläutert wird, wird die die \textit{Leap Motion} mit einem HMD kombiniert, um dem Nutzer die Möglichkeit zu geben mARt mit seinen Händen zu steuern.
 
-\subsection{Interaktionsdesign}
-
-\todo{? Paper zur interaktion finden -> was ist gut zur interaktion inAR warum?}
 
 
 

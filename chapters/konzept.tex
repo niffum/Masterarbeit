@@ -9,7 +9,7 @@ Im folgenden werden Konzepte diskutiert, um die in Kapitel \ref{anforderung} her
 Ziel des Arbeit ist es eine prototypische AR- bzw. VR-Anwendung zur Visualisierung und Untersuchung von MRT-Daten zu implementieren. 
 
 Vor allem im Bereich der Volumendarstellung gibt es bereits viele Programme und Arbeiten, die diese erfolgreich umsetzten, wie im Kapitel \ref{grundlagen} erläutert wurde.
-Wie später beschrieben wird, baut mARt auf einer bereits implementierten Lösung auf. Die Anwendung soll mit der Spiele-Engine \textit{Unity}  implementiert werden, worauf ebenfalls im späteren Kapiteln eingegangen wird. Die Implementierung muss also mit der Software kompatibel sein. In Kapitel \ref{grundlagen} wurde unter anderem die \textit{Unity}-Erweiterung \textit{Volume Viewer Pro} beschrieben, die viele der gestellten Anforderungen bereits abdeckt. Das Programm ist allerdings kostenpflichtig. Eine unabhängige und frei zugängliche Software ist dem vorzuziehen. Vor allem, da es sich um einen Prototyp handelt, der Aufschluss über die Verwendungsmöglichkeiten in diesem Bereich liefern und daher eventuell weiterentwickelt werden soll. Deshalb sollte die dreidimensionale Darstellung im Rahmen dieser Arbeit entwickelt werden und Code aus anderem Quellen nur verwendet werden, wenn er diesen Kriterien entspricht.
+Wie später beschrieben wird, baut mARt auf einer bereits implementierten Lösung auf. Die Anwendung soll mit der Spiele-Engine \textit{Unity}  implementiert werden, worauf ebenfalls im späteren Kapiteln eingegangen wird. Die Implementierung muss also mit der Software kompatibel sein. In Kapitel \ref{grundlagen} wurde unter anderem die \textit{Unity}-Erweiterung \textit{Volume Viewer Pro} beschrieben, die viele der gestellten Anforderungen bereits abdeckt. Das Programm ist allerdings kostenpflichtig. Eine unabhängige und frei zugängliche Software ist dem vorzuziehen. Vor allem, da es sich um einen Prototyp handelt, der Aufschluss über die Verwendungsmöglichkeiten in diesem Bereich liefern und daher eventuell weiterentwickelt werden soll. Deshalb sollte die dreidimensionale Darstellung im Rahmen dieser Arbeit entwickelt werden und Code aus anderen Quellen nur verwendet werden, wenn er diesen Kriterien (z.B. lizenzrechtlichen Bestimmungen) entspricht.
 
 Weiterhin soll die Darstellung in eine interaktive Anwendung eingebettet sein, die die in Kapitel \ref{anforderung} formulierten Anforderungen erfüllt.
 
@@ -31,14 +31,14 @@ Da das Innere der 3D Darstellung erkennbar sein soll, muss eine semi-transparent
 Weiterhin sind sind nur die Pixel relevant, die das Gehirn darstellen. Der Bereich darum (Schädel und Hintergrund) sollten gefiltert  und nicht sichtbar gemacht werden. Das gewünschte Ergebnis ist, dass das Gehirn frei im Raum schwebt. 
 
 Die Anforderungen sprechen gegen eine Umsetzung, die eine Oberfläche des Gehirns erzeugt und es als Mesh darstellt. Die Form des Gehirns könnte dadurch deutlich gezeigt werden und das Objekt würde von den umgebenden Pixeln getrennt werden. 
-Allerdings handelt es sich bei dem Gehirn nicht um eine Hülle sondern eine Masse. Es ist unwahrscheinlich, dass ein Verfahren wie Marching Cubes die inneren Gehirnstrukturen exakt genug wiedergeben könnte, damit ein Neurologe sinnvolle Schlüsse daraus ziehen kann. Die binäre Aufteilung der Voxel kann außerdem dazu führen, dass Teile des Gehirn fehlerhafter Weise nicht angezeigt werden, obwohl sie es sollten. Weiterhin müsste das Mesh in Echtzeit kontinuierlich angepasst werden, wenn der Nutzer durch die verschiedenen Schichten scrollt. 
+Allerdings handelt es sich bei dem Gehirn nicht um eine Hülle sondern eine Masse. Es ist unwahrscheinlich, dass ein Verfahren wie Marching Cubes die inneren Gehirnstrukturen exakt genug wiedergeben könnte, damit ein Neurologe sinnvolle Schlüsse daraus ziehen kann. Die binäre Aufteilung der Voxel kann außerdem dazu führen, dass Teile des Gehirn fehlerhafter Weise nicht angezeigt werden. Weiterhin müsste das Mesh in Echtzeit kontinuierlich angepasst werden, wenn der Nutzer durch die verschiedenen Schichten scrollt. 
 Deshalb eignet sich eine Oberflächengenerieurung nicht zur Visualisierung.
 Hinzu kommt, dass in den Anforderungen kein Anwendungsfall beschrieben wird, der eine Oberfläche erfordert, wie z.B. die Berechnung einer Kollision des Gehirns mit einem anderen Objekt.	
 	
 Die dreidimensionale Darstellung lässt sich demnach besser mit einer Volume Rendering Methode umsetzten.  
-In Kapitel \ref{grundlagen} wurden die verschiedenen Volume Render Techniken miteinander verglichen.
+In Kapitel \ref{grundlagen} wurden die verschiedenen Volume Rendering Techniken miteinander verglichen.
 Die Visualisierung der MRT-Daten wurde im Rahmen dieser Arbeit mit den Volume Raycasting Verfahren umgesetzt.
-\todo{P}
+
 Das Raycasting Verfahren liefert im Vergleich meist die beste Bildqualität. Es ist daher auch weit verbreitet bei der Implementierung von Volume Rendering Software, wie in Abschnitt \ref{volumeRenderingImplementierung} gezeigt wurde. 
 Die verschiedenen Implementierungen können zur Orientierung und als Referenz für die eigene Umsetzung verwendet werden.
 Die Technik lässt sich außerdem gut durch einen Fragment-Shader realisieren. Damit eignet sie sich von den vorgestellten Methoden am meisten zur Implementierung mit \textit{Unity}. 
