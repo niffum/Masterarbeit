@@ -40,23 +40,21 @@ In Kapitel \ref{grundlagen} wurden die verschiedenen Volume Rendering Techniken 
 Die Visualisierung der MRT-Daten wurde im Rahmen dieser Arbeit mit den Volume Raycasting Verfahren umgesetzt.
 Das Raycasting Verfahren liefert die beste Bildqualität, wie aus dem Vergleich hervorgeht. Es ist daher auch weit verbreitet bei der Implementierung von Volume Rendering Software, wie in Abschnitt \ref{volumeRenderingImplementierung} gezeigt wurde. 
 Die verschiedenen Implementierungen können zur Orientierung und als Referenz für die eigene Umsetzung verwendet werden.
-Die Technik lässt sich außerdem gut durch einen Fragment-Shader realisieren. Damit eignet sie sich von den vorgestellten Methoden am meisten zur Implementierung mit \textit{Unity}. 
+Die Technik lässt sich außerdem gut durch einen Fragment-Shader realisieren was eine Implementierung in \textit{Unity} erleichtert. 
 Das für Texture-Based Rendering benötigte Texture Slicing und Mapping ist in der Umsetzung nicht trivial und die Ergebnisse des Verfahrens rechtfertigen diesen Aufwand nicht.
-Obwohl die Shear-Warp Methode in der Theorie ähnlich abläuft, wie das Raycasting ist die Implementierung komplexer.
+Obwohl die Shear-Warp Methode in der Theorie ähnlich abläuft wie das Raycasting, ist die Implementierung komplexer.
 Für eine Umsetzung des Volume Renderings im Rahmen dieser Arbeit eignet sich das Raycasting Verfahren deshalb am besten.
 Zwar ist die Berechnung einzelner Strahlen leistungsintensiv, kann aber durch Optimierungen und die Verwendung von passender Hardware trotzdem in Echtzeit und interaktiv realisiert werden.
 
-Weiterhin wurden in Abschnitt \ref{klassifikation} die verschiedene Arten erläutert eine Klassifikation zu implementieren. Durch die Umsetzung im Fragment Shader wird eine Post-Klassifikation umgesetzt. 
-Von der Umsetzung einer Pre-Integrierten Klassifikation wurde abgesehen. Zum Einen auf Grund des zusätzliche Implementierungsaufwands, zum Anderen weil die Renderings keine schwerwiegenden Artefakte aufwiesen. Letzteres wird in Kapitel \ref{ergebnisse} aufgegriffen.
+Weiterhin wurden in Abschnitt \ref{klassifikation} die verschiedene Arten erläutert eine Klassifikation zu implementieren. Durch die Umsetzung im Fragment-Shader wird eine Post-Klassifikation umgesetzt. 
+Von der Umsetzung einer Pre-Integrierten Klassifikation wurde abgesehen. Zum Einen auf Grund des zusätzliche Implementierungsaufwands, zum Anderen weil die Renderings keine schwerwiegenden Artefakte aufwiesen. Letzteres wird im Abschnitt \ref{ergebnisse} aufgegriffen.
 
-Wie im Kapitel \ref{grundlagen} beschrieben, werden beim Volume Rendering in der Regel Transferfunktionen eingesetzt, um verschiedene Gewebestrukturen oder Materialien zu unterscheiden. Wobei es sich um eine Look-Up-Tabelle in Form einer Textur handelt, die jedem Isowert eine Farbe und Opazität zuweist.
+Wie im Kapitel \ref{grundlagen} beschrieben, werden beim Volume Rendering in der Regel Transferfunktionen eingesetzt, um verschiedene Gewebestrukturen oder Materialien zu unterscheiden. Dabei handelt es sich um eine Look-Up-Tabelle in Form einer Textur, die jedem Isowert eine Farbe und Opazität zuweist.
 Die Herausforderung bei der Implementierung einer Transferfunktion ist dabei die Generierung einer zum Datensatz passenden Textur. Selbst bei einer Transferfunktion mit nur einer Dimension müssen häufig verschiedene Wertzuweisungen ausprobiert werden, um ein gutes Ergebnis zu erhalten.
 Um eine bzw. mehrere Transferfunktionen zu generieren, die den Ansprüchen des Nutzers genügt und die für verschiedene Datensätze passend sind, ist es deshalb sinnvoll dem Nutzer eine Benutzeroberfläche zur Verfügung zu stellen, mit deren Hilfe er die verwendete Transferfunktion zur Laufzeit manipulieren kann. 
 
-In einem Volumen gibt es in der Regel bestimmte Isowerte, die Grenzwerte zwischen verschiedenen Materialien darstellen. Diese dienen als Kontrollpunkte, zwischen denen dann interpoliert wird, um einen Farbverlauf zwischen den Materialien zu erhalten. 
-Um die Transfertextur zu beeinflussen muss der Nutzer diese Kontrollpunkte verändern können. Er muss dabei für jeden Kontrollpunkt dessen Iso-, Farb- und Opazitätswert festlegen. Zwischen den Werten der Kontrollpunkte kann dann eine Spline-Interpolation stattfinden.. 
-\todo{Splinefunktion und erzeugung von transferfunktione erläutern ?}
-
+In einem Volumen gibt es in der Regel bestimmte Isowerte, die Grenzwerte zwischen verschiedenen Materialien darstellen. Diese dienen als Kontrollpunkte zwischen denen interpoliert wird, um einen Farbverlauf zwischen den Materialien zu erhalten. 
+Um die Transfertextur zu beeinflussen muss der Nutzer diese Kontrollpunkte verändern können. Er muss dabei für jeden Kontrollpunkt dessen Iso-, Farb- und Opazitätswert festlegen. Zwischen den Werten der Kontrollpunkte kann dann eine Spline-Interpolation stattfinden.
 Die nutzergesteuerte Generierung von Transferfunktionen konnte aus zeitlichen Gründen im Rahmen dieser Arbeit nicht umgesetzt werden.
 
 
@@ -64,14 +62,15 @@ Die nutzergesteuerte Generierung von Transferfunktionen konnte aus zeitlichen Gr
 \label{maske}
 
 
-In User Story \textbf{U11} der Anforderungen wird beschrieben, dass der vorher von einem Arzt gekennzeichnete Bereich des Gehirns, der vom Schlaganfall betroffen ist, in der Darstellung angezeigt werden soll, wenn dies gewünscht wird. 
+In User Story \textbf{U11} der Anforderungen wird beschrieben, dass der vom Schlaganfall betroffene Bereich des Gehirns, der vorher von einem Arzt gekennzeichnet wurde in der Darstellung angezeigt werden soll, wenn dies gewünscht wird. 
 Der Bereich wird durch Masken definiert, die zuvor von einem Arzt in einem externen Programm erstellt wurden und ebenfalls im NIfTI-Format vorliegen. Für jede Schicht in einem Datensatz existiert ebenfalls eine Schicht im Maskendatensatz. 
 
 Der Bereich soll sowohl in der zwei- als auch in der dreidimensionalen Ansicht dargestellt werden. Bei letzterer sollte er auch in den Querschnitten erkennbar sein, die sich durch das Scrollen durch das Volumen ergeben. MRT-Daten und markierter Bereich verhalten sich also gleich.
 
-Da die Daten im selben Format vorliegen und sich gleich verhalten sollen, ist es naheliegend, dass sie auf die selbe Weise gerendert werden. Dementsprechend werden auch die Maskenbilder in eine 3D-Textur übertragen, die dann durch Volume Ray Tracing gerendert wird. Damit aber nicht jeder Strahl doppelt verschossen werden muss, der das Volumen durchdringt, wird der Zugriff auf die Maskentextur in den Shader integriert, der bereits das MRT-Volumen rendert. Für jeden Voxel, der aus der 3D-Textur der MRT-Daten gelesen wird, wird  der Voxel mit denselben Koordinaten aus der Masken-3D-Textur gelesen. Die zwei Farbwerte werden zum Schluss miteinander verrechnet. Durch die Verrechnung, bleibt trotzdem die Struktur des Gehirns erkennbar, wie es von \textbf{U12} gefordert wird. Die Abfrage der Maskenwerte erfolgt nur, wenn durch das Material eine entsprechende Steuervariable gesetzt wurde.
+Da die Daten im selben Format vorliegen und sich gleich verhalten sollen, ist es naheliegend, dass sie auf die selbe Weise gerendert werden. Dementsprechend werden auch die Maskenbilder in eine 3D-Textur übertragen, die dann durch Volume Raytracing gerendert wird. Damit aber nicht jeder Strahl doppelt verschossen werden muss, der das Volumen durchdringt, wird der Zugriff auf die Maskentextur in den Shader integriert, der bereits das MRT-Volumen rendert. Für jeden Voxel, der aus der 3D-Textur der MRT-Daten gelesen wird, wird  der Voxel mit denselben Koordinaten aus der Masken-3D-Textur gelesen. Die zwei Farbwerte werden zum Schluss miteinander verrechnet. Durch die Verrechnung, bleibt trotzdem die Struktur des Gehirns erkennbar, wie es von \textbf{U12} gefordert wird. Die Abfrage der Maskenwerte erfolgt nur, wenn durch das Material eine entsprechende Steuervariable gesetzt wurde.
 Dies wird im folgenden Codebeispiel veranschaulicht.
 
+\begin{listing}[!htb]
 \begin{minted}[mathescape,
                linenos,
                numbersep=5pt,
@@ -98,14 +97,18 @@ void main(sampler3D _Volume,
   return isoValue * isoValueMask * maskColor;
 }
 \end{minted}
+\caption{}
+\label{lst:transfer}
+\end{listing}
+\FloatBarrier
 \todo{Manipulation der Maske}
-
+\todo{ccaptiom}
 \section{2D Darstellung}
 
-Neben der dreidimensionalen Ansicht, sollen die Daten auch in zwei Dimensionen untersucht werden können, wie es auch in vielen Bildschirmanwendungen der Fall ist.
+Neben der dreidimensionalen Ansicht sollen die Daten auch in zwei Dimensionen untersucht werden können, wie es auch in vielen Bildschirmanwendungen der Fall ist.
 Die Betrachtung von jeweils nur einer Schicht des Datensatzes, erlaubt es den Fokus auf bestimmte Merkmale oder Regionen zu legen, die in dieser Darstellung deutlicher sein könnten als in der volumetrischen. Weiterhin wird der direkte Vergleich zwischen den Szenen deutlicher. Beispielsweise kann die Annahme von der Größe eines Bereichs in der 3D-Darstellung überprüft und so eventuell korrigiert werden.
 
-Da in User Story \textbf{U02} nur das Scollen auf einer Achse durch die Bildschichten gefordert wird, wird jeder Datensatz als quadratische Bildfläche dargestellt.
+Da in User Story \textbf{U02} nur das Scrollen auf einer Achse durch die Bildschichten gefordert wird, wird jeder Datensatz als quadratische Bildfläche dargestellt.
 Die Anzeige der Daten aus verschiedenen Sichtachsen wäre nicht nur aufwändiger in der Umsetzung, sondern würde die Komplexität der Anwendung auch deutlich steigern wodurch ihre Benutzbarkeit sinken könnte. 
 
 Die zweidimensionale Darstellung in mARt kann kaum einen Mehrwert gegenüber einer Bildschirmanwendung  bieten. Zwar kann sie zur Untersuchung der Daten genutzt werden, dient allerdings hauptsächlich als komplementäre Ansicht zur 3D-Visualisierung.
@@ -113,27 +116,27 @@ Die zweidimensionale Darstellung in mARt kann kaum einen Mehrwert gegenüber ein
 \section{Endgerät}
 \label{device}
 
-Im Kapitel \ref{grundlagen} wurden die Vor- und Nachteile von AR und VR gegenüber gestellt.
-Wie bereits im Kapitel \ref{motivation} beschrieben, ist mARt als AR-HMD-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem medizinischen Arbeitsumfeld.
+Wie bereits im Abschnitt \ref{motivation} beschrieben, ist mARt als AR-HMD-Anwendung konzipiert. Obwohl die Technologie noch viele Unzulänglichkeiten aufweist, eignet sie sich auf lange Sicht dennoch besser für den Einsatz in einem medizinischen Arbeitsumfeld.
 Für den Arbeitsalltag eines Arztes und die Zusammenarbeit mit Patienten eignet sich ein durchsichtiges Display deutlich besser als ein undurchsichtiges. Der Nutzer verliert somit nicht seine Umwelt aus den Augen, wodurch er sich sicherer in der Benutzung fühlt. In einem Anwendungsszenario, in dem er mit anderen Menschen kommuniziert, während er die Anwendung bedient gilt dies umso mehr. Die mögliche Verwendung von mARt während einer Operation oder Behandlung wäre mit einer VR-Anwendung oder Smartphone-App unmöglich. Die Reduzierung auf die virtuelle Realität bietet zudem keinen Vorteil für die Funktion der Anwendung, da die Umwelt in der Anwendung nicht verändert werden soll. 
 
 Ein weiterer Vorteil eines AR-HMDs ist seine Portabilität. Dies ist vor allem entscheidend, wenn die Daten anderen Personen, wie z.B. Patienten gezeigt werden sollen. Das Gerät lässt sich einfach in ein anderes Zimmer mitnehmen, was mit einem VR-System deutlich schwieriger umzusetzen ist.
  
-Eine große Einschränkung bietet die geringe Anzahl an Gesten und Interaktionsmöglichkeiten, die bisherige AR Technik zur Verfügung stellen. Dies ist allerdings hinfällig, wenn stattdessen die \textit{Leap Motion} verwendet wird um Nutzereingaben zu erfassen. Die Vorteile des Gerätes werden im folgenden Abschnitt erläutert.
+Eine große Einschränkung bietet die geringe Anzahl an Gesten und Interaktionsmöglichkeiten, die die bisherige AR-Technik zur Verfügung stellt. Dies ist allerdings hinfällig, wenn stattdessen die \textit{Leap Motion} verwendet wird um Nutzereingaben zu erfassen. Die Vorteile des Gerätes werden im folgenden Abschnitt erläutert.
 
 Es ist zu erwarten, dass sich AR-HMDs in den folgenden Jahren deutlich verbessern werden, was Tragekomfort und Leistungfähigkeit angeht. Da mARt als Prototyp einer medizinischen Anwendung anzusehen ist, kann davon ausgegangen werden, dass bei einer Weiterentwicklung der Anwendung Technologie zur Verfügung steht, die viele der genannten Mängel behebt.
 
+\todo{hololens nennen}
 Obwohl sich eine AR-Anwendung also besser für die Umsetzung eignet, ist die Leistung des Gerätes nicht ausreichend, um die intensiven Berechnungen durchzuführen, die für das Volume Raycasting erforderlich sind. Auch der Einsatz der \textit{Leap Motion} erfordert eine hohe Rechenleistung.
 In einer Demo, in der die 3D-Darstellung auf der \textit{HoloLens} getestet wurde, wurde eine Framerate von 
-\todo{Framerate messen} erreicht. 
+\todo{Framerate messen, anpassrn, welche framweate mensdh braucgst} erreicht. 
 Dies ist nicht ausreichend, um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
-
+\todo{stimmt nicht}
 Aus diesem Grund wurde die AR-Anwendung mit eingeschränkter Funktionalität entwickelt. Für die dreidimensionale Darstellung wurden vorgerenderte Bilder eingesetzt, um Testern eine Vorstellung davon zu geben.
-Zusätzlich dazu wurde die Anwendung als VR-Erfahrung umgesetzt. Die Funktionalität bleibt dabei die selbe. 
+Zusätzlich dazu wurde die Anwendung als VR-Erfahrung umgesetzt. Die Funktionalität bleibt dabei gleich. 
 Durch Verwendung der \textit{Leap Motion} ist selbst die Interaktion mit dem Modell in beiden Anwendungen identisch. 
 % Bezug Hololens2?
 
-\section{Interaktion/ UI } 
+\section{Interaktionsdesign} 
 
 In diesem Abschnitt wird das Konzept der Interaktion innerhalb der Anwendung beschrieben. Dazu wird zunächst diskutiert, mit welcher Technik die Nutzereingabe erfasst werden soll. Dann wird auf die Gestaltung der Bedienelemente in der Anwendung eingegangen.
 
@@ -141,14 +144,14 @@ In diesem Abschnitt wird das Konzept der Interaktion innerhalb der Anwendung bes
 \todo{Referenzen?}
 
 Wie bereits im vorherigen Abschnitt erwähnt, wird die \textit{Leap Motion} in Kombination mit dem jeweiligen HMD benutzt, um den Nutzer mit der Anwendung interagieren zu lassen. 
-Die \textit{Leap Motion} verfolgt die Hände des Nutzers und stellt diese als 3D-Modelle innerhalb der Anwendung dar. Die Bewegungen der Hände werden dabei sehr genau nachempfunden, sodass die Illusion entsteht die simulierten Hände wären die eigenen. 
+Die \textit{Leap Motion} verfolgt die Hände des Nutzers und stellt diese als 3D-Modelle innerhalb der Anwendung dar. Die Bewegungen der Hände werden dabei genau nachempfunden, sodass die Illusion entsteht die simulierten Hände wären die eigenen. 
 Bereits \cite{Zimmerman86} haben die Hand als natürlichstes Mittel zur Manipulation von Objekten bezeichnet. Zudem haben \cite{Bianchi-Berthouze07} festgestellt, dass Körperbewegung in einer Anwendung zu einem höheren Einsatz in deren Umgang führt. Indem es die Hand in den virtuellen Raum überträgt, fördert das Gerät den intuitiven Umgang mit der Anwendung enorm und ermöglicht damit ein positives Nutzungserlebnis. Weiterhin wird dadurch das erlernen komplexer Gesten oder die Verwendung von Controllern umgangen. Beides sind Hindernisse, die Nutzer, die mit der Technik nicht vertraut sind abschrecken könnten. 
-Nachteilig ist, dass das Sichtfeld der Kamera begrenzt ist. Da diese vorne auf dem HMD angebracht ist, wird dieses noch weiter nach vorne verschoben. Damit die seine Hände erkannt werden muss der Nutzer sie deshalb in einiger Entfernung genau vor sein Gesicht halten. 
-Dafür bietet die \textit{Leap Motion} mehr Freiheit in der Interaktion. Dies gilt besonders, im Vergleich mit den Eingabemöglichkeiten der \textit{HoloLens}. 
+Nachteilig ist, dass das Sichtfeld der Kamera begrenzt ist. Da diese vorne auf dem HMD angebracht ist, wird dieses noch weiter nach vorne verschoben. Damit seine Hände erkannt werden, muss der Nutzer sie deshalb in einiger Entfernung genau vor sein Gesicht halten. 
+Dafür bietet die \textit{Leap Motion} mehr Freiheit in der Interaktion. Dies gilt besonders im Vergleich mit den Eingabemöglichkeiten der \textit{HoloLens}. 
 Die Gestenerkennung der \textit{HoloLens} ist stark begrenzt. Um alle notwendigen Manipulationen der Darstellungen abzudecken müssten daher entweder deutlich mehr Bedienelemente eingebaut werden oder die Interaktion müsste zu großen Teilen auf Sprachsteuerung beruhen. 
 Dies wurde durch Implementierung einer prototypischen \textit{HoloLens}-Anwendung bestätigt, die nur durch die \textit{HoloLens}-Gesten gesteuert werden konnte. Sie ist im Kapitel \ref{implementierung} genauer beschrieben.
-Ein auf Sprachsteuerung beruhendes Programm ist im Arbeitsalltag eher umständlich, vor allem, wenn man sich im selben Raum wie andere Personen befindet. Zudem wirft es die Problematik der Mehrsprachigkeit auf. 
-Allerdings wurde im Frühjahr 2019 ein Nachfolgemodell der \textit{HoloLens} angekündigt, das alle Handbewegungen des Nutzers verfolgt und somit auch Gesten wie Greifen erkennt. Dies wird noch einmal in Abschnitt \ref{hololens2Fazit} erläutert. Es zeigt, das eine Steuerung durch die Hände des Nutzers nicht nur sinnvoll ist, sondern in der Zukunft auch durch ein HMD umgesetzt werden kann.
+Ein auf Sprachsteuerung beruhendes Programm ist im Arbeitsalltag eher umständlich, vor allem wenn sich der Anwender im selben Raum wie andere Personen befindet. Zudem wirft es die Problematik der Mehrsprachigkeit auf. 
+Allerdings wurde im Frühjahr 2019 ein Nachfolgemodell der \textit{HoloLens} angekündigt, das alle Handbewegungen des Nutzers verfolgt und somit auch Gesten wie Greifen erkennt. Dies wird noch einmal in Abschnitt \ref{hololens2Fazit} erläutert. Es zeigt, dass eine Steuerung durch die Hände des Nutzers nicht nur sinnvoll ist, sondern in der Zukunft auch durch ein HMD umgesetzt werden kann.
 
 Da mARt schließlich in Form einer AR- und VR-Anwendung umgesetzt wird stellt sich weiterhin die Frage nach den Bedienmöglichkeiten in VR. Die Verwendung der \textit{Leap Motion} ermöglicht es hier einerseits, dass beide Anwendung durch dieselben Interaktionen bedient werden können. Andererseits bietet sie auch gegenüber der Steuerung durch Controller Vorteile. 
 Wie bereits erwähnt, kann die Bedienung der Controller einen ungeübten Nutzer verwirren. Dazu kommt, dass es sich dabei um für sich stehende Geräte handelt. Im Arbeitsalltag müsste immer sicher gestellt werden, dass sie nicht abhanden kommen und zu jedem Zeitpunkt aufgeladen sind. 
