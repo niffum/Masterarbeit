@@ -172,7 +172,7 @@ Dazu stehen ihm einerseits physische Bedienelemente wie Knöpfe, Schieberegler o
 Physische Bedienelemente haben den Vorteil, dass sie dem Nutzer bereits aus anderen Kontexten bekannt sind. Durch Icons oder Beschriftungen kann dieser ihre Funktion schnell begreifen. 
 \todo{REFERENZ} Dies Ermöglicht eine Verwendung ohne hohen Lernaufwand oder das Merken von Gesten. 
 Die Elemente laden außerdem dazu ein sie auszuprobieren, sodass der Nutzer ermutigt wird, mit der Anwendung zu interagieren und sich so mit dieser vertraut zu machen. 
-Allerdings ist es schwierig das physische Feedback zu simulieren, das der Nutzer erwartet, da die Elemente der physischen Realität nachempfunden sind. Der Tastsinn des Nutzers kann durch die Anwendung nicht simuliert werden. Es können lediglich audiovisuelle Reize erzeugt werden. Da der Sehsinn allerdings im Allgemeinen der am stärksten ausgebildete Sinn ist (REFERNZ?), kann durch die Verwendung dieser Reize eine immersive Interaktion erreicht werden. 
+Allerdings ist es schwierig das physische Feedback zu simulieren, das der Nutzer erwartet, da die Elemente der physischen Realität nachempfunden sind. Der Tastsinn des Nutzers kann durch die Anwendung nicht simuliert werden. Es können lediglich audiovisuelle Reize erzeugt werden. Da der Sehsinn allerdings von allen der dominanteste ist \cite{Azmandian16}, kann durch die Verwendung dieser Reize eine immersive Interaktion erreicht werden. 
 Schließlich ist zu beachten, dass Interaktionselemente dieser Art Raum innerhalb der virtuellen Realität einnehmen. Dementsprechend ist es wichtig diese so anzuordnen und zu gestalten, dass der virtuelle Raum für den Nutzer übersichtlich bleibt. Hier muss auch ein Gleichgewicht zwischen der Reduzierung der Elemente in Größe und Komplexität, sowie der Bedienbarkeit gefunden werden. Ist ein Knopf beispielsweise zu klein, fällt es schwer diesen zu betätigen. 
 
 Für die Verwendung physischer Bedienelemente spricht außerdem, dass die Komplexität der Interaktionen zu hoch ist, um nur durch Gesten abgedeckt werden zu können. Der intuitive Einsatz der Hände für simple Interaktionen, wie z.B. das Drehen eines Objektes durch Anfassen, ist dabei trotzdem einer abstrakteren Abbildung auf Bedienelemente vorzuziehen. Der Einsatz von einzelnen, eindeutigen Gesten ist weiterhin hilfreich, um der eben genannte visuellen Reizüberflutung entgegen zu wirken. 
@@ -224,7 +224,15 @@ Vergrößert der Nutzer eine Darstellung kann er dieselbe Verschiebung nutzen, u
 Um die Darstellung der Position des Nutzers weiterhin anpassen zu können, kann diese gedreht werden. Dazu dient ein weiteres Bedienelement, welches sich vor der Darstellung befindet. Um die Anwendung übersichtlich zu gestalten, erscheint dieses nur, wenn der Nutzer das erste Element ergriffen hat und somit seine Absicht demonstriert, die Darstellung zu bewegen. 
 Sowohl Position als auch Rotation der Ansicht werden beim Szenariowechsel übernommen.
 Die Bedienelemente zur Positionierung und Drehung der Ansicht sind in Abbildung \ref{img:3dPos} dargestellt. 
-\todo{Bild einfügen}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/mARt_turn.png}
+	\caption{Die zweidimensionale Darstellung mit den beiden Bedienelementen zur Positionierung (oben) und Drehung (mitte).}
+	\label{img:3dPos}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
 
 %Drehen
 Entsprechend Anforderung \textbf{U13} soll die volumetrische Darstellung der MRT-Daten gedreht werden können. 
@@ -236,10 +244,9 @@ Ebenso wie die Skalierung, ist die Rotation eine temporäre Manipulation, die be
 
 Die Bedienoberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:mARt2d} zu sehen.
 
-\todo{Bilder tauschen}
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.5\linewidth]{images/mARt2d.png}
+	\includegraphics[width=0.7\linewidth]{images/mARt2d_2.png}
 	\caption{Die zweidimensionale Darstellung von zwei MRT-Datensätzen, deren Manipulation nicht gleichgeschaltet ist. Über den oberen Schieberegler können Kontrast und Helligkeit per Gammakorrektur beeinflusst werden. Durch das Icon in der rechten Ecke kann der markierte Bereich ein- und ausgeblendet werden. Das Rad ermöglicht das Scrollen durch die Bildschichten. Die aktuelle Schicht wird in dessen Mitte angezeigt. }
 	\label{img:mARt2d}
 	\source{Eigene Darstellung}
@@ -248,7 +255,7 @@ Die Bedienoberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:m
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.5\linewidth]{images/mARt3d.png}
+	\includegraphics[width=0.5\linewidth]{images/mARt3d_2.png}
 	\caption{Die 3D-Darstellung eines MRT-Datensatzes mit angezeigter Maske. Die oberen Schieberegler kontrollieren Intentsität und Gammakorrektur des Renderings. Auch hier wird der markierte Bereich durch ein Icon ein- und ausgeblendet. Jede Ebene kann durch einen Anfassungspunkt verschoben werden.}
 	\label{img:mARt3d}
 	\source{Eigene Darstellung}
@@ -274,7 +281,7 @@ In Abbildung \ref{img:handUI} ist das ausgeklappte Menü, an der linken Hand dar
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{images/handUI.png}
+	\includegraphics[width=0.7\linewidth]{images/handUI_2.png}
 	\caption{Das ausklappbare Handmenü, das erscheint, wenn der Nutzer seine Handfläche zur Kamera dreht. Über die Knöpfe kann der Nutzer die angezeigten Datensätze auswählen (oben und Liste), zwischen 2D- und 3D-Darstellung wechseln (mitte) und die angezeigten Datensätze gleichschalten (unten). }
 	\label{img:handUI}
 	\source{Eigene Darstellung}
@@ -302,8 +309,16 @@ Die Abweichungen der Simulation sind in einer VR-Anwendung deutlich weniger auff
 
 In AR entfällt diese Illusion. Da die beiden Handpaare aber nicht deckungsgleich sind, kann es dazu kommen, dass ein virtueller Finger einen Knopf trifft, während es ein realer nicht tut oder umgekehrt. Wenn der Nutzer die virtuelle Hand nicht sieht, würde dies den Eindruck von fehlerhaftem Verhalten hervorrufen. 
 Aus diesem Grund werden die Leap-Controller-Hände auch in der AR-Anwendung angezeigt. Allerdings werden sie leicht transparent dargestellt, um dem Nutzer zu erlauben auch die dahinter liegende Umgebung wahrzunehmen. 
+In Abbildung \ref{img:arHands} sind die Hände innerhalb der Anwendung abgebildet.
 
-\todo{Bild AR Hände}
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/AR_hand.jpg}
+	\caption{Aufnahme aus der \textit{HoloLens}, die die augmentierte Hand des Nutzers zeigt.}
+	\label{img:handUI}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
 
 
 \section{Unterstützung von Dateiformaten} 

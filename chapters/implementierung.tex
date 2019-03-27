@@ -206,9 +206,18 @@ Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und An
 
 Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der \textit{HoloLens} zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig, z.B. zum Wechseln der Manipulationsart. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die \textit{Leap Motion} in das System integriert.
 % Genauer auf Implementierung eingehen
-Der Prototyp wurde in der Szen \todo{Szene einfügen} realisiert und eine Datei zur Bereitstellung für die \textit{HoloLens} ist im Ergänzungsmaterial zu finden.
+Der Prototyp wurde in der Szene \todo{Szene einfügen} realisiert und eine Datei zur Bereitstellung für die \textit{HoloLens} sowie ein Video der Anwendung ist im Ergänzungsmaterial zu finden.
+Die Demo ist in Abbildung \ref{img:prototyp} dargestellt.
 
-\todo{Bild von Demo}
+\todo{Bild austauschen}
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/hololens_prototyp.jpg}
+	\caption{Aufnahme aus der \textit{HoloLens} von der \textit{HoloLens}-Demo, die Interaktion ausschließlich über \textit{HoloLens}-Gesten realisiert.}
+	\label{img:prototyp}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
 
 \subsection{HoloToolkit}
 
@@ -262,14 +271,14 @@ beschreibung der Anwendung
 
 In Abschnitt \ref{3dImplementierung} wurde erläutert, wie die 3D-Darstellung mit Hilfe von Volume Raycasting erzeugt wurde. 
 Dazu wurde der Alphawert einer Transfertextur genutzt, um das Rauschen in der Umgebung des Gehirns zu entfernen und die Gehirnform eindeutiger herauszustellen. Dies führt allerdings auch zu Artefakten, dem sogenannten Holzmaserungseffekt. Da allerdings die Darstellung der inneren Strukturen des Gehirns im Vordergrund steht, wurde sich für eine Darstellung entschieden, die durch Reduzierung der Umgebung den Fokus auf das Gehirn erlaubt. 
-Im Abbildung \ref{img:results} sind die beiden Datensätze mit und ohne die Verwendung einer Transferfunktion abgebildet. 
-Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualität des Renderings auswirkt. Die vorgegebenen Datensätze des Gehirns wiesen ein hohes Maß an Bildrauschen auf. Außerdem wurden die Schichten offenbar in in Abständen solcher Größe gescannt, dass die Interpolation zwischen den Schichten Aktefakte ausweist. Auch dies in in Abbildung \ref{img:results} zu sehen.
+Im Abbildung \ref{img:resultsDWI} sind die beiden Datensätze mit und ohne die Verwendung einer Transferfunktion abgebildet. 
+Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualität des Renderings auswirkt. Die vorgegebenen Datensätze des Gehirns wiesen ein hohes Maß an Bildrauschen auf. Außerdem wurden die Schichten offenbar in in Abständen solcher Größe gescannt, dass die Interpolation zwischen den Schichten Aktefakte ausweist. Auch dies in in Abbildung \ref{img:resultsDWI} zu sehen.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.5\linewidth]{images/hololens2D.jpg}
-	\caption{Rendering der zur Verfügung gestellten Datensätze durch den in mARt verwendeten Shader. a) Datensatz 1 ohne Transferfunktion, Intensität: XY. b) Datensatz 1 mit Transferfunktion, Intensität: XY. c) Datensatz 2 ohne Transferfunktion, Intensität: XY d) Datensatz 2 mit Transferfunktion, Intensität: XY}
-	\label{img:result}
+	\includegraphics[width=0.9\linewidth]{images/dwi_results.png}
+	\caption{Rendering der zur Verfügung gestellten Datensätze durch den in mARt verwendeten Shader mit der selben Intensität. a) Datensatz 1 ohne Transferfunktion b) Datensatz 1 mit Transferfunktion c) Datensatz 2 ohne Transferfunktion d) Datensatz 2 mit Transferfunktion}
+	\label{img:resultsDWI}
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
@@ -278,25 +287,27 @@ Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerend
   
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.5\linewidth]{images/hololens2D.jpg}
-	\caption{Rendering eines alternativen Datensatzes durch den in mARt verwendeten Shader. a) Rendering ohne Transferfunktion, Intensität: XY. b) Rendering mit Transferfunktion, Intensität: XY. c) Rendering ohne Transferfunktion, Intensität: yZ.}
+	\includegraphics[width=0.9\linewidth]{images/visMale_result.png}
+	\caption{Rendering eines alternativen Datensatzes durch den in mARt verwendeten Shader mit der selben Intensität. a) Rendering ohne Transferfunktion b) Rendering mit Transferfunktion}
 	\label{img:resultsVisMale}
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
 
 Der gekennzeichnete Bereich, der verdeutlicht welche Teile des Gehirns von dem Schlaganfall betroffen wurden, ist durch die semitransparente Darstellung von allen Seiten gut zuerkennen. 
-Holzmaserungseffek?
-Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resulrtMask} die Darstellung des Bereichs im 2D- und 3D-Szenario abgebildet.
+Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resultMask} die Darstellung des Bereichs im 2D- und 3D-Szenario abgebildet.
 
-\todo{Bild}
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.99\linewidth]{images/mask_results.png}
+	\caption{Rendering des ersten Datensatzes und der Maske, die den betroffenen Bereich hervorhebt, aus verschiedenen Ansichten.}
+	\label{img:resultMask}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
   
 \subsection{AR Anwendung}
 Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten teilweise schlecht zu erkennen. Dies betrifft vor allem die 3D-Darstellung. Um das Rendering erkennen zu können müssen die Farbwerte durch die Gammakorrektur erhellt werden. In Abbildungen \ref{img:ARLicht} und \ref{img:ARLicht3D} dargestellt, wie die Daten mit dem Standardhelligkeitswert und mit einem erhören Wert aussehen.
-
-\todo{Bild AR Helligkeit}
-
--> Artefakte in abhängigkeit zu Daten setzen. \ref{Konzept}
 
 \begin{figure}[!htb]
 	\centering
@@ -311,7 +322,7 @@ Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten te
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/mARt_AR_brightness_3D.png}
 	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 3D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss ein hoher Wert eingestellt werden.}
-	\label{img:ARLicht}
+	\label{img:ARLicht3D}
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
