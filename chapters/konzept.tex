@@ -83,26 +83,30 @@ void main(sampler3D _Volume,
           float3 texCoord : TEXCOORD0,
           float4 maskColor : COLOR,
           float _ShowMask)
-{
-  // Der Isowert des Volumens wird für die aktuelle Position ausgelesen
-  float isoValue = tex3D(_Volume, texCoord);
-  
-  if (_ShowMask == 1)
-  {
-		// Der Isowert des Maskenvolumens wird für die aktuelle Position ausgelesen
-		float isoValueMask = tex3D(_MaskVolume, texCoord);
-  }
-	
-  // Die Werte werden verrechnet und die Maske wird zusätzlich eingefärbt
-  return isoValue * isoValueMask * maskColor;
-}
+          {
+          
+          	// Isowert des Volumens wird für die aktuelle Position ausgelesen
+          	float isoValue = tex3D(_Volume, texCoord);
+          
+          	if (_ShowMask == 1)
+          	{
+          		// Isowert des Maskenvolumens wird für die 
+          		// aktuelle Position ausgelesen
+          		float isoValueMask = tex3D(_MaskVolume, texCoord);
+          	
+          		// Die Maske wird eingefärbt
+          		isoValueMask *= maskColor;
+          	}
+          
+          	// Die Werte werden verrechnet
+          	return isoValue * isoValueMask;
+          }
 \end{minted}
-\caption{}
+\caption{Bestimmung der Farbe eines Pixels in Abhängigkeit zum entsprechenden Isowert sowie dem Iso- und Farbwert der Maskentextur. Letztere werden nur angewandt, wenn die Steuervariable dafür gesetzt wurde. Eigenes Beispiel.}
 \label{lst:transfer}
 \end{listing}
 \FloatBarrier
-\todo{Manipulation der Maske}
-\todo{ccaptiom}
+
 \section{2D Darstellung}
 
 Neben der dreidimensionalen Ansicht sollen die Daten auch in zwei Dimensionen untersucht werden können, wie es auch in vielen Bildschirmanwendungen der Fall ist.
@@ -125,14 +129,13 @@ Eine große Einschränkung bietet die geringe Anzahl an Gesten und Interaktionsm
 
 Es ist zu erwarten, dass sich AR-HMDs in den folgenden Jahren deutlich verbessern werden, was Tragekomfort und Leistungfähigkeit angeht. Da mARt als Prototyp einer medizinischen Anwendung anzusehen ist, kann davon ausgegangen werden, dass bei einer Weiterentwicklung der Anwendung Technologie zur Verfügung steht, die viele der genannten Mängel behebt.
 
-\todo{hololens nennen}
-Obwohl sich eine AR-Anwendung also besser für die Umsetzung eignet, ist die Leistung des Gerätes nicht ausreichend, um die intensiven Berechnungen durchzuführen, die für das Volume Raycasting erforderlich sind. Auch der Einsatz der \textit{Leap Motion} erfordert eine hohe Rechenleistung.
+Eine AR-Anwendung eignet sich demnach besser für die Umsetzung. Um diese wiederzugeben wurde die \textit{HoloLens} von \cite{hololens} gewählt, da sie bereits 2015 erschienen und verfügbarer ist.
+Die Leistung des Gerätes ist allerdings nicht ausreichend, um die intensiven Berechnungen durchzuführen, die für das Volume Raycasting erforderlich sind. Auch der Einsatz der \textit{Leap Motion} erfordert eine hohe Rechenleistung.
 In einer Demo, in der die 3D-Darstellung auf der \textit{HoloLens} getestet wurde, wurde eine Framerate von 
-\todo{Framerate messen, anpassrn, welche framweate mensdh braucgst} erreicht. 
+\todo{Framerate messen, anpassrn, welche framerate mensch braucgst} erreicht. 
 Dies ist nicht ausreichend, um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
-\todo{stimmt nicht}
-Aus diesem Grund wurde die AR-Anwendung mit eingeschränkter Funktionalität entwickelt. Für die dreidimensionale Darstellung wurden vorgerenderte Bilder eingesetzt, um Testern eine Vorstellung davon zu geben.
-Zusätzlich dazu wurde die Anwendung als VR-Erfahrung umgesetzt. Die Funktionalität bleibt dabei gleich. 
+Hinzu kommt, dass der Einsatz der \textit{Leap Motion} es verhindert, dass die Anwendung für die \textit{HoloLens} bereitgestellt wird. Dies wird in Abschnitt \ref{kombination} erläutert. Die Anwendung wird deshalb lediglich an die \textit{HoloLens} übertragen, was allerdings eine Latenz mit sich bringt. 
+Um im Test eine stabile Darstellung und Interaktion zur Verfügung stellen zu können, wurde die Anwendung zusätzlich als VR-Erfahrung umgesetzt. Die Funktionalität bleibt dabei gleich. 
 Durch Verwendung der \textit{Leap Motion} ist selbst die Interaktion mit dem Modell in beiden Anwendungen identisch. 
 % Bezug Hololens2?
 
@@ -157,6 +160,7 @@ Da mARt schließlich in Form einer AR- und VR-Anwendung umgesetzt wird stellt si
 Wie bereits erwähnt, kann die Bedienung der Controller einen ungeübten Nutzer verwirren. Dazu kommt, dass es sich dabei um für sich stehende Geräte handelt. Im Arbeitsalltag müsste immer sicher gestellt werden, dass sie nicht abhanden kommen und zu jedem Zeitpunkt aufgeladen sind. 
 Hinzu kommt, dass die Controller zur Verwendung in der Hand gehalten werden müssen. Der Nutzer wird somit der Fähigkeit des Multitasking beraubt, wozu z.B. das Schreiben von Notizen während der Nutzung der Anwendung fällt. Auch die Verwendung von Controllern während einer OP ist ausgeschlossen.
 
+\todo{bezug zu interaktion in grundlagen?}
 \subsection{Konzeption der Interaktionselemente}
 % 2D 
 % UX steht im Vordergrung -> begründen warum besser als vorher!
@@ -201,7 +205,9 @@ Wie in Abschnitt \ref{maske} beschrieben, wird der markierte vom Schlaganfall be
 
 Zur besseren Sichtbarkeit bestimmter Bereiche fordert Anforderung \textbf{U14}, dass die Helligkeit und der Kontrast der MRT-Bilder einstellbar sind. Dies ist über einen Slider steuerbar, der sich oberhalb der Darstellung befinden. 
 Die Manipulation von Helligkeit und Kontrast wird dabei als Gammakorrektur im Shader implementiert. Der von Nutzer bestimmte Gamma-Wert wird dazu als Exponent zur Bildfarbe genommen. 
-In der 3D-Darstellung wird außerdem ein weiterer Slider angezeigt, über den der Nutzer bestimmen kann, \todo{Intensität beschreiben}
+In der 3D-Darstellung wird außerdem ein weiterer Slider angezeigt, über den der Nutzer bestimmen kann, wie intensiv Voxel dargestellt werden sollen. Diese Intensität beeinflusst die Opazität der Voxel. Ist ein hoher Wert eingestellt, werden die äußeren Voxel mit geringer Opazität dargestellt, sodass sie die weiter innen liegenden Voxel verdecken. Eine niedrige Intensität hat zur Folge, dass die äußeren Werte ausgeblendet werden, sodass die inneren Strukturen deutlicher zu erkennen sind. Auf diese Weise kann der Nutzer die Umgebung des Gehirns ausblenden und nur das Organ selbst darstellen. \todo{Intensität P}
+
+Obwohl nicht in den Anforderungen beschrieben, würde die Manipulation des gekennzeichneten Bereichs mit denselben Optionen dem Nutzer helfen die Darstellung seinen Ansprüchen anzupassen. Dies kann ebenfalls über Slider gesteuert werden. Um die Anwendung überschaubar zu halten wurde allerdings davon abgesehen.
 
 % Zoom
 Zu den geforderten Interaktionen gehört mit \textbf{U15} auch die die Vergrößerung von Bildern, um dem Nutzer eine genaue Untersuchung zu erlauben. Bei der Vergrößerung handelt es sich im Grunde genommen um eine Skalierung des Bildes. Auch dies lässt sich gut mit einer direkten Handbewegung in Berührung mit der Darstellung umsetzten. Aus anderen Anwendungen sind Nutzern zwei Bedienmöglichkeiten dieser Funktionalität bekannt. Bei Bildschirmanwendungen wird oft das Mausrad zum Zoomen verwendet. Allerdings werden Räder bereits für andere Aktionen verwendet und ein mehrdeutiger Einsatz könnte zu Verwirrung führen. Von der Bedienung von Touchdisplays sind Nutzer weiterhin daran gewöhnt zu zoomen, indem sie den Bildschirm mit Daumen und Zeigefinger berühren und die Finder dann aufeinander zu oder voneinander weg zu bewegen. Diese Bewegung lässt sich gut in die Anwendung übertragen. Um ein eindeutigeres Ergebnis zu erhalten und dem Nutzer mehr Kontrolle zu geben werden statt zwei Fingern allerdings die beiden Hände verwendet. Wird das Bild von beiden Händen mit Daumen und Zeigefinder gegriffen kann es durch die Bewegung der Hände zueinander manipuliert werden.
@@ -263,7 +269,6 @@ Stattdessen wird die Synchronisierung der Manipulation über einen weiteren Knop
 Schließlich kann der Nutzer durch das Handmenü auch zwischen der zwei- und dreidimensionalen Darstellung wechseln, wie es in \textbf{U09} beschrieben ist. Auf dem dafür zuständigen Button wird jeweils das Szenario angezeigt in das gewechselt wird.
 Laut \textbf{U10} sollen beim Wechsel die Manipulationen und Einstellungen möglichst erhalten bleiben. D.h. wenn in 2D zwei Datensets angezeigt werden, eines mit und eines ohne Maske, sollte das nach dem Wechsel zu 3D ebenfalls so sein. 
 Bis auf die genannten Ausnahmen werden die Einstellungen, die in einer Ansicht getätigt werden in die andere übernommen. Handelt es sich um Werte, die nur in einer der beiden Szenarios vorhanden sind, wie die Position der zusätzlichen Ebenen der 3D-Darstellung, werden diese ebenfalls gespeichert.
-
 In Abbildung \ref{img:handUI} ist das ausgeklappte Menü, an der linken Hand dargestellt.
 
 \begin{figure}[!htb]
@@ -274,8 +279,6 @@ In Abbildung \ref{img:handUI} ist das ausgeklappte Menü, an der linken Hand dar
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
-
-\todo{bezug zu interaktion in grundlagen}
 
 Die Darstellung der MRT-Daten soll, wie in Anforderung \textbf{U16} beschrieben im Raum platzierbar sein und nach \textbf{U17} ihre Position dort behalten, sodass der Nutzer um sie herum gehen und von allen Seiten betrachten kann, oder an einem bestimmten Standpunkt verankern kann. Dies wäre vor allem in einem Multi-Nutzer-Szenario nützlich, in dem mehrere Nutzer gleichzeitig die Daten betrachten.
 Die \textit{HoloLens} bietet diese Funktionalität in Form von Spatial oder World Anchors. Das Gerät besitzt einen internen Speicher für Anker, die von einer Anwendung angelegt werden, den sogenannten Anchor Store. Durch interne Prozesse bestimmt die \textit{HoloLens} in welchem Raum sie sich gerade befindet. Wird ein World Anchor in diesem Raum abgelegt, wird dessen Standort im Anchor Store gespeichert und behält somit immer seine Position im Raum, auch wenn der Nutzer sich bewegt und über mehrere Sitzungen hinweg. Nachdem ein World Anchor beim Start der Anwendung geladen wird, kann er an ein Objekt, wie ein 3D-Modell anhängt werden, sodass das Objekt an der Position des Ankers dargestellt wird. 

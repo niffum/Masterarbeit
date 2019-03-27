@@ -22,9 +22,10 @@ Um die \textit{Unity}-Anwendung auf dem VR-System abzuspielen, wird die \textit{
 
 \textit{Unity} Projekte basieren auf 3D-Szenen. Innerhalb einer Szene können GameObjects platziert werden. Dabei kann es sich z.B. um 3D-Modelle handeln. Ein GameObject besitzt verschiedene Components, die dessen Eigenschaften und Verhalten bestimmen. Viele Funktionen und Eigenschaften werden von bereits in der Engine vorhandenen Components realisiert. Sogenannte Rigidbodys verleihen einem Objekt beispielsweise physikalische Eigenschaften, die von der Engine berechnet werden. Components können auch Skripte sein, die der Entwickler selbst verfasst hat. Über diese Skripte wird die Spiellogik und die Funktionalität der Anwendung definiert. 
 
-Da mARt sich hauptsächlich in die beiden Szenarien einer zwei- und dreidimensionalen Darstellung unterteilen lässt existiert für jedes Szenario eine Szene.
+Da mARt sich in die beiden Szenarien einer zwei- und dreidimensionalen Darstellung unterteilen lässt existiert für jedes Szenario eine Szene.
 Viele der Funktionen sind allerdings ähnlich oder gleich, weshalb manche Skripte in beiden Szenen verwendet werden. 
-
+Zusätzlich zu den beiden Szenen existiert eine Startszene Preload.unity, in der ein GameObject namens appState liegt, über das bestimmt werden kann, welche Szene zuerst geladen werden soll. In diesem Objekt werden auch die Zustände der Szenen gespeichert und so Manipulationen übertragen.
+Die Szenen für die 2D-Darstellung heißen main\_2D.unity und main\_2D\_AR.unity. Die für die 3D-Darstellung main\_3D.unity und main\_3D\_AR.unity.
 
 
 
@@ -52,9 +53,6 @@ Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader au
 
 % https://docs.unity3d.com/Manual/SL-Shader.html
 \todo{
--Was is cg hlsl?
-- Was sind compute, surface, unlit shader?
-- Graphic pipeline?
 REFERNZEN
 }
 \section{Grundlage der Implementierung}
@@ -84,7 +82,7 @@ Die volumetrische Darstellung des Gehirns wird im Grunde genommen mit nur 3 Skri
 Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg-Code, der den Vertex- und Fragment-Shader implementiert ist dabei in ein eigenes Script ausgelagert.
 
 \subsection{Volume Raycasting}
-
+\label{3dImplementierung}
 Im Fragment-Shader des Volume\_DiffuseWITHMask.sh Shaders
 \todo{umbenennen} wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt geschossen wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Würfeln zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
 
@@ -136,7 +134,6 @@ Hierbei werden lediglich die Texturkoordinaten als Indices für die Textur verwe
 Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um eine Farbe sondern nur einen Grauwert handelt, können die anderen Farbkanäle der Textur mit dem Gradienten des jeweiligen Pixels befüllt werden. Darauf wird im Abschnitt \ref{gradienten} genauer eingegangen.
 
 Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutzer beeinflussen kann.
-\todo{Mit ergebnis abgleichen}
 An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist, oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
 Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
 \todo{ UBERPRÜFEN Warum?}
@@ -145,7 +142,7 @@ Die beiden Werte werden anschließend mit dem Isowert multipliziert.Ist einer de
 Das Ergebnis dieser Berechnung wird zunächst für jedem Farbkanal zugewiesen.
 %-----------------------------------------
 
-An dieser Stelle wird über die Transferfunktion der entsprechende Farbwert aus der zugehörigen Textur gelesen. Dazu wird der Isowert als Index verwendet. Die Funktionsweise und Implementierung der Transferfunktion wird in der Sektion \ref{transfer} beschrieben.
+An dieser Stelle wird über die Transferfunktion der entsprechende Alphawert aus der zugehörigen Textur gelesen. Dazu wird der Isowert als Index verwendet. Die Funktionsweise und Implementierung der Transferfunktion wird in der Sektion \ref{transfer} beschrieben.
 % Bezug Transferfunktion!
 Die Transferfunktion wird nur abgerufen, wenn der Isowert nicht 0 ist, da sonst die Transparenz überschrieben würde.
 % Tranferfunktion bei index 0 auf 0000 setzen??
@@ -163,15 +160,13 @@ Die Farbe wird schließlich noch auf einen Wert zwischen 0 und 1 festgesetzt und
 \subsection{Transferfunktion}
 \label{transfer}
 
-\todo{mit ergebnis abgleichen}
-
 Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. In einem vom Rest der Anwendung unabhängigen Skript wird aus diesen einzelnen Punkten eine Textur erzeugt, indem zwischen den festgelegten Werten eine Interpolation stattfindet.
 \todo{welche interpolation? -> Code}
-Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung wurden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
+Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung verwendet werden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
 Allerdings werden von Unity keine 1D-Texturen als Shader-Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-Textur verwendet, die eine einzige Y-Koordinate besitzt. 
 Die Textur wird dann über das Material an den Shader übergeben. Wie im Abschnitt \ref{transfer} beschrieben, wird die Textur dann mit Hilfe eines Index ausgelesen.
 
-Die Erstellung einer passenden Transfertextur ist allerdings, wie beschrieben sehr schwierig und es konnte im Rahmen dieser Arbeit keine sinnvollen Schwellenwerte zur Einfärbung des Volumens ermittelt werden. Aus diesem Grund wird nur der Alphawert der Transferfunktion verwendet. Aus diese Weise werden irrelevante Bildinformationen, wie Umgebungsrauschen und der Schädel ausgeblendet, wobei die Struktur des Hirninneren bestehen bleibt. 
+Die Erstellung einer passenden Transfertextur ist allerdings, wie beschrieben sehr schwierig und es konnte im Rahmen dieser Arbeit keine sinnvollen Schwellenwerte zur Einfärbung des Volumens ermittelt werden. Aus diesem Grund wird nur der Alphawert der Transferfunktion verwendet. Auf diese Weise werden irrelevante Bildinformationen, wie Umgebungsrauschen und der Schädel ausgeblendet, wobei die Struktur des Hirninneren bestehen bleibt. 
 
 \subsection{Beleuchtung}
 \label{illumination}
@@ -249,3 +244,89 @@ Da es die \textit{Vive} einen undurchsichtigen Bildschirm besitzt, kann die \tex
 Bei der \textit{HoloLens} sollte der Bildschirm, durch den der Nutzer sieht nicht verdeckt werden. Eine Installation im oberen Teil der Frontseite ist ebenfalls nicht umsetzbar, da dieser von den \textit{HoloLens}-Kameras eingenommen wird, die die Umgebung und Nutzergesten verfolgen.
 Somit ist die einzige sinnvolle Möglichkeit, die \textit{Leap Motion} auf der \textit{HoloLens} zu platzieren. Hierbei muss sie außerdem nach vorne geneigt werden, um die Hände des Nutzers in der Anwendung möglichst genau an den realen Händen auszurichten. 
 Um die Anwendung auf der \textit{HoloLens} bedienen zu können, wurde eine eigene Haltungsvorrichtung gebaut.
+
+% Ergebnisse
+
+
+%\chapter{Ergebnisse}
+\section{Ergebnisse}
+\label{ergebnisse}
+
+Die VR-Anwendung ist als ausführbare Datei im Ergänzungsmaterial zu finden. Da die \textit{HoloLens}-Anwendung, wie in Kapitel \ref{konzept} erläutert, nicht für diese bereitgestellt werden konnte, existiert hierfür keine ausführbare Datei. Allerdings wurde in der ReadMe.txt Datei des Projektes, die sich ebenfalls im Ergänzungsmaterial befindet beschrieben, wie die Anwendung auf der \textit{HoloLens} abgespielt werden kann. 
+Weiterhin ist dort ein Video enthalten, das die Funktionen und Bedienung der Anwendung zeigt.
+Die Interaktionslemente wurden wie in Kapitel \ref{konzept} beschrieben implementiert. Neben ihrer Beschreibung sind dort auch Abbildungen der Benutzerelemente zu finden. 
+Screenshots
+beschreibung der Anwendung
+
+\subsection{3D Darstellung}
+
+In Abschnitt \ref{3dImplementierung} wurde erläutert, wie die 3D-Darstellung mit Hilfe von Volume Raycasting erzeugt wurde. 
+Dazu wurde der Alphawert einer Transfertextur genutzt, um das Rauschen in der Umgebung des Gehirns zu entfernen und die Gehirnform eindeutiger herauszustellen. Dies führt allerdings auch zu Artefakten, dem sogenannten Holzmaserungseffekt. Da allerdings die Darstellung der inneren Strukturen des Gehirns im Vordergrund steht, wurde sich für eine Darstellung entschieden, die durch Reduzierung der Umgebung den Fokus auf das Gehirn erlaubt. 
+Im Abbildung \ref{img:results} sind die beiden Datensätze mit und ohne die Verwendung einer Transferfunktion abgebildet. 
+Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualität des Renderings auswirkt. Die vorgegebenen Datensätze des Gehirns wiesen ein hohes Maß an Bildrauschen auf. Außerdem wurden die Schichten offenbar in in Abständen solcher Größe gescannt, dass die Interpolation zwischen den Schichten Aktefakte ausweist. Auch dies in in Abbildung \ref{img:results} zu sehen.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/hololens2D.jpg}
+	\caption{Rendering der zur Verfügung gestellten Datensätze durch den in mARt verwendeten Shader. a) Datensatz 1 ohne Transferfunktion, Intensität: XY. b) Datensatz 1 mit Transferfunktion, Intensität: XY. c) Datensatz 2 ohne Transferfunktion, Intensität: XY d) Datensatz 2 mit Transferfunktion, Intensität: XY}
+	\label{img:result}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+  
+Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerendert. Das Ergebnis ist dabei von besserer Qualität als mit den Gehirndaten. Die Verwendung der Transferfunktion ist nicht notwendig, um die Darstellung deutlicher zu machen. Durch Manipulation der Intensität kann bestimmt werden, in welcher Tiefe das Gewebe gerendert werden soll. In Abbildung \ref{img:resultsVisMale} ist der Datensatz eines Kopfes mit und ohne sowie mit verschiedener Intensität dargestellt.
+  
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/hololens2D.jpg}
+	\caption{Rendering eines alternativen Datensatzes durch den in mARt verwendeten Shader. a) Rendering ohne Transferfunktion, Intensität: XY. b) Rendering mit Transferfunktion, Intensität: XY. c) Rendering ohne Transferfunktion, Intensität: yZ.}
+	\label{img:resultsVisMale}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+
+Der gekennzeichnete Bereich, der verdeutlicht welche Teile des Gehirns von dem Schlaganfall betroffen wurden, ist durch die semitransparente Darstellung von allen Seiten gut zuerkennen. 
+Holzmaserungseffek?
+Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resulrtMask} die Darstellung des Bereichs im 2D- und 3D-Szenario abgebildet.
+
+\todo{Bild}
+  
+\subsection{AR Anwendung}
+Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten teilweise schlecht zu erkennen. Dies betrifft vor allem die 3D-Darstellung. Um das Rendering erkennen zu können müssen die Farbwerte durch die Gammakorrektur erhellt werden. In Abbildungen \ref{img:ARLicht} und \ref{img:ARLicht3D} dargestellt, wie die Daten mit dem Standardhelligkeitswert und mit einem erhören Wert aussehen.
+
+\todo{Bild AR Helligkeit}
+
+-> Artefakte in abhängigkeit zu Daten setzen. \ref{Konzept}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/mARt_AR_brightness.png}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 2D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss ein hoher Wert eingestellt werden.}
+	\label{img:ARLicht}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/mARt_AR_brightness_3D.png}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 3D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss ein hoher Wert eingestellt werden.}
+	\label{img:ARLicht}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+
+Ein weiterer Punkt, der die Verwendung der Anwendung auf der \textit{HoloLens} erschwert ist das eingeschränkte Sichtfeld des Gerätes. Dieses Problem wurde bereit in Kapitel \ref{grundlagen} beschrieben. 
+Die Begrenzung der Darstellung führt dazu, dass die MRT-Daten aus der Sicht des Nutzers meist abgeschnitten sind. Um die Daten gleichzeitig mit den Interaktionselementen sehen zu können, muss der Nutzer einen Abstand von ca. 1,5m zur Darstellung haben. Dies macht es ihm allerdings unmöglich mit dieser zu interagieren. Um die Darstellung manipulieren zu können, muss er also zwischen MRT-Bildern und Bedienelementen hin- und herblicken. In Abbildung \ref{ARCutoff} ist das abgeschnittene Sichtfeld der \textit{HoloLens} dargestellt. Dabei werden die virtuellen Hände des Nutzer nicht angezeigt, wenn er diese nicht direkt ansieht, auch wenn die Leap Motion diese vielleicht noch erfasst. 
+Die Darstellung der Hände selbst nimmt bereits einen großen Teil des Sichtfeldes der \textit{HoloLens} ein, da sie sich nahe am HMD befinden. 
+Eine Bedienung der Anwendung auf der \textit{HoloLens} ist aus diesen Gründen sehr schwer. 
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/mARt_Cutoff.png}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 2D-Scene von mARt aus bedienbarer Entfernung. Durch das begrenzte Sichtfeld der \textit{HoloLens} wir nur ein Ausschnitt der Anwendung dargestellt.}
+	\label{img:ARCutoff}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+

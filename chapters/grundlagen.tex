@@ -187,7 +187,6 @@ Im Gegensatz dazu werden bei der Post-Klassifikation zuerst alle Skalarwerte dur
 
 Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlich unterschiedlichen Ergebnissen. Die Interpolation der Voxeleigenschaften bei der Pre-Klassifikation führt zu Artefaktbildung, da die später ermittelten Eigenschaftswerte lediglich gestreckt werden, ohne dass die Formen des Volumens beachtet werden. Bei der Post-Klassifikation werden die fehlenden Daten anhand der Struktur des Objektes erzeugt. Dies führt zu einer deutlich klareren Darstellung des Volumens. Der Vergleich ist in Abbildung \ref{img:prepost} veranschaulicht.
 
-\todo{Bild ersetzen}
 \begin{figure}[!htb]
 	\centering
 	%http://schorsch.efi.fh-nuernberg.de/roettger/index.php/VolumeRendering/Pre-AndPost-Classification
@@ -301,13 +300,9 @@ Jede Schicht wird dann zuerst aus Sicht der Kamera gerendert. Die aus Lichtsicht
 Für jede Schicht wird ein eigener Pass durchlaufen.
 
 Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren gebrochen, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wachs oder Haut.
-
-\cite{hansen02} stellen ein Shading Modell vor, dass realistisches Rendering von transluzenten Materialien erlaubt.
+Das Shading für ein realistisches Rendering von transluzenten Materialien wird unter anderem von \cite{hansen02} und \cite{Hadwiger06} beschrieben.
 \todo{Phasenfunktion} 
-
-Die globale Beleuchtung ist somit von der Umsetzung deutlich komplexer, bietet allerdings auch mehr Plastizität und Realismus. Dies wird in Abbildung \ref{img:localGlobalIll} deutlich, in der die Ergebnisse der beiden Vorgehensweisen gegenübergestellt sind.
-\cite{Jnsson14} untersuchen derzeit verwendete Beleuchtungsmethoden von Volumen.
-\todo{Was untrsuchen die genau?}
+\todo{P}
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/localGlobalIllumination.png}
@@ -317,6 +312,7 @@ Die globale Beleuchtung ist somit von der Umsetzung deutlich komplexer, bietet a
 \end{figure}
 \FloatBarrier
 
+Die Verfahren zur Umsetzung von globaler Beleuchtung sind vielseitig und komplex, wie \cite{Jnsson14} zeigen, die verschiedene Beleuchtungsmethoden von Volumen vergleichen. Dafür bietet sie allerdings auch mehr Plastizität und Realismus. Dies wird in Abbildung \ref{img:localGlobalIll} deutlich, in der die Ergebnisse der beiden Vorgehensweisen gegenübergestellt sind.
 Aufgrund der hohen Komplexität der globalen Beleuchtung, wird im Rahmen dieser Arbeit nur eine lokale Beleuchtung implementiert. 
 Hierzu wird in vielen Fällen das Phong-Beleuchtungmodell verwendet und wird auch für mARt implementiert.
 
@@ -366,8 +362,8 @@ f(x, y, z + h) - f(x, y, z - h)
 %\todo{genau vorstellen}
 %\todo{Vergleich der versch. formen -> BUCH}
 
-\cite{Correa11} haben verschiedene Methoden zur Bestimmung von Gradienten verglichen.
-\todo{Was wird verglichen}
+%\cite{Correa11} haben verschiedene Methoden zur Bestimmung von Gradienten verglichen.
+%\todo{Was wird verglichen}
 \todo{Segmentierung}
 
 \subsection{Komposition}
@@ -446,11 +442,11 @@ Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form 
 Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sichtachse. Dazu werden sogenannte Proxy-Geometrien erzeugt, Polygone, die einen Querschnitt beschreiben. Auf diesen Proxy-Geometrien wird dann die Textur erstellt, indem die entsprechenden Volumendaten abgefragt werden. Dadurch, dass die Querschnitte an der Sichtachse ausgerichtet sind, ist nur ein Texturstapel notwendig. 
 
 
-\todo{https://dl.acm.org/citation.cfm?id=329138}
+%\todo{https://dl.acm.org/citation.cfm?id=329138}
 
-\todo[inline]{implementierung auf der grfikkarte mit 2d texuren nachteil: nur flächen nicht geometrie}
-\todo{3d texure based? }	
-\todo{Genauer? P}
+%\todo[inline]{implementierung auf der grfikkarte mit 2d texuren nachteil: nur flächen nicht geometrie}
+%\todo{3d texure based? }	
+%\todo{Genauer? P}
 
 \begin{figure}[!htb]
 	\centering
@@ -468,7 +464,7 @@ Shear-Warp verfolgt den selben Ansatz wie das Raycasting. Anstatt die Strahlen a
 Damit auch bei einem nicht orthogonalen Blickwinkel das Volumen korrekt dargestellt wird, wird vor dem Raycasting eine vom Blickwinkel abhängige Scherung auf die Volumendaten angewandt. In Abbildung \ref{img:shearwarp} ist dargestellt, wie die Scherung die einzelnen Schichten entsprechend des Blickwinkels verschiebt, um einen orthogonalen Einfallswinkel zu simulieren. 
 Das durch das Raycasting entstandene Bild wird zunächst in einen Buffer gerendert. Durch die Scherung ist das Bild zu diesem Zeitpunkt noch verzerrt. Deshalb wird es anschließend noch einmal transformiert, sodass eine korrekte Abbildung des Volumens auf die Bildschirmebene projiziert wird. In Abbildung \ref{img:shearwarp} ist zu sehen, wie das gerenderte Bild vor und nach der Transformation aussieht. 
 Shear-Warp liefert eine hohe Bildqualität und ist dabei um einiges schneller als Raycastings. 
-\todo{begründen warum (GPU-Berechnung, Rasterisierung vs Raytracing)}
+%\todo{begründen warum (GPU-Berechnung, Rasterisierung vs Raytracing)}
 
 \begin{figure}[!htb]
 	\centering
@@ -510,7 +506,7 @@ Vermehrt wird heutzutage Path Tracing oder Monte-Carlo-Raytracing zur Visualisie
 %Im Folgenden werden diese erläutert. 
 
 Wie im Abschnitt \ref{volumeData} beschrieben wurde, gibt es neben dem Volume Rendering auch das Surface Rendering. Während ersteres ein Volumen ohne klare Oberfläche abbildet, wird bei Surface Rendering eine Oberfläche aus den Volumendaten erzeugt. Auf diese Weise entsteht ein Mesh des gescannten Objektes.
-Im Folgenden wird der Marching Cubes Algorithmus erläutert, ein weit verbreitetes Surface Rendering Verfahren.
+Im Folgenden wird exemplarisch für diese Methode der Marching Cubes Algorithmus erläutert, ein weit verbreitetes Surface Rendering Verfahren.
 
 % Vor- und Nachteile Tabelle?
 
@@ -559,29 +555,19 @@ Der Marching Cubes Algorithmus wird häufig zur prozeduralen Erzeugung von Terra
 \section{Vergleich der Methoden im Überblick}											 %
 %-------------------------------------------------------------
 
-\begin{longtable} {p{.2\textwidth}p{.1\textwidth}p{.25\textwidth}p{.35\textwidth}}
- 
-Methode & Ergebnis & Vorteile & Nachteile \\ 
-\toprule 
-Volumerisches Raycasting & Rendering  & Sehr gute Bildqualität & Rechenintensiv \\
-\midrule 
-Shear-Warp & Redering & Sehr schnell& Schlechtere Bildqualität\\
- & & & Benötigt viel Speicher\\
-\midrule 
-2D-Texture-Based Volume Rendering & Redering & Schnell & Artefakte, wenn aus 45° Winkel gesehen\\
- & &  Wird auch von alten Grafikkarten unterstützt & Abstände zwischen Texturen ist abhängig von Blickrichtung \\
- & & benötigt nur bilinieare Interpolation &  Artefakte bei Rotation\\ 
-\midrule 
-3D-Texture-Based Volume Rendering & Rendering & keine Artefakte durch Blickwinkel & langsamer durch trilineare Interpolation \\
- & &  Abstand zwischen Texturen konstant & Grafikkarte braucht 3D Texturen Unterstützung\\ 
- & & & Artefakte bei Rotation\\
-\midrule 
-Marching Cubes & 3D-Mesh &  &\\ 
-\bottomrule
-\caption{\label{tab:volumeRenderingVergleich}Vergleich von Methoden zur 3D Darstellung von Volumendaten}
-\end{longtable}
+Nachdem verschiedene Verfahren zur Visualisierung von Volumendaten vorgestellt wurden sollen sie an dieser Stelle miteinander verglichen werden. 
+Hierbei ist zuerst das Surface Rendering Verfahren Marching Cubes von den Volume Rendering Methoden abzugrenzen. Im Gegensatz zu diesen erzeugt der Algorithmus ein Mesh des Volumens. Dabei wird die Form des Objektes durch mehrere Polygonflächen abgebildet. Das Verfahren dient auch zur Visualisierung von inneren Organen, wie z.B. dem Herzen, wie Arbeiten, die in Abschnitt \ref{relatedAR} vorgestellt wurden zeigen. Das Erzeugte Mesh kann weiterverarbeitet werden. 
 
-\todo{Tabelle zu Text: Vergleich zwische geschwindigkeit, bildqualität und implementierungsaufwand}
+Die Volume Rendering Verfahren erzeugen dagegen nur eine zweidimensionale Projektion der Volumendaten. Sie unterscheiden dabei nicht zwischen Oberflächen, Objekten oder Umgebung. Jeder Voxel des Volumens wird gerentert. 
+Das Volume Raycasting Verfahren liefert dabei von den hier vorgestellten in der Regel die beste Bildqualität, da die in das Objekt geschossenen Strahlen jeden Voxel unverfälscht prüfen können. Der Prozess ist dafür entsprechend rechenintensiv.
+Durch die Verschiebung der Volumendaten bei der Shear-Warp Methode und dem zusätzlichen Renderingschritt, kann es zu einer fehlerhaften Wiedergabe der Isowerte kommen, was in eine schlechtere Bildqualität resultiert, als sie das Volume Raycasting bietet. Zudem wird mehr Speicher benötigt. Durch die Abfrage von hintereinander liegenden Werten ist das Verfahren allerdings um einiges schneller. Mit den zusätzlichen Schritten der Scherung und des Renderings in einen Buffer, bedeutet Shear-Warp aber auch einen höheren Implementierungsaufwand.
+Eine im Vergleich mangelhafte Bildqualität liefert das 2D-Texture-Based Volume Rendering. Die Darstellung ist dabei abhängig von der Blickrichtung der Kamera. Durch deren Veränderung können Artefakte entstehen, vor allem dann, wenn wenn der Blickwinkel annähernd 45° beträgt.
+Der Einsatz von 3D-Texuren behebt diese Probleme teilweise kann aber trotzdem Artefakte erzeuge, insbesondere während der Rotation.
+Beide Texture-Based Verfahren sind schneller als Volume Raycasting, da das Texture Mapping der Schnittflächen von der GPU unterstützt wird. Für die Implementierung von 3D-Texture-Based Volume Rendering  müssen dafür 3D-Texturen unterstützt werden. 
+\todo{Implementierun P?}
+
+
+
 %-------------------------------------------------------------
 \section{AR und VR}		
 \label{arVr}							 %
@@ -628,7 +614,7 @@ Zurzeit gibt es verschiedene AR-Systeme auf dem Markt, die sich teilweise in ihr
 Smartphones oder Tablets können, wie bereits erwähnt als Fenster in die erweiterte Realität dienen. Das Gerät benötigt dazu lediglich eine Kamera. Es gibt verschiedene SDKs und Frameworks zur Entwicklung von AR-Apps. Dazu gehören unter anderem \textit{ARKit} von \cite{arKit}, \textit{ARCore} von \cite{ARCore} und \textit{Vuforia} von \cite{vuforia}.
 
 Zu den binokularen HMDs zählen HMDs, die vor jedem Auge des Nutzers einen Bildschirm platzieren und so stereoskopisch dreidimensionale Inhalte simulieren. Im AR-Bereich sind dabei die \textit{HoloLens} von \cite{hololens} sowie die \textit{Magic Leap One} von \cite{magicLeap} nennenswerte Vertreter der Technologie. Beide Geräte haben durchsichtige Bildschirme und können unabhängig von einem Computer verwendet werden. 
-Der Bildschirm nimmt dabei allerdings nur einen Teil des Blickfeldes des Nutzers ein. Bei der \textit{HoloLens} beträgt das Sichtfeld 30°x17,5° \cite{hololensFOV}. Dies führt zu dem Effekt, dass der Nutzer die augmentierten Inhalte wie durch ein Fenster sieht, sodass sie häufig teilweise abgeschnitten sind. Auf diese Problematik wird im Kapitel \ref{ergebnisse} eingegangen. 
+Der Bildschirm nimmt dabei allerdings nur einen Teil des Blickfeldes des Nutzers ein. Bei der \textit{HoloLens} beträgt das Sichtfeld 30°x17,5° \cite{hololensFOV}. Dies führt zu dem Effekt, dass der Nutzer die augmentierten Inhalte wie durch ein Fenster sieht, sodass sie häufig teilweise abgeschnitten sind. Auf diese Problematik wird im Abschnitt \ref{ergebnisse} eingegangen. 
 
 An dieser Stelle sollen auch VR-Geräte, wie die \textit{HTC Vive Pro} (Vive Pro) von \cite{vivePro} genannt werden, die durch ihre eingebaute Kamera auch die Umgebung auf ihren Bildschirmen darstellen kann. Diese kann dabei auch mit virtuellen Inhalten angereicherts werden. 
 mARt ist wie im Kapitel \ref{konzept} beschrieben für ein HMD konzipiert.
@@ -760,18 +746,9 @@ Theoretisch kann jedes System mit jedem Eingabemedium verknüpft werden. Dies is
 %IMMERSION
 
 \paragraph{Controller}
-Zum einen gibt es Controller, die mit dem System zusammen hergestellt werden und die der Nutzer während der Verwendung des Systems in der Hand hält. Im Fall von VR-Systemen sind meistens zwei Controller vorhanden, einer für jede Hand. Diese sind jeweils mit einer Anzahl an Knöpfen oder auch Touchpads versehen, die der Nutzer bedienen kann. Im Aussehen sind sich Controller dieser Art recht ähnlich. In Abbildung \ref{img:VRController} ist der Controller des \textit{HTC Vive} Systems (\textit{Vive}) von \cite{vive} zusehen.
-\todo{Bild einfügen}
+Zum einen gibt es Controller, die mit dem System zusammen hergestellt werden und die der Nutzer während der Verwendung des Systems in der Hand hält. Im Fall von VR-Systemen sind meistens zwei Controller vorhanden, einer für jede Hand. Diese sind jeweils mit einer Anzahl an Knöpfen oder auch Touchpads versehen, die der Nutzer bedienen kann. Im Aussehen sind sich Controller dieser Art recht ähnlich. %In Abbildung \ref{img:VRController} ist der Controller des \textit{HTC Vive} Systems (\textit{Vive}) von \cite{vive} zusehen.
 Allerdings existieren auch Systeme für deren Bedienung nur ein Controller vorgesehen ist. Ein VR-Beispiel ist die \textit{Oculus Go} von \cite{oculus}, ein eigenständiges System für grafisch weniger anspruchsvolle Anwendungen. 
 Auch AR-Systeme, wie die \textit{Magic Leap} von \cite{magicLeap} oder die \textit{HoloLens} besitzen nur einen Controller. Diese haben im Vergleich zu den zuerst genannten VR-Controllern deutlich weniger Eingabemöglichkeiten. Im Falle der \textit{Hololens} handelt es sich um einen flachen Controller, den sich der Nutzer an den Finger steckt. Indem er Druck ausübt, kann er klicken. Daneben wird nur die Position und Rotation des Clickers verfolgt, durch die der Nutzer mit dem System interagieren kann. Das Gerät stellt damit eine von zwei möglichen handgesteuerten Eingabemethoden dar. 
-
-\paragraph{Gesten}
-Die andere ist die Steuerung über Gesten, die vor allem AR-Systeme verwenden.
-Die in den Systemen verbaute Kamera erfasst dabei die Hände des Nutzers in ihrem Blickfeld und erkennt bestimmte Handgesten, auf die dann reagiert wird. 
-Die \textit{HoloLens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Bloom} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
-Die derzeit angekündigte \textit{HoloLens 2} verfügt dagegen über eine Hand-Tracking-Funktionalität, die jede Bewegung der Hände, wie z.B. das Greifen von Objekten erkennt (vgl. \cite{hololens2}). 
-Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
-
 
 \begin{figure}[!htb]
 	\centering
@@ -782,6 +759,13 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 	\source{Übernommen von: \cite{Tang18}}
 \end{figure}
 \FloatBarrier
+
+\paragraph{Gesten}
+Die andere ist die Steuerung über Gesten, die vor allem AR-Systeme verwenden.
+Die in den Systemen verbaute Kamera erfasst dabei die Hände des Nutzers in ihrem Blickfeld und erkennt bestimmte Handgesten, auf die dann reagiert wird. 
+Die \textit{HoloLens} kann zum aktuellen Zeitpunkt zwei Hauptgesten erkennen, \textit{Bloom} und \textit{Air tap}, sowie die Bewegung der Hand. Durch die Verbindung von beidem können beispielsweise Objekte verschoben werden. In Abbildung \ref{img:hololensGestures} ist dargestellt, wie die Hololens-Gesten ausgeführt werden. 
+Die derzeit angekündigte \textit{HoloLens 2} verfügt dagegen über eine Hand-Tracking-Funktionalität, die jede Bewegung der Hände, wie z.B. das Greifen von Objekten erkennt (vgl. \cite{hololens2}). 
+Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \ref{img:magicGestures} abgebildet sind. 
 
 \begin{figure}[!htb]
 	\centering
