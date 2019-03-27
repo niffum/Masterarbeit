@@ -196,6 +196,7 @@ Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters geglättet,
 
 Diese wird im Assets-Verzeichnis des Projektes abgelegt. Sie werden in der Szene referenziert, um bei Bedarf an einen Shader übergeben zu werden, der den entsprechenden Datensatz darstellt. 
 
+\todo{Überschrift ändern}
 \section{Implementierung verschiedener Technologien/Plattformen}
 \label{plattformen}
 
@@ -222,8 +223,24 @@ Die Demo ist in Abbildung \ref{img:prototyp} dargestellt.
 \subsection{HoloToolkit}
 
 HoloToolkit, Input, Camera etc
+
+\subsection{Positionierung im Raum}
+\label{anchor}
+
+Im Kapitel \ref{konzept} wurde bereits erwähnt, dass die dauerhafte Positionierung im Raum, wie sie \textbf{U17} fordert, auf unterschiedliche Weise implementiert werden kann. 
+Die \textit{HoloLens} bietet diese Funktionalität in Form von Spatial oder World Anchors. Das Gerät besitzt einen internen Speicher für Anker, die von einer Anwendung angelegt werden, den sogenannten Anchor Store. Durch interne Prozesse bestimmt die \textit{HoloLens} in welchem Raum sie sich gerade befindet. Wird ein World Anchor in diesem Raum abgelegt, wird dessen Standort im Anchor Store gespeichert und behält somit immer seine Position im Raum, auch wenn der Nutzer sich bewegt und über mehrere Sitzungen hinweg. Nachdem ein World Anchor beim Start der Anwendung geladen wird, kann er an ein Objekt, wie ein 3D-Modell anhängt werden, sodass das Objekt an der Position des Ankers dargestellt wird. 
+
+Ohne die Verwendung eines World Anchors wird die 3D-Szene und alle Objekte darin an der \textit{HoloLens} ausgerichtet, die den Nullpunkt der Szene darstellt. Durch die unterschiedliche Ausrichtung kommt es bei der Positionierung der Darstellung in der AR-Anwendung zu Komplikationen, sobald zwischen 2D- und 3D-Szene gewechselt wird. 
+
+Der Anchor Store ist allerdings nur auf der \textit{HoloLens} verfügbar. Wie bereits erläutert wurde, wird die Anwendung im Rahmen dieser Arbeit aber nur auf der \textit{HoloLens} abgespielt, aber nicht für sie bereitgestellt. Dementsprechend ist ein Zugriff auf den Anchor Store nicht möglich. Dasselbe gilt für eine Verwendung der Anwendung in einem VR-System.
+
+Als Alternative dazu können die Daten mit Hilfe eines Markers in den Raum projiziert werden, wie es im Kapitel \ref{grundlagen} beschreiben wurde. \textit{Unity} bietet hierfür das \textit{Vuforia}-Plugin, welches genau das umsetzt. Hierzu können Marker definiert werden, die das Programm erkennt und die diesen zugeordneten GameObjects anzeigt. 
+\textit{Vuforia} ist für AR-Anwendungen gedacht und funktioniert durch eine Kamera, die den Marker erkennt. Deshalb könnte die Funktion von einer \textit{Vive} nicht genutzt werden, von einer \textit{Vive Pro} jedoch schon, da diese über einen Mixed Reality Modus verfügt. Auch \textit{HoloLens}-Anwendungen können \textit{Vuforia} nutzen. 
+Im zeitlichen Rahmen der Arbeit konnte dieses Funktionalität allerdings nicht mehr umgesetzt werden.
+
 \section{Implementierung der Nutzereingabe}
 Steam VR, normale scene
+
 
 \subsection{Verwendung der \textit{Leap Motion}}
 

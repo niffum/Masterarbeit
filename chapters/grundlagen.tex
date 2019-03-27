@@ -26,7 +26,6 @@ Während ein Patient sich in einem MRT-Scanner befindet, können die MRT-Bilder 
 	\includegraphics[width=0.9\linewidth]{images/relatedMedicine.png}
 	\caption{Abbildungen verschiedener AR-Systeme zur Visualisierung von MRT-Daten im operativen Kontext. a) Bildschirmanwendung zur Unterstützung von Kiefer-OPs von \cite{MISCHKOWSKI2006478}. b) Augmentierung eines Kopfphantoms durch ein tragbares Display von \cite{Wendt03}. c) Durch einen Projektor augementiertes Kopfphantom zum Einsatz in Gehirn-OPs von \cite{Tabrizi15}.}
 	\label{img:relatedMed}
-	\source{Die Bilder wurden aus den jeweiligen Arbeiten übernommen.}
 \end{figure}
 \FloatBarrier
 
@@ -78,7 +77,7 @@ Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von
 	\includegraphics[width=0.5\linewidth]{images/mri.jpg}
 	\caption{Ein geschlossenes MRT-Gerät. Auf die Liege im vorderen Bereich legt sich ein Patient, der dann während des Scans in die Röhre geschoben wird. }
 	\label{img:mri}
-	\source{Übernommen von: https://www.flickr.com/photos/11304375@N07/3081315619/}
+	\source{Quelle: https://www.flickr.com/photos/11304375@N07/3081315619/}
 \end{figure}
 \FloatBarrier
 
@@ -87,8 +86,9 @@ Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von
 Um die inneren Organe eines Patienten zu visualisieren, werden kleinste Teilchen seines Körpers in Bewegung versetzt, die gemessen werden kann. Im Falle einer MRT handelt es sich dabei um Wasserstoffprotonen. Diese haben eine Eigendrehung um sich selbst, den sogenannten Kernspin. Durch ihre positive Ladung, die durch den Kernspin in Bewegung ist, besitzen die Protonen weiterhin ein eigenes Magnetfeld, welches messbar ist. 
 Während einer MRT wird mit einer Hochfrequenz-Spule (HF-Spule), die in dem MRT-System verbaut ist, um den Körper des Patienten ein Magnetfeld erzeugt. Die Kernspin-Achsen der Wasserstoffprotonen richten sich an diesem aus. Anschließend wird in das Magnetfeld ein Hochfrequenzimpuls, die Larmorfrequenz, eingestrahlt. Durch diesen Impuls findet eine Synchronisation der Protonen statt, wobei einige um 180° gedreht werden. Kurz danach laufen die Protonen wieder auseinander und richten sich wieder am Magnetfeld aus. 
 Dadurch, dass alle Protonen in dieselbe Richtung zeigen (phasengleich sind), verstärken sie gegenseitig das Signal, dass sie abgeben. Das Signal wird schwächer, sobald sie wieder auseinander laufen (Dephasierung).
-Die Zeit, die die Protonen brauchen, um sich wieder am Magnetfeld auszurichten wird als Relaxtionzeit bezeichnet. Dabei wird zwischen T1- und T2-Relaxtion unterschieden.
+Die Zeit, die die Protonen brauchen, um sich wieder am Magnetfeld auszurichten wird als Relaxtionszeit bezeichnet. Dabei wird zwischen T1- und T2-Relaxtion unterschieden.
 Die Relaxionszeit ist dabei abhängig von der Zusammensetzung des umgebenden Gewebes. Das gemessene MR-Signal, das durch diese beeinflusst wird, ist also für verschiedene Gewebearten verschieden stark.
+Durch unterschiedliche Einstellungen von Frequenzen und Magnetfeldern wird ein Scan in verschiedenen Sequenzen durchgeführt. Die verwendete Sequenz wirkt sich auf die Darstellung des Gewebes auf den MRT-Bildern aus.
 
 \subsection{Erfassung dreidimensionaler Daten}
 
@@ -193,7 +193,7 @@ Obwohl die Vorgehensweisen also beinahe gleich sind, führen sie doch zu deutlic
 	\includegraphics[width=0.7\linewidth]{images/prepostclassification.png}
 	\caption{Vergleich zweier Volumen Renderings mit unterschiedlicher Klassifizierung. Durch die Verwendung von Pre-Klassifikation (links) entstehen Artefakte. Die Post-Klassifikation (rechts) liefert eine bessere Darstellung des Volumens.}
 	\label{img:prepost}
-	\source{Übernommen von: http://schorsch.efi.fh-nuernberg.de/roettger/index.php/VolumeRendering/Pre-AndPost-Classification}
+	\source{Quelle: http://schorsch.efi.fh-nuernberg.de/roettger/index.php/VolumeRendering/Pre-AndPost-Classification}
 \end{figure}
 \FloatBarrier
 
@@ -265,7 +265,7 @@ Die Verwendung einer Transferfunktion ist Teil der Klassifikation von Voxeln, da
 	\includegraphics[width=0.7\linewidth]{images/transferfunction.jpg}
 	\caption{Abbildung zweier gerenderter Volumen und der jeweils dafür verwendeten Transferfunktion. In den Darstellungen a) und c) wurde eine eindimensionale Transferfunktion verwendet. b) und c) benutzen zweidimensionale Tranfserfunktionen, wodurch verschiedene Bereiche des Volumens anders eingefärbt sind.}
 	\label{img:transferfunction}
-	\source{Übernommen von: \cite{Fernando04}}
+	\source{Quelle: \cite{Fernando04}}
 \end{figure}
 \FloatBarrier
 
@@ -292,7 +292,7 @@ Die Position der Vektoren und der winkelhalbierenden Schicht ist in Abbildung \r
 	\includegraphics[width=0.7\linewidth]{images/halfAngleSlice.png}
 	\caption{Durch Bestimmung der Winkelhalbierenden des Licht- und Kamerarichtungsvektors, wird die Lage der Schichten bestimmt, die sowohl aus Licht- als auch Kamerasicht gerendert werden. Bei einem Skalarprodukt $>=0$ wird der Kameravektor verwendet (a), bei einem negativen Skalarprodukt dessen Inverse (b).}
 	\label{img:halfAngleSlice}
-	\source{Übernommen von: \cite{Hadwiger06}}
+	\source{Quelle: \cite{Hadwiger06}}
 \end{figure}
 \FloatBarrier
 
@@ -308,7 +308,7 @@ Das Shading für ein realistisches Rendering von transluzenten Materialien wird 
 	\includegraphics[width=0.7\linewidth]{images/localGlobalIllumination.png}
 	\caption{Vergleich zweier Volumen, die mit lokaler Oberflächenbeleuchtung (links) und direkter Beleuchtung und Schatten (rechts) gerendert wurden.}
 	\label{img:localGlobalIll}
-	\source{Übernommen von: \cite{Hadwiger06}}
+	\source{Quelle: \cite{Hadwiger06}}
 \end{figure}
 \FloatBarrier
 
@@ -333,7 +333,7 @@ $I$ ist dabei die Farbe des beleuchteten Punktes, die bei Verwendung einer Trans
 	\includegraphics[width=0.7\linewidth]{images/Phong_components_version_4.png}
 	\caption{Visuelle Aufteilung des Phong-Beleuchtungsmodells in seine drei Komponenten. Die Farbe pro Pixel wird für jede Komponente einzeln berechnet und die Komponenten schließlich zusammen addiert.}
 	\label{img:phong}
-	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:Phong\_components\_version\_4.png}
+	\source{Quelle: https://commons.wikimedia.org/wiki/File:Phong\_components\_version\_4.png}
 \end{figure}
 \FloatBarrier
 
@@ -435,7 +435,7 @@ Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form 
 	\includegraphics[width=0.7\linewidth]{images/texture_2d3d.pdf}
 	\caption{Links: Texturen werden entlang des Volumens ausgerichtet. Rechts: Texturen werden entlang des Blickwinkels ausgerichtet.}
 	\label{img:2D3DTex}
-	\source{Übernommen von: https://www.evl.uic.edu/aej/524/lecture06.html}
+	\source{Quelle: https://www.evl.uic.edu/aej/524/lecture06.html}
 \end{figure}
 \FloatBarrier
 
@@ -454,7 +454,7 @@ Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sic
 	\includegraphics[width=0.7\linewidth]{images/textureStacks.png}
 	\caption{Texturen werden als Stapel in der 	XY-, YZ- und XZ-Ebene angeordnet.}
 	\label{img:textureBased}
-	\source{Übernommen von: \cite{Benassarou05}}
+	\source{Quelle: \cite{Benassarou05}}
 \end{figure}
 \FloatBarrier
 
@@ -472,7 +472,7 @@ Shear-Warp liefert eine hohe Bildqualität und ist dabei um einiges schneller al
 	\includegraphics[width=0.7\linewidth]{images/shearwarp.png}
 	\caption{Schematische Darstellung des Shear-Warp Verfahrens. Rechts: Ohne Verschiebung würden die Strahlen der Bildebene schräg auf das Volumen treffen. Mitte: Die Schichten des Volumen werden verschoben, sodass die Strahlen orthogonal darauf treffen. Das resultierende Bild ist verzerrt. Rechts: Das verzerrte Bild wird transformiert, um das Volumen korrekt darzustellen.}
 	\label{img:shearwarp}
-	\source{Übernommen von: \cite{SCHMIDT2000583}}
+	\source{Quelle: \cite{SCHMIDT2000583}}
 \end{figure}
 \FloatBarrier
 
@@ -533,7 +533,7 @@ Die Anzahl an Möglichkeiten einen Würfel aufzuteilen lässt sich errechnen. F�
 	\includegraphics[width=0.7\linewidth]{images/MarchingCubes.png}
 	\caption{Die 15 verschiedenen Möglichkeiten, wie eine Polygonfläche einen Würfel in zwei Bereiche teilen kann.}
 	\label{img:marchingCubes}
-	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:MarchingCubes.svg}
+	\source{Quelle: https://commons.wikimedia.org/wiki/File:MarchingCubes.svg}
 \end{figure}
 \FloatBarrier
 
@@ -602,7 +602,7 @@ Bei undurchsichtigen Bildschirmen nimmt eine Kamera die Umgebung auf und gibt si
 	\includegraphics[width=0.5\linewidth]{images/App_iSkull,_an_augmented_human_skull.jpg}
 	\caption{Eine tabletbasierte AR-Anwendung, die auf einem Marker des 3D-Modell  eines Schädels projiziert.}
 	\label{img:ARMarker}
-	\source{Übernommen von: https://commons.wikimedia.org/wiki/File:App\_iSkull,\_an\_augmented\_human\_skull.jpg}
+	\source{Quelle: https://commons.wikimedia.org/wiki/File:App\_iSkull,\_an\_augmented\_human\_skull.jpg}
 \end{figure}
 \FloatBarrier
 
@@ -653,7 +653,7 @@ In Abbildung \ref{img:vive} ist ein HMD und die dazugehörigen Controller währe
 	\includegraphics[width=0.5\linewidth]{images/vive.jpg}
 	\caption{Ein Nutzer trägt das HMD der \textit{Vive} und bedient dessen Controller.}
 	\label{img:vive}
-	\source{Übernommen von: https://sco.wikipedia.org/wiki/Virtual\_reality\#/media/File:Reality\_check\_ESA384313.jpg}
+	\source{Quelle: https://sco.wikipedia.org/wiki/Virtual\_reality\#/media/File:Reality\_check\_ESA384313.jpg}
 \end{figure}
 \FloatBarrier
 
@@ -706,7 +706,7 @@ In Abbildung \ref{img:mrtSoftware} ist die Oberfläche de \textit{OsiriX DICOM V
 	\includegraphics[width=0.7\linewidth]{images/osirix.jpg}
 	\caption{Die Benutzeroberfläche des \textit{OsiriX DICOM Viewers}. Der Scan eines Kopfes wird aus den drei klassischen Perspektiven angezeigt. Die Position der ausgewählten Sichtebene ist in den übrigen Fenstern farbig eingezeichnet.}
 	\label{img:mrtSoftware}
-	\source{Übernommen von: https://www.macupdate.com/app/mac/14362/osirix}
+	\source{Quelle: https://www.macupdate.com/app/mac/14362/osirix}
 \end{figure}
 \FloatBarrier
 
@@ -756,7 +756,7 @@ Auch AR-Systeme, wie die \textit{Magic Leap} von \cite{magicLeap} oder die \text
 	\includegraphics[width=0.7\linewidth]{images/hololensGestures.png}
 	\caption{Handgesten, die die \textit{HoloLens} erkennt.}
 	\label{img:hololensGestures}
-	\source{Übernommen von: \cite{Tang18}}
+	\source{Quelle: \cite{Tang18}}
 \end{figure}
 \FloatBarrier
 
@@ -773,7 +773,7 @@ Die \textit{Magic Leap} erkennt dagegen acht verschiedene Handgesten, die in \re
 	\includegraphics[width=0.7\linewidth]{images/magicleapGestures.jpg}
 	\caption{Handgesten, die die \textit{Magic Leap} erkennt.}
 	\label{img:magicGestures}
-	\source{Übernommen von: https://next.reality.news/news/new-magic-leap-gesture-documentation-offers-insight-into-hands-will-make-its-digital-world-come-alive-0183614/}
+	\source{Quelle: https://next.reality.news/news/new-magic-leap-gesture-documentation-offers-insight-into-hands-will-make-its-digital-world-come-alive-0183614/}
 \end{figure}
 \FloatBarrier
 

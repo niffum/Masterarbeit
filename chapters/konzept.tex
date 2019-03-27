@@ -193,6 +193,15 @@ Um diese Bedienung darzustellen, wird die Ebene als rechteckiger Rahmen angezeig
 Die Position der Berührung von Hand und Rahmen kann schwer zu erfassen sein, vor allem wenn die Ebenen der verschiedenen Achsen dicht beieinander liegen. Dazu kommt außerdem, dass noch andere Funktionen durch des Greifen des Volumens umgesetzt werden. Dazu gehört z.B. die Rotation, wie später noch beschrieben wird. Deshalb ist es sinnvoll dem Nutzer bestimmte Punkte zur Verfügung zu stellen, die er anfassen und somit die Ebenen steuern kann. Diese Punkte werden jeweils an den Eckpunkten der Ebenen angebracht und stehen in einiger Entfernung zum Volumen. Sie reagieren auf die Nähe von und den Kontakt mit Händen. Dies macht es für den Nutzer eindeutig nachvollziehbar, welche Auswirkungen seine Handbewegungen haben werden. 
 Die dreidimensionale Darstellung und deren Bedienelemente ist in Abbildung \ref{img:mARt3d} zu dargestellt.
 
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/mARt3d_2.png}
+	\caption{Die 3D-Darstellung eines MRT-Datensatzes mit angezeigter Maske. Die oberen Schieberegler kontrollieren Intentsität und Gammakorrektur des Renderings. Auch hier wird der markierte Bereich durch ein Icon ein- und ausgeblendet. Jede Ebene kann durch einen Anfassungspunkt verschoben werden.}
+	\label{img:mARt3d}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
+
 Dieses Bedienkonzept lässt sich allerdings nicht einfach in den zweidimensionalen Raum übertragen. Da jeweils nur die ausgewählte Schicht zu sehen ist und nicht das gesamte Volumen, hat der Nutzer keine Vorstellung davon wo in dessen Innern er sich befindet. Um ihm diese zu liefern, wird die Gesamtanzahl an schichten angezeigt, sowie die wievielte gerade ausgewählt ist. 
 Die Bewegung durch die Schichten erfolgt außerdem entlang der Z-Achse, die durch den zweidimensionalen Kontext allerdings wegfällt. D.h. der Wechsel zwischen den Schichten durch Anfassen und Ziehen eines Kontaktpunktes entlang dieser, wie eben beschrieben, würde nicht in das Konzept passen. 
 Weiterhin sollte es dem Nutzer möglich sein die Ebene ununterbrochen zu verschieben. Bei einer Bewegung entlang der Z-Achse müsste er sehr weit vorne anfangen und ist in der Tiefe durch die Länge seines Armes beschränkt. Es wäre möglich das Interaktionselement als Schieberegler in die XY-Achse zu legen, die Bedienung ist dabei allerdings oft ungenau und könnte dazu führen, dass der Nutzer den Fokus auf den Regler legt, anstatt auf das Bild, das er auswählen will. Eine bessere Variante stellt ein Rad dar, durch dessen Rotation man zwischen den Bildern wechseln kann. Dies entspricht eher der Bedienung einer Bildschirmanwendung mittels eines Mausrads und ist dem Nutzer somit bereits bekannt. Außerdem lässt sich so eine kontinuierliche Bewegung in beide Richtungen ermöglichen. Der Nutzer muss zur Steuerung lediglich die Hand und nicht den Arm bewegen, was eine genauere Manipulation erlaubt. 
@@ -206,8 +215,19 @@ Wie in Abschnitt \ref{maske} beschrieben, wird der markierte, vom Schlaganfall b
 Zur besseren Sichtbarkeit bestimmter Bereiche fordert Anforderung \textbf{U14}, dass die Helligkeit und der Kontrast der MRT-Bilder einstellbar sind. Dies ist über einen Schieberegler steuerbar, der sich oberhalb der Darstellung befindet. 
 Die Manipulation von Helligkeit und Kontrast wird dabei als Gammakorrektur im Shader implementiert. Der von Nutzer bestimmte Gammawert wird dazu als Exponent zur Bildfarbe genommen. 
 In der 3D-Darstellung wird außerdem ein weiterer Schieberegler angezeigt, über den der Nutzer bestimmen kann, wie intensiv Voxel dargestellt werden sollen. Diese Intensität beeinflusst die Opazität der Voxel. Ist ein hoher Wert eingestellt, werden die äußeren und damit dunkleren Voxel mit geringer Opazität dargestellt, sodass sie die weiter innen liegenden Voxel verdecken. Eine niedrige Intensität hat zur Folge, dass die äußeren Werte ausgeblendet werden, sodass die inneren Strukturen deutlicher zu erkennen sind. Auf diese Weise kann der Nutzer die Umgebung des Gehirns ausblenden und nur das Organ selbst darstellen.
+Die Bedienoberfläche zur Manipulation der 2D-MRT-Daten ist in Abbildung \ref{img:mARt2d} zu sehen.
 
 Obwohl nicht in den Anforderungen beschrieben, würde die Manipulation des gekennzeichneten Bereichs mit denselben Optionen dem Nutzer helfen die Darstellung seinen Ansprüchen anzupassen. Dies kann ebenfalls über Schieberegler gesteuert werden. Um die Anwendung überschaubar zu halten wurde allerdings davon abgesehen.
+
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/mARt2d_2.png}
+	\caption{Die zweidimensionale Darstellung von zwei MRT-Datensätzen, deren Manipulation nicht gleichgeschaltet ist. Über den oberen Schieberegler können Kontrast und Helligkeit per Gammakorrektur beeinflusst werden. Durch das Icon in der rechten Ecke kann der markierte Bereich ein- und ausgeblendet werden. Das Rad ermöglicht das Scrollen durch die Bildschichten. Die aktuelle Schicht wird in dessen Mitte angezeigt. }
+	\label{img:mARt2d}
+	\source{Eigene Darstellung}
+\end{figure}
+\FloatBarrier
 
 % Zoom
 Zu den geforderten Interaktionen gehört mit \textbf{U15} auch die Vergrößerung von Bildern, um dem Nutzer eine genaue Untersuchung zu erlauben. Bei der Vergrößerung handelt es sich im Grunde genommen um eine Skalierung des Bildes. Auch dies lässt sich gut mit einer direkten Handbewegung in Berührung mit der Darstellung umsetzten. Aus anderen Anwendungen sind Nutzern zwei Bedienmöglichkeiten dieser Funktionalität bekannt. Bei Bildschirmanwendungen wird oft das Mausrad zum Zoomen verwendet. Allerdings werden Räder bereits für andere Aktionen verwendet und ein mehrdeutiger Einsatz könnte zu Verwirrung führen. Von der Bedienung von Touchdisplays sind Nutzer weiterhin daran gewöhnt zu zoomen, indem sie den Bildschirm mit Daumen und Zeigefinger berühren und die Finger dann aufeinander zu oder voneinander weg bewegen. Diese Bewegung lässt sich gut in die Anwendung übertragen. Um ein eindeutigeres Ergebnis zu erhalten und dem Nutzer mehr Kontrolle zu geben werden statt zwei Fingern allerdings die beiden Hände verwendet. Wird das Bild von beiden Händen mit Daumen und Zeigefinder gegriffen kann es durch die Bewegung der Hände zueinander skaliert werden.
@@ -234,33 +254,16 @@ Die Bedienelemente zur Positionierung und Drehung der Ansicht sind in Abbildung 
 \end{figure}
 \FloatBarrier
 
+\todo{In implementierung und nach oben}
+Die Darstellung der MRT-Daten soll weiterhin nach \textbf{U17} die ihr gegebene Position behalten, sodass der Nutzer um sie herum gehen und von allen Seiten betrachten kann, oder an einem bestimmten Standpunkt verankern kann. Dies wäre vor allem in einem Multi-Nutzer-Szenario nützlich, in dem mehrere Nutzer gleichzeitig die Daten betrachten.
+Die Bedienweise sollte sich durch diese Funktionalität nicht ändern. Zu deren Umsetzung gibt es verschiedene Ansätze, die in Abschnitt \ref{anchor} erläutert werden.
+
 %Drehen
 Entsprechend Anforderung \textbf{U13} soll die volumetrische Darstellung der MRT-Daten gedreht werden können. 
 Die Drehung erfolgt dabei durch das Greifen des Volumens und Bewegen der Hand. Diese direkte Manipulation ist sehr intuitiv, wenn auch nicht unbedingt genau. Eine gradgenaue Drehung würde bei der Verwendung von mARt allerdings keinen erkennbaren Vorteil bringen. 
 Wird das Volumen gedreht, drehen sich die Kontrollpunkte zum Verschieben der Bildebenen mit, um die lokale Verbindung zwischen diesen und der Ebene, die sie manipulieren zu erhalten. Würden sie sich nicht bewegen, wäre es schwer vorauszusehen, welcher Kontrollpunkt welche Ebene beeinflusst. 
 Die UI wird von der Rotation allerdings nicht beeinflusst, da ihre Bedienung nur erschwert würde, wenn sie nicht annähernd orthogonal zur Blickrichtung des Nutzer verlaufen würde. 
 Ebenso wie die Skalierung, ist die Rotation eine temporäre Manipulation, die beim Szenenwechsel zurückgesetzt wird.
-
-
-Die Bedienoberfläche zur Manipulation der MRT-Daten ist in Abbildung \ref{img:mARt2d} zu sehen.
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=0.7\linewidth]{images/mARt2d_2.png}
-	\caption{Die zweidimensionale Darstellung von zwei MRT-Datensätzen, deren Manipulation nicht gleichgeschaltet ist. Über den oberen Schieberegler können Kontrast und Helligkeit per Gammakorrektur beeinflusst werden. Durch das Icon in der rechten Ecke kann der markierte Bereich ein- und ausgeblendet werden. Das Rad ermöglicht das Scrollen durch die Bildschichten. Die aktuelle Schicht wird in dessen Mitte angezeigt. }
-	\label{img:mARt2d}
-	\source{Eigene Darstellung}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=0.5\linewidth]{images/mARt3d_2.png}
-	\caption{Die 3D-Darstellung eines MRT-Datensatzes mit angezeigter Maske. Die oberen Schieberegler kontrollieren Intentsität und Gammakorrektur des Renderings. Auch hier wird der markierte Bereich durch ein Icon ein- und ausgeblendet. Jede Ebene kann durch einen Anfassungspunkt verschoben werden.}
-	\label{img:mARt3d}
-	\source{Eigene Darstellung}
-\end{figure}
-\FloatBarrier
 
 Die User Story \textbf{U04} erfordert es weiterhin, dass Bilder im direkten Vergleich nebeneinander betrachtet werden können. Dies gilt sowohl für die zwei- als auch dreidimensionale Darstellung der Daten. Die User Stories \textbf{U05} und \textbf{U06} erfordern außerdem eine Möglichkeit für den Nutzer aus den vorhandenen Daten einzelne auszuwählen, die angezeigt werden sollen, sowie die Daten jeweils gleichzeitig oder einzeln zu manipulieren. 
 Die Auswahl der Datensätze, sowie die Wahl ob diese synchron manipuliert werden sollen oder nicht, sind beide nicht Teil der direkten Manipulation des Bildes. Sie müssen deshalb nicht in dessen unmittelbarem Umfeld stehen und der Nutzer kann während dessen Bedienung auch auf diese den Fokus setzen.
@@ -287,18 +290,6 @@ In Abbildung \ref{img:handUI} ist das ausgeklappte Menü, an der linken Hand dar
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
-
-\todo{In implementierung und nach oben}
-Die Darstellung der MRT-Daten soll, wie in Anforderung \textbf{U16} beschrieben im Raum platzierbar sein und nach \textbf{U17} ihre Position dort behalten, sodass der Nutzer um sie herum gehen und von allen Seiten betrachten kann, oder an einem bestimmten Standpunkt verankern kann. Dies wäre vor allem in einem Multi-Nutzer-Szenario nützlich, in dem mehrere Nutzer gleichzeitig die Daten betrachten.
-Die \textit{HoloLens} bietet diese Funktionalität in Form von Spatial oder World Anchors. Das Gerät besitzt einen internen Speicher für Anker, die von einer Anwendung angelegt werden, den sogenannten Anchor Store. Durch interne Prozesse bestimmt die \textit{HoloLens} in welchem Raum sie sich gerade befindet. Wird ein World Anchor in diesem Raum abgelegt, wird dessen Standort im Anchor Store gespeichert und behält somit immer seine Position im Raum, auch wenn der Nutzer sich bewegt und über mehrere Sitzungen hinweg. Nachdem ein World Anchor beim Start der Anwendung geladen wird, kann er an ein Objekt, wie ein 3D-Modell anhängt werden, sodass das Objekt an der Position des Ankers dargestellt wird. 
-
-\todo{Deshalb szenenwechsel position in ar}
-\todo{ref anpassen}
-Der Anchor Store ist allerdings, wie beschrieben nur auf der \textit{HoloLens} verfügbar. Wie im Kapitel \ref{implementierung} erläutert wird, wird die Anwendung im Rahmen dieser Arbeit aber nur auf der \textit{HoloLens} abgespielt, aber nicht für sie bereitgestellt. Dementsprechend ist ein Zugriff auf den Anchor Store nicht möglich. Dasselbe gilt für eine Verwendung der Anwendung in einem VR-System.
-
-Als Alternative dazu können die Daten mit Hilfe eines Markers in den Raum projiziert werden, wie es im Kapitel \ref{grundlagen} beschreiben wurde. \textit{Unity} bietet hierfür das \textit{Vuforia}-Plugin, welches genau das umsetzt. Hierzu können Marker definiert werden, die das Programm erkennt und die diesen zugeordneten GameObjects anzeigt. 
-\textit{Vuforia} ist für AR-Anwendungen gedacht und funktioniert durch eine Kamera, die den Marker erkennt. Deshalb könnte die Funktion von einer \textit{Vive} nicht genutzt werden, von einer \textit{Vive Pro} jedoch schon, da diese über einen Mixed Reality Modus verfügt. Auch \textit{HoloLens}-Anwendungen können \textit{Vuforia} nutzen. 
-Im zeitlichen Rahmen der Arbeit konnte dieses Funktionalität allerdings nicht mehr umgesetzt werden.
 
 \subsection{Interaktion AR}
 
@@ -331,9 +322,7 @@ In einer realen Arbeitsumgebung ist diese Funktionalität mehr als sinnvoll. Wie
 Der Fokus soll dabei auf der Darstellung der Daten und der Interaktion mit ihnen liegen. Da der zur Entwicklung und zum Testen zur Verfügung stehende Datensatz gering ist, ist die Nützlichkeit in diesem Szenario nicht gegeben. Der benötigte Zeitaufwand zur Implementierung wird somit nicht durch einen Mehrwert gerechtfertigt.
 Weiterhin kann so die Komplexität und der Umfang der Anwendung gering gehalten werden, was es dem Nutzer erlaubt sich auf die Kernfunktionen zu konzentrieren. 
 
-Durch den eingeschränkten verfügbaren Datensatz, konnte auch \textbf{U18}, nicht umgesetzt werden, da für jeden Datensatz nur ein Scan zur Verfügung steht.
-
-\todo{scans und gewictungen irgendwo beschreiben}
+Durch den eingeschränkten verfügbaren Datensatz, konnte auch \textbf{U18}, nicht umgesetzt werden, da jeder Datensatz nur in einer Sequenz zur Verfügung steht.
 
 Trotzdem können mehrere Datensätze in mARt dargestellt werden. Diese werden durch Verwendung von externer Bildsoftware manuell in PNG-Dateien umgewandelt und in die Anwendung integriert, bevor diese gebaut wird. 
 Obwohl dieser manuelle Vorgang umständlich ist, ist er für den Zweck der Anwendung und den Umfang dieser Arbeit ausreichend.
