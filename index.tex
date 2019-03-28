@@ -60,16 +60,16 @@
 \makeindex
 
 
-
-
 %\addbibresource{bibtex.bib}
 
 \counterwithout{figure}{chapter}
 \counterwithout{footnote}{chapter}
 
+
 \titleformat{\chapter}[display]
    {\normalfont\large\bfseries}
-   {\chaptertitlename\ \thechapter}{1em}{\large}
+   {\begin{figure}[!htb]\ \centering \includegraphics[width=0.9\linewidth]{images/teaser.png}\ \caption{MRT-Daten mit maskiertem Bereich und ihre Darstellung in mARt als zwei- und dreidimensionale Abbildung. (Eigene Darstellung)}\  \end{figure}\ \chaptertitlename\ \thechapter}{1em}{\large}
+   
 \titleformat{\section}
    {\normalfont\large\bfseries}
    {\thesection}{1em}{}
@@ -134,6 +134,12 @@ In Zusammenarbeit mit einem Neurologen wird dazu eine Anwendung konzipiert und i
 \listoftodos
 
 \include{chapters/motivation}
+
+\titleformat{\chapter}[display]
+   {\normalfont\large\bfseries}
+   {\chaptertitlename\ \thechapter}{1em}{\large}
+   
+   
 \include{chapters/grundlagen}
 \include{chapters/anforderung}
 \include{chapters/konzept}
