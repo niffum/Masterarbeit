@@ -196,8 +196,8 @@ Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters geglättet,
 
 Diese wird im Assets-Verzeichnis des Projektes abgelegt. Sie werden in der Szene referenziert, um bei Bedarf an einen Shader übergeben zu werden, der den entsprechenden Datensatz darstellt. 
 
-\todo{Überschrift ändern}
-\section{Implementierung verschiedener Technologien/Plattformen}
+\todo{Überschrift P}
+\section{\textit{HoloLens} spezifische Implementierung}
 \label{plattformen}
 
 \subsection{\textit{HoloLens} Prototyp}
@@ -205,24 +205,19 @@ Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine pro
 Anhand dieser Demo sollte geprüft werden, ob die Interaktionsmöglichkeiten, die die \textit{HoloLens} bietet ausreichend sind, um einem Neurologen die effektive Untersuchung von MRT-Bildern zu ermöglichen.
 Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und Anforderungen eines Arztes an mARt noch weiter spezifiziert werden.  
 
-Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der \textit{HoloLens} zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig, z.B. zum Wechseln der Manipulationsart. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die \textit{Leap Motion} in das System integriert.
+Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der \textit{HoloLens} zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig. Der Wechsel zwischen den Manipulationsarten wurde über ein ausklappbares Menü realisiert. Alle Manipulationen erfolgen über \textit{Air tap} und das Bewegen der Hand. Bei eingeklapptem Menü kann der Nutzer so such die Darstellung scrollen. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die \textit{Leap Motion} in das System integriert.
 % Genauer auf Implementierung eingehen
 Der Prototyp wurde in der Szene \todo{Szene einfügen} realisiert und eine Datei zur Bereitstellung für die \textit{HoloLens} sowie ein Video der Anwendung ist im Ergänzungsmaterial zu finden.
 Die Demo ist in Abbildung \ref{img:prototyp} dargestellt.
 
-\todo{Bild austauschen}
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{images/hololens_prototyp.jpg}
+	\includegraphics[width=0.5\linewidth]{images/hololens_prototyp.jpg}
 	\caption{Aufnahme aus der \textit{HoloLens} von der \textit{HoloLens}-Demo, die Interaktion ausschließlich über \textit{HoloLens}-Gesten realisiert.}
 	\label{img:prototyp}
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
-
-\subsection{HoloToolkit}
-
-HoloToolkit, Input, Camera etc
 
 \subsection{Positionierung im Raum}
 \label{anchor}
