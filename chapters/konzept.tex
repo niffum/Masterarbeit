@@ -131,9 +131,8 @@ Es ist zu erwarten, dass sich AR-HMDs in den folgenden Jahren deutlich verbesser
 
 Eine AR-Anwendung eignet sich demnach besser für die Umsetzung. Um diese wiederzugeben wurde die \textit{HoloLens} von \cite{hololens} gewählt, da sie bereits 2015 erschienen und verfügbarer ist.
 Die Leistung des Gerätes ist allerdings nicht ausreichend, um die intensiven Berechnungen durchzuführen, die für das Volume Raycasting erforderlich sind. Auch der Einsatz der \textit{Leap Motion} erfordert eine hohe Rechenleistung.
-In einer Demo, in der die 3D-Darstellung auf der \textit{HoloLens} getestet wurde, wurde eine Framerate von 
-\todo{Framerate messen, anpassrn, welche framerate mensch braucgst} erreicht. 
-Dies ist nicht ausreichend, um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
+In einer Demo, in der das Volume Rendering auf der \textit{HoloLens} getestet wurde, wurde eine Framerate von 2-10 FPS gemessen, wobei die höhere Rate nur bei einer Darstellung mit kleiner Skalierung erreicht wird. \cite{fpsHololens} empfiehlt eine Framerate von 60 FPS, um die beste Erfahrung zu bieten.
+Die Framerate ist nicht ausreichend, um eine angenehme und effektive Arbeitsweise zu ermöglichen. 
 Hinzu kommt, dass der Einsatz der \textit{Leap Motion} es verhindert, dass die Anwendung für die \textit{HoloLens} bereitgestellt wird. Dies wird in Abschnitt \ref{kombination} erläutert. Die Anwendung wird deshalb lediglich an die \textit{HoloLens} übertragen, was allerdings eine Latenz mit sich bringt. 
 Um im Test eine stabile Darstellung und Interaktion zur Verfügung stellen zu können, wurde die Anwendung zusätzlich als VR-Anwendung umgesetzt. Die Funktionalität bleibt dabei gleich. 
 Durch Verwendung der \textit{Leap Motion} ist die Interaktion mit dem Modell in beiden Anwendungen identisch. 

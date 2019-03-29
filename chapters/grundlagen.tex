@@ -398,8 +398,6 @@ An dieser Stelle werden verschiedene Methoden erläutert, mit denen Volume Rende
 \subsection{Volumetrisches Raycasting}
 \label{rayCasting}
 
-\todo{REFERENZEN}
-
 \begin{figure}[!htb]
 	\centering
 	%https://de.wikipedia.org/wiki/Datei:Volume_Ray_Casting-de.svg
@@ -417,16 +415,19 @@ Weiterhin existieren die Techniken Raytracing und Raymarching, die ebenfalls auf
 Beim Raytracing werden dabei neben dem ursprünglichen Strahl, der das Objekt trifft noch weitere berechnet, welche vom Treffpunkt des Objekts, abhängig von seiner Oberflächenbeschaffenheit und seinem Material reflektiert und weiter durch die Szene verfolgt werden.
 Raymarching ist eine schnellere Version des Raycastings. 
 Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau berechnet. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung weniger genau ist, ist sie schneller als Raycasting.
+\cite{Hart89} haben das Verfahren beschrieben. 
 
+\todo{P Ref?} 
 %Raycasting bzw. Ray-Marching wird auch zum Rendering von Volumen benutzt.
 Bei allen Verfahren muss die Oberfläche bzw. die Form des Objektes bekannt sein, um bestimmen zu können, wann der Strahl in sie eintritt. Dies ist bei Volumendaten in der Regel nicht gegeben, da nicht nur das Objekt selbst, sondern auch dessen Umgebung darin gespeichert sind. Weiterhin werden durch die eben beschriebenen Prozesse nur die Oberflächen der Objekte gerendert, nicht aber ihr Inneres.
 
 Hier liegt der Unterschied zum Rendering von Volumen. Volumetrisches Raycasting oder volumetrisches Raymarching vereint die beiden beschriebenen Verfahren. Auch hier werden dabei Strahlen von der Kamera in die Szene geschossen. Um das Volumen zu rendern sind davon nur die Strahlen relevant, die das Volumen treffen. Und auch von dieser Teilmenge wird jeweils nur der Teil des Strahls berücksichtigt, der innerhalb der umgebenden Geometrie liegt. Für jeden Strahl wird deshalb der Ein- und Austrittspunkt errechnet. Innerhalb der Geometrie werden anschließend entlang des Strahls in bestimmten Abständen Voxel betrachtet. Für jeden Voxel wird per Klassifikation ein Farb- und Opazitätswert bestimmt und die Werte werden abhängig von der Komposition von hinten nach vorne oder von vorne nach hinten aufeinander addiert. Die Summen der Werte ergeben so eine dreidimensionale Darstellung des Volumens aus der Sicht der Kamera. Der Vorgang ist in Abbildung \ref{img:rayCasting} veranschaulicht.
+Raycasting zur Visualisierung von Volumen wurde von \cite{Weiskopf06} erläutert.
 
 
 \subsection{Texture-Based Volume Rendering}
 
-Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann übereinander geblendet werden. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den mit Hilfe von Texture Mapping die Textur gerendert wird.
+Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann übereinander geblendet werden. Dies wird von \cite{kniss02} beschrieben. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den mit Hilfe von Texture Mapping die Textur gerendert wird.
 Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form die Volumendaten vorliegen. In Abbildung \ref{img:2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dadurch wird verhindert, dass der Betrachter zwischen zwei Texturen hindurchsehen kann, wenn diese annähernd parallel zu seiner Blickrichtung stehen. Dies ist in Abbildung \ref{img:textureBased} dargestellt.
 
 \begin{figure}[!htb]
@@ -460,7 +461,7 @@ Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sic
 
 \subsection{Shear-Warp}
 
-Shear-Warp verfolgt den selben Ansatz wie das Raycasting. Anstatt die Strahlen allerdings von der tatsächlichen Kameraposition aus zu verschießen, werden die Strahlen orthogonal zu den Volumenschichten in das Volumen gefeuert. Auf diese Weise wird die Berechnung der Strahlen und die Komposition der Darstellung deutlich beschleunigt. 
+Shear-Warp wird von \cite{Lacroute94} beschrieben. Es verfolgt denselben Ansatz wie das Raycasting. Anstatt die Strahlen allerdings von der tatsächlichen Kameraposition aus zu verschießen, werden die Strahlen orthogonal zu den Volumenschichten in das Volumen gefeuert. Auf diese Weise wird die Berechnung der Strahlen und die Komposition der Darstellung deutlich beschleunigt. 
 Damit auch bei einem nicht orthogonalen Blickwinkel das Volumen korrekt dargestellt wird, wird vor dem Raycasting eine vom Blickwinkel abhängige Scherung auf die Volumendaten angewandt. In Abbildung \ref{img:shearwarp} ist dargestellt, wie die Scherung die einzelnen Schichten entsprechend des Blickwinkels verschiebt, um einen orthogonalen Einfallswinkel zu simulieren. 
 Das durch das Raycasting entstandene Bild wird zunächst in einen Buffer gerendert. Durch die Scherung ist das Bild zu diesem Zeitpunkt noch verzerrt. Deshalb wird es anschließend noch einmal transformiert, sodass eine korrekte Abbildung des Volumens auf die Bildschirmebene projiziert wird. In Abbildung \ref{img:shearwarp} ist zu sehen, wie das gerenderte Bild vor und nach der Transformation aussieht. 
 Shear-Warp liefert eine hohe Bildqualität und ist dabei um einiges schneller als Raycastings. 
@@ -587,7 +588,7 @@ Laut \cite{azuma97} zeichnet sich eine AR-Anwendung durch folgende Eigenschaften
 \item 3D-Objekte existieren in dreidimensionaler Realität
 \end{itemize}
 
-AR und VR verbindet eine ähnliche Geschichte. Die frühesten VR-Systeme waren nach heutiger Definition AR-Systeme. \todo{Referenz?}
+%AR und VR verbindet eine ähnliche Geschichte. Die frühesten VR-Systeme waren nach heutiger Definition AR-Systeme. \todo{Referenz?}
 %Geshcihte?
 Viele AR-HMDs funktionieren mit Stereoskopie (s. Abschnitt \ref{vr}). Die eben genannten Definition lässt allerdings auch andere Systeme zu. 
 Beispielsweise kann eine AR-Anwendung mit oder ohne einen Bildschirm konzipiert werden, der die Augmentierung darstellt. Im letzteren Fall werden dann meist Beamer o.Ä. verwendet, um die Objekte in die reale Welt zu projizieren. 
