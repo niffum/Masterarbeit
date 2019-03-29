@@ -169,10 +169,6 @@ Die einzelnen Voxel werden abhängig vom Blickwinkel des Nutzers durch eine Bere
 Die optischen Eigenschaften eines Voxels sind abhängig von seinem Isowert, sowie der verwendeten Transferfunktion und dem Shading. 
 Im Folgenden werden grundlegende Bestandteile des Volume Rendering erläutert.%Techniken, sowie verschiedene Verfahren der Umsetzung des Volume Rendering erläutert.
 
-\cite{Kaufman03}
-\cite{kniss02}
-\todo{Was ist mit diesen Referenzen?}
-
 \subsection{Klassifikation}
 \label{klassifikation}
 
@@ -301,8 +297,7 @@ Für jede Schicht wird ein eigener Pass durchlaufen.
 
 Indirekte Beleuchtung entsteht, wenn ein Objekt von Licht getroffen wird, das vorher von woanders reflektiert wurde. Bei einem Volumen beschreibt es dabei in der Regel die Streuung von Licht innerhalb des Volumens. Dabei wird dass Licht, nachdem es auf das Objekt getroffen ist, von dessen Inneren gebrochen, während es in dieses eindringt. Dies ist der Fall bei Objekten aus transluzentem Material, wie z.B. Wachs oder Haut.
 Das Shading für ein realistisches Rendering von transluzenten Materialien wird unter anderem von \cite{hansen02} und \cite{Hadwiger06} beschrieben.
-\todo{Phasenfunktion} 
-\todo{P}
+
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/localGlobalIllumination.png}
@@ -357,14 +352,13 @@ f(x, y, z + h) - f(x, y, z - h)
 \end{matrix} \right )
 \end{align}
 
-\todo{Convolution?}
 %\todo{On´The fly gradientenberechnung}
 %\todo{genau vorstellen}
 %\todo{Vergleich der versch. formen -> BUCH}
 
 %\cite{Correa11} haben verschiedene Methoden zur Bestimmung von Gradienten verglichen.
 %\todo{Was wird verglichen}
-\todo{Segmentierung}
+
 
 \subsection{Komposition}
 
@@ -417,7 +411,6 @@ Raymarching ist eine schnellere Version des Raycastings.
 Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau berechnet. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung weniger genau ist, ist sie schneller als Raycasting.
 \cite{Hart89} haben das Verfahren beschrieben. 
 
-\todo{P Ref?} 
 %Raycasting bzw. Ray-Marching wird auch zum Rendering von Volumen benutzt.
 Bei allen Verfahren muss die Oberfläche bzw. die Form des Objektes bekannt sein, um bestimmen zu können, wann der Strahl in sie eintritt. Dies ist bei Volumendaten in der Regel nicht gegeben, da nicht nur das Objekt selbst, sondern auch dessen Umgebung darin gespeichert sind. Weiterhin werden durch die eben beschriebenen Prozesse nur die Oberflächen der Objekte gerendert, nicht aber ihr Inneres.
 
@@ -565,7 +558,7 @@ Durch die Verschiebung der Volumendaten bei der Shear-Warp Methode und dem zusä
 Eine im Vergleich mangelhafte Bildqualität liefert das 2D-Texture-Based Volume Rendering. Die Darstellung ist dabei abhängig von der Blickrichtung der Kamera. Durch deren Veränderung können Artefakte entstehen, vor allem dann, wenn wenn der Blickwinkel annähernd 45° beträgt.
 Der Einsatz von 3D-Texuren behebt diese Probleme teilweise kann aber trotzdem Artefakte erzeuge, insbesondere während der Rotation.
 Beide Texture-Based Verfahren sind schneller als Volume Raycasting, da das Texture Mapping der Schnittflächen von der GPU unterstützt wird. Für die Implementierung von 3D-Texture-Based Volume Rendering  müssen dafür 3D-Texturen unterstützt werden. 
-\todo{Implementierun P?}
+Der Implementierungsaufwand des Verfahrens ist dabei abhängig von der gewählten Umgebung.
 
 
 
@@ -636,13 +629,12 @@ Um den Eindruck von Dreidimensionalität zu erzeugen, wird für binokulare HMDs 
 Der Blickwinkel auf ein Objekt hängt dabei von der Kopfposition des Nutzers ab. Um diesem die Möglichkeit zu geben, den Kopf zu bewegen und damit den Eindruck eines 3D-Objektes zu verstärken, wird die Position des Kopfes verfolgt. Auf diese Weise können die stereoskopischen Bilder an den Blickwinkel des Nutzers angepasst werden. Dieser erhält somit das Gefühl, er könne um das dargestellte Objekt herumgehen. 
 
 Die Bewegungsfreiheit der Nutzers war allerdings durch die damalige Technik eingeschränkt, denn das System, mit dem das HMD verbunden war, war zu schwer, um es zu tragen und deshalb fest installiert. 
-In den 90er Jahren gab es deshalb Entwicklungen in eine andere Richtung. Anstatt die virtuelle Realität nur direkt vor den Augen des Nutzers darzustellen, sollte diese um ihn herum erzeugt werden. Dazu wird der Nutzer in einem abgeschlossenen Raum platziert, an dessen Wände und Boden die Umgebung des jeweiligen Szenarios projiziert wurde. Die Immersion des Erlebnisses kann gesteigert werden, indem z.B. 3D-Brillen eingesetzt werden. Sogenannte CAVE-Systeme (Cave Automatic Virtual Environment) kommen auch heute noch zum Einsatz. Da sie allerdings sehr unhandlich und in ihrer Umsetzung kostspielig sind, eignen sie sich nicht als Massenprodukt oder für private Nutzung.
-\todo{Referenz
-}
+In den 90er Jahren gab es deshalb Entwicklungen in eine andere Richtung. Anstatt die virtuelle Realität nur direkt vor den Augen des Nutzers darzustellen, sollte diese um ihn herum erzeugt werden. Dazu wird der Nutzer in einem abgeschlossenen Raum platziert, an dessen Wände und Boden die Umgebung des jeweiligen Szenarios projiziert wurde. Die Immersion des Erlebnisses kann gesteigert werden, indem z.B. 3D-Brillen eingesetzt werden. Sogenannte CAVE-Systeme (Cave Automatic Virtual Environment) kommen auch heute noch zum Einsatz. Da sie allerdings sehr unhandlich und in ihrer Umsetzung kostspielig sind, wurden sie nicht als Massenprodukt oder für private Nutzung umgesetzt.
+
 Obwohl die Simulation einer virtuellen Realität oft auf die Täuschung visueller Wahrnehmung fokussiert ist, werden in vielen Systemen auch andere Sinne angesprochen, um das Erlebnis immersiver zu gestalten. Dies gilt vor allem für das Gehör. Dem Nutzer werden dabei über Lautsprecher oder Kopfhörer zur Erfahrung passende Geräusche vorgespielt.
 Eine größere Herausforderung stellt die Imitation von haptischen Reizen dar. Hierzu gibt es verschiedene Ansätze. Einer der einfacheren ist es dem Nutzer bei virtuellen Berührungen Vibrationen auszusetzen, z.B. über Eingabemedien in seinen Händen. Es gibt allerdings mehrere Konzepte, die haptische Impulse realistischer simulieren sollen, beispielsweise durch Handschuhe aus speziellem Material. %Referenz 
 Durch die Verwendung eines Laufbands, das auf die Laufbewegung des Nutzers reagiert soll die Bewegungsfreiheit innerhalb der Simulation erweitert werden. Omnidirektionale Laufbänder können sowohl zusammen mit HMDs als auch CAVEs eingesetzt werden.
-Über den Verlauf der Entwicklung von VR-Systemen wurde außerdem des Öfteren versucht Gerüche zu simulieren.  \todo{Referenz??}
+%Über den Verlauf der Entwicklung von VR-Systemen wurde außerdem des Öfteren versucht Gerüche zu simulieren.  \todo{Referenz??}
 Auf die Möglichkeiten der Nutzerinteraktion in VR-Systemen wird im Abschnitt \ref{VRInteraktion} genauer eingegangen.
 
 Heutzutage bestehen die meistgenutzten VR-Systeme aus einem HMD, welches über eine Kamera verfügt, Eingabemedien (z.B. Controllern), einem Trackingsystem, das die Position der ersten beiden Komponenten verfolgt und einem Computer, der die Komponenten miteinander verknüpft und auf dem die VR-Anwendung läuft. 

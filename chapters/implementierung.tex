@@ -12,8 +12,7 @@ Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeine
 Zur Implementierung von mARt wurde \textit{Unity} von \cite{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \cite{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit \textit{Unity} entwickelt. Weiterhin ermöglicht \textit{Unity} die Entwicklung von Software für die meisten Plattformen. \textit{Unity} bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
 
 \textit{Microsoft} empfiehlt weiterhin \textit{Unity} zur Entwicklung für \textit{HoloLens}-Software zu nutzen \cite{unityHololens} und bietet mit \textit{Mixed Reality Toolkit} (MRTK) von \cite{holoToolkit} ein Framework, das \textit{HoloLens}-Funktionen innerhalb von \textit{Unity} zur Verfügung stellt.
-\textit{Unity} verwendet C\# als Skriptsprache. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
-\todo{Referenzen?}
+\textit{Unity} verwendet C\# als Skriptsprache. Die Engine selbst ist allerdings in C++ geschrieben.
 %Wieso?
 
 mARt wurde in \textit{Unity} entwickelt und sollte dann sowohl für die \textit{HoloLens} und als VR-Anwendung gebaut werden. Die Anwendung konnte allerdings nicht für die \textit{HoloLens} bereitgestellt werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert.
@@ -47,14 +46,12 @@ Nach den Tags folgt die Definition eines Pass. Als Render Pass wird der gesamte 
 Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie oft ein Pass durchlaufen werden soll. 
 % Render setup ????
 Dann folgt der Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics)
-\todo{REFERENZ} geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
-Abhängig davon um welche Art von Shader es sich handelt, werden hier die notwendigen Funktionen implementiert. \textit{Unity} besitzt sogenannte Surface-Shader,  vereinfachte Shader, für die kein Beleuchtungsmodell implementiert werden muss. Andererseits können auch Unlit-Shader implementiert werden, in deren Pass Vertex- und Fragment-Shader definiert sind. 
+geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
+Abhängig davon um welche Art von Shader es sich handelt, werden hier die notwendigen Funktionen implementiert. \textit{Unity} besitzt sogenannte Surface-Shader, vereinfachte Shader, für die kein Beleuchtungsmodell implementiert werden muss. Andererseits können auch Unlit-Shader implementiert werden, in deren Pass Vertex- und Fragment-Shader definiert sind. 
 Das Volume Rendering der MRT-Daten erfolgt durch einen Unlit-Shader. Auf die genaue Implementierung wird im Folgenden eingegangen. 
 
 % https://docs.unity3d.com/Manual/SL-Shader.html
-\todo{ P
-REFERNZEN
-}
+
 \section{Grundlage der Implementierung}
 
 Die in Kapitel \ref{anforderung} beschriebenen Anforderungen repräsentieren den Umfang der zu implementierenden Anwendung. 
@@ -174,7 +171,7 @@ Die Koeffizienten werden im Shader durch Farben repräsentiert. Der diffuse Koef
 Um die Reflexion berechnen zu können müssen außerdem der Lichtvektor und die Normale bekannt sein.
 Wie bereits erläutert, wird der Gradient eines Voxels als Normale verwendet. 
 Der Vektor zum Licht wird aus der in \textit{Unity} eingebauten Shader-Variable \_WorldSpaceLightPos0 ausgelesen.
-\todo{P Unterscheidung direktionales und Punktlicht?}
+%\todo{P Unterscheidung direktionales und Punktlicht?}
 
 \subsection{Gradientenberechnung}
 \label{gradienten}
