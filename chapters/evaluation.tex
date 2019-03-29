@@ -8,7 +8,7 @@
 
 Zunächst werden in der folgenden Tabelle \ref{tab:evaluation} die implementierten Funktionen von mARt mit den in Kapitel \ref{anforderung} aufgestellten Anforderungen abgeglichen. Die Anforderung ist dabei über die entsprechende User Story referenziert. Zusätzlich wird diese stichwortartig beschrieben, um den Inhalt der Story wiederzugeben. Dazu ist angegeben, inwiefern die Anforderung erfüllt wurde, so wie eventuelle Anmerkungen. 
 
-\begin{longtable} {p{.125\textwidth}p{.2\textwidth}p{.07\textwidth}p{.5\textwidth}}
+\begin{longtable}{p{.125\textwidth}p{.15\textwidth}C{.1\textwidth}p{.52\textwidth}}
 \toprule
 User Story & Stichwort & Status & Anmerkungen \\
 \toprule
@@ -22,7 +22,7 @@ U04 & Min. zwei Datensätze anzeigen & Erfüllt & Die Anzahl der angezeigten Dat
 \midrule 
 U05 & Datensätze auswählen & Erfüllt & Der Nutzer kann aus zwei Datensätzen auswählen, die Teil der Anwendung sind.\\
 \midrule
-U06 & optionale gleichgeschaltete Manipulation & Erfüllt erfüllt & Maximal zwei Darstellungen können gleichzeitig manipuliert werden. \\
+U06 & optionale gleichgeschaltete Manipulation & Erfüllt & Maximal zwei Darstellungen können gleichzeitig manipuliert werden. \\
 \midrule 
 U07 & Scrolling auf min. einer Achse & Erfüllt & Die 2D-Darstellung kann auf der z-Achse durchlaufen werden. Dabei wird immer eine Schicht angezeigt. In der 3D-Darstellung können durch drei Ebenen Querschnitte im Volumen verschoben werden.\\
 \midrule 
@@ -57,7 +57,7 @@ U20 & Unterstützung des DICOM-Formats & Offen & Datensätze sind in Anwendung i
 \end{longtable}
 
 \section{Nutzertest}
-\label{nazuertest}
+\label{nutzertest}
 
 Um die Verwendung von mARt im Bereich der Schlaganfallbehandlung zu evaluieren wurde ein Nutzertest abgehalten. 
 Dabei wurden sowohl die AR- als auch die VR-Anwendung von einem Neurologen getestet. Für die Präsentation der AR-Anwendung wurde eine \textit{HoloLens} verwendet, für die VR-Anwendung eine \textit{Vive Pro} von \cite{vivePro}. Anschließend wurde der Tester befragt.
@@ -65,14 +65,14 @@ Dabei wurden sowohl die AR- als auch die VR-Anwendung von einem Neurologen getes
 % VR und AR Vergleich
 Obwohl die beiden Anwendungen von Funktionsumfang und Bedienung her gleich sind, wurde die Nutzung der VR-Anwendung als angenehmer beschrieben. 
 Sie wurde als flüssiger und stabiler wahrgenommen. 
-Dies ist vor allem auf die Latenz zurückzuführen, die entsteht, wenn die Inhalte vom Rechner auf die \textit{HoloLens} übertragen werden. Da die virtuellen Hände sich nicht in Echtzeit mit den realen bewegen, wird das Nutzungserlebnis negativ beeinflusst. 
+Dies ist vor allem auf die Latenz zurückzuführen, die entsteht, wenn die Inhalte vom Computer auf die \textit{HoloLens} übertragen werden. Da die virtuellen Hände sich nicht in Echtzeit mit den realen bewegen, wird das Nutzungserlebnis negativ beeinflusst. 
 Die Latenz führte auch dazu, dass Interaktionen teilweise unerwartet oder gar nicht ausgelöst wurden. 
 Ein weiterer Grund für fehlerhafte Interaktionen ist das eingeschränkte Blickfeld der \textit{HoloLens} (30°x17,5°). Wie bereits beschrieben wurde, werden Inhalte nur in diesem Blickfeld dargestellt. Der Bereich, in dem die \textit{Leap Motion} die Hände des Nutzers erfasst ist allerdings um einiges größer (150°x120°). Dadurch werden Gesten häufig auch dann registriert, wenn der Nutzer seine Hand außerhalb des eigenen Blickfeldes bewegt. Dies wird verstärkt, durch die Tatsache, dass die \textit{Leap Motion} mit einer Neigung nach unten auf der \textit{HoloLens} angebracht wird, wodurch sich ihr Erfassungsbereich ebenfalls verschiebt.
-Manipulationen, die vermehrt nicht erwartungskonform durchgeführt wurden waren die Skalierung von Ansichten, sowie die Rotation der 3D-Darstellung.
+Manipulationen, die vermehrt nicht erwartungskonform durchgeführt wurden, waren die Skalierung von Ansichten, sowie die Rotation der 3D-Darstellung.
 
 % Schwierigkeiten in der Bedienung 
-Die Schwierigkeiten bei der Bedienung waren teilweise ebenfalls in der VR-Anwendung festzustellen. Grundsätzlich war die Darstellung Reaktion des Programmes zwar stabiler, einzelne Interaktionen, wie das Verschieben von Schiebereglern funktionierten allerdings nicht immer entsprechend der Erwartung des Nutzers, sodass dieser mehrfach für eine Interaktion ansetzen musste. 
-Diese Fälle ließen sich allerdings kaum verlässlich reproduzieren und sich wahrscheinlich auf die \textit{Leap Motion} Technologie zurückzuführen.
+Die Schwierigkeiten bei der Bedienung waren zu Teilen ebenfalls in der VR-Anwendung festzustellen. Grundsätzlich war die Reaktion des Programmes zwar stabiler, einzelne Interaktionen, wie das Verschieben von Schiebereglern funktionierten allerdings nicht immer entsprechend der Erwartung des Nutzers, sodass dieser mehrfach für eine Interaktion ansetzen musste. 
+Diese Fälle ließen sich allerdings kaum verlässlich reproduzieren und sind wahrscheinlich auf die \textit{Leap Motion} Technologie zurückzuführen.
 
 Ein großer Kritikpunkt beider HMDs war außerdem der mangelnde Tragekomfort. Durch den Aufbau und das Gewicht der Brillen war das Tragen dieser für den Tester überaus unangenehm. 
 
@@ -91,5 +91,5 @@ Die Verwendung von mARt beschrieb der Tester weiterhin als unterhaltsam und inte
 
 Es wurde allerdings auch betont, dass ein Einsatz von mARt im derzeitigen Zustand auf Grund der Hardwarerestriktionen nicht realistisch ist und dass es die Funktion von derzeitigen Viewern nicht ersetzten kann. Gleichzeitig wurde aber das Potenzial der Anwendung hervorgehoben sowie die Vielzahl an Anwendungsfällen für die eine AR-Anwendung, wie mARt sinnvoll wäre, die auch in Abschnitt \ref{motivation} genannt wurden. 
 
-\section{Auswertung}
+%\section{Auswertung}
 % Was ist besser als vorher? Warum?

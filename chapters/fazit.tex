@@ -14,7 +14,7 @@ Anschließend wurde diskutiert, wie die einzelnen Funktionalitäten von mARt umg
 
 Das beschriebene Konzept wurde implementiert und einzelne relevante Punkte der Umsetzung wurden erläutert. Die Ergebnisse der Implementierung wurden präsentiert.
 
-Schließlich wurde die Anwendung mit den zuvor aufgestellten Anforderungen abgeglichen und von Neurologen getestet. 
+Schließlich wurde die Anwendung mit den zuvor aufgestellten Anforderungen abgeglichen und von einem Neurologen getestet. 
 Es konnte gezeigt werden, dass die Darstellung der dreidimensionalen Daten im Raum zu einem besseren Verständnis der Situation führt. Die direkte Interaktion mit der Darstellung trägt dazu bei. 
 
 \section{Ausblick}
@@ -44,15 +44,15 @@ Wie ebenfalls in Kapitel \ref{konzept} erläutert wurde, unterstützt der Protot
 
 Hinzu kommen die Erweiterungen, die in Abschnitt \ref{nutzertest} beschrieben wurden. 
 Abhängig von den konkreten Nutzungsszenarien werden sich außerdem weitere Anforderungen ergeben, um die mARt erweitert bzw. an die es angepasst werden muss. 
-Es wäre wünschenswert, dass diese sowie zukünftige ähnliche Arbeiten einem Test mit einer größeren Anzahl an Testern unterzogen wird, da dies noch mehr Aufschluss über die Bedürfnisse verschiedener Nutzer und die Möglichkeiten einer AR-Anwendung liefert diese zu erfüllen.
+Es wäre wünschenswert, dass diese sowie zukünftige ähnliche Arbeiten einem Test mit einer größeren Anzahl an Testern unterzogen wird, da dies noch mehr Aufschluss über die Bedürfnisse verschiedener Nutzer und die Möglichkeiten einer AR-Anwendung liefert.
 
 \subsection{Verbesserte 3D Visualisierung}
 
 Die Ergebnisse des Volume Rendering der MRT-Daten wurde in Abschnitt \ref{ergebnisse} demonstriert. Der Nutzertest hat gezeigt, dass die Darstellungen von ausreichender Qualität sind, um eine Diagnose durchzuführen und vor allem den Zustand des Gehirns nach einen Schlaganfall zu vermitteln. 
 Allerdings stellt das Volume Rendering für sich einen eigenen Forschungsbereich dar, der im Rahmen dieser Arbeit nicht abgedeckt werden konnte. Darin existieren viele Maßnahmen, um die Qualität der Darstellung weiter zu verbessern. Einige davon werden an dieser Stelle genannt. 
 
-Zum einen wurde als Rendering Verfahren das Volume RayCasting gewählt, da es sehr gute Ergebnisse liefert. Je nach dem in welche Richtung sich zukünftige Arbeiten entwickeln ist es allerdings sinnvoll weitere Verfahren zu testen, die beispielsweise weniger rechenintensiv sind. 
-Weiterhin wurde zwar eine Transferfunktion verwendet, um das Rauschen der Bilder zu beschränken allerdings ist diese nicht für jeden Datensatz optimal und es wird lediglich ihr Alphawert genutzt. 
+Zum einen wurde als Rendering Verfahren das Volume RayCasting gewählt, da es sehr gute Ergebnisse liefert. Je nachdem in welche Richtung sich zukünftige Arbeiten entwickeln, ist es allerdings sinnvoll weitere Verfahren zu testen, die beispielsweise weniger rechenintensiv sind. 
+Weiterhin wurde zwar eine Transferfunktion verwendet, um das Rauschen der Bilder zu beschränken. Allerdings ist diese nicht für jeden Datensatz optimal und es wird lediglich ihr Alphawert genutzt. 
 Idealerweise sollte dem Nutzer die Möglichkeit gegeben werden die Transferfunktion zu beeinflussen, wie es in Kapitel \ref{konzept} bereits erläutert wurde. Dies würde die Darstellungsqualität erhöhen und dem Nutzer zu einem Rendering nach seinen Ansprüchen verhelfen. 
 Um das Rendering plastischer und realer erscheinen zu lassen kann außerdem ein globales Beleuchtungsmodell implementiert werden, wie es in Kapitel \ref{grundlagen} beschrieben ist. 
 Da die Qualität des Renderings von den Bilddaten abhängt, können diese schließlich bereinigt bzw. aufgearbeitet werden. Wie in Abschnitt \ref{ergebnisse} dargelegt wurde, besteht in den gegebenen Datensätzen ein hohes Maß an Rauschen. Dieses könnte auf verschiedenen Wegen herausgefiltert werden, bevor die Bilder gerendert werden. Zudem könnte eine zusätzliche Interpolation vorgenommen werden, die die großen Abstände zwischen den einzelnen Schichten besser überbrückt als es bisher der Fall ist. Damit könnten Bildartefakte reduziert werden. 
@@ -62,7 +62,7 @@ Für die Verbesserung der MRT-Daten könnte beispielsweise maschinelles Lernen e
 \label{hololens2Fazit}
 
 Im Rahmen dieser Arbeit wurde mARt als AR-Anwendung nur auf der \textit{HoloLens} getestet. 
-Die Verwendung der Anwendung zusammen mit anderen AR-Systemen, könnte noch mehr Aufschluss über die Möglichkeiten von AR-Systemen im medizinischen Bereich bieten. 
+Die Verwendung der Anwendung zusammen mit anderen AR-Systemen, könnte noch mehr Aufschluss über die Möglichkeiten von AR-Systemen im medizinischen Bereich geben. 
 mARt könnte dabei auf vergleichbaren AR-Systemen, wie der \textit{Magic Leap} von \cite{magicLeap} getestet werden.
 Da die Entwicklung solcher Systeme momentan weiter fortschreitet, kommen allerdings auch noch nicht erschienene Geräte in Betracht.
 

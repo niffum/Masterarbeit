@@ -3,19 +3,20 @@
 \chapter{Implementierung}
 \label{implementierung}
 
+Nachdem das Konzept der Anwendung beschrieben wurde, wird in den folgenden Abschnitten auf die Implementierung von mARt eingegangen. 
+
 \section{Aufbau Struktur des Projektes}
 
-Wie im Kapitel \ref{konzept} erläutert stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der Leistungsfähigkeit der \textit{HoloLens}, wurde die Anwendung sowohl für die \textit{HoloLens} als auch als VR-Anwendung implementiert. Die AR-Anwendung bietet dabei nicht die volle Funktionalität und stellt die dreidimensionale Visualisierung nur beispielhaft dar. Sie ermöglicht dagegen eine interaktive Echtzeit-Darstellung des Volumens. In beiden Fällen handelt es sich allerdings im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
-Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen Spiele-Engines verwendet, da sie als Oberfläche dienen, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
-Zur Implementierung von mARt wurde \textit{Unity} von \cite{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \cite{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit \textit{Unity} entwickelt. Weiterhin ermöglicht Unity die Entwicklung von Software für die meisten Plattformen. \textit{Unity} bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
+Wie im Kapitel \ref{konzept} erläutert wurde, stellt mARt jeweils eine zwei- und dreidimensionale Darstellung der MRT-Daten zur Verfügung, zwischen denen gewechselt werden kann. Auf Grund der beschriebenen Hindernisse bezüglich der Leistungsfähigkeit der \textit{HoloLens} wurde die Anwendung sowohl für die \textit{HoloLens}, als auch als VR-Anwendung implementiert. Die AR-Anwendung kann dabei nicht für die \textit{HoloLens} bereitgestellt werden. Aus diesem Grund wird die nur auf dem Gerät abgespielt. In beiden Fällen handelt es sich im Kern um die selbe Anwendung, d.h. die Software sollte für beide Gräte entwickelt werden. 
+Sowohl für die Entwicklung von VR- als auch AR-Anwendungen werden im Allgemeinen Spiele-Engines verwendet, da sie einen Editor bieten, um interaktive 3D-Anwendungen zu erzeugen, die in Echtzeit funktionieren. 
+Zur Implementierung von mARt wurde \textit{Unity} von \cite{unity} verwendet. Die Engine gehört zu den meist genutzten auf dem Markt. Laut \cite{unityRelations} selbst, werden 60\% von AR/VR Inhalten mit \textit{Unity} entwickelt. Weiterhin ermöglicht \textit{Unity} die Entwicklung von Software für die meisten Plattformen. \textit{Unity} bietet viele nützliche Funktionen zur Entwicklung von interaktiven Anwendungen und wird außerdem von einer großen  Gemeinschaft genutzt, sodass neben einer detaillierten Dokumentation auch über Foren und Webartikel hilfreiche Informationen zur Entwicklung zur Verfügung stehen.
 
-\textit{Microsoft} empfiehlt weiterhin \textit{Unity} zur Entwicklung für \textit{HoloLens}-Software zu nutzen \cite{unityHololens} und bietet mit \textit{Mixed Reality Toolkit} (MRTK) \cite{holoToolkit} ein Framework, das \textit{HoloLens}-Funktionen innerhalb von \textit{Unity} zur Verfügung stellt.
-\textit{Unity} verwendet C\# als Skriptsprache, was vor allem den Einstieg in die Programmierung erleichtert. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
+\textit{Microsoft} empfiehlt weiterhin \textit{Unity} zur Entwicklung für \textit{HoloLens}-Software zu nutzen \cite{unityHololens} und bietet mit \textit{Mixed Reality Toolkit} (MRTK) von \cite{holoToolkit} ein Framework, das \textit{HoloLens}-Funktionen innerhalb von \textit{Unity} zur Verfügung stellt.
+\textit{Unity} verwendet C\# als Skriptsprache. Die Engine selbst ist allerdings in C++ geschrieben, wodurch effiziente Berechnungen zur Laufzeit ermöglicht werden.
 \todo{Referenzen?}
 %Wieso?
 
-mARt wurde in \textit{Unity} entwickelt und sollte dann sowohl für die \textit{HoloLens} und als VR-Anwendung gebaut werden. Die Anwendung konnte allerdings nicht für die \textit{HoloLens} bereitgestellt werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert. Auf die Entwicklung für die unterschiedlichen Plattformen wird im Abschnitt \ref{plattformen} näher eingegangen.
-
+mARt wurde in \textit{Unity} entwickelt und sollte dann sowohl für die \textit{HoloLens} und als VR-Anwendung gebaut werden. Die Anwendung konnte allerdings nicht für die \textit{HoloLens} bereitgestellt werden. Diese Problematik wird in Abschnitt \ref{kombination} erläutert.
 Um die \textit{Unity}-Anwendung auf dem VR-System abzuspielen, wird die \textit{SteamVR}-Software von \cite{steam} in das Projekt integriert. Um die Anwendung starten zu können muss sie auf dem jeweiligen Computer installiert sein.
 
 \subsection{\textit{Unity} Projekt}
@@ -24,41 +25,40 @@ Um die \textit{Unity}-Anwendung auf dem VR-System abzuspielen, wird die \textit{
 
 Da mARt sich in die beiden Szenarien einer zwei- und dreidimensionalen Darstellung unterteilen lässt existiert für jedes Szenario eine Szene.
 Viele der Funktionen sind allerdings ähnlich oder gleich, weshalb manche Skripte in beiden Szenen verwendet werden. 
-Zusätzlich zu den beiden Szenen existiert eine Startszene Preload.unity, in der ein GameObject namens appState liegt, über das bestimmt werden kann, welche Szene zuerst geladen werden soll. In diesem Objekt werden auch die Zustände der Szenen gespeichert und so Manipulationen übertragen.
-Die Szenen für die 2D-Darstellung heißen main\_2D.unity und main\_2D\_AR.unity. Die für die 3D-Darstellung main\_3D.unity und main\_3D\_AR.unity.
+Zusätzlich zu den beiden Szenen existiert eine Startszene Main/Preload.unity, in der ein GameObject namens appState liegt, über das bestimmt werden kann welche Szene zuerst geladen werden soll. In diesem Objekt werden auch die Zustände der Szenen gespeichert und so Manipulationen übertragen.
+Die Szenen für die 2D-Darstellung sind 2DUI/main\_2D.unity und 2DUI/main\_2D\_AR.unity. Die für die 3D-Darstellung 3DUI/main\_3D.unity und 3DUI/main\_3D\_AR.unity.
 
 
 
 \section{Shader in Unity}
 
-Wie in Kapitel \ref{konzept} beschrieben, wird das Volume Rendering der MRT-Daten in einem Shaders umgesetzt. An dieser Stelle soll ein Überblick über die Funktionsweise und den Aufbau von \textit{Unity}-Shadern gegeben werden. 
+Wie in Kapitel \ref{konzept} beschrieben wurde, wird das Volume Rendering der MRT-Daten in einem Shaders umgesetzt. An dieser Stelle soll ein Überblick über die Funktionsweise und den Aufbau von \textit{Unity}-Shadern gegeben werden. Aufbau und Funktionsweise sind in der \textit{Unity}-Dokumentation von \cite{unityDoku} beschrieben.
 
-Wie ein Objekt in einer Szene gerendert wird hängt in \textit{Unity} davon ab, welches Material diesem zugewiesen ist. Das Material fungiert dabei als eine Art Behälter für sämtliche Parameter, die das Aussehen des Objektes beeinflussen, wie z.B. die Textur oder Farbe. Welche Parameter das Material besitzt und wie diese miteinander verrechnet werden bestimmt der Shader des Materials. Innerhalb des Shaders wird in Abhängigkeit zu den diesem übergebenen Werten die Farbe für jeden Pixel errechnet. 
+Wie ein Objekt in einer Szene gerendert wird hängt in \textit{Unity} davon ab, welches Material diesem zugewiesen ist. Das Material fungiert dabei als Behälter für sämtliche Parameter, die das Aussehen des Objektes beeinflussen, wie z.B. die Textur oder Farbe. Welche Parameter das Material besitzt und wie diese miteinander verrechnet werden bestimmt der Shader des Materials. Innerhalb des Shaders wird in Abhängigkeit zu den diesem übergebenen Werten die Farbe für jeden Pixel errechnet. 
 % https://docs.unity3d.com/Manual/Shaders.html
 
-Shader in \textit{Unity} sind in der \textit{Unity} eigenen Shader-Sprache \textit{Shader Lab} geschrieben. Im Shader ist definiert, welche Eigenschaften dieser besitzt und welche Sub- und Fallback-Shader er verwendet.
-Die Eigenschaften sind die eben genannten Parameter, deren Werte dann über das Material gesetzt werden. Hier werden deren Namen, Typen, ihr Wertebereich, sowie ihre Standardwerte definiert. 
+Shader in \textit{Unity} sind in der \textit{Unity} eigenen Shader-Sprache Shader Lab geschrieben. Im Shader ist definiert welche Eigenschaften dieser besitzt und welche Sub- und Fallback-Shader er verwendet.
+Die Eigenschaften sind die eben genannten Parameter, deren Werte dann über das Material gesetzt werden. Hier werden deren Namen, Typen, ihr Wertebereich sowie ihre Standardwerte definiert. 
 
 Schließlich werden im Shader auch sogenannte Subshader definiert, die den eigentlichen Shader-Code enthalten.
 Ein Shader kann mehrere Subshader enthalten für den Fall, dass einer der Shader von einem Gerät nicht unterstützt wird. Wird keiner unterstützt wird der Fallback-Shader verwendet. 
-Neben dem Shader-Code besitzt ein Subshader Tags, die bestimmen, wann und wie ein Shader von der Rendering Engine gerendert werden soll. Dies kann sich beispielsweise auf die Reihenfolge beziehen, in der Objekte gerendert werden oder ob ein Objekt Schatten werfen soll. 
+Neben dem Shader-Code besitzt ein Subshader Tags, die bestimmen wann und wie ein Shader von der Rendering-Engine gerendert werden soll. Dies kann sich beispielsweise auf die Reihenfolge beziehen, in der Objekte gerendert werden oder ob ein Objekt Schatten werfen soll. 
 Nach den Tags folgt die Definition eines Pass. Als Render Pass wird der gesamte Prozess bezeichnet, der durchlaufen wird, um einen Pixel zu rendern. Angefangen bei der Berechnung einzelner Vertices eines Meshes über den Vertex-Shader bis zum Fragment-Shader. D.h. im Pass werden in verschiedenen Methoden die tatsächlichen Berechnungen beschrieben, die zum Aussehen jedes Pixels führen. 
 Auch ein Pass kann zunächst wieder Tags enthalten, die bestimmen wann oder wie oft ein Pass durchlaufen werden soll. 
 % Render setup ????
-Dann folgt der Code Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics)
+Dann folgt der Abschnitt, der den Shader-Code enthält. Dieser ist in Cg (C for Graphics)
 \todo{REFERENZ} geschrieben, einer Shading-Sprache, die syntaktisch stark HLSL (High-Level Shading Language) ähnelt. 
-Abhängig davon, um welche Art von Shader es sich handelt werden hier die notwendigen Funktionen implementiert. \textit{Unity} besitzt sogenannte Surface-Shader, ein vereinfachter Shader, für den kein Beleuchtungsmodell implementiert werden muss. Andererseits können auch Vertex-Fragment-Shader implementiert werden, die auch Unlit-Shader heißen. 
-
-Das Volume Rendering der MRT-Daten erfolgt durch einen Vertex-Fragment-Shader auf die genaue Implementierung wird im Folgenden eingegangen. 
+Abhängig davon um welche Art von Shader es sich handelt, werden hier die notwendigen Funktionen implementiert. \textit{Unity} besitzt sogenannte Surface-Shader,  vereinfachte Shader, für die kein Beleuchtungsmodell implementiert werden muss. Andererseits können auch Unlit-Shader implementiert werden, in deren Pass Vertex- und Fragment-Shader definiert sind. 
+Das Volume Rendering der MRT-Daten erfolgt durch einen Unlit-Shader. Auf die genaue Implementierung wird im Folgenden eingegangen. 
 
 % https://docs.unity3d.com/Manual/SL-Shader.html
-\todo{
+\todo{ P
 REFERNZEN
 }
 \section{Grundlage der Implementierung}
 
-Die in Kapitel \ref{anforderung} beschriebenen Anforderungen stellen den Umfang der zu implementierenden Anwendung dar. 
-Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Darstellung durch Raycasting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
+Die in Kapitel \ref{anforderung} beschriebenen Anforderungen repräsentieren den Umfang der zu implementierenden Anwendung. 
+Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Darstellung durch Volume Raycasting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
 Wie in Kapitel \ref{grundlagen} beschrieben wurde, gibt es bereits viele Implementierungen von Volume Raycasting zur Visualisierung von medizinischem Bildmaterial. 
 Die dort genannten Unity-spezifischen Lösungen sind allerdings kostenpflichtig und/oder ihre Codebasis ist nicht einsehbar. Es wäre allerdings von Vorteil die Kontrolle über die Implementierung der 3D-Darstellung zu haben, um so die Möglichkeit zu haben, sie den Anforderungen entsprechend anpassen zu können.
 Aus diesem Grund wurde die Open-Source-Implementierung von \cite{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet, die unter der MIT-Lizenz steht. \todo{P}
@@ -71,27 +71,27 @@ Im Rahmen der Arbeit wurden folgende Bestandteile implementiert:
 \item Anpassung der Bedienelemente an 3D-Szene
 \item Anwendungslogik
 \end{itemize}
-Der verwendete Code ist im Projekt markiert.
+Der fremde Code ist im Projekt gekennzeichnet.
+
 \section{Volume Rendering}
 
-Wie in Kapitel \ref{konzept} beschrieben, wurde der 3D-Darstellung des Gehirns mit Hilfe von Volume Raycasting umgesetzt. 
-
+Wie in Kapitel \ref{konzept} beschrieben wurde, wurde die 3D-Darstellung des Gehirns mit Hilfe von Volume Raycasting umgesetzt. 
 Im Abschnitt \ref{rayCasting} wurde der theoretische Vorgang dieser Technik beschrieben. Dieser Abschnitt fokussiert sich auf die Implementierung der einzelnen Schritte.
 
-Die volumetrische Darstellung des Gehirns wird im Grunde genommen mit nur 3 Skripten erzeugt. Zuerst wird in VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
-Die Parameter werden an den Shader übergeben, in dem das Rendering definiert ist. Der Cg-Code, der den Vertex- und Fragment-Shader implementiert ist dabei in ein eigenes Script ausgelagert.
+Die volumetrische Darstellung des Gehirns wird mit drei Skripten erzeugt. Zuerst wird in VolumeRendering/Scripts/VolumeRendering.cs das Mesh des Würfeln generiert. Hier werden auch die Parameter aktualisiert, die für das Rendering relevant sind, wie z.B. die 3D-Textur oder Farbe, sowie die Parameter, die durch die Nutzerschnittstelle manipuliert werden können. 
+Die Parameter werden an den Shader VolumeRendering/Shader/VolumeRendering\_Diffuse\_Mask.shader übergeben, in dem das Rendering definiert ist. Der Cg-Code, der den Vertex- und Fragment-Shader implementiert ist dabei in ein eigenes Skript VolumeRendering/Shader/VolumeRendering\_Diffuse\_Mask.cginc ausgelagert.
 
 \subsection{Volume Raycasting}
 \label{3dImplementierung}
-Im Fragment-Shader des Volume\_DiffuseWITHMask.sh Shaders
-\todo{umbenennen} wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt geschossen wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Würfeln zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
+Im Fragment-Shader des VolumeRendering/Shader/Volume\_Diffuse\_Mask.sh Shaders
+\todo{umbenennen} wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt geschossen wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Quaders zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
 
 %-----------Intersect-----------
 %Dies geschieht indem zuerst die Inverse der Strahlrichtung ermittelt wird. Die Inverse eines Vektors $v$ ist $v^-1$ und da $v^-x=\frac1}{v^x}$, ergibt sich die Inverse des Richtungsvektors des Strahls indem $1$ durch die dividiert wird.
 % AABB, axis aligend etc? intersection formula REFERENZ
-Um die Schnittpunkte des Strahls zu ermitteln nimmt man an, dass die sechs Seiten des Würfels auf jeweils sechs Ebenen liegen, wobei davon zwei immer parallel sind. Zuerst werden jetzt alle Schnittpunkte des Strahls mit diesen Ebenen berechnet und dann geprüft, ob die Schnittpunkte innerhalb des Würfels liegen.
+Um die Schnittpunkte des Strahls zu ermitteln nimmt man an, dass die sechs Seiten des Würfels auf jeweils sechs Ebenen liegen, wobei davon zwei immer parallel sind. Zuerst werden alle Schnittpunkte des Strahls mit diesen Ebenen berechnet und dann geprüft, ob die Schnittpunkte innerhalb des Würfels liegen.
 Der Würfel wird durch zwei Eckpunkte beschrieben. Da der Würfel Koordinaten von -0,5 bis 0,5 hat können wir hierfür die jeweils kleinsten und größten Koordinaten nutzen. 
-Die Schnittpunkte des Strahls, mit den x-, y- und z-Ebenen ergeben sich durch das Umstellen der Formel, die einen Strahl beschreibt:
+Die Schnittpunkte des Strahls, mit den X-, Y- und Z-Ebenen ergeben sich durch das Umstellen der Formel, die einen Strahl beschreibt:
 
 \begin{align}
 p=r_{Ursprung}+t*r_{Richtung}
@@ -106,7 +106,7 @@ t=(p-r_{Ursprung})/r_{Richtung}
 \end{align}
 
 Für $p$ werden jeweils die beiden Eckpunkte des Würfels, die jeweils auf drei der Würfelebenen liegen, eingesetzt.
-Dadurch sind insgesamt sechs $t$s und damit sechs Schnittpunkte mit den Ebenen bekannt. Zwei auf jeder Ebene. Die Entfernungen werden in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ gespeichert. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt und damit welche zweier paralleler Ebenen weiter vorne liegt. 
+Dadurch sind insgesamt sechs $t$s und damit sechs Schnittpunkte mit den Ebenen bekannt. Zwei für jedes Ebenenpaar. Die Entfernungen werden in den zwei dreidimensionalen Vektoren $t_{unten}$ und $t_{oben}$ gespeichert. Durch den Vergleich der t-Vektoren wird festgelegt, welcher Eckpunkt und damit welche zweier paralleler Ebenen weiter vorne liegt. 
 % Was wenn Strahl parallel zur Ebene ist??
 Jetzt muss bestimmt werden, ob diese Schnittpunkte sich innerhalb des Würfels befinden.
 Dazu werden jeweils die x-, y- und z-Werte der t-Vektoren untereinander verglichen. Für das $t$ der näher gelegenen Ebene wird der maximale, für den weiter entfernten der minimale Wert bestimmt. Ist der Wert des näheren $t$s größer als der des entfernten, schneidet der Strahl den Würfel nicht. Andersherum tut er es.
@@ -115,7 +115,7 @@ Das Verhältnis der Schnittpunkte zueinander und wie dieses durch den Verlauf de
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/rayBox.png}
-	\caption{Zweidimensionale Darstellung, wie ein Strahl durch eine Box (links) und daran vorbei (rechts) verläuft. Die Schnittpunkte des Strahls (gelb) mit den Würfelebenen (blau) sind eingezeichnet. Der Vergleich derer Abstände zum Ursprung des Strahls (rot) zeigt, ob der Strahl die Box schneidet oder nicht.}
+	\caption{Zweidimensionale Darstellung, wie ein Strahl durch einen Würfel (links) und daran vorbei (rechts) verläuft. Die Schnittpunkte des Strahls (gelb) mit den Würfelebenen (blau) sind eingezeichnet. Der Vergleich derer Abstände zum Ursprung des Strahls (rot) zeigt, ob der Strahl den Würfel schneidet oder nicht.}
 	\label{img:rayBoxHit}
 	\source{Eigene Darstellung}
 \end{figure}
@@ -134,12 +134,12 @@ Hierbei werden lediglich die Texturkoordinaten als Indices für die Textur verwe
 Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um eine Farbe sondern nur einen Grauwert handelt, können die anderen Farbkanäle der Textur mit dem Gradienten des jeweiligen Pixels befüllt werden. Darauf wird im Abschnitt \ref{gradienten} genauer eingegangen.
 
 Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutzer beeinflussen kann.
-An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist, oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
+An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
 Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
-\todo{ UBERPRÜFEN Warum?}
-Der Punkt wird dann mit den minimalen und maximalen x-, y-, und z-Werten der verschiebbaren Schicht verglichen. Das Ergebnis des Vergleichs wird dabei in einer Variable gespeichert. Ist der Punkt kleiner als das Minimum oder größer als das Maximum wird 0 gespeichert, ansonsten 1. 
-Die beiden Werte werden anschließend mit dem Isowert multipliziert.Ist einer der Werte null, ist auch der ermittelte Isowert null, was im Alphakanal totale Transparenz bedeutet. 
-Das Ergebnis dieser Berechnung wird zunächst für jedem Farbkanal zugewiesen.
+\todo{ UBERPRÜFEN Warum? P?}
+Der Punkt wird dann mit den von Nutzer eingestellten minimalen und maximalen X-, Y-, und Z-Werten der verschiebbaren Schicht verglichen, die den sichtbaren Bereich definieren. Das Ergebnis des Vergleichs wird dabei in einer Variable gespeichert. Ist der Punkt kleiner als das Minimum oder größer als das Maximum wird 0 gespeichert, ansonsten 1. 
+Die beiden Werte werden anschließend mit dem Isowert multipliziert. Ist einer der Werte 0, ist auch der ermittelte Isowert 0, was im Alphakanal totale Transparenz bedeutet. 
+Das Ergebnis dieser Berechnung wird zunächst jedem Farbkanal zugewiesen.
 %-----------------------------------------
 
 An dieser Stelle wird über die Transferfunktion der entsprechende Alphawert aus der zugehörigen Textur gelesen. Dazu wird der Isowert als Index verwendet. Die Funktionsweise und Implementierung der Transferfunktion wird in der Sektion \ref{transfer} beschrieben.
@@ -147,40 +147,36 @@ An dieser Stelle wird über die Transferfunktion der entsprechende Alphawert aus
 Die Transferfunktion wird nur abgerufen, wenn der Isowert nicht 0 ist, da sonst die Transparenz überschrieben würde.
 % Tranferfunktion bei index 0 auf 0000 setzen??
 Ist die Farbe bekannt, wir der betrachtete Voxel illuminiert. Dies ist in der Sektion \ref{illumination} beschrieben. 
-
 Der Alphawert der so erhaltenen Farbe wird noch einmal halbiert, um die Darstellung semi-transparent erscheinen zu lassen.
 % WARUM
-
 Schließlich wird der erhaltene Farbwert mit den vorhergehenden verrechnet. Die Komposition erfolgt dabei von vorne nach hinten, da der Strahl in dieser Richtung abgetastet wird, nach der in Kapitel \ref{grundlagen} beschriebenen Formel.
 % Referenz GPU Gems
-
-Wenn diese Farbe einen vorher definierten Schwellenwert überschreitet wird die Schleife abgebrochen. 
-Die Farbe wird schließlich noch auf einen Wert zwischen 0 und 1 festgesetzt und mit der Farbe der Maske verrechnet, die auf dem selben Weg bestimmt wurde.
+Wenn diese Farbe einen zuvor definierten Schwellenwert überschreitet wird die Schleife abgebrochen. 
+Die Farbe wird schließlich noch auf einen Wert zwischen 0 und 1 festgesetzt und mit der Farbe der Maske verrechnet, die auf dem selben Weg aber ohne die Verwendung einer Transfertextur bestimmt wurde.
 
 \subsection{Transferfunktion}
 \label{transfer}
 
-Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. In einem vom Rest der Anwendung unabhängigen Skript wird aus diesen einzelnen Punkten eine Textur erzeugt, indem zwischen den festgelegten Werten eine Interpolation stattfindet.
-\todo{welche interpolation? -> Code}
+Wie beschrieben, wird die Transfertextur im Shader ausgelesen. Vorher wird sie von dem Skript 3DUI/Scripts/CreateTransferColorTexture.cs erzeugt, welches beim Ausführen der Szene 3DUI/Scenes/Load3DTexture.unity ausgeführt wird.
+Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen über Kontrollpunkte bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. Mit Hilfe einer Schleife wird dann eine 2D-Textur mit den Dimensionen 256 und 1 erstellt. Dabei wird für jeden X-Wert der Textur geprüft, ob er größer oder gleich dem Isowert des betrachteten Kontrollpunktes ist. Ist dies der Fall, wird der Pixel der Textur mit dem entsprechenden Wert besetzt. Dies geschieht für alle Kontrollpunkte. \todo{P}
 Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung verwendet werden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
-Allerdings werden von Unity keine 1D-Texturen als Shader-Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-Textur verwendet, die eine einzige Y-Koordinate besitzt. 
-Die Textur wird dann über das Material an den Shader übergeben. Wie im Abschnitt \ref{transfer} beschrieben, wird die Textur dann mit Hilfe eines Index ausgelesen.
+Allerdings werden von \textit{Unity} keine 1D-Texturen als Shader-Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-Textur verwendet, die eine einzige Y-Koordinate besitzt. 
+Die Textur wird dann über das Material an den Shader übergeben. Wie im Abschnitt \ref{3dImplementierung} beschrieben, wird die Textur dann mit Hilfe eines Index ausgelesen.
 
-Die Erstellung einer passenden Transfertextur ist allerdings, wie beschrieben sehr schwierig und es konnte im Rahmen dieser Arbeit keine sinnvollen Schwellenwerte zur Einfärbung des Volumens ermittelt werden. Aus diesem Grund wird nur der Alphawert der Transferfunktion verwendet. Auf diese Weise werden irrelevante Bildinformationen, wie Umgebungsrauschen und der Schädel ausgeblendet, wobei die Struktur des Hirninneren bestehen bleibt. 
+Die Erstellung einer passenden Transfertextur ist allerdings, wie beschrieben, sehr schwierig und es konnte im Rahmen dieser Arbeit keine sinnvollen Kontrollpunkte zur Einfärbung des Volumens ermittelt werden. Aus diesem Grund wird nur der Alphawert der Transferfunktion verwendet. Auf diese Weise werden irrelevante Bildinformationen, wie Umgebungsrauschen und der Schädel ausgeblendet, wobei die Struktur des Hirninneren bestehen bleibt. 
 
 \subsection{Beleuchtung}
 \label{illumination}
 
-Das Volumen wird mit mit dem Phong-Beleuchtungsmodell illuminiert, wodurch es mehr Plastizität erhält. Das Modell wurde bereits in Kapitel \ref{grundlagen} detailliert beschrieben. Deshalb wird an dieser Stelle nur auch die Umsetzung im Shader eingegangen.
+Das Volumen wird mit mit dem Phong-Beleuchtungsmodell illuminiert, wodurch es mehr Plastizität erhält. Das Modell wurde bereits in Kapitel \ref{grundlagen} detailliert beschrieben. Deshalb wird an dieser Stelle nur auf die Umsetzung im Shader eingegangen.
 % Referenz? warum nicht blinn?
-Wie beschrieben setzt sich das Modell aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Die Komponenten werden zusammen addiert, was in die endgültige Farbe resultiert. 
+Wie beschrieben setzt sich das Modell aus drei Komponenten zusammen: Der ambienten und der diffusen Beleuchtung, sowie der spiegelnden Reflexion. Die Komponenten werden zusammen addiert, wodurch die endgültige Farbe entsteht. 
 Die Koeffizienten werden im Shader durch Farben repräsentiert. Der diffuse Koeffizient ist dabei der vorher aus der Transferfunktion gelesene Farbwert. Um diesen nicht durch die ambiente Beleuchtung zu verfälschen, wird er mit einem konstanten Faktor multipliziert, um eine abgedunkelte Farbe zu erhalten, die als ambienter Wert verwendet wird. Die Reflextion wird weiß dargestellt.
 %Als Reflexionsexponent hat sich der Wert ?10? als am besten erwiesen.
-
 Um die Reflexion berechnen zu können müssen außerdem der Lichtvektor und die Normale bekannt sein.
 Wie bereits erläutert, wird der Gradient eines Voxels als Normale verwendet. 
-Der Vektor zum Licht wird aus der in Unity eingebauten Shader-Variable \_WorldSpaceLightPos0 ausgelesen.
-\todo{Unterscheidung direktionales und Punktlicht?}
+Der Vektor zum Licht wird aus der in \textit{Unity} eingebauten Shader-Variable \_WorldSpaceLightPos0 ausgelesen.
+\todo{P Unterscheidung direktionales und Punktlicht?}
 
 \subsection{Gradientenberechnung}
 \label{gradienten}
@@ -192,16 +188,16 @@ Die Berechnung der Gradienten erfolgt im selben Schritt, wie das Übertragen der
 Dafür werden alle Bilddateien in einem Dateiverzeichnis, auf das ein vorher definierter Pfad zeigt, ausgelesen und in ein Array übertragen, das der Größe der Bilder entspricht. Die dritte Dimension des Arrays wird durch die Anzahl der Bilder bestimmt. 
 
 Entsprechend der in Kapitel \ref{grundlagen} beschriebenen Finite-Differenzen-Methode, werden durch eine Convolution die Gradienten für jeden Farbwert berechnet und ebenfalls in ein Array gespeichert.
-Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters geglättet, bevor die Werte in eine 3D-Textur gespeichert werden. 
+Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters \todo{parameter}geglättet, bevor die Werte in eine 3D-Textur gespeichert werden. 
 
-Diese wird im Assets-Verzeichnis des Projektes abgelegt. Sie werden in der Szene referenziert, um bei Bedarf an einen Shader übergeben zu werden, der den entsprechenden Datensatz darstellt. 
+Diese wird im Asset-Verzeichnis 3DTextures des Projektes abgelegt. Sie werden in der Szene referenziert, um bei Bedarf an einen Shader übergeben zu werden, der den entsprechenden Datensatz darstellt. 
 
 \todo{Überschrift P}
 \section{\textit{HoloLens} spezifische Implementierung}
 \label{plattformen}
 
 \subsection{\textit{HoloLens} Prototyp}
-Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine prototypische Demo-Anwendung entwickelt, die die \textit{HoloLens} eigenen Gesten genutzt hat. Die Anwendung hat eine zweidimensionale Darstellung der MRT-Bilder als Hologramm in den Raum projiziert, welches der Nutzer durch \textit{HoloLens} eigene Gesten manipulieren konnte. Dabei wurden alle vorhandenen Manipulierungsformen eines Hologramms abgedeckt, sowie das Scrollen durch die Bildschichten. Um die \textit{HoloLens} Gesten zu Nutzen wurde das \textit{HoloToolkit} verwendet. 
+Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine prototypische Demo-Anwendung entwickelt, die die \textit{HoloLens}-eigenen Gesten genutzt hat. Die Anwendung hat eine zweidimensionale Darstellung der MRT-Bilder als Hologramm in den Raum projiziert, welches der Nutzer durch \textit{HoloLens}-eigene Gesten manipulieren konnte. Dabei wurden alle vorhandenen Manipulierungsformen eines Hologramms abgedeckt, sowie das Scrollen durch die Bildschichten. Um die \textit{HoloLens}-Gesten zu Nutzen wurde das \textit{HoloToolkit} verwendet. 
 Anhand dieser Demo sollte geprüft werden, ob die Interaktionsmöglichkeiten, die die \textit{HoloLens} bietet ausreichend sind, um einem Neurologen die effektive Untersuchung von MRT-Bildern zu ermöglichen.
 Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und Anforderungen eines Arztes an mARt noch weiter spezifiziert werden.  
 
@@ -250,7 +246,7 @@ Sowohl \textit{Vive} als auch \textit{HoloLens} sollen in Verbindung mit der \te
 Das Einbinden der \textit{Leap Motion} in eine VR Anwendung, sowie die Kombination mit dem \textit{Vive} Headset sind unproblematisch. Das \textit{Orion} SDK der \textit{Leap Motion} unterstützt den Einsatz in VR-Szenen. Sofern \textit{SteamVR} installiert und eine VR-Brille angeschlossen ist, ist kein größerer Aufwand nötig, um die Hände des Nutzers in VR anzuzeigen. 
 Die Integration in das VR-System ist vergleichbar einfach. Die \textit{Leap Motion} Kamera wird vorne auf dem HMD über der eingebauten Kamera befestigt und ihre Kabel zusammen mit den anderen der Brille über den Kopf des Nutzers geführt. 
 
-Dagegen bringt die Verbindung von \textit{Leap Motion} und \textit{HoloLens} einige Herausforderungen mit sich. Zunächst ist in einer \textit{HoloLens}-Szene nur eine Kamera, die des HMDs, vorgesehen. Das Vorhandensein einer zweiten Kamera, wie die der \textit{Leap Motion} würde beim Erstellungsprozess zu Fehlern führen,sodass das Bereitstellen des Programmes für die \textit{HoloLens} nicht möglich ist.
+Dagegen bringt die Verbindung von \textit{Leap Motion} und \textit{HoloLens} einige Herausforderungen mit sich. Zunächst ist in einer \textit{HoloLens}-Szene nur eine Kamera, die des HMDs, vorgesehen. Das Vorhandensein einer zweiten Kamera, wie die der \textit{Leap Motion} würde beim Erstellungsprozess zu Fehlern führen, sodass das Bereitstellen des Programmes für die \textit{HoloLens} nicht möglich ist.
 Die \textit{Leap Motion} wird über ihr Kabel mit Strom versorgt. Sie kann also im Gegensatz zu der \textit{HoloLens} nicht kabellos funktionieren. 
 Über das Kabel werden außerdem die von der \textit{Leap Motion} Kamera erfassten Daten weitergeleitet, die dann verarbeitet werden. Die dafür notwendige Software ist nicht für die \textit{HoloLens} verfügbar und es ist fragwürdig, ob sie die dafür notwendige Rechenleistung besitzt. 
 
@@ -261,10 +257,9 @@ Stattdessen wird die Anwendung lediglich auf der \textit{HoloLens} wiedergegeben
 Die Wiedergabequalität der Anwendung ist dabei abhängig von der Stabilität der Wlan-Verbindung.
 
 Auch das Anbringen der \textit{Leap Motion} an das HMD ist bei der \textit{HoloLens} umständlicher als bei der \textit{Vive}. 
-Da es die \textit{Vive} einen undurchsichtigen Bildschirm besitzt, kann die \textit{Leap Motion} Kamera einfach vorne auf der Brille befestigt werden. Die Form des Gerätes bietet dazu ausreichend Fläche.
+Da die \textit{Vive} einen undurchsichtigen Bildschirm besitzt, kann die \textit{Leap Motion} Kamera einfach vorne auf der Brille befestigt werden. Die Form des Gerätes bietet dazu ausreichend Fläche.
 Bei der \textit{HoloLens} sollte der Bildschirm, durch den der Nutzer sieht nicht verdeckt werden. Eine Installation im oberen Teil der Frontseite ist ebenfalls nicht umsetzbar, da dieser von den \textit{HoloLens}-Kameras eingenommen wird, die die Umgebung und Nutzergesten verfolgen.
 Somit ist die einzige sinnvolle Möglichkeit, die \textit{Leap Motion} auf der \textit{HoloLens} zu platzieren. Hierbei muss sie außerdem nach vorne geneigt werden, um die Hände des Nutzers in der Anwendung möglichst genau an den realen Händen auszurichten. 
-Um die Anwendung auf der \textit{HoloLens} bedienen zu können, wurde eine eigene Haltungsvorrichtung gebaut.
 
 % Ergebnisse
 
@@ -289,25 +284,25 @@ Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualit
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/dwi_results.png}
-	\caption{Rendering der zur Verfügung gestellten Datensätze durch den in mARt verwendeten Shader mit der selben Intensität. a) Datensatz 1 ohne Transferfunktion b) Datensatz 1 mit Transferfunktion c) Datensatz 2 ohne Transferfunktion d) Datensatz 2 mit Transferfunktion}
+	\caption{Rendering der zur Verfügung gestellten Datensätze durch den in mARt verwendeten Shader mit gleicher Intensität. a) Datensatz 1 ohne Transferfunktion b) Datensatz 1 mit Transferfunktion c) Datensatz 2 ohne Transferfunktion d) Datensatz 2 mit Transferfunktion}
 	\label{img:resultsDWI}
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
   
-Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerendert. Das Ergebnis ist dabei von besserer Qualität als mit den Gehirndaten. Die Verwendung der Transferfunktion ist nicht notwendig, um die Darstellung deutlicher zu machen. Durch Manipulation der Intensität kann bestimmt werden, in welcher Tiefe das Gewebe gerendert werden soll. In Abbildung \ref{img:resultsVisMale} ist der Datensatz eines Kopfes mit und ohne sowie mit verschiedener Intensität dargestellt.
+Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerendert. Das Ergebnis ist dabei von besserer Qualität als mit den Gehirndaten. Die Verwendung der Transferfunktion ist nicht notwendig, um die Darstellung deutlicher zu machen. Durch Manipulation der Intensität kann bestimmt werden, in welcher Opazität das Gewebe gerendert werden soll, was vor allem das äußere Gewebe beeinflusst. In Abbildung \ref{img:resultsVisMale} ist der Datensatz eines Kopfes mit und ohne Transferfunktion dargestellt.
   
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/visMale_result.png}
-	\caption{Rendering eines alternativen Datensatzes durch den in mARt verwendeten Shader mit der selben Intensität. a) Rendering ohne Transferfunktion b) Rendering mit Transferfunktion}
+	\caption{Rendering eines alternativen Datensatzes durch den in mARt verwendeten Shader mit gleicher Intensität. a) Rendering ohne Transferfunktion b) Rendering mit Transferfunktion}
 	\label{img:resultsVisMale}
 	\source{Eigene Darstellung}
 \end{figure}
 \FloatBarrier
 
 Der gekennzeichnete Bereich, der verdeutlicht welche Teile des Gehirns von dem Schlaganfall betroffen wurden, ist durch die semitransparente Darstellung von allen Seiten gut zuerkennen. 
-Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resultMask} die Darstellung des Bereichs im 2D- und 3D-Szenario abgebildet.
+Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resultMask} ist die Darstellung des Bereichs im 2D- und 3D-Szenario abgebildet.
 
 \begin{figure}[!htb]
 	\centering
@@ -319,12 +314,12 @@ Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns w
 \FloatBarrier
   
 \subsection{AR Anwendung}
-Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten teilweise schlecht zu erkennen. Dies betrifft vor allem die 3D-Darstellung. Um das Rendering erkennen zu können müssen die Farbwerte durch die Gammakorrektur erhellt werden. In Abbildungen \ref{img:ARLicht} und \ref{img:ARLicht3D} dargestellt, wie die Daten mit dem Standardhelligkeitswert und mit einem erhören Wert aussehen.
+Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten teilweise schlecht zu erkennen. Dies betrifft vor allem die 3D-Darstellung. Um das Rendering erkennen zu können müssen die Farbwerte durch die Gammakorrektur erhellt werden. In Abbildungen \ref{img:ARLicht} und \ref{img:ARLicht3D} dargestellt, wie die Daten mit dem Standardhelligkeitswert und mit einem erhöhten Wert aussehen.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/mARt_AR_brightness.png}
-	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 2D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss ein hoher Wert eingestellt werden.}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 2D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss der Wert erhöht werden.}
 	\label{img:ARLicht}
 	\source{Eigene Darstellung}
 \end{figure}
@@ -339,9 +334,9 @@ Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten te
 \end{figure}
 \FloatBarrier
 
-Ein weiterer Punkt, der die Verwendung der Anwendung auf der \textit{HoloLens} erschwert ist das eingeschränkte Sichtfeld des Gerätes. Dieses Problem wurde bereit in Kapitel \ref{grundlagen} beschrieben. 
-Die Begrenzung der Darstellung führt dazu, dass die MRT-Daten aus der Sicht des Nutzers meist abgeschnitten sind. Um die Daten gleichzeitig mit den Interaktionselementen sehen zu können, muss der Nutzer einen Abstand von ca. 1,5m zur Darstellung haben. Dies macht es ihm allerdings unmöglich mit dieser zu interagieren. Um die Darstellung manipulieren zu können, muss er also zwischen MRT-Bildern und Bedienelementen hin- und herblicken. In Abbildung \ref{ARCutoff} ist das abgeschnittene Sichtfeld der \textit{HoloLens} dargestellt. Dabei werden die virtuellen Hände des Nutzer nicht angezeigt, wenn er diese nicht direkt ansieht, auch wenn die Leap Motion diese vielleicht noch erfasst. 
-Die Darstellung der Hände selbst nimmt bereits einen großen Teil des Sichtfeldes der \textit{HoloLens} ein, da sie sich nahe am HMD befinden. 
+Ein weiterer Punkt, der die Verwendung der Anwendung auf der \textit{HoloLens} erschwert, ist das eingeschränkte Sichtfeld des Gerätes. Dieses Problem wurde bereit in Kapitel \ref{grundlagen} beschrieben. 
+Die Begrenzung der Darstellung führt dazu, dass die MRT-Daten aus der Sicht des Nutzers meist abgeschnitten sind. Um die Daten gleichzeitig mit den Interaktionselementen sehen zu können, muss der Nutzer einen Abstand von ca. 1,5m zur Darstellung haben. Dies macht es ihm allerdings unmöglich mit dieser zu interagieren. Um die Darstellung manipulieren zu können, muss er also zwischen MRT-Bildern und Bedienelementen hin- und herblicken. In Abbildung \ref{img:ARCutoff} ist das abgeschnittene Sichtfeld der \textit{HoloLens} dargestellt. Dabei werden die virtuellen Hände des Nutzer nicht angezeigt, wenn er diese nicht direkt ansieht, auch wenn die Leap Motion diese vielleicht noch erfasst. 
+Die Darstellung der Hände selbst nimmt bereits einen großen Teil des Sichtfeldes der \textit{HoloLens} ein, da sie sich nah am HMD befinden. 
 Eine Bedienung der Anwendung auf der \textit{HoloLens} ist aus diesen Gründen sehr schwer. 
 
 \begin{figure}[!htb]
