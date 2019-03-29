@@ -61,7 +61,7 @@ Die in Kapitel \ref{anforderung} beschriebenen Anforderungen repräsentieren den
 Neben der Umsetzung der Anwendungslogik stellt vor allem die Implementierung der 3D-Darstellung durch Volume Raycasting einen hohen Aufwand dar. Um diesen in einem realisierbaren Rahmen zu halten, wurde ein bereits existierendes Programm als Basis für die zuletzt genannte Funktionalität verwendet.
 Wie in Kapitel \ref{grundlagen} beschrieben wurde, gibt es bereits viele Implementierungen von Volume Raycasting zur Visualisierung von medizinischem Bildmaterial. 
 Die dort genannten Unity-spezifischen Lösungen sind allerdings kostenpflichtig und/oder ihre Codebasis ist nicht einsehbar. Es wäre allerdings von Vorteil die Kontrolle über die Implementierung der 3D-Darstellung zu haben, um so die Möglichkeit zu haben, sie den Anforderungen entsprechend anpassen zu können.
-Aus diesem Grund wurde die Open-Source-Implementierung von \cite{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet, die unter der MIT-Lizenz steht. \todo{P}
+Aus diesem Grund wurde die Open-Source-Implementierung von \cite{volumeRenderingGit} als Grundlage für die 3D-Darstellung verwendet, die unter der MIT-Lizenz steht.
 Diese wurde erweitert, um die Anforderungen an mARt zu erfüllen. 
 Im Rahmen der Arbeit wurden folgende Bestandteile implementiert:
 
@@ -83,8 +83,7 @@ Die Parameter werden an den Shader VolumeRendering/Shader/VolumeRendering\_Diffu
 
 \subsection{Volume Raycasting}
 \label{3dImplementierung}
-Im Fragment-Shader des VolumeRendering/Shader/Volume\_Diffuse\_Mask.sh Shaders
-\todo{umbenennen} wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt geschossen wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Quaders zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
+Im Fragment-Shader des VolumeRendering/Shader/Volume\_Diffuse\_Mask.sh Shaders wird zunächst ein Strahl definiert, der von dem aktuell betrachteten Vertex aus von der Kameraposition in die Welt geschossen wird. In einem selbst definierten struct werden die maximalen und minimalen Werte definiert, aus denen sich die Eckpunkte des dargestellten Quaders zusammensetzten. Anschließend wird geprüft, ob der Strahl den Würfel schneidet. 
 
 %-----------Intersect-----------
 %Dies geschieht indem zuerst die Inverse der Strahlrichtung ermittelt wird. Die Inverse eines Vektors $v$ ist $v^-1$ und da $v^-x=\frac1}{v^x}$, ergibt sich die Inverse des Richtungsvektors des Strahls indem $1$ durch die dividiert wird.
@@ -135,8 +134,7 @@ Der Isowert ist dabei im Alphakanal der Textur gespeichert. Da es sich nicht um 
 
 Der Isowert wird außerdem noch mit der Intensität multipliziert, die der Nutzer beeinflussen kann.
 An dieser Stelle wird aber auch geprüft, ob der betreffende Punkt überhaupt zu sehen ist oder aufgrund der verschiebbaren Schichten nicht sichtbar sein sollte. 
-Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Modells multipliziert.
-\todo{ UBERPRÜFEN Warum? P?}
+Dazu wird zuerst der aktuell betrachtete Punkt mit der Rotationsmatrix des Volumens multipliziert.
 Der Punkt wird dann mit den von Nutzer eingestellten minimalen und maximalen X-, Y-, und Z-Werten der verschiebbaren Schicht verglichen, die den sichtbaren Bereich definieren. Das Ergebnis des Vergleichs wird dabei in einer Variable gespeichert. Ist der Punkt kleiner als das Minimum oder größer als das Maximum wird 0 gespeichert, ansonsten 1. 
 Die beiden Werte werden anschließend mit dem Isowert multipliziert. Ist einer der Werte 0, ist auch der ermittelte Isowert 0, was im Alphakanal totale Transparenz bedeutet. 
 Das Ergebnis dieser Berechnung wird zunächst jedem Farbkanal zugewiesen.
@@ -158,7 +156,7 @@ Die Farbe wird schließlich noch auf einen Wert zwischen 0 und 1 festgesetzt und
 \label{transfer}
 
 Wie beschrieben, wird die Transfertextur im Shader ausgelesen. Vorher wird sie von dem Skript 3DUI/Scripts/CreateTransferColorTexture.cs erzeugt, welches beim Ausführen der Szene 3DUI/Scenes/Load3DTexture.unity ausgeführt wird.
-Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen über Kontrollpunkte bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. Mit Hilfe einer Schleife wird dann eine 2D-Textur mit den Dimensionen 256 und 1 erstellt. Dabei wird für jeden X-Wert der Textur geprüft, ob er größer oder gleich dem Isowert des betrachteten Kontrollpunktes ist. Ist dies der Fall, wird der Pixel der Textur mit dem entsprechenden Wert besetzt. Dies geschieht für alle Kontrollpunkte. \todo{P}
+Um eine Transfertextur zu erzeugen, werden zunächst zwei Key-Value-Listen definiert, in denen über Kontrollpunkte bestimmte Isowerte einem Farb- oder Opazitätwert zugewiesen werden. Mit Hilfe einer Schleife wird dann eine 2D-Textur mit den Dimensionen 256 und 1 erstellt. Dabei wird für jeden X-Wert der Textur geprüft, ob er größer oder gleich dem Isowert des betrachteten Kontrollpunktes ist. Ist dies der Fall, wird der Pixel der Textur mit dem entsprechenden Wert besetzt. Dies geschieht für alle Kontrollpunkte.
 Die Textur wird dann als 2D-Textur abgespeichert. Da allein die Isowerte als Index für die Zuordnung verwendet werden, handelt es sich eigentlich um eine eindimensionale Transferfunktion. 
 Allerdings werden von \textit{Unity} keine 1D-Texturen als Shader-Eigenschaften unterstützt. Da die Verwendung einer 2D-Textur aber keine Nachteile aufweist, wird stattdessen eine 2D-Textur verwendet, die eine einzige Y-Koordinate besitzt. 
 Die Textur wird dann über das Material an den Shader übergeben. Wie im Abschnitt \ref{3dImplementierung} beschrieben, wird die Textur dann mit Hilfe eines Index ausgelesen.
@@ -188,28 +186,27 @@ Die Berechnung der Gradienten erfolgt im selben Schritt, wie das Übertragen der
 Dafür werden alle Bilddateien in einem Dateiverzeichnis, auf das ein vorher definierter Pfad zeigt, ausgelesen und in ein Array übertragen, das der Größe der Bilder entspricht. Die dritte Dimension des Arrays wird durch die Anzahl der Bilder bestimmt. 
 
 Entsprechend der in Kapitel \ref{grundlagen} beschriebenen Finite-Differenzen-Methode, werden durch eine Convolution die Gradienten für jeden Farbwert berechnet und ebenfalls in ein Array gespeichert.
-Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters \todo{parameter}geglättet, bevor die Werte in eine 3D-Textur gespeichert werden. 
+Das Gradientenarray wird anschließend mit Hilfe eines Gauß-Filters mit einer Kernelgröße von 5 und $\sigma=5.5$ geglättet, bevor die Werte in eine 3D-Textur gespeichert werden. 
 
 Diese wird im Asset-Verzeichnis 3DTextures des Projektes abgelegt. Sie werden in der Szene referenziert, um bei Bedarf an einen Shader übergeben zu werden, der den entsprechenden Datensatz darstellt. 
 
-\todo{Überschrift P}
-\section{\textit{HoloLens} spezifische Implementierung}
+\section{\textit{HoloLens}-spezifische Implementierung}
 \label{plattformen}
 
-\subsection{\textit{HoloLens} Prototyp}
+\subsection{\textit{HoloLens}-Demo}
 Im Rahmen der Arbeit wurde neben der endgültigen Anwendung zuerst auch eine prototypische Demo-Anwendung entwickelt, die die \textit{HoloLens}-eigenen Gesten genutzt hat. Die Anwendung hat eine zweidimensionale Darstellung der MRT-Bilder als Hologramm in den Raum projiziert, welches der Nutzer durch \textit{HoloLens}-eigene Gesten manipulieren konnte. Dabei wurden alle vorhandenen Manipulierungsformen eines Hologramms abgedeckt, sowie das Scrollen durch die Bildschichten. Um die \textit{HoloLens}-Gesten zu Nutzen wurde das \textit{HoloToolkit} verwendet. 
 Anhand dieser Demo sollte geprüft werden, ob die Interaktionsmöglichkeiten, die die \textit{HoloLens} bietet ausreichend sind, um einem Neurologen die effektive Untersuchung von MRT-Bildern zu ermöglichen.
 Weiterhin konnten durch das Testen einer realen Anwendung die Erwartungen und Anforderungen eines Arztes an mARt noch weiter spezifiziert werden.  
 
-Wie im Kapitel \ref{konzept}erläutert, haben sich die Gesten der \textit{HoloLens} zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig. Der Wechsel zwischen den Manipulationsarten wurde über ein ausklappbares Menü realisiert. Alle Manipulationen erfolgen über \textit{Air tap} und das Bewegen der Hand. Bei eingeklapptem Menü kann der Nutzer so such die Darstellung scrollen. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die \textit{Leap Motion} in das System integriert.
+Wie im Kapitel \ref{konzept} erläutert, haben sich die Gesten der \textit{HoloLens} zwar als ausreichend erwiesen, machten aber die Verwendung von weiteren Bedienelementen notwendig. Der Wechsel zwischen den Manipulationsarten wurde über ein ausklappbares Menü realisiert. Alle Manipulationen erfolgen über \textit{Air tap} und das Bewegen der Hand. Bei eingeklapptem Menü kann der Nutzer so durch die Darstellung scrollen. Aus den beschriebenen Gründen wurde für die endgültige Implementierung der Anwendung die \textit{Leap Motion} in das System integriert.
 % Genauer auf Implementierung eingehen
-Der Prototyp wurde in der Szene \todo{Szene einfügen} realisiert und eine Datei zur Bereitstellung für die \textit{HoloLens} sowie ein Video der Anwendung ist im Ergänzungsmaterial zu finden.
+Der Prototyp wurde in der Szene 2DUI\_HololensDemo/Scenes/HololensDemo.unity realisiert und eine Datei zur Bereitstellung für die \textit{HoloLens} sowie ein Video der Anwendung ist im Ergänzungsmaterial zu finden.
 Die Demo ist in Abbildung \ref{img:prototyp} dargestellt.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.5\linewidth]{images/hololens_prototyp.jpg}
-	\caption{Aufnahme aus der \textit{HoloLens} von der \textit{HoloLens}-Demo, die Interaktion ausschließlich über \textit{HoloLens}-Gesten realisiert.}
+	\caption{Aufnahme aus der \textit{HoloLens} von der \textit{HoloLens}-Demo, die Interaktionen ausschließlich über \textit{HoloLens}-Gesten realisiert.}
 	\label{img:prototyp}
 	\source{Eigene Darstellung}
 \end{figure}
@@ -226,12 +223,10 @@ Ohne die Verwendung eines World Anchors wird die 3D-Szene und alle Objekte darin
 Der Anchor Store ist allerdings nur auf der \textit{HoloLens} verfügbar. Wie bereits erläutert wurde, wird die Anwendung im Rahmen dieser Arbeit aber nur auf der \textit{HoloLens} abgespielt, aber nicht für sie bereitgestellt. Dementsprechend ist ein Zugriff auf den Anchor Store nicht möglich. Dasselbe gilt für eine Verwendung der Anwendung in einem VR-System.
 
 Als Alternative dazu können die Daten mit Hilfe eines Markers in den Raum projiziert werden, wie es im Kapitel \ref{grundlagen} beschreiben wurde. \textit{Unity} bietet hierfür das \textit{Vuforia}-Plugin, welches genau das umsetzt. Hierzu können Marker definiert werden, die das Programm erkennt und die diesen zugeordneten GameObjects anzeigt. 
-\textit{Vuforia} ist für AR-Anwendungen gedacht und funktioniert durch eine Kamera, die den Marker erkennt. Deshalb könnte die Funktion von einer \textit{Vive} nicht genutzt werden, von einer \textit{Vive Pro} jedoch schon, da diese über einen Mixed Reality Modus verfügt. Auch \textit{HoloLens}-Anwendungen können \textit{Vuforia} nutzen. 
+\textit{Vuforia} ist für AR-Anwendungen gedacht und funktioniert durch eine Kamera, die den Marker erkennt. Deshalb kann die Funktion von einer \textit{Vive} nicht genutzt werden, von einer \textit{Vive Pro} jedoch schon, da diese über einen Mixed Reality Modus verfügt. Auch \textit{HoloLens}-Anwendungen können \textit{Vuforia} nutzen. 
 Im zeitlichen Rahmen der Arbeit konnte dieses Funktionalität allerdings nicht mehr umgesetzt werden.
 
 \section{Implementierung der Nutzereingabe}
-Steam VR, normale scene
-
 
 \subsection{Verwendung der \textit{Leap Motion}}
 
@@ -268,18 +263,17 @@ Somit ist die einzige sinnvolle Möglichkeit, die \textit{Leap Motion} auf der \
 \section{Ergebnisse}
 \label{ergebnisse}
 
-Die VR-Anwendung ist als ausführbare Datei im Ergänzungsmaterial zu finden. Da die \textit{HoloLens}-Anwendung, wie in Kapitel \ref{konzept} erläutert, nicht für diese bereitgestellt werden konnte, existiert hierfür keine ausführbare Datei. Allerdings wurde in der ReadMe.txt Datei des Projektes, die sich ebenfalls im Ergänzungsmaterial befindet beschrieben, wie die Anwendung auf der \textit{HoloLens} abgespielt werden kann. 
+Die VR-Anwendung ist als ausführbare Datei im Ergänzungsmaterial zu finden. Da die \textit{HoloLens}-Anwendung, wie in Kapitel \ref{konzept} erläutert, nicht für diese bereitgestellt werden konnte, existiert hierfür keine ausführbare Datei. Allerdings wurde in der ReadMe.txt Datei des Projektes, welches sich ebenfalls im Ergänzungsmaterial befindet beschrieben, wie die Anwendung auf der \textit{HoloLens} abgespielt werden kann. 
 Weiterhin ist dort ein Video enthalten, das die Funktionen und Bedienung der Anwendung zeigt.
 Die Interaktionslemente wurden wie in Kapitel \ref{konzept} beschrieben implementiert. Neben ihrer Beschreibung sind dort auch Abbildungen der Benutzerelemente zu finden. 
-Screenshots
-beschreibung der Anwendung
 
-\subsection{3D Darstellung}
+
+\subsection{3D-Darstellung}
 
 In Abschnitt \ref{3dImplementierung} wurde erläutert, wie die 3D-Darstellung mit Hilfe von Volume Raycasting erzeugt wurde. 
 Dazu wurde der Alphawert einer Transfertextur genutzt, um das Rauschen in der Umgebung des Gehirns zu entfernen und die Gehirnform eindeutiger herauszustellen. Dies führt allerdings auch zu Artefakten, dem sogenannten Holzmaserungseffekt. Da allerdings die Darstellung der inneren Strukturen des Gehirns im Vordergrund steht, wurde sich für eine Darstellung entschieden, die durch Reduzierung der Umgebung den Fokus auf das Gehirn erlaubt. 
-Im Abbildung \ref{img:resultsDWI} sind die beiden Datensätze mit und ohne die Verwendung einer Transferfunktion abgebildet. 
-Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualität des Renderings auswirkt. Die vorgegebenen Datensätze des Gehirns wiesen ein hohes Maß an Bildrauschen auf. Außerdem wurden die Schichten offenbar in in Abständen solcher Größe gescannt, dass die Interpolation zwischen den Schichten Aktefakte ausweist. Auch dies in in Abbildung \ref{img:resultsDWI} zu sehen.
+Im Abbildung \ref{img:resultsDWI} sind die beiden Datensätze mit und ohne die Verwendung einer Transferfunktion abgebildet. Durch Manipulation der Intensität kann bestimmt werden, in welcher Opazität das Gewebe gerendert werden soll, was vor allem das äußere Gewebe beeinflusst. Die Intensität der Renderings in der Abbildung ist in allen Fällen gleich.
+Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualität des Renderings auswirkt. Die vorgegebenen Datensätze des Gehirns weisen ein hohes Maß an Bildrauschen auf. Außerdem wurden die Schichten offenbar in Abständen solcher Größe gescannt, dass die Interpolation zwischen den Schichten Aktefakte ausweist. Auch dies in in Abbildung \ref{img:resultsDWI} zu sehen.
 
 \begin{figure}[!htb]
 	\centering
@@ -290,7 +284,7 @@ Es ist anzumerken, dass die Qualität der Daten sich unweigerlich auf die Qualit
 \end{figure}
 \FloatBarrier
   
-Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerendert. Das Ergebnis ist dabei von besserer Qualität als mit den Gehirndaten. Die Verwendung der Transferfunktion ist nicht notwendig, um die Darstellung deutlicher zu machen. Durch Manipulation der Intensität kann bestimmt werden, in welcher Opazität das Gewebe gerendert werden soll, was vor allem das äußere Gewebe beeinflusst. In Abbildung \ref{img:resultsVisMale} ist der Datensatz eines Kopfes mit und ohne Transferfunktion dargestellt.
+Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerendert. Das Ergebnis ist dabei von besserer Qualität als mit den Gehirndaten. Die Verwendung der Transferfunktion ist nicht notwendig, um die Darstellung deutlicher zu machen. In Abbildung \ref{img:resultsVisMale} ist der Datensatz eines Kopfes mit und ohne Transferfunktion dargestellt.
   
 \begin{figure}[!htb]
 	\centering
@@ -301,8 +295,8 @@ Aus diesem Grund wurden testweise auch andere Daten mit dem selben Shader gerend
 \end{figure}
 \FloatBarrier
 
-Der gekennzeichnete Bereich, der verdeutlicht welche Teile des Gehirns von dem Schlaganfall betroffen wurden, ist durch die semitransparente Darstellung von allen Seiten gut zuerkennen. 
-Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resultMask} ist die Darstellung des Bereichs im 2D- und 3D-Szenario abgebildet.
+Der gekennzeichnete Bereich, der verdeutlicht welche Teile des Gehirns von dem Schlaganfall betroffen wurden, ist durch die semitransparente Darstellung von allen Seiten gut zu erkennen. 
+Durch die Multiplikation der Masken- und Isowerte ist die Struktur des Gehirns weiterhin erkennbar. In Abbildung \ref{img:resultMask} sind Renderings des Gehirns und des Bereichs dargestellt.
 
 \begin{figure}[!htb]
 	\centering
@@ -319,7 +313,7 @@ Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten te
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/mARt_AR_brightness.png}
-	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 2D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss der Wert erhöht werden.}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während der 2D-Scene von mARt mit unverändertem (links) und erhöhtem (rechts) Gammakorrekturwert. Um die Darstellung erkennen zu können muss der Wert erhöht werden.}
 	\label{img:ARLicht}
 	\source{Eigene Darstellung}
 \end{figure}
@@ -328,7 +322,7 @@ Durch die semi-transparente Darstellung in AR sind die eher dunklen MRT-Daten te
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/mARt_AR_brightness_3D.png}
-	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 3D-Scene von mARt mit unverändertem (links) und erhöhtem Gammakorrekturwert. Um die Darstellung erkennen zu können muss ein hoher Wert eingestellt werden.}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während der 3D-Scene von mARt mit unverändertem (links) und erhöhtem (rechts) Gammakorrekturwert. Um die Darstellung erkennen zu können muss der Wert erhöht werden.}
 	\label{img:ARLicht3D}
 	\source{Eigene Darstellung}
 \end{figure}
@@ -342,7 +336,7 @@ Eine Bedienung der Anwendung auf der \textit{HoloLens} ist aus diesen Gründen s
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/mARt_Cutoff.png}
-	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während die 2D-Scene von mARt aus bedienbarer Entfernung. Durch das begrenzte Sichtfeld der \textit{HoloLens} wir nur ein Ausschnitt der Anwendung dargestellt.}
+	\caption{Zwei Aufnahmen aus der \textit{HoloLens}, während der 2D-Scene von mARt aus bedienbarer Entfernung. Durch das begrenzte Sichtfeld der \textit{HoloLens} wir nur ein Ausschnitt der Anwendung dargestellt.}
 	\label{img:ARCutoff}
 	\source{Eigene Darstellung}
 \end{figure}

@@ -37,26 +37,27 @@ Die in Story \textbf{U17} geforderte dauerhafte Positionierung im Raum wurde ebe
 Weiterhin ist ihre Position relativ zur Position des Nutzers. Für den Prototyp ist dies ausreichend. Die User Story hat ihren Ursprung allerdings in der Idee einer Multiuser-Anwendung. Dabei können mehrere Nutzer die selbe Darstellung betrachten, die sich für alle an der selben Position im Raum befindet. Dieses Konzept wurde in Kapitel \ref{konzept} erläutert. Vor allem für Einsätze demonstrativer Art, wie Lernzwecke oder die Kommunikation mit Patienten wäre diese Funktion von Nutzen.
 
 %U18
-Eine weitere unerfüllte User Story ist \textit{U18}, die beschreibt, dass möglichst alle Sequenzen eines Scans eines Patienten wählbar sein sollen. Für diese Arbeit wurden nur eine begrenzte Anzahl an Datensätzen zur Verfügung gestellt. Bei der Untersuchung eines möglichen Schlaganfalls, kommen allerdings oft verschiedene Scans und Gewichtungen zum Einsatz, wie in Abschnitt \ref{mrt} beschrieben wurde. Sollten mehrere Datensätze zu einem Patienten vorliegen, ist es sinnvoll aus diesen wählen zu können. Dies steht allerdings in Zusammenhang mit der Implementierung einer generellen Auswahl von Daten, aus denen der Nutzer wählen kann, wie sie bereits dargelegt wurde.
+Eine weitere unerfüllte User Story ist \textbf{U18}, die beschreibt, dass möglichst alle Sequenzen eines Scans eines Patienten wählbar sein sollen. Für diese Arbeit wurden nur eine begrenzte Anzahl an Datensätzen zur Verfügung gestellt. Bei der Untersuchung eines möglichen Schlaganfalls, kommen allerdings oft verschiedene Sequenzen und Gewichtungen zum Einsatz, wie in Abschnitt \ref{mrt} beschrieben wurde. Sollten mehrere Datensätze zu einem Patienten vorliegen, ist es sinnvoll aus diesen wählen zu können. Dies steht allerdings in Zusammenhang mit der Implementierung einer generellen Auswahl von Daten, aus denen der Nutzer wählen kann.
 
 %U19-20
-Wie ebenfalls in Kapitel \ref{konzept} erläutert wurde, unterstützt der Prototyp nicht die Darstellung von vom Nutzer gewählten Dateien. Dementsprechend werden auch keine Dateien im DICOM- oder NIfTI-Format unterstützt. Für die Nutzung von Neurologen oder auch erweiterte Tests ist diese Funktion allerdings notwendig. Dazu müsste im Konzept der Anwendung eine Möglichkeit gefunden werden dem Nutzer die Auswahl von Daten zu erlauben und diese in das Programm zu übertragen. Dies setzt unter anderem voraus, dass ein Parser integriert wird, der die Daten aus besagten Formaten in einen für \textit{Unity} lesbaren Typ umwandelt. 
+Wie ebenfalls in Kapitel \ref{konzept} erläutert wurde, unterstützt der Prototyp nicht die Darstellung von vom Nutzer gewählten Dateien. Dementsprechend werden auch keine Dateien im DICOM- oder NIfTI-Format unterstützt. Für die Nutzung durch Neurologen oder auch für erweiterte Tests ist diese Funktion allerdings notwendig. Dazu müsste im Konzept der Anwendung eine Möglichkeit gefunden werden dem Nutzer die Auswahl von Daten zu erlauben und diese in das Programm zu übertragen. Dies setzt unter anderem voraus, dass ein Parser integriert wird, der die Daten aus besagten Formaten in einen für \textit{Unity} lesbaren Typ umwandelt. 
 
 Hinzu kommen die Erweiterungen, die in Abschnitt \ref{nutzertest} beschrieben wurden. 
 Abhängig von den konkreten Nutzungsszenarien werden sich außerdem weitere Anforderungen ergeben, um die mARt erweitert bzw. an die es angepasst werden muss. 
 Es wäre wünschenswert, dass diese sowie zukünftige ähnliche Arbeiten einem Test mit einer größeren Anzahl an Testern unterzogen wird, da dies noch mehr Aufschluss über die Bedürfnisse verschiedener Nutzer und die Möglichkeiten einer AR-Anwendung liefert.
 
-\subsection{Verbesserte 3D Visualisierung}
+\subsection{Verbesserte 3D-Visualisierung}
 
 Die Ergebnisse des Volume Rendering der MRT-Daten wurde in Abschnitt \ref{ergebnisse} demonstriert. Der Nutzertest hat gezeigt, dass die Darstellungen von ausreichender Qualität sind, um eine Diagnose durchzuführen und vor allem den Zustand des Gehirns nach einen Schlaganfall zu vermitteln. 
 Allerdings stellt das Volume Rendering für sich einen eigenen Forschungsbereich dar, der im Rahmen dieser Arbeit nicht abgedeckt werden konnte. Darin existieren viele Maßnahmen, um die Qualität der Darstellung weiter zu verbessern. Einige davon werden an dieser Stelle genannt. 
 
-Zum einen wurde als Rendering Verfahren das Volume RayCasting gewählt, da es sehr gute Ergebnisse liefert. Je nachdem in welche Richtung sich zukünftige Arbeiten entwickeln, ist es allerdings sinnvoll weitere Verfahren zu testen, die beispielsweise weniger rechenintensiv sind. 
+Zum einen wurde als Rendering Verfahren das Volume Raycasting gewählt, da es sehr gute Ergebnisse liefert. Je nachdem in welche Richtung sich zukünftige Arbeiten entwickeln, ist es allerdings sinnvoll weitere Verfahren zu testen, die beispielsweise weniger rechenintensiv sind. 
 Weiterhin wurde zwar eine Transferfunktion verwendet, um das Rauschen der Bilder zu beschränken. Allerdings ist diese nicht für jeden Datensatz optimal und es wird lediglich ihr Alphawert genutzt. 
 Idealerweise sollte dem Nutzer die Möglichkeit gegeben werden die Transferfunktion zu beeinflussen, wie es in Kapitel \ref{konzept} bereits erläutert wurde. Dies würde die Darstellungsqualität erhöhen und dem Nutzer zu einem Rendering nach seinen Ansprüchen verhelfen. 
 Um das Rendering plastischer und realer erscheinen zu lassen kann außerdem ein globales Beleuchtungsmodell implementiert werden, wie es in Kapitel \ref{grundlagen} beschrieben ist. 
 Da die Qualität des Renderings von den Bilddaten abhängt, können diese schließlich bereinigt bzw. aufgearbeitet werden. Wie in Abschnitt \ref{ergebnisse} dargelegt wurde, besteht in den gegebenen Datensätzen ein hohes Maß an Rauschen. Dieses könnte auf verschiedenen Wegen herausgefiltert werden, bevor die Bilder gerendert werden. Zudem könnte eine zusätzliche Interpolation vorgenommen werden, die die großen Abstände zwischen den einzelnen Schichten besser überbrückt als es bisher der Fall ist. Damit könnten Bildartefakte reduziert werden. 
 Für die Verbesserung der MRT-Daten könnte beispielsweise maschinelles Lernen eingesetzt werden.
+Die Technologie könnte weiterhin zur Diagnose von Schlaganfällen oder zur Prognose ihrer Entwicklung verwendet werden. Funktionen dieser Art könnten in Anwendungen wie mARt  integriert und in der 3D-Visualisierung dargestellt werden.
 
 \subsection{Übertragen der Anwendung auf andere Hardware}
 \label{hololens2Fazit}
@@ -71,15 +72,9 @@ Dieses und andere Probleme, die bei der Verwendung von mARt auf der \textit{Holo
 Das Gerät wurde im Februar 2019 vorgestellt und soll voraussichtlich im April 2019 erscheinen. 
 Die neue Version der \textit{HoloLens} besitzt ein mehr als doppelt so großes Sichtfeld, wie ihr Vorgänger (vgl. \cite{hololens2}), was dem eben genannten Problem entgegen wirkt. 
 Weiterhin verfügt die \textit{HoloLens 2} über eine eingebaute Hand-Tracking-Funktion (vgl. \cite{hololens2}). Diese könnte an Stelle der \textit{Leap Motion} zum Erfassen der Hände des Nutzers verwendet werden. Dadurch entstehen zwei Vorteile gegenüber der aktuellen Anwendung. Zum Einen ist anzunehmen, dass die virtuellen Hände nicht länger angezeigt werden müssen. Dies vereinfacht die Benutzung und lässt mehr Raum im Sichtfeld für tatsächliche Inhalte. Zum Anderen, könnte die Anwendung für die \textit{HoloLens 2} bereitgestellt und somit kabellos verwendet werden, wodurch die Verzögerung der Übertragung auf das Gerät behoben und das Nutzungserlebnis verbessert würden. 
-
 Weiterhin ist davon auszugehen, dass die \textit{HoloLens 2} über eine höhere Rechenleistung verfügt, als ihr Vorgänger. Dies könnte neben der eben genannten Optimierung des Renderingverfahrens eine flüssige Darstellung der 3D-MRT-Daten ermöglichen.
-
 Eine Übertragung der Anwendung auf die \textit{HoloLens 2} könnte die Benutzbarkeit der Anwendung demnach stark erhöhen.
 
-\subsection{Integration anderer Technologien}
-
-Im vorherigen Abschnitt wurde bereits der Einsatz von maschinellem Lernen zur Verbesserung der Bildqualität angeführt. Diese Technologie könnte weiterhin zur Diagnose von Schlaganfällen oder zur Prognose ihrer Entwicklung verwendet werden. Funktionen dieser Art könnten in Anwendungen wie mARt  integriert werden.
-\todo{Paper? P}
 
 \section{Fazit}
 
@@ -97,5 +92,5 @@ Der derzeitige Stand der AR-Technologie stellt dabei das größte Hindernis dar.
 \end{itemize}
 
 All dies trifft momentan nicht auf AR-HMDs wie die \textit{HoloLens} zu. Es ist wahrscheinlich, dass zukünftige Systeme der ständig voranschreitenden Technologie diese Eigenschaften mitbringen werden. 
-Bis dahin gilt es zu untersuchen, was die notwendigen Interaktionen und relevantes Elemente für die jeweiligen Anwendungsfälle sind und wie diese sinnvoll in AR realisiert werden können, damit eine stabile und einsetzbare Anwendung entstehen kann, die das dargelegte Potenzial ausschöpft.
+Bis dahin gilt es zu untersuchen, was die notwendigen Interaktionen und relevanten Elemente für die jeweiligen Anwendungsfälle sind und wie diese sinnvoll in AR realisiert werden können, damit eine stabile und einsetzbare Anwendung entstehen kann, die das dargelegte Potenzial ausschöpft.
 mARt ist somit der erste Schritt einer Entwicklung, um die Arbeit und Zusammenarbeit von Ärzten, Studenten und Patienten zu bereichern.

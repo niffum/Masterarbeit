@@ -12,7 +12,7 @@ Zunächst werden in der folgenden Tabelle \ref{tab:evaluation} die implementiert
 \toprule
 User Story & Stichwort & Status & Anmerkungen \\
 \toprule
-U01 & Gut erkennbare Abbildung & Erfüllt & Die Darstellung der Daten ist zu großen Teilen abhängig von diesen selbst. Die Darstellung in AR ist abhängig von den Lichtverhältnissen.\\
+U01 & Gut erkennbare Abbildung & Erfüllt & Die Darstellung der Daten ist zu großen Teilen abhängig von diesen selbst. Die Darstellung in AR ist dunkler.\\
 \midrule 
 U02 & 2D-Darstellung der Daten aus min. einem Blickwinkel & Erfüllt & Die Betrachtung aus einem Blickwinkel ist möglich.\\
 \midrule 
@@ -24,7 +24,7 @@ U05 & Datensätze auswählen & Erfüllt & Der Nutzer kann aus zwei Datensätzen 
 \midrule
 U06 & optionale gleichgeschaltete Manipulation & Erfüllt & Maximal zwei Darstellungen können gleichzeitig manipuliert werden. \\
 \midrule 
-U07 & Scrolling auf min. einer Achse & Erfüllt & Die 2D-Darstellung kann auf der z-Achse durchlaufen werden. Dabei wird immer eine Schicht angezeigt. In der 3D-Darstellung können durch drei Ebenen Querschnitte im Volumen verschoben werden.\\
+U07 & Scrolling auf min. einer Achse & Erfüllt & Die 2D-Darstellung kann auf der Z-Achse durchlaufen werden. Dabei wird immer eine Schicht angezeigt. In der 3D-Darstellung können durch drei Ebenen Querschnitte im Volumen verschoben werden.\\
 \midrule 
 U08 & Scrollen mit Scrollrad & Offen & \\
 \midrule 
@@ -38,15 +38,15 @@ U12 & Erkennbare Strukturen bei Einblendung & Erfüllt & Eine Manipulation der M
 \midrule 
 U13 & 3D-Darstellung drehen & Erfüllt & \\
 \midrule 
-U14 & Manipulation von Helligkeit und Kontrast & Erfüllt & \\
+U14 & Manipulation von Helligkeit und Kontrast & Erfüllt & Durch Gammakorrektur umgesetzt.\\
 \midrule 
 U15 & Skalierung der Darstellungen & Erfüllt & Nur bei Anzeige eines Datensatzes möglich. Temporäre Manipulation.\\
 \midrule 
-U16 & Positionierung der Darstellung & Erfüllt & Die Position wird nicht über mehrere Sitzungen hinweg gespeichert.\\
+U16 & Positionierung der Darstellung & Erfüllt & \\
 \midrule 
 U17 & Beibehalten der Position & Teilweise erfüllt & Die Positionierung wird für die Dauer einer Sitzung gespeichert und wir relativ zum Nutzer gesetzt.\\
 \midrule 
-U18 & Auswahl von Scans & Offen & Keine unterschiedlichen Scans standen zur Verfügung.\\
+U18 & Auswahl von Sequenzen & Offen & Keine unterschiedlichen Sequenzen standen zur Verfügung.\\
 \midrule 
 U19 & Unterstützung des NIfTI-Formats & Offen & Datensätze sind in Anwendung integriert.\\
 \midrule 
@@ -59,7 +59,7 @@ U20 & Unterstützung des DICOM-Formats & Offen & Datensätze sind in Anwendung i
 \section{Nutzertest}
 \label{nutzertest}
 
-Um die Verwendung von mARt im Bereich der Schlaganfallbehandlung zu evaluieren wurde ein Nutzertest abgehalten. 
+Um die Verwendung von mARt im Bereich der Schlaganfallbehandlung zu evaluieren wurde ein Nutzertest durchgeführt. 
 Dabei wurden sowohl die AR- als auch die VR-Anwendung von einem Neurologen getestet. Für die Präsentation der AR-Anwendung wurde eine \textit{HoloLens} verwendet, für die VR-Anwendung eine \textit{Vive Pro} von \cite{vivePro}. Anschließend wurde der Tester befragt.
 
 % VR und AR Vergleich
@@ -67,7 +67,7 @@ Obwohl die beiden Anwendungen von Funktionsumfang und Bedienung her gleich sind,
 Sie wurde als flüssiger und stabiler wahrgenommen. 
 Dies ist vor allem auf die Latenz zurückzuführen, die entsteht, wenn die Inhalte vom Computer auf die \textit{HoloLens} übertragen werden. Da die virtuellen Hände sich nicht in Echtzeit mit den realen bewegen, wird das Nutzungserlebnis negativ beeinflusst. 
 Die Latenz führte auch dazu, dass Interaktionen teilweise unerwartet oder gar nicht ausgelöst wurden. 
-Ein weiterer Grund für fehlerhafte Interaktionen ist das eingeschränkte Blickfeld der \textit{HoloLens} (30°x17,5°). Wie bereits beschrieben wurde, werden Inhalte nur in diesem Blickfeld dargestellt. Der Bereich, in dem die \textit{Leap Motion} die Hände des Nutzers erfasst ist allerdings um einiges größer (150°x120°). Dadurch werden Gesten häufig auch dann registriert, wenn der Nutzer seine Hand außerhalb des eigenen Blickfeldes bewegt. Dies wird verstärkt, durch die Tatsache, dass die \textit{Leap Motion} mit einer Neigung nach unten auf der \textit{HoloLens} angebracht wird, wodurch sich ihr Erfassungsbereich ebenfalls verschiebt.
+Ein weiterer Grund für fehlerhafte Interaktionen ist das eingeschränkte Blickfeld der \textit{HoloLens} (30°x17,5°). Wie bereits beschrieben wurde, werden Inhalte nur in diesem Blickfeld dargestellt. Der Bereich in dem die \textit{Leap Motion} die Hände des Nutzers erfasst ist allerdings um einiges größer (150°x120°). Dadurch werden Gesten häufig auch dann registriert, wenn der Nutzer seine Hand außerhalb des eigenen Blickfeldes bewegt. Dies wird verstärkt, durch die Tatsache, dass die \textit{Leap Motion} mit einer Neigung nach unten auf der \textit{HoloLens} angebracht wird, wodurch sich ihr Erfassungsbereich ebenfalls verschiebt.
 Manipulationen, die vermehrt nicht erwartungskonform durchgeführt wurden, waren die Skalierung von Ansichten, sowie die Rotation der 3D-Darstellung.
 
 % Schwierigkeiten in der Bedienung 
@@ -78,7 +78,7 @@ Ein großer Kritikpunkt beider HMDs war außerdem der mangelnde Tragekomfort. Du
 
 Weiterhin wurden Anmerkungen zu sinnvollen bzw. notwendigen Erweiterungen der Anwendungen gemacht.
 Beispielsweise könnte dem Nutzer Rückmeldung gegeben werden, wenn eine Darstellung mit beiden Händen gegriffen wurde, sodass es ihm leichter fällt eine Skalierung nachzuvollziehen.
-Die in Kapitel \ref{konzept} beschriebene Gammakorrektur, wurde für die Untersuchung der Daten nicht als ausreichend angesehen. Stattdessen müssten Helligkeit und Kontrast separat voneinander manipulierbar sein, da Datensätze in unterschiedlichen Wertebereichen vorliegen können. 
+Die in Kapitel \ref{konzept} beschriebene Gammakorrektur, wurde für die Untersuchung der Daten als nicht ausreichend angesehen. Stattdessen müssten Helligkeit und Kontrast separat voneinander manipulierbar sein, da Datensätze in unterschiedlichen Wertebereichen vorliegen können. 
 Schließlich wurde durch den Tester angemerkt, dass obwohl für diesen Prototyp nur das Scrollen in einer Richtung für die 2D-Darstellung gefordert war, die Betrachtung der Daten aus verschiedenen Blickwinkeln für einen realen Einsatz unabdingbar sei. Dies gilt für mehrere Manipulationsmöglichkeiten, wie die Beeinflussung von Farbe und Opazität der gekennzeichneten Schlaganfallbereichs.
 
 Über die vorhandenen Bedienmöglichkeiten sagte der Tester aus, dass sie leicht verständlich und schnell erlernbar waren, was teilweise dem eingeschränkten Umfang der Anwendung zuzuschreiben ist.
@@ -86,10 +86,10 @@ Besonders positiv aufgefallen ist die Platzierung von Bedienelementen im ausklap
 
 Die Anwendung wurde im Allgemeinen als positiv aufgenommen. 
 Die Darstellung der Daten wurde als deutlich genug eingeschätzt, um eine Untersuchung und Diagnose durchzuführen. 
-Vor allem die dreidimensionale Darstellung der MRT-Daten im Raum wurde als sehr anschaulich beschrieben. Der Tester hatte den Eindruck, dass das Verständnis der angezeigten Daten, insbesondere von Lage und Größe des vom Schlaganfall betroffenen Bereichs, im Vergleich zur Darstellung auf einem Bildschirm verbessert wird. Die direkte Interaktion mit der Darstellung, wie die Rotation durch Greifen verstärkt diesen Effekt zusätzlich. Dadurch kann die aktuelle Situation auch Personen ohne Fachwissen begreiflich vermittelt werden. 
+Vor allem die dreidimensionale Darstellung der MRT-Daten im Raum wurde als sehr anschaulich beschrieben. Der Tester hatte den Eindruck, dass das Verständnis der angezeigten Daten, insbesondere von Lage und Größe des vom Schlaganfall betroffenen Bereichs, im Vergleich zur Darstellung auf einem Bildschirm verbessert wird. Die direkte Interaktion mit der Darstellung, wie die Rotation durch Greifen, verstärkt diesen Effekt zusätzlich. Dadurch kann die aktuelle Situation auch Personen ohne Fachwissen begreiflich vermittelt werden. 
 Die Verwendung von mARt beschrieb der Tester weiterhin als unterhaltsam und interessant.
 
-Es wurde allerdings auch betont, dass ein Einsatz von mARt im derzeitigen Zustand auf Grund der Hardwarerestriktionen nicht realistisch ist und dass es die Funktion von derzeitigen Viewern nicht ersetzten kann. Gleichzeitig wurde aber das Potenzial der Anwendung hervorgehoben sowie die Vielzahl an Anwendungsfällen für die eine AR-Anwendung, wie mARt sinnvoll wäre, die auch in Abschnitt \ref{motivation} genannt wurden. 
+Es wurde allerdings auch betont, dass ein Einsatz von mARt im derzeitigen Zustand auf Grund der Hardwarerestriktionen nicht realistisch ist und dass es die Funktion von derzeitigen Viewern nicht ersetzten kann. Gleichzeitig wurde aber das Potenzial der Anwendung hervorgehoben sowie die Vielzahl an Anwendungsfällen für die eine AR-Anwendung wie mARt sinnvoll wäre, die auch in Abschnitt \ref{motivation} genannt wurden. 
 
 %\section{Auswertung}
 % Was ist besser als vorher? Warum?
