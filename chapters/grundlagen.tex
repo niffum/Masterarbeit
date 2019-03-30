@@ -66,11 +66,6 @@ Neben diesen Arbeiten gibt es noch viele weitere, die sich insbesondere mit der 
 \label{mrt}												 %
 %-------------------------------------------------------------
 
-Magnetresonanztomographie (MRT) ist ein bildgebendes Verfahren, das auch Kernspintomografie genannt wir. Es wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
-Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. In einem geschlossenen, wie es in Abbildung \ref{img:mri} zu sehen ist, ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
-
-Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von \cite{weishaupt09} beschrieben.
-
 \begin{figure}[!htb]
 	\centering
 	%https://www.flickr.com/photos/11304375@N07/3081315619/
@@ -80,6 +75,11 @@ Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von
 	\source{Quelle: https://www.flickr.com/photos/11304375@N07/3081315619/}
 \end{figure}
 \FloatBarrier
+
+Magnetresonanztomographie (MRT) ist ein bildgebendes Verfahren, das auch Kernspintomografie genannt wir. Es wird in der Radiologie verwendet, um Abbildungen innerer Organe zu erzeugen. Während der Durchführung einer MRT wird der Patient in ein MRT-System geschoben, das einer großen Röhre gleicht. Er sollte sich für die Dauer des MRTs möglichst wenig bewegen, um klare Bilder zu erhalten.
+Es gibt offene und geschlossene MRT-Systeme. Offene Systeme haben die Form eines C, das den Patienten umgibt und werden daher auch C-Systeme genannt. In einem geschlossenen, wie es in Abbildung \ref{img:mri} zu sehen ist, ist der Patient dagegen vollständig von einer Röhre umgeben. Die Bildqualität ist bei geschlossenen Systemen deutlich besser.
+
+Im folgenden wird die Funktionsweise eines MRT-Scans erläutert, diese wurde von \cite{weishaupt09} beschrieben.
 
 \subsection{Physikalische Grundlagen}
 
@@ -96,6 +96,11 @@ Mit dem eben beschriebenen Verfahren werden jeweils Werte auf der XY-Ebene erfas
 Diese Unterteilung in Schichten wird erreicht, indem weitere Spulen verwendet werden, die ein zusätzliches Magnetfeld (Gradientenfeld) erzeugen, welches das erste Magnetfeld inhomogen macht. Dementsprechend fällt es zu einer Seite hin ab, was sich durch einen Gradienten, den Z-Gradienten, beschreiben lässt. So kann jeder Z-Schicht eine bestimmte Stärke im Magnetfeld zugewiesen und einzelne Schichten durch die Verwendung bestimmter Frequenzen angeregt werden. In Abbildung \ref{img:zGradient} ist schematisch dargestellt, wie die Schichten entlang des Z-Gradienten hintereinander liegen und eine von ihnen angeregt wird.
 Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 
+Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem Bild Koordinaten, die der Anordnung der jeweils betrachteten Punkte in der Welt entsprechen. Stattdessen bildet der X-Wert die Frequenz und der Y-Wert die Phase ab. Wie für den Z-Wert werden auch hier Gradienten gebildet und auf das Magnetfeld gelegt. Der X-Gradient verläuft von links nach rechts und sorgt dafür, dass die Larmorfrequenz in dieser Richtung zunimmt, sodass die jeder Punkt seine eigene Frequenz hat. Der Y-Gradient, der senkrecht verläuft, beeinflusst auf dieselbe Weise die Phasen einer Schicht. Er wird dabei nur kurz nach dem Einstrahlen des Hochfrequenz-Impulses eingeschaltet, wenn sich die Protonen bereits ausgerichtet haben.
+
+Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichert, die K-Raum genannt wird. In dieser Rohdatenmatrix sind Kontrastwerte und Bilddetails räumlich sortiert. Mit Hilfe einer Fouriertransformation werden sie in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
+Die eben erläuterte Erfassung der MRT-Daten wurde von \cite{weishaupt09} beschrieben.
+
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.3\linewidth]{images/zGradientMrt.png}
@@ -104,11 +109,6 @@ Es wird immer nur eine Schicht auf einmal gescannt und verarbeitet.
 	\source{Übernommen von: \cite{weishaupt09}}
 \end{figure}
 \FloatBarrier
-
-Die X- und Y-Werte einer Schicht repräsentieren allerdings nicht, wie bei einem Bild Koordinaten, die der Anordnung der jeweils betrachteten Punkte in der Welt entsprechen. Stattdessen bildet der X-Wert die Frequenz und der Y-Wert die Phase ab. Wie für den Z-Wert werden auch hier Gradienten gebildet und auf das Magnetfeld gelegt. Der X-Gradient verläuft von links nach rechts und sorgt dafür, dass die Larmorfrequenz in dieser Richtung zunimmt, sodass die jeder Punkt seine eigene Frequenz hat. Der Y-Gradient, der senkrecht verläuft, beeinflusst auf dieselbe Weise die Phasen einer Schicht. Er wird dabei nur kurz nach dem Einstrahlen des Hochfrequenz-Impulses eingeschaltet, wenn sich die Protonen bereits ausgerichtet haben.
-
-Für jeden Punkt gibt es also eine Magnetfeldstärke (Z), eine Frequenz (X) und eine Phase (Y). Diese Werte aller Punkte werden in einer Matrix gespeichert, die K-Raum genannt wird. In dieser Rohdatenmatrix sind Kontrastwerte und Bilddetails räumlich sortiert. Mit Hilfe einer Fouriertransformation werden sie in lesbare Bilddaten umgewandelt, die die entsprechenden Organe schichtenweise abbilden. 
-Die eben erläuterte Erfassung der MRT-Daten wurde von \cite{weishaupt09} beschrieben.
 
 \subsection{Abgrenzung zur Computer-Tomographie}
 
@@ -119,7 +119,6 @@ Auf die Einsatzbereiche von CT und MRT im Bezug auf Schlaganfälle wird in Absch
 
 Beide Verfahren liefern Volumendaten als Ergebnis und können demnach in Folgeschritten ähnlich verarbeitet werden.
 
-\pagebreak
 \subsection{Medizinische Bilddatenformate}
 \label{datenformate}
  
@@ -239,12 +238,14 @@ void main(sampler3D _Volume,
           sampler1D _TransferTexture,
           float3 texCoord : TEXCOORD0,
           float4 color : COLOR)
-{
-  // Der Isowert des Volumens wird für die aktuelle Position ausgelesen
-  float isoValue = tex3D(_Volume, texCoord);
-  // Die Farbe des Volumens wird für die aktuelle Position ausgelesen
-  color = tex1D(_TransferTexture, isoValue);
-}
+          {
+          	// Der Isowert des Volumens wird für die 
+          	// aktuelle Position ausgelesen
+          	float isoValue = tex3D(_Volume, texCoord);
+          	// Die Farbe des Volumens wird für die 
+          	// aktuelle Position ausgelesen
+          	color = tex1D(_TransferTexture, isoValue);
+          }
 \end{minted}
 \caption{Aus einer 3D-Textur wird ein Isowert gelesen. Dieser wird verwendet, um aus einer 1D-Transfertextur die entsprechende Farbe auszulesen. Übernommen von: \cite{Fernando04}}
 \label{lst:transfer}
@@ -389,8 +390,18 @@ Die Komposition erfolgt pro Voxel am Ende des Renderingprozesses. Die Eigenschaf
 
 An dieser Stelle werden verschiedene Methoden erläutert, mit denen Volume Rendering umgesetzt werden kann. Die Implementierung dieser Arbeit verwendet das Volume Raycastingverfahren. Es werden allerdings auch andere prominente Methoden beschrieben, um einen Überblick über die Thematik und die Möglichkeit eines Vergleichs zu schaffen.
 
+\pagebreak
 \subsection{Volumetrisches Raycasting}
 \label{rayCasting}
+
+Raycasting ist eine bekannte Renderingmethode, die auch beim Rendering von 3D-Szenen zur Anwendung kommt, die keine Volumendaten enthalten.
+Dabei werden von der Position der Kamera für jeden Pixel Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser die Oberfläche eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Pixel in der Farbe des Objektes eingefärbt, wobei der verwendete Shader diese beeinflusst. Es wird außerdem berücksichtigt, welche Länge der Strahl zu dem Schnittpunkt hat, da nur der Eintrittspunkt relevant ist.
+
+Weiterhin existieren die Techniken Raytracing und Raymarching, die ebenfalls auf der Kollision zwischen Strahlen und Objekten beruhen.
+Beim Raytracing werden dabei neben dem ursprünglichen Strahl, der das Objekt trifft noch weitere berechnet, welche vom Treffpunkt des Objekts, abhängig von seiner Oberflächenbeschaffenheit und seinem Material reflektiert und weiter durch die Szene verfolgt werden.
+Raymarching ist eine schnellere Version des Raycastings. 
+Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau berechnet. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung weniger genau ist, ist sie schneller als Raycasting.
+\cite{Hart89} haben das Verfahren beschrieben. 
 
 \begin{figure}[!htb]
 	\centering
@@ -402,15 +413,6 @@ An dieser Stelle werden verschiedene Methoden erläutert, mit denen Volume Rende
 \end{figure}
 \FloatBarrier
 
-Raycasting ist eine bekannte Renderingmethode, die auch beim Rendering von 3D-Szenen zur Anwendung kommt, die keine Volumendaten enthalten.
-Dabei werden von der Position der Kamera für jeden Pixel Strahlen in die Szene geschossen. Für jeden Strahl wird dann errechnet, ob dieser die Oberfläche eines der Objekte in der Szene schneidet. Ist dies der Fall, wird der betreffende Pixel in der Farbe des Objektes eingefärbt, wobei der verwendete Shader diese beeinflusst. Es wird außerdem berücksichtigt, welche Länge der Strahl zu dem Schnittpunkt hat, da nur der Eintrittspunkt relevant ist.
-
-Weiterhin existieren die Techniken Raytracing und Raymarching, die ebenfalls auf der Kollision zwischen Strahlen und Objekten beruhen.
-Beim Raytracing werden dabei neben dem ursprünglichen Strahl, der das Objekt trifft noch weitere berechnet, welche vom Treffpunkt des Objekts, abhängig von seiner Oberflächenbeschaffenheit und seinem Material reflektiert und weiter durch die Szene verfolgt werden.
-Raymarching ist eine schnellere Version des Raycastings. 
-Hier wird der Schnittpunkt von Strahl und Oberfläche nicht genau berechnet. Stattdessen wird entlang des Strahls in kleiner werdenden Abständen jeweils ein einzelner Punkt betrachtet. Für diesen Punkt wird lediglich geprüft, ob er sich bereits innerhalb des Objektes befindet oder nicht. Der erste Punkt, auf den dies zutrifft wird als Schnittpunkt angesehen. Obwohl diese Berechnung weniger genau ist, ist sie schneller als Raycasting.
-\cite{Hart89} haben das Verfahren beschrieben. 
-
 %Raycasting bzw. Ray-Marching wird auch zum Rendering von Volumen benutzt.
 Bei allen Verfahren muss die Oberfläche bzw. die Form des Objektes bekannt sein, um bestimmen zu können, wann der Strahl in sie eintritt. Dies ist bei Volumendaten in der Regel nicht gegeben, da nicht nur das Objekt selbst, sondern auch dessen Umgebung darin gespeichert sind. Weiterhin werden durch die eben beschriebenen Prozesse nur die Oberflächen der Objekte gerendert, nicht aber ihr Inneres.
 
@@ -420,9 +422,6 @@ Raycasting zur Visualisierung von Volumen wurde von \cite{Weiskopf06} erläutert
 
 \subsection{Texture-Based Volume Rendering}
 
-Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann übereinander geblendet werden. Dies wird von \cite{kniss02} beschrieben. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den mit Hilfe von Texture Mapping die Textur gerendert wird.
-Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form die Volumendaten vorliegen. In Abbildung \ref{img:2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dadurch wird verhindert, dass der Betrachter zwischen zwei Texturen hindurchsehen kann, wenn diese annähernd parallel zu seiner Blickrichtung stehen. Dies ist in Abbildung \ref{img:textureBased} dargestellt.
-
 \begin{figure}[!htb]
 	\centering
 	%https://www.evl.uic.edu/aej/524/lecture06.html
@@ -430,6 +429,19 @@ Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form 
 	\caption{Links: Texturen werden entlang des Volumens ausgerichtet. Rechts: Texturen werden entlang des Blickwinkels ausgerichtet.}
 	\label{img:2D3DTex}
 	\source{Quelle: https://www.evl.uic.edu/aej/524/lecture06.html}
+\end{figure}
+\FloatBarrier
+
+Beim texturbasierten Rendering von Volumen wird eine dreidimensionale Darstellung erzeugt indem viele Texturen aufeinander geschichtet werden, die dann übereinander geblendet werden. Dies wird von \cite{kniss02} beschrieben. Dazu wird für jede Schicht ein Querschnitt durch das Volumen gemacht, auf den mit Hilfe von Texture Mapping die Textur gerendert wird.
+Die Form und Ausrichtung der Querschnitte wird dadurch bestimmt in welcher Form die Volumendaten vorliegen. In Abbildung \ref{img:2D3DTex} wird der Unterschied verdeutlicht. Handelt es sich um zweidimensionale Texturen,  richten sich die Querschnitte am Volumen aus. Innerhalb eines Würfel sind sie also quadratisch. Damit das Volumen aus verschiedenen Blickwinkeln betrachtet werden kann, wird für jede der Hauptsichtachsen ein Stapel mit Texturen erstellt. Zwischen den Stapeln wird gewechselt, sobald sich der Betrachtungswinkel ändert. Dadurch wird verhindert, dass der Betrachter zwischen zwei Texturen hindurchsehen kann, wenn diese annähernd parallel zu seiner Blickrichtung stehen. Dies ist in Abbildung \ref{img:textureBased} dargestellt.
+
+\begin{figure}[!htb]
+	\centering
+	%https://www.researchgate.net/figure/Object-aligned-slice-stacks-with-2d-texture-mapping_fig1_226214561
+	\includegraphics[width=0.7\linewidth]{images/textureStacks.png}
+	\caption{Texturen werden als Stapel in der 	XY-, YZ- und XZ-Ebene angeordnet.}
+	\label{img:textureBased}
+	\source{Quelle: \cite{Benassarou05}}
 \end{figure}
 \FloatBarrier
 
@@ -442,15 +454,7 @@ Liegen die Daten als 3D-Texturen vor, verlaufen die Querschnitte entlang der Sic
 %\todo{3d texure based? }	
 %\todo{Genauer? P}
 
-\begin{figure}[!htb]
-	\centering
-	%https://www.researchgate.net/figure/Object-aligned-slice-stacks-with-2d-texture-mapping_fig1_226214561
-	\includegraphics[width=0.7\linewidth]{images/textureStacks.png}
-	\caption{Texturen werden als Stapel in der 	XY-, YZ- und XZ-Ebene angeordnet.}
-	\label{img:textureBased}
-	\source{Quelle: \cite{Benassarou05}}
-\end{figure}
-\FloatBarrier
+
 
 \subsection{Shear-Warp}
 
